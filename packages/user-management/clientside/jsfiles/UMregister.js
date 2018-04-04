@@ -18,7 +18,7 @@ Template.UMregister.events({
             console.log('Error: ' + error.reason);
          } else {
             var newID = Meteor.userId();
-            var defaultRoleconfig = ['admin','Staff'];
+            var defaultRoleconfig = ['admin'];
             Meteor.call('addRoles', newID , defaultRoleconfig);
             Meteor.call('createUserByAdminSetEmailToTrue', newID);
             Meteor.logout();
