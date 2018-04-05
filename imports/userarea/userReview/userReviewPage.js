@@ -29,7 +29,27 @@ sortReviewDateDescending = function(){
 
 }
 
+
 Template.userReview.helpers({
+	userLoadmoreCmmnt(dataIndex){
+		if(dataIndex < 2){
+			return true;
+		} else{
+			return false;
+		}
+	},
+	userLoadmoreCmmntBtn(data){
+		if(data){
+			if(data.length > 2){
+				return true;
+			} else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+		
+	},
 	checkReviewLoading(){
 		var id = '';
 		var url = FlowRouter.current().path;
@@ -125,7 +145,7 @@ Template.userReview.helpers({
 							reviewData[i].AreaClasses 	= businessData.businessArea.split('.').join('-');
 							reviewData[i].businessCity 	= businessData.businessCity;
 
-						if(businessData.businessImages.length > 0){
+						if(businessData.businessImages && businessData.businessImages.length > 0){
 							var pic = BusinessImgUploadS3.findOne({"_id":businessData.businessImages[0].img});
 							if(pic){
 								reviewData[i].businessImages = pic.url();
@@ -565,6 +585,15 @@ Template.userReviewSuggestion.helpers ({
 });
 
 Template.userReview.events({
+	'click .showMoreCommntDiv': function(event){
+		// To Expant All comments
+		var currentClass = $(event.currentTarget).parent().siblings();
+		currentClass.removeClass('showMoreCommntDivNone');
+
+		// To Change Buttons
+		$(event.currentTarget).parent().css('display','none');
+		$(event.currentTarget).parent().siblings('showLessCommnt').css('display','block');
+	},
 	"keydown #searchFrndsEdit":function(e){
 		//For Up and Down arrow selection in dropdown
 		$('.tagFrndUlFrieldList').removeClass('searchDisplayHide').addClass('searchDisplayShow');

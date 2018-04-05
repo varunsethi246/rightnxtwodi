@@ -17,6 +17,7 @@ Template.userSidebar.events({
 	'click .userMenuItem':function(event){        
         $('.userMenuItem').removeClass('active');
         $(event.currentTarget).addClass('active');
+        $("html,body").scrollTop(0);
 	},
 });
 
@@ -93,6 +94,7 @@ Template.userSidebar.helpers({
 
 	'siderbarBookmarkCount':function(){
 		if(Session.get("updateUserTimeline")==true){
+			$("html,body").scrollTop(0);
 			var id ='';
 			var url = FlowRouter.current().path;
 			var checkIdExists = url.split('/');
@@ -113,6 +115,7 @@ Template.userSidebar.helpers({
 				return bookmarkDataReturn;
 			}
 		}else {
+			$("html,body").scrollTop(0);
 			var id ='';
 			var url = FlowRouter.current().path;
 			var checkIdExists = url.split('/');

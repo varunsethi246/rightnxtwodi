@@ -31,6 +31,8 @@ businessSearchbanner1 = new SearchSource('sidebarBusinessBanners', fields, optio
 
 
 Template.businessList.onRendered(function(){
+    $("html,body").scrollTop(0);
+
 	$('.mapViewBusList').hide();
 	$('.gridVwBus').addClass('bkgOrange');
     Session.set('searchLevelText','');

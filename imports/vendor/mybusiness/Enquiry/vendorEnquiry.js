@@ -7,7 +7,15 @@ import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
 import './allEnquries.html';
 import './enquiryDetails.html';
 
-
+// Template.enquiryDetails.events({
+// 	'click .vEnqsndEnqBtn':function(event){
+// 		var elem = $(e.currentTarget).attr('.vEnqFormImgOne');
+// 	    if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight())
+// 	    {
+// 	        console.log("bottom");
+// 	    }
+// 	}
+// });
 
 Template.vendorEnquiry.helpers({
 	// Enquiry enquiryImages
@@ -280,6 +288,7 @@ Template.vendorEnquiry.onRendered(function(){
 });
 
 Template.allEnquries.events({
+	
 	'click .readEnClass':function(event){
 		var id = $(event.currentTarget).parent().attr('id');
 		Session.set("EnqIDSes",id);
@@ -328,6 +337,10 @@ Template.allEnquries.events({
 var filesM = [];
 
 Template.vendorEnquiry.events({
+	'click .vEnqsndEnqBtn':function(event){
+		
+	},
+
 	"keyup .vendorEnquiryFormSearch": _.throttle(function(e) {
 	    var text = $(e.target).val().trim();
 	    Session.set("nameKey",text);
@@ -365,7 +378,12 @@ Template.vendorEnquiry.events({
        	var id = event.currentTarget.id;
        	var enquirySentBy = $(event.currentTarget).attr("data-enquirySentBy");
        	var businessLink = $(event.currentTarget).attr("data-businessLink");
-
+       	console.log('hi');
+		var elem = $(event.currentTarget).attr('.vEnqFormImgOne');
+	    // if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight())
+	    // {
+	    //     console.log("bottom");
+	    // }
        	if(filesM.length > 0){
 			for(i = 0 ; i < filesM.length; i++){
 			    EnquiryImgUploadS3.insert(filesM[i], function (err, fileObj) {

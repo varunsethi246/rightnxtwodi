@@ -1,0 +1,43 @@
+<template name="salesTableView">
+	<tr class="clickableRow" id={{orderId}}>
+    {{#if isGreaterThan0 rowSpanCount}}
+  		<td class="rowspanElement" rowspan="{{rowSpanCount}}"> 
+        <a href="" data-toggle="modal" data-target="#myModalSales" id="{{orderId}}" class="showModal"> {{ date }} </a> 
+      </td>
+    {{/if}}
+		<td> 
+      <a href="" data-toggle="modal" data-target="#myModalSales" id="{{orderId}}"> {{ orderNo }} </a> 
+    </td>
+		<td> 
+      <a href="" data-toggle="modal" data-target="#myModalSales" id="{{orderId}}"> {{ transaction}} </a>
+    </td>
+		<td>
+      <a href="" data-toggle="modal" data-target="#myModalSales" id="{{orderId}}"> {{ proCount }}</a> 
+    </td>
+		<td> 
+      <a href="" data-toggle="modal" data-target="#myModalSales" id="{{orderId}}"> {{ totalQuantity }}</a> 
+    </td>
+		<td> 
+      <a href="" data-toggle="modal" data-target="#myModalSales" id="{{orderId}}"> &#x20B9; {{ totalAmount }} </a> 
+    </td>
+	</tr>
+
+		<!-- modal -->
+<div id="myModalSales" class="modal fade " role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content salesModalStyle">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Invoice</h4>
+      </div>
+      <div class="modal-body modalBody">
+        {{> salesModal}}
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+</template>

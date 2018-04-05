@@ -9,6 +9,7 @@ import { Categories } from '/imports/api/masterData/categoriesMaster.js';
 var categoryRouteList = '';
 Template.homepageProductCarousel.events({
    'click .item' : function(event){
+        $("html,body").scrollTop(0);
         event.preventDefault();
         var searchCatg = $(event.target).attr('title'); 
         console.log("searchCatg; ",searchCatg);
@@ -23,6 +24,7 @@ Template.homepageProductCarousel.events({
 
 Template.homepageServicesCarousel.events({
    'click .item' : function(event){
+        $("html,body").scrollTop(0);
         event.preventDefault();
         var searchCatg = $(event.target).attr('title'); 
         console.log("searchCatg; ",searchCatg);
