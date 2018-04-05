@@ -16,6 +16,29 @@ var limitReviews=0;
 var loggedinUser = '';
 tagedFriends = [];
 
+Template.userTimeline.helpers({
+	userLoadmoreCmmnt(dataIndex){
+		if(dataIndex < 2){
+			return true;
+		} else{
+			return false;
+		}
+	},
+	userLoadmoreCmmntBtn(data){
+		if(data){
+			if(data.length > 2){
+				return true;
+			} else{
+				return false;
+			}
+		}else{
+			return false;
+		}
+		
+	},
+});
+
+
 Template.userSuggestion.helpers ({
 	'userSuggestionData': function(){
 		var userId         = Meteor.userId();
@@ -131,8 +154,9 @@ Template.userTimeline.helpers({
 
 	businessReviews:function(){
 		var id = Meteor.userId();
+		console.log('id:',id);
 		var loggedinUser = Meteor.users.findOne({"_id":id});
-		
+		console.log('loggedinUser:',loggedinUser);
 		var allReviews = Review.find( {
 										$or:[ 
 												{ "userId":{$in  : uniqueId} } , 
@@ -226,7 +250,7 @@ Template.userTimeline.helpers({
 					allReviews[i].businessArea = businessData.businessArea;
 					allReviews[i].businessCity = businessData.businessCity;
 
-					if(businessData.businessImages.length > 0){
+					if(businessData.businessImages && businessData.businessImages.length > 0){
 						var pic = BusinessImgUploadS3.findOne({"_id":businessData.businessImages[0].img});
 						if(pic){
 							allReviews[i].businessImages = pic.url();
@@ -246,7 +270,7 @@ Template.userTimeline.helpers({
 					for(k=0;k<allReviews[i].userComments.length; k++){
 						var userId  = allReviews[i].userComments[k].userId;
 						var userObj = Meteor.users.findOne({"_id":userId});
-						console.log("userObj: ",userObj);
+						// console.log("userObj: ",userObj);
 						if(userObj){
 							if(userObj._id == Meteor.userId()){
 								allReviews[i].userComments[k].userID = userObj._id;
@@ -286,7 +310,7 @@ Template.userTimeline.helpers({
 								replyObj.replyId  = allReviews[i].commentReply[l].userReplyId;
 								var userId1  = allReviews[i].commentReply[l].userId;
 								var userObj1 = Meteor.users.findOne({"_id":userId1});
-								console.log("userObj1: ",userObj1);
+								// console.log("userObj1: ",userObj1);
 								if(userObj1){
 									replyObj.commentReplyUserName = userObj1.profile.name;
 									if(userObj1.profile && userObj1.profile.userProfilePic){								
@@ -444,6 +468,15 @@ Template.userSuggestion.events({
 });
 
 Template.userTimeline.events({
+	'click .showMoreCommntDiv': function(event){
+		// To Expant All comments
+		var currentClass = $(event.currentTarget).parent().siblings();
+		currentClass.removeClass('showMoreCommntDivNone');
+
+		// To Change Buttons
+		$(event.currentTarget).parent().css('display','none');
+		$(event.currentTarget).parent().siblings('showLessCommnt').css('display','block');
+	},
 	"keydown #searchFrndsEdit":function(e){
 		//For Up and Down arrow selection in dropdown
 		$('.tagFrndUlFrieldList').removeClass('searchDisplayHide').addClass('searchDisplayShow');
@@ -453,16 +486,16 @@ Template.userTimeline.events({
 		}
 
 		var current_index = $('.selectedSearch').index();
-		console.log("current_index: ",current_index);
+		// console.log("current_index: ",current_index);
 		
 		var $number_list = $('.tagFrndUlFrieldList');
-		console.log("$number_list: ",$number_list);
+		// console.log("$number_list: ",$number_list);
 		
 		var $options = $number_list.find('.tagFrndLiFrieldList');
 		// console.log("$options: ",$options);
 		
 		var items_total = $options.length;
-		console.log("items_total: ",items_total);
+		// console.log("items_total: ",items_total);
 		if (e.keyCode == 40) {
 	        if (current_index + 1 < items_total) {
 	            current_index++;

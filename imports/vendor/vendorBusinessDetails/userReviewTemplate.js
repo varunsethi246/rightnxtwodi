@@ -11,7 +11,7 @@ import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
 
 Template.userReviewTemplate.helpers({
 	userLoadmoreCmmnt(dataIndex){
-		if(dataIndex < 5){
+		if(dataIndex < 2){
 			return true;
 		} else{
 			return false;
@@ -19,7 +19,7 @@ Template.userReviewTemplate.helpers({
 	},
 	userLoadmoreCmmntBtn(data){
 		if(data){
-			if(data.length > 5){
+			if(data.length > 2){
 				return true;
 			} else{
 				return false;
