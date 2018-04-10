@@ -50,6 +50,9 @@ import '/imports/general/careers/jobList.html';
 
 import '/imports/admin/contactUsList/contactUsList.js';
 
+import '/imports/admin/salesReport/salesReport.js';
+import '/imports/admin/salesReportBanner/salesReportBanner.js';
+
 
 
 

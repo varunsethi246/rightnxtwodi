@@ -7,6 +7,7 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import { Offers } from './offersMaster.js';
 import { CompanySettings } from './companysettingsAPI.js';
 import { BusinessBanner } from '/imports/api/businessBannerMaster.js';
+import { BusinessAds } from '/imports/api/businessAdsMaster.js';
 import { Business } from '/imports/api/businessMaster.js';
 
 
@@ -38,6 +39,7 @@ if (Meteor.isServer) {
   }
 
 	Meteor.publish('payment', function payment() {
+		// console.log(Payment.find({"vendorId":this.userId}).fetch() );
 		return Payment.find({"vendorId":this.userId});
 	});
 
@@ -204,53 +206,58 @@ Meteor.methods({
 			}
 		}
 	},
-	// 'updateAdsPaymentOnline':function(businessLink){
-	// 	var businessAds = BusinessAds.find({"businessLink":businessLink,"status":"new"}).fetch();
-	// 	var paymentCheck = Payment.findOne({"businessLink":businessLink,"orderType":"Banner","paymentStatus":"unpaid"});
-	// 	var businessUser = Business.findOne({"businessLink":businessLink});
+	'updateAdsPaymentOnline':function(businessLink){
+		var businessAds = BusinessAds.find({"businessLink":businessLink,"status":"new"}).fetch();
+		console.log("businessAds: ",businessAds);
+		var paymentCheck = Payment.findOne({"businessLink":businessLink,"orderType":"Ads","paymentStatus":"unpaid"});
+		console.log("paymentCheck: ",paymentCheck);
+		var businessUser = Business.findOne({"businessLink":businessLink});
+		console.log("businessUser: ",businessUser);
 
-	// 	if(!businessUser.ownerMobile){
-	// 		businessUser.ownerMobile = "9730190305";
-	// 	}else{
-	// 		if((businessUser.ownerMobile).indexOf("+") >= 0){
-	// 			businessUser.ownerMobile = (businessUser.ownerMobile).substring(3);
-	// 		}
-	// 	}
+		if(!businessUser.ownerMobile){
+			businessUser.ownerMobile = "9730190305";
+		}else{
+			if((businessUser.ownerMobile).indexOf("+") >= 0){
+				businessUser.ownerMobile = (businessUser.ownerMobile).substring(3);
+			}
+		}
 
-	// 	if(paymentCheck.totalAmount){
-	// 		var userId       	= Meteor.userId();
-	// 		var userObj      	= Meteor.users.findOne({"_id":userId});
-	// 		var mobileNumber 	= businessUser.ownerMobile;
-	// 		var grandTotal 		= paymentCheck.totalAmount;
-	// 		var quickWalletInput = {
-	// 			"partnerid"	:   "323",
-	// 			"mobile"   	:   mobileNumber,
-	// 			"secret"   	:   "QbFMMdGFanNEkmdjeRnFJrUreJfjuqaAw",
-	// 			"amount"   	:    grandTotal,
-	// 			"udf1"		: 	paymentCheck._id,
-	// 			"redirecturl" : 'http://localhost:3000/paymentAds-response?payId='+paymentCheck._id+"&InvNo="+paymentCheck.invoiceNumber+"&BusLink="+paymentCheck.businessLink,
-	// 		};
+		if(paymentCheck.totalAmount){
+			var userId       	= Meteor.userId();
+			var userObj      	= Meteor.users.findOne({"_id":userId});
+			var mobileNumber 	= businessUser.ownerMobile;
+			var grandTotal 		= paymentCheck.totalAmount;
+			var quickWalletInput = {
+				"partnerid"	:   "323",
+				"mobile"   	:   mobileNumber,
+				"secret"   	:   "QbFMMdGFanNEkmdjeRnFJrUreJfjuqaAw",
+				"amount"   	:    grandTotal,
+				"udf1"		: 	paymentCheck._id,
+				"redirecturl" : 'http://localhost:3000/paymentAds-response?payId='+paymentCheck._id+"&InvNo="+paymentCheck.invoiceNumber+"&BusLink="+paymentCheck.businessLink,
+			};
 
-	// 		try {
-	// 			console.log("Im trying");
-	// 			if (Meteor.isServer) {
-	// 					var result = HTTP.call("POST", "https://uat.quikwallet.com/api/partner/323/requestPayment",
-	// 									{params: quickWalletInput});
-	// 									console.log("result: ",result);
-	// 					if(result.data.status == 'success'){
-	// 						var paymentUrl = result.data.data.url;
-	// 						console.log("paymentUrl: ",paymentUrl);
+			console.log('quickWalletInput: ',quickWalletInput);
+
+			try {
+				console.log("Im trying");
+				if (Meteor.isServer) {
+						var result = HTTP.call("POST", "https://uat.quikwallet.com/api/partner/323/requestPayment",
+										{params: quickWalletInput});
+										console.log("result: ",result);
+						if(result.data.status == 'success'){
+							var paymentUrl = result.data.data.url;
+							console.log("paymentUrl: ",paymentUrl);
 				
-	// 						return paymentUrl;
-	// 					}else{
-	// 						return false;
-	// 					}
-	// 				}
-	// 		} catch (err) {
-	// 			return false;
-	// 		}
-	// 	}
-	// },
+							return paymentUrl;
+						}else{
+							return false;
+						}
+					}
+			} catch (err) {
+				return false;
+			}
+		}
+	},
 	
 	'addNewOfferinPayment': function(_id, offerId){
 		Payment.update( {"_id":_id},
@@ -378,39 +385,39 @@ Meteor.methods({
 			}
 		);
 	},
-	// 'updateAdsInvoiceforPayment':function(id,billNo,payId,businessLink){
-	// 	Payment.update(
-	// 		{"_id": payId},
-	// 		{ $set:	{ 
-	// 					"paymentStatus" 			: "paid",
-	// 					"paymentDate" 				: moment(new Date()).format('DD/MM/YYYY'),
-	// 					"modeOfPayment" 			: "online"
-	// 				}, 
-	// 		},
-	// 		function(error,result){
-	// 			if(error){
-	// 				return error;
-	// 			}else{
-	// 				BusinessAds.update(
-	// 					{"businessLink": businessLink, "status":"new"},
-	// 					{ $set:	{ 
-	// 								"status" 	: "active",
-	// 							}, 
-	// 					},{multi: true},
-	// 					function(error1,result1){
-	// 						if(error1){
-	// 							return error1;
-	// 						}
-	// 						if(result1){
-	// 							return result1;
-	// 						}
-	// 					}
-	// 				);
-	// 				return result;
-	// 			}
-	// 		}
-	// 	);
-	// },
+	'updateAdsInvoiceforPayment':function(id,billNo,payId,businessLink){
+		Payment.update(
+			{"_id": payId},
+			{ $set:	{ 
+						"paymentStatus" 			: "paid",
+						"paymentDate" 				: moment(new Date()).format('DD/MM/YYYY'),
+						"modeOfPayment" 			: "online"
+					}, 
+			},
+			function(error,result){
+				if(error){
+					return error;
+				}else{
+					BusinessAds.update(
+						{"businessLink": businessLink, "status":"new"},
+						{ $set:	{ 
+									"status" 	: "active",
+								}, 
+						},{multi: true},
+						function(error1,result1){
+							if(error1){
+								return error1;
+							}
+							if(result1){
+								return result1;
+							}
+						}
+					);
+					return result;
+				}
+			}
+		);
+	},
 
 	'updateInvoiceforPayment':function(_id,offerId,mode){
 		Payment.update(

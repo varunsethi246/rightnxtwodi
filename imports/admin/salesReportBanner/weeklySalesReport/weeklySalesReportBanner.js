@@ -2,9 +2,9 @@ import { moment } from "meteor/momentjs:moment";
 // import { Orders } from '../../../../api/orderMaster.js';
 import { Payment } from '../../../api/paymentMaster.js';
 
-import './weeklySalesReport.html';
+import './weeklySalesReportBanner.html';
 
-Template.weeklySalesReport.helpers({
+Template.weeklySalesReportBanner.helpers({
 
 	'currentweek' : function(){
 		var sessionWeek = Session.get('selectedWeek');//Expecting "2017-W01" type of format
@@ -39,7 +39,8 @@ Template.weeklySalesReport.helpers({
 		var sundayOfWeek = moment(mondayInWeek).add(7,"days").format();
 		var sundayOfWeekDt = new Date(sundayOfWeek);
 
-		var ordersData = Payment.find({'orderType':'Ads','invoiceDate':{$gte: mondayInWeekDt, $lt: sundayOfWeekDt}}).fetch();
+
+		var ordersData = Payment.find({'orderType':'Banner','invoiceDate':{$gte: mondayInWeekDt, $lt: sundayOfWeekDt}}).fetch();
 		var totalRec = ordersData.length;
 	 	if(ordersData){
         var allOrders = [];
@@ -47,55 +48,54 @@ Template.weeklySalesReport.helpers({
         var tempdate = '1/1/1';
 
         for(i=0; i < totalRec; i++){
-		 			var quantityTotal = 0;
-		 			var d = ordersData[i].invoiceDate;
-	                var t = d.toLocaleDateString('en-IN');
-	                if (t == tempdate) {
-	                	dateCount++;
-	                }
-	 		 			allOrders[i] = {
-			              "orderId"       	: ordersData[i]._id ,
-			              "businessLink"   	: ordersData[i].businessLink ,
-			              "orderNo"       	: ordersData[i].invoiceNumber,
-			              "discountPercent" : ordersData[i].discountPercent,
-			              "date"          	: t ,
-			              "discountedPrice" : ordersData[i].discountedPrice,
-			              "totalAmount" 	: ordersData[i].totalAmount,
-			              "totalDiscount" 	: ordersData[i].totalDiscount,
-			              "orderType" 		: ordersData[i].orderType,
-			              "totalQuantity" 	: 0,
-			              "rowSpanCount"  	: 0,
-			            }
+          var quantityTotal = 0;
+          var d = ordersData[i].invoiceDate;
+          var t = d.toLocaleDateString('en-IN');
+          if (t == tempdate) {
+                    dateCount++;
+          }
 
-					var totalProdQty = totalRec;
-					for(j=0 ; j<totalProdQty; j++){
-						quantityTotal += parseInt(ordersData[i]);
-					}
-					allOrders[i].totalQuantity = parseInt(quantityTotal);
+            allOrders[i] = {
+				"orderId"       	: ordersData[i]._id ,
+				"businessLink"   	: ordersData[i].businessLink ,
+				"orderNo"       	: ordersData[i].invoiceNumber,
+				"discountPercent" : ordersData[i].discountPercent,
+				"date"          	: t ,
+				"discountedPrice" : ordersData[i].discountedPrice,
+				"totalAmount" 	: ordersData[i].totalAmount,
+				"totalDiscount" 	: ordersData[i].totalDiscount,
+				"orderType" 		: ordersData[i].orderType,
+				"totalQuantity" 	: 0,
+				"rowSpanCount"  	: 0,
+            }
 
-	                if(t != tempdate){
-	                	var rowSpan = dateCount;
-						allOrders[i-rowSpan].rowSpanCount = rowSpan;
-	                	tempdate = t;
-	                	dateCount = 1;
-	                }
+          var totalProdQty = totalRec;
+          for(j=0 ; j<totalProdQty; j++){
+            quantityTotal += parseInt(ordersData[i]);
 
+          }
 
-		 		}//for Loop
+          allOrders[i].totalQuantity = parseInt(quantityTotal);
+            if(t != tempdate){
+              var rowSpan = dateCount;
+              allOrders[i-rowSpan].rowSpanCount = rowSpan;
+              tempdate = t;
+              dateCount = 1;
+            }
 
-		 		//for last element
-        		var rowSpan = dateCount;
-				allOrders[i-rowSpan].rowSpanCount = rowSpan;
+        }//for Loop
+        var rowSpan = dateCount;
+        allOrders[i-rowSpan].rowSpanCount = rowSpan;
+        return allOrders;
+      } //if
 
-		 		return allOrders;
-		 	} //if
 
 	}
 
 
 });
 
-Template.weeklySalesReport.events({
+Template.weeklySalesReportBanner.events({
 	'change #weekpicker':function(event){
 		event.preventDefault();
 		var selectedWeek = $("input#weekpicker").val();

@@ -3,11 +3,11 @@ import { moment } from "meteor/momentjs:moment";
 import { Template } from 'meteor/templating';
 import { Payment } from '../../../api/paymentMaster.js';
 
-import './monthlySalesReport.html';
+import './monthlySalesReportBanner.html';
 
 
 
-Template.monthlySalesReport.helpers({
+Template.monthlySalesReportBanner.helpers({
 
 	'currentmonth' : function(){
 		var monthSession = Session.get('selectedMonth');
@@ -25,10 +25,13 @@ Template.monthlySalesReport.helpers({
 
 	'result' : function(){
 		var monthDateFromSess = Session.get("selectedMonth");
+	 
 	  	var monthDateStart = new Date(moment(monthDateFromSess).month("YYYY-MM"));//Find out first day of month with selectedMonth
 	  	var monthDateToSess = new Date(moment(monthDateFromSess).add(1,"M"));
-		var ordersData = Payment.find({'orderType':'Ads','invoiceDate':{$gte: monthDateStart,$lt: monthDateToSess}}).fetch();
-		// console.log('ordersDataOne: ',ordersData);
+	  	// console.log(monthDateToSess);
+		// var ordersData = Payment.find({'orderType':'Ads','invoiceDate':{$gte: monthDateStart,$lt: monthDateToSess}}).fetch();
+		var ordersData = Payment.find({'orderType':'Banner','invoiceDate':{$gte: monthDateStart,$lt: monthDateToSess}}).fetch();
+		// console.log("ordersData",ordersData);
 		var totalRec = ordersData.length;
 	 		if(ordersData){
 		 		var allOrders = [];
@@ -82,7 +85,7 @@ Template.monthlySalesReport.helpers({
 
 });
 
-Template.monthlySalesReport.events({
+Template.monthlySalesReportBanner.events({
 
 	'click #nextMonth':function(event){
 		event.preventDefault();

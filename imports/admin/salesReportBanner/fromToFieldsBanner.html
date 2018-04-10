@@ -1,4 +1,4 @@
-<template name="fromToFields">
+<template name="fromToFieldsBanner">
 <section class="Content">
 <div class="row">
 <div class="col-md-10 col-lg-12">
@@ -20,7 +20,7 @@
 				<div class="table-responsive">
 				<table class="table table-striped myTable table-bordered tableSales">
 					<thead>
-						<tr class="table-head saleheadbackground">
+						<tr class="table-head">
 							<th> Date </th>
 							<th> Order Number </th>
 							<th> Transaction Type</th>
@@ -31,7 +31,7 @@
 					</thead>
 					<tbody class="myTableData">
 			            {{#each result}}
-			            {{> salesTableView}}
+			            {{> salesTableViewBanner}}
 			            {{/each}}
 					</tbody>
 				</table>

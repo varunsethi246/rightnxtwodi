@@ -1,4 +1,4 @@
-<template name="weeklySalesReport">
+<template name="weeklySalesReportBanner">
 <section class="Content">
 <div class="row">
 	<div class="">
@@ -30,12 +30,12 @@
 								<th> Transaction Type</th>
 								<th> Product Count </th>
 								<th> Quantity </th>
-								<th>Amount</th>
+								<th> Amount</th>
 							</tr>
 						</thead>
 						<tbody class="myTableData">
 							{{#each result}}
-							{{> salesTableView}}
+							{{> salesTableViewBanner}}
 							{{/each}}
 						</tbody>
 					</table>

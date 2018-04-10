@@ -4,9 +4,9 @@ import { Session } from 'meteor/session';
 import { moment } from "meteor/momentjs:moment";
 import { Payment } from '../../api/paymentMaster.js';
 
-import './fromToFields.html';
+import './fromToFieldsBanner.html';
 
-Template.fromToFields.helpers({
+Template.fromToFieldsBanner.helpers({
 	'fromDate':function(){
 		var fromDate = new Date();
 		var dd = fromDate.getDate();
@@ -44,9 +44,6 @@ Template.fromToFields.helpers({
 		var fromDate = Session.get('fromDate');
     	var toDate = Session.get('toDate');
 
-    	// console.log('from: ',fromDate);
-    	// console.log('to: ',toDate);
-
 		if(fromDate != toDate){
 			var fromDt = new Date(fromDate);
       		var toDt = new Date(toDate);
@@ -54,12 +51,9 @@ Template.fromToFields.helpers({
 			var fromDt = new Date();
       		var toDt = new Date(moment(fromDt).add(1,'d'));
 		}
-		// console.log('fromDate: ',fromDt);
-		// console.log('toDate: ',toDt);
 
-		var ordersData =  Payment.find({"orderType" : "Ads",'invoiceDate':{$gte : fromDt, $lt : toDt }}).fetch();
-		// console.log('ordersData :',ordersData);
-		// console.log("hi");
+
+		var ordersData =  Payment.find({"orderType" : "Banner",'invoiceDate':{$gte : fromDt, $lt : toDt }}).fetch();
 	 	var totalRec = ordersData.length;
 		if(ordersData){
 			var allOrders = [];
@@ -75,17 +69,17 @@ Template.fromToFields.helpers({
 				}
 
 					allOrders[i] = {
-		              "orderId"       	: ordersData[i]._id ,
-		              "businessLink"   	: ordersData[i].businessLink ,
-		              "orderNo"       	: ordersData[i].invoiceNumber,
-		              "discountPercent" : ordersData[i].discountPercent,
-		              "date"          	: t ,
-		              "discountedPrice" : ordersData[i].discountedPrice,
-		              "totalAmount" 	: ordersData[i].totalAmount,
-		              "totalDiscount" 	: ordersData[i].totalDiscount,
-		              "orderType" 		: ordersData[i].orderType,
-		              "totalQuantity" 	: 0,
-		              "rowSpanCount"  	: 0,
+						"orderId"       	: ordersData[i]._id ,
+						"businessLink"   	: ordersData[i].businessLink ,
+						"orderNo"       	: ordersData[i].invoiceNumber,
+						"discountPercent" 	: ordersData[i].discountPercent,
+						"date"          	: t ,
+						"discountedPrice" 	: ordersData[i].discountedPrice,
+						"totalAmount" 		: ordersData[i].totalAmount,
+						"totalDiscount" 	: ordersData[i].totalDiscount,
+						"orderType" 		: ordersData[i].orderType,
+						"totalQuantity" 	: 0,
+						"rowSpanCount"  	: 0,
 		            }
 
 				var totalProdQty = totalRec;
@@ -112,12 +106,11 @@ Template.fromToFields.helpers({
 });
 
 
-Template.fromToFields.events({
+Template.fromToFieldsBanner.events({
 	"click .search" : function(event){
 		event.preventDefault();
 		var fromDate = $("input#fromdate").val();
 		var toDate = $("input#todate").val();
-
 		if(fromDate > toDate){
 			alert("From Date cannot be less than To Date");
 			Bert.alert( 'From Date cannot be less than To Date', 'danger', 'growl-top-right' );
@@ -126,8 +119,6 @@ Template.fromToFields.events({
 		}else{
 			Session.set("fromDate",fromDate);
 			Session.set("toDate",toDate);
-		// console.log(Session.set("fromDate",fromDate));
-		// console.log(Session.set("toDate",toDate));
 		}
 	}
 

@@ -245,10 +245,34 @@ Template.businessAds.helpers({
   	},
 });
 
-
+Template.adsInvoice.events({
+	'click .bannerPayButton': function(event){
+		console.log('hi');
+		var currentLink = $(event.currentTarget).attr('data-busLink');
+		console.log('data-busLink:',currentLink);
+		var currentVal = $(event.currentTarget).siblings('.bannerPayButtonRadio').val();
+		console.log('currentVal:',currentVal);
+		if(currentVal == "online"){
+			Meteor.call("updateAdsPaymentOnline",currentLink,(error, result)=>{
+				if(result){
+					window.location = result;
+				}
+			});
+		}else{
+			FlowRouter.go("/businessAdsList");
+		}
+	},
+});
 
 
 Template.adsInvoice.helpers({
+	checkPaymentStatus(data){
+		if(data == "paid"){
+			return false;
+		}else{
+			return true;
+		}
+	},
 	adsInvoiceData(){
 		var businessLink = FlowRouter.getParam('businessLink');
   		var businessDetails = Business.findOne({"businessLink":businessLink, "status":"active"});
@@ -305,6 +329,8 @@ Template.adsInvoice.helpers({
 
 
 Template.businessAds.events({
+	
+	
 	'click .adsButton':function(event){
 		event.preventDefault();
 		var invoiceNumber 	= Counts.get('noOfInvoiceCount')+1;

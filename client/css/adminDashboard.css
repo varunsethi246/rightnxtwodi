@@ -2774,3 +2774,119 @@ margin-left: 10%;
 .homepagebanner{
 	margin-bottom: 20px;
 }
+.SalesreportTitleName {
+    text-align: center;
+    color: #3c8dbc;
+    font-weight: bold;
+    margin-top: -7px !important;
+}
+.salesReportTabs {
+    margin-bottom: 20px !important;
+    margin-top: 25px;
+}
+
+@media (min-width: 991px){
+	.salesTab {
+	    width: 178px !important;
+	}
+	.salesTab {
+	    text-align: center;
+	    font-size: 14px;
+	    color: #fff!important;
+	}
+}
+.nav-pills>li.active>a {
+    font-weight: 600;
+}
+.nav-pills>li.active>a {
+    font-weight: 600;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+    border-top-color: #3c8dbc;
+}
+.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus {
+    color: #fff;
+    background-color: #337ab7;
+}
+.nav-pills>li>a {
+    border-radius: 0;
+    border-top: 3px solid transparent;
+    color: #444;
+}
+.salesTab a {
+    border: 1px solid #ccc !important;
+}
+.nav-pills>li>a {
+    border-radius: 0;
+    border-top: 3px solid transparent;
+    color: #444;
+}
+
+.nav-pills>li>a {
+    border-radius: 0;
+    border-top: 3px solid transparent;
+    color: #444;
+}
+.salesTab {
+    text-align: center;
+    font-size: 14px;
+    color: #fff!important;
+}
+.Content {
+    min-height: 250px;
+    padding: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.salesreportTitle {
+    text-align: center;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+h4 , .h4 {
+    font-size: 18px;
+}
+h4, .h4, h5, .h5, h6, .h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+.dateinputstyle {
+    margin-top: 16px;
+    margin-bottom: 22px;
+}
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+.faoutput {
+    font-size: 20px !important;
+    cursor: pointer;
+}
+.faoutput {
+    font-size: 20px !important;
+    cursor: pointer;
+}
+.table-responsive .table {
+    max-width: none !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+.myTable, .hrTableHeader {
+    text-align: center;
+}
+.table-striped {
+    background-color: #E4F1FE !important;
+}
+.saleheadbackground{
+	    background: #337ab7;
+    color: #fff;
+}

@@ -2,10 +2,10 @@ import { moment } from "meteor/momentjs:moment";
 // import { Orders } from '../../../../api/orderMaster.js';
 import { Payment } from '../../../api/paymentMaster.js';
 
-import './yearlySalesReport.html';
+import './yearlySalesReportBanner.html';
 
 
-Template.yearlySalesReport.helpers({
+Template.yearlySalesReportBanner.helpers({
 
 	'currentyear' : function(){
 		var yearSession = Session.get('selectedYear');
@@ -21,13 +21,13 @@ Template.yearlySalesReport.helpers({
 
 	},
 
-	'result' : function(){
+  'result' : function(){
     var yearFromSess = Session.get("selectedYear");
 
     var thisYear = yearFromSess;
     var yearDateStart = new Date("1/1/" + thisYear);
     var yearDateEnd = new Date (yearDateStart.getFullYear(), 11, 31);
-    var ordersData = Payment.find({'orderType':'Ads','invoiceDate':{$gte: yearDateStart,$lt: yearDateEnd}}).fetch();
+    var ordersData = Payment.find({'orderType':'Banner','invoiceDate':{$gte: yearDateStart,$lt: yearDateEnd}}).fetch();
     var totalRec = ordersData.length;
       if(ordersData){
         var allOrders = [];
@@ -43,41 +43,38 @@ Template.yearlySalesReport.helpers({
           }
 
             allOrders[i] = {
-	          "orderId"       	: ordersData[i]._id ,
-	          "businessLink"   	: ordersData[i].businessLink ,
-	          "orderNo"       	: ordersData[i].invoiceNumber,
-	          "discountPercent" : ordersData[i].discountPercent,
-	          "date"          	: t ,
-	          "discountedPrice" : ordersData[i].discountedPrice,
-	          "totalAmount" 	: ordersData[i].totalAmount,
-	          "totalDiscount" 	: ordersData[i].totalDiscount,
-	          "orderType" 		: ordersData[i].orderType,
-	          "totalQuantity" 	: 0,
-	          "rowSpanCount"  	: 0,
-	        }
+              "orderId"         : ordersData[i]._id ,
+              "businessLink"    : ordersData[i].businessLink ,
+              "orderNo"         : ordersData[i].invoiceNumber,
+              "discountPercent" : ordersData[i].discountPercent,
+              "date"            : t ,
+              "discountedPrice" : ordersData[i].discountedPrice,
+              "totalAmount"     : ordersData[i].totalAmount,
+              "totalDiscount"   : ordersData[i].totalDiscount,
+              "orderType"       : ordersData[i].orderType,
+              "totalQuantity"   : 0,
+              "rowSpanCount"    : 0,
+            }
 
-		        var totalProdQty = totalRec;
-				for(j=0 ; j<totalProdQty; j++){
-					quantityTotal += parseInt(ordersData[i]);
-				}
-				allOrders[i].totalQuantity = parseInt(quantityTotal);
+          var totalProdQty = totalRec;
+          for(j=0 ; j<totalProdQty; j++){
+            quantityTotal += parseInt(ordersData[i]);
 
-                if(t != tempdate){
-                	var rowSpan = dateCount;
-					allOrders[i-rowSpan].rowSpanCount = rowSpan;
-                	tempdate = t;
-                	dateCount = 1;
-                }
+          }
 
+          allOrders[i].totalQuantity = parseInt(quantityTotal);
+            if(t != tempdate){
+              var rowSpan = dateCount;
+              allOrders[i-rowSpan].rowSpanCount = rowSpan;
+              tempdate = t;
+              dateCount = 1;
+            }
 
-	 		}//for Loop
-
-	 		//for last element
-    		var rowSpan = dateCount;
-			allOrders[i-rowSpan].rowSpanCount = rowSpan;
-
-	 		return allOrders;
-	 	} //if
+        }//for Loop
+        var rowSpan = dateCount;
+        allOrders[i-rowSpan].rowSpanCount = rowSpan;
+        return allOrders;
+      } //if
 
   }
 
@@ -85,7 +82,7 @@ Template.yearlySalesReport.helpers({
 });
 
 
-Template.yearlySalesReport.events({
+Template.yearlySalesReportBanner.events({
 
 	'click #nextYear':function(event){
 		event.preventDefault();

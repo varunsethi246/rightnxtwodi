@@ -3,11 +3,11 @@ import { Session } from 'meteor/session';
 import { moment } from "meteor/momentjs:moment";
 import { Payment } from '../../../api/paymentMaster.js';
 
-import './todaysSalesReport.html';
+import './todaysSalesReportBanner.html';
 
 
 
-Template.todaysSalesReport.helpers({
+Template.todaysSalesReportBanner.helpers({
 	'currentDate':function(){
 		var setDate = Session.get('newDate');
 
@@ -39,45 +39,43 @@ Template.todaysSalesReport.helpers({
 		}else{
 			var newDate  = new Date();
 		}
-		// console.log('newDate: ',newDate);
 		var newDate1 = new Date(newDate.getFullYear(), newDate.getMonth(), newDate.getDate(), 0, 0, 0); //current day at 0:0:0
 		var newDate2 = new Date(newDate1.getTime() + (24*60*60*1000) ); // next day at 0:0:0
-		
-		var paymentAds =  Payment.find({'orderType':'Ads','invoiceDate':{$gte : newDate1, $lt : newDate2 }}).fetch();
-		// console.log("orderData: ",paymentAds);
-	 	var totalRec = paymentAds.length;
-	 	if(paymentAds){
+
+		// var ordersData =  Orders.find({'createdAt':{$gte : newDate1, $lt : newDate2 }}, {sort: {'createdAt': -1}}).fetch();
+		// var ordersData =  Payment.find({'orderType':'Banner','invoiceDate':{$gte : newDate1, $lt : newDate2 }}).fetch();
+		var ordersData =  Payment.find({'orderType':'Ads','invoiceDate':{$gte : newDate1, $lt : newDate2 }}).fetch();
+	 	var totalRec = ordersData.length;
+	 	if(ordersData){
         var allOrders = [];
         var dateCount = 0;
         var tempdate = '1/1/1';
 
         for(i=0; i < totalRec; i++){
           var quantityTotal = 0;
-          var d = paymentAds[i].invoiceDate;
+          var d = ordersData[i].invoiceDate;
           var t = d.toLocaleDateString('en-IN');
-          // console.log('d :',d);
-          // console.log('t :',t);
           if (t == tempdate) {
                 dateCount++;
           }
 
             allOrders[i] = {
-              "orderId"       	: paymentAds[i]._id ,
-              "businessLink"   	: paymentAds[i].businessLink ,
-              "orderNo"       	: paymentAds[i].invoiceNumber,
-              "discountPercent" : paymentAds[i].discountPercent,
+              "orderId"       	: ordersData[i]._id ,
+              "businessLink"   	: ordersData[i].businessLink ,
+              "orderNo"       	: ordersData[i].invoiceNumber,
+              "discountPercent" : ordersData[i].discountPercent,
               "date"          	: t ,
-              "discountedPrice" : paymentAds[i].discountedPrice,
-              "totalAmount" 	: paymentAds[i].totalAmount,
-              "totalDiscount" 	: paymentAds[i].totalDiscount,
-              "orderType" 		: paymentAds[i].orderType,
+              "discountedPrice" : ordersData[i].discountedPrice,
+              "totalAmount" 	: ordersData[i].totalAmount,
+              "totalDiscount" 	: ordersData[i].totalDiscount,
+              "orderType" 		: ordersData[i].orderType,
               "totalQuantity" 	: 0,
               "rowSpanCount"  	: 0,
             }
 
           var totalProdQty = totalRec;
           for(j=0 ; j<totalProdQty; j++){
-            quantityTotal += parseInt(paymentAds[i]);
+            quantityTotal += parseInt(ordersData[i]);
 
           }
 
@@ -92,7 +90,6 @@ Template.todaysSalesReport.helpers({
         }//for Loop
         var rowSpan = dateCount;
         allOrders[i-rowSpan].rowSpanCount = rowSpan;
-        // console.log('allOrders:',allOrders);
         return allOrders;
       } //if
 	}
@@ -101,7 +98,7 @@ Template.todaysSalesReport.helpers({
 });
 
 
-Template.todaysSalesReport.events({
+Template.todaysSalesReportBanner.events({
 	'click #nextDate':function(event){
 		event.preventDefault();
 		var selectedDate1 = $("input#reportDate").val();

@@ -26,7 +26,7 @@ Template.businessAdsList.helpers({
 		}
 		
     	var adsData = BusinessAds.find({"status":bannerStatus}).fetch();
-    	
+    	// console.log('adsData:',adsData);
     	if(adsData){
     		var data = _.uniq(adsData, function(p){ return p.businessLink; });
     		for(i=0;i<data.length;i++){

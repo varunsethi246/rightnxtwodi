@@ -7,21 +7,21 @@ import { moment } from "meteor/momentjs:moment";
 import { Payment } from '../../api/paymentMaster.js';
 
 
-import './salesReport.html';
-import './salesReportTabs.html';
-import './todaysSalesReport/todaysSalesReport.js';
-import './weeklySalesReport/weeklySalesReport.js';
-import './monthlySalesReport/monthlySalesReport.js';
-import './yearlySalesReport/yearlySalesReport.js';
-import './tabContent.html';
-import './fromToFields.html';
-import './fromToFields.js';
-import './salesTableView.html';
-import './salesModal.html';
-import './reviewOrderView.html';
+import './salesReportBanner.html';
+import './salesReportTabsBanner.html';
+import './todaysSalesReport/todaysSalesReportBanner.js';
+import './weeklySalesReport/weeklySalesReportBanner.js';
+import './monthlySalesReport/monthlySalesReportBanner.js';
+import './yearlySalesReport/yearlySalesReportBanner.js';
+import './tabContentBanner.html';
+import './fromToFieldsBanner.html';
+import './fromToFieldsBanner.js';
+import './salesTableViewBanner.html';
+import './salesModalBanner.html';
+import './reviewOrderViewBanner.html';
 
 
-Template.salesTableView.onRendered(function(){
+Template.salesTableViewBanner.onRendered(function(){
   
   $('.clickableRow').click( function(){
 		var id = $(this).attr('id');
@@ -29,7 +29,7 @@ Template.salesTableView.onRendered(function(){
 	});
 });
 
-Template.salesTableView.helpers({
+Template.salesTableViewBanner.helpers({
 
   'isGreaterThan0' : function(rowSpanCount){
     return rowSpanCount > 0;
@@ -39,7 +39,7 @@ Template.salesTableView.helpers({
 
 
 
-Template.salesModal.helpers({
+Template.salesModalBanner.helpers({
 
    
      resultVar: ()=> {
@@ -81,12 +81,11 @@ Template.salesModal.helpers({
 
                     
                       report_data.products.push({
-                          'planName'         : productsVar.businessLink,
-                          'planName'         : productsVar.orderType,
-                          'price'            : myOrders.products[j].totalAmount,
-                          'total'            : myOrders.products[j].discountedPrice,
-                          'qty'              : myOrders.products[j].invoiceNumber,
-                          // 'productthumbnail' : productStore,
+                          'planName'         : productsVar.productName,
+                          'price'            : myOrders.products[j].price,
+                          'total'            : myOrders.products[j].total,
+                          'qty'              : myOrders.products[j].quantity,
+                          'productthumbnail' : productStore,
                       });
                     }// if productsVar
 
