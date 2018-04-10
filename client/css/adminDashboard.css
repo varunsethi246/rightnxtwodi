@@ -414,7 +414,9 @@ transition:all .1ms ease-in-out
 font-size:15px;
 font-family:"PROXIMANOVA-REGULAR"
 }
-
+.planeStyle{
+	height: 100%;
+}
 .parent-flat {
 transform:scale(2,2) translate(50px,12px);
 transition:all .1ms ease-in-out

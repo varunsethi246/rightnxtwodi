@@ -253,6 +253,7 @@ Template.adminSidebar.events({
 		$('.menusidebarClass5').removeClass('mymenucolorSelect');
 		$('.menusidebarClass6').removeClass('mymenucolorSelect');
 		$('.menusidebarClass7').removeClass('mymenucolorSelect');
+		$('.menusidebarClass8').removeClass('mymenucolorSelect');
 		
 	},
 	'click .menusidebarClassOne': function(){
@@ -266,6 +267,7 @@ Template.adminSidebar.events({
 		$('.menusidebarClass5').removeClass('mymenucolorSelect');
 		$('.menusidebarClass6').removeClass('mymenucolorSelect');
 		$('.menusidebarClass7').removeClass('mymenucolorSelect');
+		$('.menusidebarClass8').removeClass('mymenucolorSelect');
 		
 	},
 	'click .menusidebarClass0': function(){
@@ -280,6 +282,7 @@ Template.adminSidebar.events({
 		$('.menusidebarClass5').removeClass('mymenucolorSelect');
 		$('.menusidebarClass6').removeClass('mymenucolorSelect');
 		$('.menusidebarClass7').removeClass('mymenucolorSelect');
+		$('.menusidebarClass8').removeClass('mymenucolorSelect');
 
 
 	},
@@ -294,6 +297,7 @@ Template.adminSidebar.events({
 		$('.menusidebarClass5').removeClass('mymenucolorSelect');
 		$('.menusidebarClass6').removeClass('mymenucolorSelect');
 		$('.menusidebarClass7').removeClass('mymenucolorSelect');
+		$('.menusidebarClass8').removeClass('mymenucolorSelect');
 
 	},
 	'click .menusidebarClass2': function(){
@@ -307,6 +311,7 @@ Template.adminSidebar.events({
 		$('.menusidebarClass6').removeClass('mymenucolorSelect');
 		$('.menusidebarClass6').removeClass('mymenucolorSelect');
 		$('.menusidebarClass7').removeClass('mymenucolorSelect');
+		$('.menusidebarClass8').removeClass('mymenucolorSelect');
 
 		
 	},
@@ -321,6 +326,7 @@ Template.adminSidebar.events({
 		$('.menusidebarClass5').removeClass('mymenucolorSelect');
 		$('.menusidebarClass6').removeClass('mymenucolorSelect');
 		$('.menusidebarClass7').removeClass('mymenucolorSelect');
+		$('.menusidebarClass8').removeClass('mymenucolorSelect');
 
 	},
 
@@ -335,6 +341,7 @@ Template.adminSidebar.events({
 		$('.menusidebarClass5').removeClass('mymenucolorSelect');
 		$('.menusidebarClass6').removeClass('mymenucolorSelect');
 		$('.menusidebarClass7').removeClass('mymenucolorSelect');
+		$('.menusidebarClass8').removeClass('mymenucolorSelect');
 
 	},
 
@@ -349,6 +356,8 @@ Template.adminSidebar.events({
 		$('.menusidebarClass5').toggleClass('mymenucolorSelect');
 		$('.menusidebarClass6').removeClass('mymenucolorSelect');
 		$('.menusidebarClass7').removeClass('mymenucolorSelect');
+		$('.menusidebarClass8').removeClass('mymenucolorSelect');
+
 	},
 	'click .menusidebarClass6': function(){
 		$('.menusidebarClassOne').removeClass('mymenucolorSelect');
@@ -361,6 +370,8 @@ Template.adminSidebar.events({
 		$('.menusidebarClass6').removeClass('mymenucolorSelect');
 		$('.menusidebarClass6').toggleClass('mymenucolorSelect');
 		$('.menusidebarClass7').removeClass('mymenucolorSelect');
+		$('.menusidebarClass8').removeClass('mymenucolorSelect');
+
 	},
 
 	'click .menusidebarClass7': function(){
@@ -374,6 +385,21 @@ Template.adminSidebar.events({
 		$('.menusidebarClass6').removeClass('mymenucolorSelect');
 		$('.menusidebarClass6').removeClass('mymenucolorSelect');
 		$('.menusidebarClass7').toggleClass('mymenucolorSelect');
+		$('.menusidebarClass8').removeClass('mymenucolorSelect');
+		
+	},
+	'click .menusidebarClass8': function(){
+		$('.menusidebarClassOne').removeClass('mymenucolorSelect');
+		$('.menusidebarClass').removeClass('mymenucolorSelect');
+		$('.menusidebarClass0').removeClass('mymenucolorSelect');
+		$('.menusidebarClass1').removeClass('mymenucolorSelect');
+		$('.menusidebarClass2').removeClass('mymenucolorSelect');
+		$('.menusidebarClass3').removeClass('mymenucolorSelect');
+		$('.menusidebarClass4').removeClass('mymenucolorSelect');
+		$('.menusidebarClass6').removeClass('mymenucolorSelect');
+		$('.menusidebarClass6').removeClass('mymenucolorSelect');
+		$('.menusidebarClass7').removeClass('mymenucolorSelect');
+		$('.menusidebarClass8').toggleClass('mymenucolorSelect');
 	},
 	
 	'click .menuSubCat1': function(){
@@ -414,7 +440,7 @@ Template.adminSidebar.events({
 			
 	},
 	'click .menuSubCat2': function(){
-		$('.menusidebarClassOne').removeClass('mymenucolorSelect');
+		/*$('.menusidebarClassOne').removeClass('mymenucolorSelect');
 		$('.menusidebarClass').removeClass('mymenucolorSelect');
 		$('.menusidebarClass0').removeClass('mymenucolorSelect');
 		$('.menusidebarClass1').removeClass('mymenucolorSelect');
@@ -422,7 +448,7 @@ Template.adminSidebar.events({
 		$('.menusidebarClass3').removeClass('mymenucolorSelect');
 		$('.menusidebarClass4').removeClass('mymenucolorSelect');
 		$('.menusidebarClass5').removeClass('mymenucolorSelect');
-		$('.menusidebarClass6').removeClass('mymenucolorSelect');
+		$('.menusidebarClass6').removeClass('mymenucolorSelect');*/
 		$('.menuSubCat1').removeClass('mymenucolorSelect');
 		$('.menuSubCat2').toggleClass('mymenucolorSelect');
 		$('.menuSubCat3').removeClass('mymenucolorSelect');
