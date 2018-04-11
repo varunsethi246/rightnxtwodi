@@ -239,7 +239,8 @@ height:200px
 }
 
 .deleteVideo {
-right:-25px;
+/*right:-25px;*/
+right:-65px;
 top:7px;
 position:relative
 }

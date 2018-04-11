@@ -48,7 +48,7 @@ if(s3Data)
             // console.log('s3: ', s3);
             // Declare the Meteor file collection on the Server
             export const BizVideo = new FilesCollection({
-                debug: false, // Change to `true` for debugging
+                debug: true, // Change to `true` for debugging
                 storagePath: 'bizVideos',
                 collectionName: 'bussVideo',
                 // Disallow Client to execute remove, use the Meteor.method

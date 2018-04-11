@@ -63,9 +63,11 @@ import '../imports/api/configSettingsMaster.js';
 import '../imports/api/s3Details.js';
 
 import { BizVideo } from '/imports/videoUploadserver/videoUpload.js';
-Meteor.publish('getBizVideo', function() {
-    return BizVideo.find({}).cursor;
-});
+if (Meteor.isServer) {
+  Meteor.publish('getBizVideo', function() {
+      return BizVideo.find({}).cursor;
+  });
+}
 
 
 

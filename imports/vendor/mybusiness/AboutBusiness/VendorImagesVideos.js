@@ -22,8 +22,12 @@ Template.vendorImagesVideos.helpers({
     files: function() {
 		var businessLink = FlowRouter.getParam('businessLink');
     	var bussData = Business.findOne({"businessLink":businessLink});
+    	// console.log('bussData: ',bussData);
     	if(bussData){
-	        var data = BizVideo.find({"_id":bussData.businessVideo}).fetch();
+    		// console.log('bussData 2: ',bussData.businessVideo);
+    		var imageId = bussData.businessVideo;
+	        var data = BizVideo.find({"_id":imageId}).fetch();
+	        // console.log('data: ',data);
 	        return data;
 	    }
     },	
@@ -207,7 +211,10 @@ Template.vendorImagesVideos.events({
 
 		      upload.on('end', function (error, fileObj) {
 		        if (error) {
-		          alert('Error during upload: ' + error);
+		          // alert('Error during upload: ' + error);
+		          console.log('Error during upload: ' + error);
+		          console.log('Error during upload: ' + error.reason);
+
 		        } else {
 		          // alert('File "' + fileObj._id + '" successfully uploaded');
 		          Bert.alert('Business Video uploaded','success','growl-top-right');

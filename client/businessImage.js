@@ -1,4 +1,4 @@
-var businessImgStoreS3= new FS.Store.S3("businessImgS3");
+var businessImgStoreS3 = new FS.Store.S3("businessImgS3");
 
 export const BusinessImgUploadS3 = new FS.Collection("businessImgS3", {
   stores: [businessImgStoreS3],
@@ -10,7 +10,7 @@ export const BusinessImgUploadS3 = new FS.Collection("businessImgS3", {
 });
 
 BusinessImgUploadS3.allow({
-  insert: function() {
+  insert: function(fileObj) {
     return true;
   },
   update: function() {
@@ -26,7 +26,7 @@ BusinessImgUploadS3.allow({
 
 
 BusinessImgUploadS3.deny({
-  insert: function() {
+  insert: function(fileObj) {
     return false;
   },
   update: function() {

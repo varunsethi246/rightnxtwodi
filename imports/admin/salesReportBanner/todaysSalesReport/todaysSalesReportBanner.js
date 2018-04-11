@@ -44,7 +44,7 @@ Template.todaysSalesReportBanner.helpers({
 
 		// var ordersData =  Orders.find({'createdAt':{$gte : newDate1, $lt : newDate2 }}, {sort: {'createdAt': -1}}).fetch();
 		// var ordersData =  Payment.find({'orderType':'Banner','invoiceDate':{$gte : newDate1, $lt : newDate2 }}).fetch();
-		var ordersData =  Payment.find({'orderType':'Ads','invoiceDate':{$gte : newDate1, $lt : newDate2 }}).fetch();
+		var ordersData =  Payment.find({'orderType':'Banner','invoiceDate':{$gte : newDate1, $lt : newDate2 }}).fetch();
 	 	var totalRec = ordersData.length;
 	 	if(ordersData){
         var allOrders = [];

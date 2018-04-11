@@ -106,6 +106,8 @@ Template.ResetPassword.events({
 
    if (isValidPassword(password, passwordConfirm)) { 
     // if (isNotEmpty(password) && areValidPasswords(password, passwordConfirm)) {
+        console.log('passwordVar.length'+ password.length >= 6 ? true : false);
+      
       Accounts.resetPassword(resetPassword, password, function(err) {
         if (err) {
           console.log('We are sorry but something went wrong.');
@@ -117,7 +119,7 @@ Template.ResetPassword.events({
       });
     }else{
             return swal({
-            title: "password should be at least 6 characters long",
+            title: "Passwords dont match",
             text: "Please try again",
             timer: 1700,
             showConfirmButton: false,

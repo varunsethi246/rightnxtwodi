@@ -3,9 +3,11 @@ import {S3Details} from '/imports/api/s3Details.js';
 
 
 var s3Data =  S3Details.findOne({"_id":"1"});
-
+console.log('before s3');
 if(s3Data)
 {
+
+  // console.log('s3Data: ',s3Data);
   var businessImgStoreS3 = new FS.Store.S3("businessImgS3", {
 
     region : s3Data.region, 
@@ -43,7 +45,7 @@ if(s3Data)
 
 
   BusinessImgUploadS3.deny({
-    insert: function() {
+    insert: function(fileObj) {
       return false;
     },
     update: function() {
@@ -60,7 +62,7 @@ if(s3Data)
   if (Meteor.isServer) {
 
     Meteor.publish("businessImgS3", function() {
-      return BusinessImgUploadS3.find({}, { limit: 0 });
+      return BusinessImgUploadS3.find({});
     });
 
   }
