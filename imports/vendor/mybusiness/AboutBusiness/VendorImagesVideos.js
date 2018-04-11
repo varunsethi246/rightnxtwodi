@@ -212,8 +212,8 @@ Template.vendorImagesVideos.events({
 		      upload.on('end', function (error, fileObj) {
 		        if (error) {
 		          // alert('Error during upload: ' + error);
-		          console.log('Error during upload: ' + error);
-		          console.log('Error during upload: ' + error.reason);
+		          // console.log('Error during upload: ' + error);
+		          // console.log('Error during upload: ' + error.reason);
 
 		        } else {
 		          // alert('File "' + fileObj._id + '" successfully uploaded');

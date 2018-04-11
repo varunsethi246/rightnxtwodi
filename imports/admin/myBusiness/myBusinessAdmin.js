@@ -184,7 +184,7 @@ Template.listOfBusiness.helpers({
 });
 
 Template.listOfBusiness.events({
-	'change #fileInput'(e, template) {
+	'change #fileInputs'(e, template) {
 	    if (e.currentTarget.files && e.currentTarget.files[0]) {
 	    		var businessLink  = $(e.currentTarget).attr("data-businessLink");
 	    		// console.log('data-businessLink ',businessLink);

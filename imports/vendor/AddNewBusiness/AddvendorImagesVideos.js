@@ -310,7 +310,7 @@ Template.addvendorImagesVideos.events({
 		$('#businessMenulist').val('');
 	},
 
-	'change #fileInput'(e, template) {
+	'change #fileInputOne'(e, template) {
 	    if (e.currentTarget.files && e.currentTarget.files[0]) {
 			var businessLink = FlowRouter.getParam('businessLink');
 			var bussData = Business.findOne({"businessLink":businessLink});
@@ -333,8 +333,8 @@ Template.addvendorImagesVideos.events({
 		      upload.on('end', function (error, fileObj) {
 		        if (error) {
 		          // alert('Error during upload: ' + error);
-		           console.log('Error during upload: ' + error);
-		           console.log('Error during upload: ' + error.reason);
+		           console.log('Error during upload 1: ' + error);
+		           console.log('Error during upload 1: ' + error.reason);
 		        } else {
 		          // alert('File "' + fileObj._id + '" successfully uploaded');
 		          Bert.alert('Business Video uploaded','success','growl-top-right');
