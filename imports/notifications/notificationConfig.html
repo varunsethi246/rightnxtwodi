@@ -54,6 +54,7 @@
 					<span class="radioOuterwrapper-selection"></span>
 				  </div>
 				</div> -->
+			{{#if isInRole 'user'}}
 				{{#with followProcess}}
 				<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				  <label for="usr" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Follow:</label>
@@ -67,7 +68,7 @@
 				  </div>
 				</div>
 				{{/with}}
-
+			{{/if}}
 				<!-- {{#with unfollowProcess}}
 				<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				  <label for="usr" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">UnFollow:</label>
@@ -109,7 +110,7 @@
 				  </div>
 				</div>
 				{{/with}} -->
-
+			{{#if isInRole 'user'}}
 				{{#with commentProcess}}
 				<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				  <label for="usr" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Comment</label>
@@ -123,7 +124,36 @@
 				  </div>
 				</div>
 				{{/with}}
+			{{/if}}
+			{{#if isInRole 'Vendor'}}
+				{{#with editbusinessProcess}}
+					<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					  <label for="usr" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Edit Business</label>
+					  <div class="radioOuterwrapper">
+						<input type="radio" class="radioOuterwrapper-input accoType radiobuttonStyle" name="editbusiness" id="editbusiness1" value="true" required {{isCheckededitbusiness "true"}}>
+						<label for="editbusiness1" class="radioOuterwrapper-label radioOuterwrapper-label-off" title="click if you want to receive EditBusiness mail">Yes</label>
+						<input type="radio" class="radioOuterwrapper-input accoType radiobuttonStyle" name="editbusiness" value="false" id="editbusiness2" required {{isCheckededitbusiness "false"}}>
+						
+						<label for="editbusiness2" class="radioOuterwrapper-label radioOuterwrapper-label-on" title="click if you dont want to receive Edit Business mail">No</label>
+						<span class="radioOuterwrapper-selection"></span>
+					  </div>
+					</div>
+				{{/with}}
 
+				{{#with reportProcess}}
+					<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					  <label for="usr" class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Report</label>
+					  <div class="radioOuterwrapper">
+						<input type="radio" class="radioOuterwrapper-input accoType radiobuttonStyle" name="report" id="report1" value="true" required {{isCheckedreport "true"}}>
+						<label for="report1" class="radioOuterwrapper-label radioOuterwrapper-label-off" title="click if you want to receive report mail">Yes</label>
+						<input type="radio" class="radioOuterwrapper-input accoType radiobuttonStyle" name="report" value="false" id="report2" required {{isCheckedreport "false"}}>
+						
+						<label for="report2" class="radioOuterwrapper-label radioOuterwrapper-label-on" title="click if you dont want to receive report mail">No</label>
+						<span class="radioOuterwrapper-selection"></span>
+					  </div>
+					</div>
+				{{/with}}
+			{{/if}}
 				<!-- <button class="btn btn-warning submitConfig pull-right">Submit</button> -->
 				<input type="submit" class="btn btn-warning submitConfig" value="Submit"/>
 			</form>

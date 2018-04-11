@@ -18,7 +18,12 @@ Template.notificationConfig.events({
 		var Like    = $('input[name=Like]:checked').val();
 		// var UnLike  = $('input[name=UnLike]:checked').val();
 		var Comment = $('input[name=Comment]:checked').val();
-		Meteor.call('insertUserNotifConfig',Enquiry,Rating,Follow,Like,Comment,function(error,result){
+
+		var editbusiness = $('input[name=editbusiness]:checked').val();
+		
+		var report	 = $('input[name=report]:checked').val();
+		
+		Meteor.call('insertUserNotifConfig',Enquiry,Rating,Follow,Like,Comment,editbusiness,report,function(error,result){
 			if(error){
 				Bert.alert('Something went wrong :',error);
 			}else{
@@ -93,6 +98,8 @@ Template.notificationConfig.helpers({
             	}
 			}//notificationConfiguration
 		}//userData
+		console.log('likeConfig :',likeConfig);
+
 		return likeConfig;
 	},
 
@@ -121,6 +128,32 @@ Template.notificationConfig.helpers({
 		}//userData
 		return commentConfig;
 	},
+	editbusinessProcess:function(){
+		var userId = Meteor.userId();
+		var userData = Meteor.users.findOne({'_id':userId});
+		if(userData){
+			if(userData.notificationConfiguration){
+				var editbusinessConfig = {
+            		'editbusiness'   : userData.notificationConfiguration.editbusiness,
+            	}
+			}//notificationConfiguration
+		}//userData
+		// console.log('editbusinessConfig :',editbusinessConfig);
+		return editbusinessConfig;
+	},
+	reportProcess:function(){
+		var userId = Meteor.userId();
+		var userData = Meteor.users.findOne({'_id':userId});
+		if(userData){
+			if(userData.notificationConfiguration){
+				var reportConfig = {
+            		'report'   : userData.notificationConfiguration.report,
+            	}
+			}//notificationConfiguration
+		}//userData
+		// console.log('reportConfig :',reportConfig);
+		return reportConfig;
+	},
 
 	isCheckedenquiry: function(scaleProcess) {
       return (this.enquiry === scaleProcess) ? "checked" : "";
@@ -148,5 +181,14 @@ Template.notificationConfig.helpers({
 
     isCheckedcomment:function(commentProcess){
     	return (this.comment === commentProcess) ? "checked" : "";
+    }, 
+
+    isCheckededitbusiness:function(editbusinessProcess){
+    	// console.log("editbusinessProcess:",editbusinessProcess);
+    	return (this.editbusiness === editbusinessProcess) ? "checked" : "";
+    },
+    isCheckedreport:function(reportProcess){
+    	// console.log("reportProcess:",reportProcess);
+    	return (this.report === reportProcess) ? "checked" : "";
     },
 });

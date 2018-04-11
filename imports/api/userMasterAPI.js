@@ -212,21 +212,23 @@ Meteor.methods({
 	    }
 	},
 
-	'insertUserNotifConfig' : function(Enquiry,Rating,Follow,Like,Comment){
+	'insertUserNotifConfig' : function(Enquiry,Rating,Follow,Like,Comment,editbusiness,report){
 		Meteor.users.update(
 					{"_id": Meteor.userId()},
 					{
 						$set: { notificationConfiguration : 
 								{
-									"enquiry"	: Enquiry,
-									"invoice"	: "true",
-									"rating"	: Rating,
-									"payment"   : "true",
-									"follow"    : Follow,
+									"enquiry"		: Enquiry,
+									"invoice"		: "true",
+									"rating"		: Rating,
+									"payment"   	: "true",
+									"follow"    	: Follow,
 									// "unfollow"  : UnFollow,
-									"like"	    : Like,
+									"like"	    	: Like,
 									// "unlike"	: UnLike,
-									"comment"  	: Comment,
+									"comment"  		: Comment,
+									"editbusiness"  : editbusiness,
+									"report"  		: report,
 								}
 							}
 					},function(error,result){
