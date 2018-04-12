@@ -3621,3 +3621,9 @@ color:#f89b1c
     color: #db4437;
     font-weight: bold;
 }
+.noactive{
+	    text-align: center;
+}
+.vEnqUserAdj{
+	padding: 0;
+}

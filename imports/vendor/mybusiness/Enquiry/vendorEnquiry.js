@@ -90,6 +90,10 @@ Template.vendorEnquiry.helpers({
 						return data;
 					}
 					
+				}else{
+					var data = "No Archive Data Available";
+					console.log('data :',data);
+					return data;
 				}
 			}else if(tabStatusVar == "flagTab"){
 				var blockedUserArray = businessObj.blockedUsers;
@@ -151,7 +155,13 @@ Template.vendorEnquiry.helpers({
 						}
 						return data;
 					}
+				}else{
+					var data = "No Flag Data Available";
+					console.log('data :',data);
+
+					return data;
 				}
+
 			}else if(tabStatusVar == "activeTab"){
 				var blockedUserArray = businessObj.blockedUsers;
 				var data = Enquiry.find({"businessid":businessObj._id,"vendorArchive":"noArchived","enquirySentBy": { $nin: blockedUserArray }},{sort: {enquiryCreatedAt:-1}}).fetch();
@@ -212,6 +222,11 @@ Template.vendorEnquiry.helpers({
 						}
 						return data;
 					}
+				}else{
+					var data = "No Active Data Available";
+					console.log('data :',data);
+
+					return data;
 				}
 			}
 		}
@@ -337,9 +352,6 @@ Template.allEnquries.events({
 var filesM = [];
 
 Template.vendorEnquiry.events({
-	'click .vEnqsndEnqBtn':function(event){
-		
-	},
 
 	"keyup .vendorEnquiryFormSearch": _.throttle(function(e) {
 	    var text = $(e.target).val().trim();
@@ -373,6 +385,19 @@ Template.vendorEnquiry.events({
 	},
 
 	'click .vEnqsndEnqBtn': function(event) {
+		// event.preventDefault();
+		// var elem = $(event.currentTarget).attr('.vEnqFormImgOne');
+		// console.log(elem);
+		// console.log('elem.outerHeight():',elem.outerHeight());
+		// console.log('elem[0].scrollHeight:',elem[0].scrollHeight);
+		// console.log('elem.scrollTop():',elem.scrollTop());
+		// elem.animate({ scrollTop: elem.prop('scrollHeight') }, 300);
+		    // if (elem[0].scrollHeight - elem.scrollTop() == elem.outerHeight())
+		    // {
+		    //     console.log("bottom");
+		    // }
+// // 	}
+		$('.vEnqFormImgOne').animate({ scrollTop: $(document).height() }, 1);
 		var enquiryPhoto = '';
 		var enquiryCommentNew = $('.vEnqFormTextarea').val();
        	var id = event.currentTarget.id;

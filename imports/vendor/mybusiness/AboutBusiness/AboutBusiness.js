@@ -405,6 +405,9 @@ Template.aboutBusiness.events({
 				
 				var admin = Meteor.users.findOne({'roles':'admin'});
 				var vendorDetail = Meteor.users.findOne({'_id':vendorId});
+				var notificationOn = vendorDetail.notificationConfiguration;
+
+				console.log('notificationOn:',notificationOn);
 
 				if(admin&&vendorDetail){
 			    	var adminId = admin._id;

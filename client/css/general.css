@@ -1315,7 +1315,8 @@ margin-top:40px
 border-radius:0;
 height:36px!important;
 border:1px solid #ccc;
-padding-right:26px;
+/*padding-right:26px;*/
+padding-right:12px;
 background-color:#fff!important;
 color:#666!important
 }

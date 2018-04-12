@@ -171,6 +171,7 @@ Template.claimOtp.helpers({
 			}else{
 				var newMobile = mobile;
 			}
+			console.log('newMobile :',newMobile);
 			var sub = newMobile.substring(2,8);
 			var res = newMobile.replace(sub , "******"); 
 			// console.log('mobile: '+res);

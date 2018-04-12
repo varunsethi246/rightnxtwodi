@@ -26,7 +26,7 @@ Template.career.helpers({
 		var getCity = FlowRouter.getParam('city');
 		if(jobTitle){
 			for (var i = 0; i < jobTitle.length; i++) {
-				jobTitle[i].expireDate = moment(jobTitle[i].dateofPost).format('DD/MM/YYYY');
+				jobTitle[i].expireDate = moment(jobTitle[i].date).format('DD/MM/YYYY');
 				jobTitle[i].cityName = getCity;
 			}
 		}

@@ -371,6 +371,8 @@ Template.userEnquiryPage.events({
 	  }, 200),
 	// Sending Enquiry image in same chatbox
 	'click .vEnqsndEnqBtn': function(event) {
+		$('.vEnqFormImgOne').animate({ scrollTop: $(document).height() }, 1);
+		
 		var enquiryPhoto = '';
 		var enquiryCommentNew = $('.vEnqFormTextarea').val();
        	var id = event.currentTarget.id;
