@@ -1725,8 +1725,14 @@ margin-left:38%
 }
 
 input[name="choosePic"] {
-padding:0
+padding:0px;
 }
+/*input[name="chooseVendor2Pic"]:hover {
+background-color: #f9b81c!important;
+color: #fff!important;
+border: 1px solid #f9b81c!important;
+font-weight: 700!important;
+}*/
 
 input[name='chooseVendor2Pic'] {
 margin-top:8%;
@@ -2238,7 +2244,8 @@ padding-bottom:8px;
 background-color:#f89b1c
 }
 
-.editOfferTable tbody tr td .fa-pencil-square-o:hover {
+.editOfferTable tbody tr td .fa-pencil-square-o:hover,
+.editOfferTable tbody tr td .fa-eye:hover {
 color:#f89b1c;
 border:#f89b1c 1px solid
 }
@@ -2823,6 +2830,13 @@ margin-left:15px
 margin-top:-1px;
 margin-left:6px
 }
+
+/*#xyz:hover{
+	background-color: #f89b1c!important;
+	color: #fff!important;
+    font-weight: 700!important;
+    border: 1px solid #f9b81c!important;
+}*/
 
 @media screen and (max-width: 767px) {
 .homepageForms-xs {

@@ -147,6 +147,35 @@ Template.paymentSuccess.helpers({
 });
 
 Template.vendorMyOffers.events({
+	'click .viewModal': function(event){
+		event.preventDefault();
+		var id = event.currentTarget.id;
+		Session.set('id',id);
+		$('.vendorOfferForm2').find('input').attr('disabled','disabled');
+		$('.vendorOfferForm2').find('select').attr('disabled','disabled');
+		$('.vendorOfferForm2').find('textarea').attr('disabled','disabled');
+		$('.vendorOfferForm2').find('.venBusiOffer').children('.col-lg-4').css('display','none');
+		$('.vendorOfferForm2').find('input[type="submit"]').css('display','none');
+	},
+	'click .editModal': function(event){
+		event.preventDefault();
+	
+		$('.vendorOfferForm2').find('input').removeAttr('disabled','disabled');
+		$('.vendorOfferForm2').find('select').removeAttr('disabled','disabled');
+		$('.vendorOfferForm2').find('textarea').removeAttr('disabled','disabled');
+		$('.vendorOfferForm2').find('.venBusiOffer').children('.col-lg-4').css('display','block');
+		$('.vendorOfferForm2').find('input[type="submit"]').css('display','block');	
+	
+		var id = event.currentTarget.id;
+		Session.set('id',id);
+
+		// $('.modal-backdrop').hide();
+		
+		if($(event.target).hasClass('inactiveOk')){
+			$('#inactOfferModal-'+id).modal('hide');
+			// $('#editDataModal-'+id).modal('show');
+		}
+	},
 	'change .offrdInput': function(event){		
 		var offrdInput = event.currentTarget.value;
 		Session.set('numberOfOffers', offrdInput);
@@ -986,6 +1015,7 @@ Template.vendorOffer2.helpers({
 		var offerObj = Offers.findOne({"_id":offerId});
 		if(offerObj){
 			var pic = OfferImagesS3.findOne({'_id' : offerObj.offerImage});
+			console.log(pic);
 		}
 		return pic;
 	}
@@ -1220,20 +1250,6 @@ Template.receipt.events({
 });
 
 Template.editOffer.events({
-	'click .editModal': function(event){
-		event.preventDefault();
-		
-		var id = event.currentTarget.id;
-		Session.set('id',id);
-
-		// $('.modal-backdrop').hide();
-		
-		if($(event.target).hasClass('inactiveOk')){
-			$('#inactOfferModal-'+id).modal('hide');
-			// $('#editDataModal-'+id).modal('show');
-		}
-	},
-
 	'click .deleteModal':function(event){
 		event.preventDefault();
 		var businessLink = FlowRouter.getParam('businessLink');

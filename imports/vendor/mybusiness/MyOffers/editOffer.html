@@ -26,6 +26,7 @@
 								<td>
 									<i id="{{_id}}" data-toggle="modal" data-target="#editDataModal-{{_id}}" class="fa fa-pencil-square-o editModal" title="Edit"></i>
 									{{#if showDeleteOffer}}<i id="{{_id}}" data-toggle="modal" data-target="#deleteDataModal-{{_id}}" class="fa fa-trash-o" title="delete"></i>{{else}}<i id="{{_id}}" class="fa fa-circle offerStatus {{#if showActiveOffer}}activeOfer{{/if}}" aria-hidden="true" title="{{#if showActiveOffer}}Inactivate Offer {{else}} Activate Offer {{/if}}"></i>{{/if}}
+									<i id="{{_id}}" data-toggle="modal" data-target="#viewDataModal-{{_id}}" class="fa fa-eye viewModal" title="View"></i>
 								</td>
 
 								<div class="modal fade modalInactive" id="inactOfferModal-{{_id}}" role="dialog">
@@ -40,6 +41,20 @@
 								         		<div class="col-xs-offset-5">
 								                	<button type="button" class="btn {{contentType}} btn-default btn-danger editModal inactiveOk" id="{{_id}}" data-toggle="modal" data-target="#editDataModal-{{_id}}">OK</button>
 								                </div>
+								            </div>
+								        </div>
+									</div>
+								</div>
+
+								<div class="modal fade modaledit" id="viewDataModal-{{_id}}" role="dialog">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header delete-close editofferModal2">
+												<span class="pull-left">View Offer</span>
+								        		<a href="#" data-dismiss="modal" aria-hidden="true" class="close pull-right"><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></a>
+								   			</div>
+								            <div class="modal-body">
+								            	{{> vendorOffer2}}
 								            </div>
 								        </div>
 									</div>

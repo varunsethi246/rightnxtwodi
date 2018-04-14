@@ -3,6 +3,7 @@ import {S3Details} from '/imports/api/s3Details.js';
 
 
 var s3Data =  S3Details.findOne({});
+// console.log(s3Data);
 if(s3Data)
 {
   var offerImagesS3 = new FS.Store.S3("offerImagesS3", {
