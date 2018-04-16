@@ -27,6 +27,8 @@ Template.profileSetting.events({
                 FlowRouter.go('/');
               }
           });
+        }else{
+         Bert.alert('Your New Password do not match!', 'danger', 'fixed-top', 'fa-frown-o' );        
         }
       }else{
         Bert.alert('Your Old Password is not correct', 'danger', 'fixed-top', 'fa-frown-o' );        

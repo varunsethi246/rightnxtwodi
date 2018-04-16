@@ -96,7 +96,7 @@ Template.ResetPassword.events({
          return password.length >= 6 ? true : false;
        } else {
          return swal({
-            title: 'Passwords dont match',
+            title: 'Passwords do not match',
             text: 'Please try again',
             showConfirmButton: true,
             type: 'error'
@@ -119,7 +119,7 @@ Template.ResetPassword.events({
       });
     }else{
             return swal({
-            title: "Passwords dont match",
+            title: "Passwords do not match",
             text: "Please try again",
             timer: 1700,
             showConfirmButton: false,

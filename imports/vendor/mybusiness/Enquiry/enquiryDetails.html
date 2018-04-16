@@ -22,8 +22,13 @@
                 {{#each enquiryDesc}}
                     <div class="row">
                         <div class="col-lg-8 {{posClass}} formBreakWord">
-                            <div class="{{posClassTringl}} {{posClass}}-bkgBorder"></div>
-							<p class="{{posClass}}-bkg">{{comment}}</p>
+                        	{{#if comment}}
+	                            <div class="{{posClassTringl}} {{posClass}}-bkgBorder"></div>
+								<p class="{{posClass}}-bkg">{{comment}}</p>
+							{{else}}
+								<div class="{{posClassTringl}} {{posClass}}-bkgBorder displayNone"></div>
+								<p class="{{posClass}}-bkg displayNone">{{comment}}</p>
+							{{/if}}
 							{{#if enquiryImgVal}}
                              	<div class="vEnqFormImgThreeImg">
                                 	<img src="{{enquiryPhoto}}" class="img-responsive">

@@ -1215,6 +1215,7 @@ Template.userReviewTemplate.events({
 		if(revComment){
 			var id = event.currentTarget.id;
 			var taggedPpl = tagedFriends;
+			console.log('revComment:',revComment);
 			
 			Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, function(error, result){
 				if(error){
@@ -1232,6 +1233,18 @@ Template.userReviewTemplate.events({
 					tagedFriends = [];
 					
 				}
+			});
+		}else{
+			swal({
+			  title: 'Please write review to save!',
+			  // text: 'You will not be able to recover this imaginary file!',
+			  type: 'warning',
+			  // showCancelButton: true,
+			  confirmButtonColor: '#dd6b55',
+			  // cancelButtonColor: '#d44',
+			  confirmButtonText: 'Okey!',
+			  // cancelButtonText: 'No, keet it',
+			  closeOnConfirm: false
 			});
 		}
 	},

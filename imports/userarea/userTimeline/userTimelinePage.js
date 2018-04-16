@@ -45,13 +45,13 @@ Template.userSuggestion.helpers ({
 		var userArray      = [];
 		var followArray    = [];
 		var currentUserObj = Meteor.users.findOne({"_id":userId});
-		console.log("currentUserObj: ",currentUserObj);
+		// console.log("currentUserObj: ",currentUserObj);
 		if(currentUserObj && currentUserObj.profile){
 			var userCity = currentUserObj.profile.city;
 			var otherUsersData  = Meteor.users.find({"profile.city":userCity, "_id":{$ne: userId}, "roles":{$nin: [ 'admin', 'Vendor']}}).fetch();
 			if(otherUsersData && otherUsersData.length>0){
 				for(var i=0;i<otherUsersData.length;i++){
-					console.log("otherUsersData[i]: ",otherUsersData[i]);
+					// console.log("otherUsersData[i]: ",otherUsersData[i]);
 					var name           = otherUsersData[i].profile.name;
 					// var userProfilePic = otherUsersData[i].profile.userProfilePic;
 					var id             = otherUsersData[i]._id;
@@ -154,9 +154,9 @@ Template.userTimeline.helpers({
 
 	businessReviews:function(){
 		var id = Meteor.userId();
-		console.log('id:',id);
+		// console.log('id:',id);
 		var loggedinUser = Meteor.users.findOne({"_id":id});
-		console.log('loggedinUser:',loggedinUser);
+		// console.log('loggedinUser:',loggedinUser);
 		var allReviews = Review.find( {
 										$or:[ 
 												{ "userId":{$in  : uniqueId} } , 
@@ -173,7 +173,7 @@ Template.userTimeline.helpers({
 
 
 			for(i=0; i<allReviews.length; i++){		
-				console.log("loggedinUser.profile: ",loggedinUser.profile);		
+				// console.log("loggedinUser.profile: ",loggedinUser.profile);		
 				if(loggedinUser.profile.userProfilePic){
 					var userpic = UserProfileStoreS3New.findOne({"_id":loggedinUser.profile.userProfilePic});
 					if(userpic){
@@ -192,7 +192,7 @@ Template.userTimeline.helpers({
 					var tagedFriendsArray = [];
 					for(m=0;m<allReviews[i].tagedFriends.length;m++){
 						var userTagObj = Meteor.users.findOne({"_id":allReviews[i].tagedFriends[m]});
-						console.log("userTagObj: ",userTagObj);
+						// console.log("userTagObj: ",userTagObj);
 						var dataImgUser = '';
 						if(userTagObj.profile && userTagObj.profile.userProfilePic){
 							var imgData = UserProfileStoreS3New.findOne({"_id":userTagObj.profile.userProfilePic});
@@ -225,7 +225,7 @@ Template.userTimeline.helpers({
 					if(allReviews[i].userId == Meteor.userId()){
 						allReviews[i].userIDs = allReviews[i].userId;
 					}
-					console.log("data: ",data);
+					// console.log("data: ",data);
 					if(data.profile && data.profile.userProfilePic){
 						var pic = UserProfileStoreS3New.findOne({"_id":data.profile.userProfilePic});
 						if(pic){
