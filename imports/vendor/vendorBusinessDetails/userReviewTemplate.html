@@ -12,6 +12,9 @@
 				        <p>{{reviewDateAgo}}</p>
 				    </div>
 				   {{#if isInRole 'user'}}
+				  <!--  <div>
+				   		<p>{{> starRating }}</p>
+				   </div> -->
 					    <div class="userFollow col-lg-2 pull-right {{followButton}} {{followButtonClass}}" id="follow-{{userId}}">
 					    	{{followButtonText}}
 					    </div>
@@ -364,7 +367,7 @@
 	  		
 			{{#each userComments}}
 				{{#if userLoadmoreCmmnt @index }}
-
+			<div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userCommentWrapper" data-reviewId="{{../_id}}" data-reviewPostedBy="{{../userId}}" data-commentId="{{userCommentId}}" data-businesslink="{{../businessLink}}" > 
 					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 userRevTempPic">  
 						<img class="commentImg" src="{{userProfileImgPath}}" /> 
@@ -509,8 +512,9 @@
 						</div>
 					</div>
 				</div>
+			</div>
 				{{else}}
-
+			<div>
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userCommentWrapper showMoreCommntDivNone" data-reviewId="{{../_id}}" data-reviewPostedBy="{{../userId}}" data-commentId="{{userCommentId}}" data-businesslink="{{../businessLink}}" > 
 					<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 userRevTempPic">  
 						<img class="commentImg" src="{{userProfileImgPath}}" /> 
@@ -655,6 +659,7 @@
 						</div>
 					</div>
 				</div>
+			</div>
 				{{/if}}
 			{{/each}}
 

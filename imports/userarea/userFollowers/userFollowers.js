@@ -201,8 +201,9 @@ Template.userFollowers.events({
 		
 		Meteor.call('removeUserFollow', currentId, (error, result)=>{
 			if(result){
-				$('.modal-backdrop').hide();
+				
 			}
+			$('.modal-backdrop').hide();
 		});
 	},
 	'click .loadmore': function(event){

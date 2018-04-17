@@ -11,7 +11,9 @@
 						No followers Yet.
 					</div>
 				{{else}}
+					<div class="followerBoxWrap">
 					{{#each userFollowerData}}
+
 						<div class="followBox col-lg-4 col-md-4  col-sm-12 col-xs-12">
 							<div class="LoadMore1">
 								<div class="followTab" id="{{id}}">
@@ -31,8 +33,9 @@
 									</div>                
 								</div>
 							</div>
-						</div>	
+						</div>
 					{{/each}}
+					</div>	
 				{{/if}}
 				
 			</div>
@@ -62,6 +65,7 @@
 					You are not following to anyone yet.
 				</div>
 			{{else}}
+				<div class="followingBoxWrap">
 				{{#each userFollowingData}}
 					<div class="followBox1 col-lg-3 col-md-4 col-sm-12 col-xs-12">
 						<div class="LoadMore1 col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -107,6 +111,7 @@
 						</div>
 					</div>	
 				{{/each}}
+				</div>
 			{{/if}}
         	
 		</div>

@@ -4103,3 +4103,7 @@ background: #fff
 .reviewCancelSave{
     margin-bottom: 10px;
 }
+.followerBoxWrap,.followingBoxWrap{
+	    overflow-y: scroll;
+    height: 325px;
+}
