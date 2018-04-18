@@ -61,13 +61,10 @@ ejson@1.1.0
 mizzao:timesync
 bigdsk:inputmask
 thinksoftware:image-resize-client
-
-
 djk:jquery-ui
 iassureit:user-management
 chart:chart
 tmeasday:publish-counts
-
 ostrio:files
 cfs:ui
 edgee:slingshot

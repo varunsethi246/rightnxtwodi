@@ -1231,6 +1231,7 @@ Template.userReviewTemplate.events({
 					$('.tagFrnd').css('display','none');
 					$('.tagedFrndDivPre-'+id).css('display','block');
 					tagedFriends = [];
+					console.log('tagedFriends:',tagedFriends);
 					
 				}
 			});

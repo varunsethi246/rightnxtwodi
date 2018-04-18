@@ -86,9 +86,13 @@
 															<div class="vEnqUserAdj">Date</div>
 														</div>
 													</div>
-													{{#each userEnquiryActiveData}}
-														{{> userEnquiry }}
-													{{/each}}
+													{{#if userEnquiryActiveData}}
+														{{#each userEnquiryActiveData}}
+															{{> userEnquiry }}
+														{{/each}}
+													{{else}}
+														<div class="noactive">no enqury</div>
+													{{/if}}
 												</div>
 											</div>
 										</div>

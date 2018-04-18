@@ -4104,6 +4104,6 @@ background: #fff
     margin-bottom: 10px;
 }
 .followerBoxWrap,.followingBoxWrap{
-	    overflow-y: scroll;
-    height: 325px;
+	overflow-y: scroll;
+    height: 167px;
 }

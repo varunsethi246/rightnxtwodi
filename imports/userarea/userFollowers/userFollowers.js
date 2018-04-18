@@ -122,8 +122,10 @@ Template.userFollowers.helpers({
 		var userId        = id;
 		var followUserObj = FollowUser.find({"followUserId":userId}).count();
 		if(followUserObj){
+			$('.addBoxs').addClass('followerBoxWrap');
 			return followUserObj;
 		}else{
+			$('.addBoxs').removeClass('followerBoxWrap');
 			return "0";
 		}
 	},
@@ -191,6 +193,11 @@ Template.userFollowers.helpers({
 		var userId        = id;
 		// console.log(userId);
 		var followUserObj = FollowUser.find({"userId":userId}).count();
+		if (followUserObj >8) {
+			$('.addBox').addClass('followingBoxWrap');
+		}else{
+			$('.addBox').removeClass('followingBoxWrap');
+		}
 		return followUserObj;
 	},
 });

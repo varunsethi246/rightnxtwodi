@@ -166,15 +166,16 @@ Template.header.events({
 
 Template.generalHeader.events({
 	'click .logoutLink': function(event){
-		Meteor.logout(function(error,result){
-			if(error){
-				console.log("error",error);
-				return;
-			}else{
-				// FlowRouter.go('/');
-				return;
-			}
-		});
+		// Meteor.logout(function(error,result){
+		// 	if(error){
+		// 		console.log("error",error);
+		// 		return;
+		// 	}else{
+		// 		// FlowRouter.go('/');
+		// 		return;
+		// 	}
+		// });
+		Meteor.logout();
 	},
 });
 
