@@ -35,7 +35,7 @@ if (Meteor.isServer) {
   });
 
   Meteor.publish('searchListReview',function(){
-  	return Review.find({},{fields:{"businessLink":1,"rating":1,"_id":0}}).fetch();
+  	return Review.find({},{fields:{"businessLink":1,"rating":1}});
   });
 
 
@@ -430,6 +430,7 @@ Meteor.methods({
 
 	'updateRevCommentEdit':function(id,revComment,taggedPpl){
 		var taggedArr = [];
+		// console.log('in meteor call');
 		for(i=0;i<taggedPpl.length;i++){
 			taggedArr.push(taggedPpl[i].selectedUserId);
 		}

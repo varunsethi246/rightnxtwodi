@@ -13,7 +13,7 @@ if (Meteor.isServer) {
 		return Offers.find({});
 	});
 	Meteor.publish('offersListSearch', function() {
-		return Offers.find({"offerStatus":"active"},{"dealHeadline":1});
+		return Offers.find({"offerStatus":"active"},{fields:{"dealHeadline":1}});
 	});
 	Meteor.publish('businessOffers', function businessOffers(businessurl) {
 		return Offers.find({"businessLink": businessurl});

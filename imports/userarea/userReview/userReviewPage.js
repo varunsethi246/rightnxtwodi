@@ -60,6 +60,8 @@ Template.userReview.helpers({
 		}else{
 			id = Meteor.userId();
 		}
+
+		console.log('check1: ',id);
 		var reviewDataTotalCount = Review.find({"userId":id}).count();
 		if(reviewDataTotalCount<=0){
 			return true;
@@ -76,7 +78,7 @@ Template.userReview.helpers({
 	},
 	'getFrndsList' : function(){
 		var data =  tagFriend1.getData();
-		console.log("data: ",data);
+		// console.log("data: ",data);
 	    var data1 = [];
 		if(tagedFriends.length > 0){
 			for(var i = 0 ; i < data.length ; i++){
@@ -116,7 +118,7 @@ Template.userReview.helpers({
 			id = Meteor.userId();
 		}
 		// console.log("Id: ",id);
-
+		console.log('check1: ',id);
 		var reviewDataTotalCount = Review.find({"userId":id},{sort: {reviewDate:-1}}).count();
 		var reviewData = Review.find({"userId":id},{sort: {reviewDate:-1},limit:limitReviews }).fetch();
 		// console.log("reviewData: ",reviewData);
@@ -146,6 +148,7 @@ Template.userReview.helpers({
 							reviewData[i].businessCity 	= businessData.businessCity;
 
 						if(businessData.businessImages && businessData.businessImages.length > 0){
+							console.log('check3: ',businessData.businessImages[0].img);
 							var pic = BusinessImgUploadS3.findOne({"_id":businessData.businessImages[0].img});
 							if(pic){
 								reviewData[i].businessImages = pic.url();
@@ -174,7 +177,7 @@ Template.userReview.helpers({
 						reviewData[i].userIDs = reviewData[i].userId;
 					}
 					if(data.profile.userProfilePic){
-
+						console.log('check4: ',data.profile.userProfilePic);
 						var pic = UserProfileStoreS3New.findOne({"_id":data.profile.userProfilePic});
 						if(pic){
 							reviewData[i].userProfilePic = pic.url();	
@@ -193,10 +196,12 @@ Template.userReview.helpers({
 					reviewData[i].tagedFriendsValidate = true;
 					var tagedFriendsArray = [];
 					for(m=0;m<reviewData[i].tagedFriends.length;m++){
+						console.log('check5: ',reviewData[i].tagedFriends[m]);
 						var userTagObj = Meteor.users.findOne({"_id":reviewData[i].tagedFriends[m]});
 
 						var dataImgUser = '';
 						if(userTagObj.profile.userProfilePic){
+							console.log('check6: ',userTagObj.profile.userProfilePic);
 							var imgData = UserProfileStoreS3New.findOne({"_id":userTagObj.profile.userProfilePic});
 							if(imgData)	{
 								dataImgUser = imgData.url();
@@ -233,7 +238,8 @@ Template.userReview.helpers({
 								reviewData[i].userComments[k].userID = userObj._id;
 							}
 							reviewData[i].userComments[k].commentUserName = userObj.profile.name;
-								if(userObj.profile.userProfilePic){								
+								if(userObj.profile.userProfilePic){	
+									console.log('check7: ',userObj.profile.userProfilePic);							
 									var pic = UserProfileStoreS3New.findOne({"_id":userObj.profile.userProfilePic});
 									if(pic){
 										reviewData[i].userComments[k].userProfileImgPath = pic.url();	
@@ -271,7 +277,8 @@ Template.userReview.helpers({
 									var userObj1 = Meteor.users.findOne({"_id":userId1});
 									if(userObj1){
 										replyObj.commentReplyUserName = userObj1.profile.name;
-										if(userObj1.profile.userProfilePic){								
+										if(userObj1.profile.userProfilePic){	
+											console.log('check8: ',userObj1.profile.userProfilePic);							
 											var pic = UserProfileStoreS3New.findOne({"_id":userObj1.profile.userProfilePic});
 											if(pic){
 												replyObj.replyProfileImgPath = pic.url();	
@@ -359,6 +366,7 @@ Template.userReview.helpers({
 
 				if(reviewData[i].reviewImages){
 					for(j=0;j<reviewData[i].reviewImages.length;j++){
+						console.log('check9: ',reviewData[i].reviewImages[j].img);
 						var reviewPhoto = UserReviewStoreS3New.findOne({"_id":reviewData[i].reviewImages[j].img});
 						if(reviewPhoto){
 							reviewData[i].reviewImages[j].imagePath = reviewPhoto.url();
@@ -1878,6 +1886,7 @@ Template.userReview.events({
 		$('.bus-page-edit-outer1-'+id).css('display','inline');
 		$('.bus-page-edit-outerFrnd1-'+id).css('display','inline-block');
 		$('.tagedFrndDivPre-'+id).css('display','none');
+					$('userRevComsEdit'+_id).css('display','block');
 		
 
 		var userData = Review.findOne({"_id": id});
@@ -1936,6 +1945,7 @@ Template.userReview.events({
 					$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
 					$('.tagedFrndDivPre-'+id).css('display','block');
 					$('.tagFrnd-'+id).css('display','none');
+					$('userRevComsEdit'+_id).css('display','block');
 					
 					tagedFriends = [];
 				}

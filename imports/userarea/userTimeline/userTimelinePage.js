@@ -103,10 +103,26 @@ Template.userTimeline.helpers({
 					data1.push(data[i]);
 				}
 			}
+		var resultFrnds = tagedFriends.reduce(function(memo, e1){
+		  var matches = memo.filter(function(e2){
+		    return e1.selectedUserId == e2.selectedUserId && e1.selectedUserId == e2.selectedUserId
+		  })
+		  if (matches.length == 0)
+		    memo.push(e1)
+		    return memo;
+		}, []);
+
+		tagedFriends = resultFrnds;
+
+		// console.log('resultFrnds: ',resultFrnds);
+
+   			// console.log('tagedFriends: ',tagedFriends);
+   			// console.log('frnds: ',frnds);
+   			// console.log('uniquefrnds: ',uniquefrnds);
 			data = data1;
-			var result =  {data,tagedFriends};
+			var result =  {data,resultFrnds};
 		}else{
-			var result =  {data,tagedFriends};
+			var result =  {data,resultFrnds};
 		}
 	    return result;
 	},

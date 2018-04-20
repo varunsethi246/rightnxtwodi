@@ -11,7 +11,7 @@ export const BeenThere = new Mongo.Collection('beenThere');
 if (Meteor.isServer) {
   // This code only runs on the server
   Meteor.publish('beenThere', function beenThere(businessLink) {
-  	var businessObj = Business.findOne({"businessLink" : businessLink},{"_id":1});
+  	var businessObj = Business.findOne({"businessLink" : businessLink});
   	if(businessObj){
 	    return BeenThere.find({"businessId":businessObj._id});  		
   	}

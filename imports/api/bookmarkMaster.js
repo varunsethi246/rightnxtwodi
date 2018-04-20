@@ -11,7 +11,7 @@ export const Bookmark = new Mongo.Collection('bookmark');
 if (Meteor.isServer) {
   // This code only runs on the server
   Meteor.publish('bookmark', function bookmark(businessLink) {
-  	var businessObj = Business.findOne({"businessLink" : businessLink},{"_id":1});
+  	var businessObj = Business.findOne({"businessLink" : businessLink});
   	if(businessObj){
 	    return Bookmark.find({"businessId":businessObj._id});  		
   	}

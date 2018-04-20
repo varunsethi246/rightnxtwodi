@@ -39,7 +39,7 @@ if (Meteor.isServer) {
 	});
 
 	Meteor.publish('chartBusiness', function() {
-		return Business.find({"businessOwnerId": Meteor.userId()});	
+		return Business.find({"businessOwnerId": this.userId});	
 	});
 }
 

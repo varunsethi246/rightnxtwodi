@@ -1133,11 +1133,20 @@ cursor:pointer;
 margin-top:7px
 }
 
-.suggestedToFollow {
+/*.suggestedToFollow {
 padding:0 11px;
 border:1px solid #ccc;
 height:auto;
 min-height:90px
+}*/
+.suggestedToFollow {
+padding: 0 11px;
+border: 1px solid #ccc;
+height: auto;
+border-radius: 2px;
+min-height: 90px;
+background: #fff;
+box-shadow: #ccc 1px 1px 5px;
 }
 
 .suggestedToFollow h4 {
@@ -4106,4 +4115,11 @@ background: #fff
 .followerBoxWrap,.followingBoxWrap{
 	overflow-y: scroll;
     height: 167px;
+}
+.countMargin{
+	margin-left: 0px!important;
+}
+.yourFriendFind{
+	background-color: #eee!important;
+	/*border-radius: 4px!important;*/
 }

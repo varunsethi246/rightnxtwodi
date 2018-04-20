@@ -40,10 +40,23 @@ Template.userReviewTemplate.helpers({
 					data1.push(data[i]);
 				}
 			}
+		var resultFrnds = tagedFriends.reduce(function(memo, e1){
+		var matches = memo.filter(function(e2){
+			return e1.selectedUserId == e2.selectedUserId && e1.selectedUserId == e2.selectedUserId
+		})
+		if (matches.length == 0)
+			memo.push(e1)
+			return memo;
+		}, []);
+
+		tagedFriends = resultFrnds;
+
+		// console.log('resultFrnds: ',resultFrnds);
+
 			data = data1;
-			var result =  {data,tagedFriends};
+			var result =  {data,resultFrnds};
 		}else{
-			var result =  {data,tagedFriends};
+			var result =  {data,resultFrnds};
 		}
 	    return result;
 	},
@@ -1211,16 +1224,17 @@ Template.userReviewTemplate.events({
 		}
 	},
 	'click .reviewBusSave': function(event){
+		event.preventDefault();
 		var revComment = $(event.currentTarget).parent().siblings('.editBoxComment').children('.editReviewTextArea').val();
 		if(revComment){
 			var id = event.currentTarget.id;
 			var taggedPpl = tagedFriends;
-			console.log('revComment:',revComment);
 			
 			Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, function(error, result){
 				if(error){
 					Bert.alert('Some technical issue happened... Your review is not posted.', 'danger', 'growl-top-right');
 				}else{
+
 					$('.userReviewTempcommTxt-'+id).css('display','block');
 					$('.editBoxCommentRev-'+id).css('display','none');
 					$('.reviewCancel-'+id).css('display','none');
@@ -1231,7 +1245,7 @@ Template.userReviewTemplate.events({
 					$('.tagFrnd').css('display','none');
 					$('.tagedFrndDivPre-'+id).css('display','block');
 					tagedFriends = [];
-					console.log('tagedFriends:',tagedFriends);
+					// console.log('tagedFriends:',tagedFriends);
 					
 				}
 			});

@@ -59,7 +59,7 @@ if(s3Data)
   if (Meteor.isServer) {
 
   Meteor.publish('offerImagesS3', function() {
-    return OfferImagesS3.find({}, { limit: 0 });
+    return OfferImagesS3.find({});
   });
   }
 

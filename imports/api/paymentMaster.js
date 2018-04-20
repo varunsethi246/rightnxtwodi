@@ -60,7 +60,7 @@ Meteor.methods({
 		var newOffers = Offers.find({"businessId":formValues.businessId,"offerStatus":"new"}).fetch();
 		var newOffersArr = [];
 		if(newOffers){
-			var companyRates = CompanySettings.findOne({'companyId':101},{"rates":1,"_id":0});
+			var companyRates = CompanySettings.findOne({'companyId':101},{"rates":1});
 			if(companyRates){
 				var totalAmount = 0;
 				var offers = [];

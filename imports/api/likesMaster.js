@@ -11,7 +11,7 @@ export const Likes = new Mongo.Collection('likes');
 if (Meteor.isServer) {
   // This code only runs on the server
   Meteor.publish('businessLikes', function businessLikes(businessLink) {
-  	var businessObj = Business.findOne({"businessLink" : businessLink},{"_id":1});
+  	var businessObj = Business.findOne({"businessLink" : businessLink});
   	if(businessObj){
 	    return Likes.find({"businessId":businessObj._id});  		
   	}
