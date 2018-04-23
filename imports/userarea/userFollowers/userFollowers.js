@@ -157,7 +157,7 @@ Template.userFollowers.helpers({
 						UserDataObj.profile.userProfilePic = pic.url();	
 					}
 					else{
-						UserDataObj.profile.userProfilePic = "/users/profile/profile_image_dummy.svg";	
+						UserDataObj.profile.userProfilePic = "/users/profile/user-one.png";	
 					}
 					var followerCount  = FollowUser.find({'followUserId': id}).count();
 					var reviewCount    = Review.find({'userId': id}).count();

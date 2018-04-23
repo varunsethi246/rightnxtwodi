@@ -3588,12 +3588,24 @@ color:#f89b1c
 }
 
 .unfollowUserBtn {
+background: #f89b2f;
+text-align: center;
+color: #f5f5f5;
+font-size: 13px;
+width: 50%;
+height: 25px;
+float: right;
+padding-top: 3px;
+border: 0px!important;
+border-radius: 0px!important;
+}
+/*.unfollowUserBtn {
     background: #c71010;
     text-align: center;
     color: #f5f5f5;
     font-size: 13px;
 }
-
+*/
 .vEnqTriangleleft-msgTimeStmp {
     font-size: 9px;
     text-align: right;

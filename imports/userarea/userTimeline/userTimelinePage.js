@@ -113,12 +113,6 @@ Template.userTimeline.helpers({
 		}, []);
 
 		tagedFriends = resultFrnds;
-
-		// console.log('resultFrnds: ',resultFrnds);
-
-   			// console.log('tagedFriends: ',tagedFriends);
-   			// console.log('frnds: ',frnds);
-   			// console.log('uniquefrnds: ',uniquefrnds);
 			data = data1;
 			var result =  {data,resultFrnds};
 		}else{

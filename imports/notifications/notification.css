@@ -553,9 +553,12 @@ background:#F6F6F7
 }
 
 .statusColorBar {
+background: #ffe0b6;
+}
+/*.statusColorBar {
 background:#D6EAF8
 }
-
+*/
 .notifmenu {
 font-size:12px
 }
@@ -662,6 +665,15 @@ text-align:center
 }
 
 .notificationheader {
+background: #fff;
+    text-align: center;
+    color: #333;
+    font-size: 12px;
+    padding: 4px;
+    font-weight: 600;
+    width: 100%!important;
+}
+/*.notificationheader {
 background:#fff;
 text-align:center;
 color:#333;
@@ -669,7 +681,7 @@ font-size:12px;
 padding:4px;
 font-weight:600
 }
-
+*/
 .notifbody {
 font-size:12px
 }
@@ -691,7 +703,8 @@ width:280px;
 padding:0;
 margin:0;
 top:100%;
-border:0!important
+border:0;
+/*border:0!important*/
 }
 
 .tabContentStyle {
@@ -735,7 +748,7 @@ margin-left:-7px;
 top:-5px
 }
 
-.squarenotifAngle:before {
+/*.squarenotifAngle:before {
 content:"";
 position:absolute;
 right:11px;
@@ -746,6 +759,16 @@ border-style:solid;
 border-width:0 10px 10px;
 border-color:transparent transparent #ccc;
 z-index:9999
+}*/
+.squarenotifAngle:before {
+    bottom: 100%;
+    left: 91%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
 }
 
 .adminHDropdown .squarenotifAngle:after {
@@ -753,6 +776,16 @@ display:none
 }
 
 .squarenotifAngle:after {
+    bottom: 100%;
+    left: 92%;
+    border: solid #ffffff00;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+/*.squarenotifAngle:after {
 content:"";
 position:absolute;
 right:4px;
@@ -764,12 +797,29 @@ border-width:0 17px 17px;
 border-color:transparent transparent #fff;
 z-index:9998
 }
-
+*/
 .squarenotifAngle {
+/*position: relative;*/
+	background: #84bad5;
+	border: 4px solid #c2e1f5;
+}
+/*.squarenotifAngle {
 background:#fff;
 border:8px solid #fffefe;
 box-shadow:0 3px 3px rgba(0,0,0,0.2);
 float:left;
 width:200px;
 z-index:99999
+}*/
+.squarenotifAngle:after {
+    border-color: rgba(132, 186, 213, 0);
+    border-bottom-color: #ffffff;
+    border-width: 13px;
+    margin-left: 0px;
+}
+.squarenotifAngle:before {
+border-color: rgba(194, 225, 245, 0);
+    border-bottom-color: #fcb445;
+    border-width: 18px;
+    /* margin-left: 181px; */
 }

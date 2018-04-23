@@ -1595,6 +1595,17 @@ margin-right:0
 }
 
 .followTab {
+    float: left;
+    width: 100%;
+    padding: 7px 1% 6px;
+    margin: 0 0 15px;
+    min-height: 50px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    box-shadow: 1px 1px 5px #a5a5a5;
+    height: 75px;
+}
+/*.followTab {
 float:left;
 width:100%;
 padding:7px 1% 6px;
@@ -1603,7 +1614,7 @@ min-height:50px;
 border:1px solid #ccc;
 cursor:pointer
 }
-
+*/
 .followTab:hover {
 background:#fff
 }
@@ -3924,6 +3935,14 @@ color:#f89b1c
 color:#f89b1c
 }
 
+.dropdown-menu > li > .hoverColor:hover,.dropdown-menu > li > .hoverColor:focus {
+ color: #fff;
+    text-decoration: none;
+    background-color: #ffe0b6;
+    margin-left: 0;
+     padding-bottom: 0px; 
+    /* background: #000; */
+}
 .dropdown-menu > li > a:hover,.dropdown-menu > li > a:focus {
 color:#fff;
 text-decoration:none;
