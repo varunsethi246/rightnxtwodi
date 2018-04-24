@@ -123,7 +123,14 @@ Template.claim.helpers({
     }
     
     var currentArea = Area.find({'city':currentCity,"status":"active"}).fetch();
-    return currentArea;
+     currentArea.sort(function(a, b) {
+		var textA = a.area.toUpperCase();
+		var textB = b.area.toUpperCase();
+		return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+	});
+
+      return  currentArea;
+    // return currentArea;
   }
 });
 

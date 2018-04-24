@@ -1127,3 +1127,7 @@ top: 54%
     margin-top: 1px;
 }
 }
+.selectareaclose{
+    top: 18px!important;
+    right: 14px!important;
+}
