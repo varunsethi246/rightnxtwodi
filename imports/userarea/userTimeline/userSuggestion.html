@@ -13,7 +13,19 @@
                       <div class="suggInfoTimeline col-lg-8 col-md-10 col-sm-10 col-xs-8">
                           <a href="/userReview/{{redirectid}}" target="_blank">
                           <h5 class="switchUser" id={{id}}>{{SuggestionInt}}</h5></a>
-                          <p>{{userSuggestionRev}} Reviews , {{userSuggestionFol}} Followers</p>
+                          <p>
+                            {{#if reviewsDataTimeline}}
+                              <span>{{userSuggestionRev}} Reviews </span>
+                            {{else}}
+                              <span>{{userSuggestionRev}} Review </span>
+                            {{/if}}
+                          , 
+                            {{#if followersDataTimeline}}
+                              <span>{{userSuggestionFol}} Followers</span>
+                            {{else}}
+                              <span>{{userSuggestionFol}} Follower</span>
+                            {{/if}}
+                          </p>
                       </div>
                       <div class="follwSugg col-lg-2 col-md-1 col-sm-1 col-xs-2 pull-right"><a><i class="fa fa-user-plus followU" aria-hidden="true" title="Follow"></i></a></div>
                       <div class="clear"></div>

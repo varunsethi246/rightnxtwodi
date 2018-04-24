@@ -531,7 +531,24 @@ Template.userReviewSuggestion.events({
 });
 
 Template.userReviewSuggestion.helpers ({
-
+	'reviewsData':function(){
+		var countUserId = Session.get('useridone');
+		var reviewCount   = Review.find({'userId': countUserId}).count();
+		if (reviewCount > 1) {
+			return true;
+		}else{
+			return false;
+		}
+	},
+	'followersData':function(){
+		var countUserId = Session.get('useridone');
+		var followerCount = FollowUser.find({'followUserId': countUserId}).count();
+		if (followerCount > 1) {
+			return true;
+		}else{
+			return false;
+		}
+	},
 	'userSuggestionrender':function(){
 		// var uid         = Meteor.userId();
 		var userArray      = [];
@@ -556,6 +573,7 @@ Template.userReviewSuggestion.helpers ({
 					for(var i=0;i<otherUsersData.length;i++){
 						var name    = otherUsersData[i].profile.name;
 						var id      = otherUsersData[i]._id;
+						var userID  = Session.set('useridone',id);
 						var pic     = UserProfileStoreS3New.findOne({"_id":otherUsersData[i].profile.userProfilePic});
 						if(pic){
 							otherUsersData[i].profile.userProfilePic = pic.url();	

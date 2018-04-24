@@ -40,6 +40,24 @@ Template.userTimeline.helpers({
 
 
 Template.userSuggestion.helpers ({
+	'reviewsDataTimeline':function(){
+		var countUserId = Session.get('useridtimeline');
+		var reviewCountTimeline   = Review.find({'userId': countUserId}).count();
+		if (reviewCountTimeline > 1) {
+			return true;
+		}else{
+			return false;
+		}
+	},
+	'followersDataTimeline':function(){
+		var countUserId = Session.get('useridtimeline');
+		var followerCountTimeline = FollowUser.find({'followUserId': countUserId}).count();
+		if (followerCountTimeline > 1) {
+			return true;
+		}else{
+			return false;
+		}
+	},
 	'userSuggestionData': function(){
 		var userId         = Meteor.userId();
 		var userArray      = [];
@@ -55,6 +73,7 @@ Template.userSuggestion.helpers ({
 					var name           = otherUsersData[i].profile.name;
 					// var userProfilePic = otherUsersData[i].profile.userProfilePic;
 					var id             = otherUsersData[i]._id;
+					var userIDTimeline = Session.set('useridtimeline',id);
 					var pic            = UserProfileStoreS3New.findOne({"_id":otherUsersData[i].profile.userProfilePic});
 					if(pic){
 						otherUsersData[i].profile.userProfilePic = pic.url();	

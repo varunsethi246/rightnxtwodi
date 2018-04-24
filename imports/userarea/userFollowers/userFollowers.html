@@ -24,7 +24,24 @@
 										<h5>
 											<a href="/userReview/{{redirectid}}" target="_blank">{{followerInt}}</a>
 										</h5>
-										<p>{{UserFollowerRev}} Reviews , {{userFollowFol}} Followers</p>
+									
+										<p>
+											{{#if reviewCountDis}}
+												<span>{{UserFollowerRev}} Reviews</span> ,
+											{{else}} 
+												<span>{{UserFollowerRev}} Review</span> , 
+											{{/if}}
+											{{#if followerCountDis}}
+												<span>{{userFollowFol}} Followers</span>
+											{{else}}
+												<span>{{userFollowFol}} Follower</span>
+											{{/if}}
+										</p>
+										<!-- {{#if followerCountDis}}
+											<p>{{UserFollowerRev}} Reviews , {{userFollowFol}} Followers</p>
+										{{else}}
+											<p>{{UserFollowerRev}} Review , {{userFollowFol}} Follower</p>
+										{{/if}} -->
 									</div>
 									<div class="followerSugg">
 										<!-- <a>
@@ -78,7 +95,21 @@
 								<a href="/userReview/{{redirectid}}" target="_blank">{{followingInt}}</a>
 							</h5>
 							
-							<p>{{UserFollowingRev}} Reviews , {{userFollowingFol}} Followers</p>
+								<p>
+								{{#if reviewCountDis}}
+									<span>{{UserFollowingRev}} Reviews</span> ,
+								{{else}} 
+									<span>{{UserFollowingRev}} Review</span> , 
+								{{/if}}
+								{{#if followerCountDis}}
+									<span>{{userFollowingFol}} Followers</span>
+								{{else}}
+									<span>{{userFollowingFol}} Follower</span>
+								{{/if}}
+								</p>
+							
+<!-- 								<p>{{UserFollowingRev}} Review , </p> -->
+
 							
 							{{#if followShowHide}}
 								<div class="unfollowUserBtn btn" data-toggle="modal" data-target="#follwMod-{{followId}}">

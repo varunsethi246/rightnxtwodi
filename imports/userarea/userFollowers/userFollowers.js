@@ -50,6 +50,34 @@ Template.userFollowers.helpers({
 			return false;
 		}
 	},
+	'followerCountDis':function(){
+		var userIdFoll = Session.get('finduserIdFoll');
+		var follCounts  = FollowUser.find({'followUserId': userIdFoll}).count();
+		console.log('follCounts : ',follCounts);
+		if (follCounts > 1) {
+			console.log('in if');
+			return true;
+		}else{
+			console.log('in else');
+			return false;
+		}
+
+	},
+	'reviewCountDis':function(){
+		var userIdFoll = Session.get('finduserIdFoll');
+		// var revieFollCounts  = FollowUser.find({'followUserId': userIdFoll}).count();
+		var revieFollCounts    = Review.find({'userId': userIdFoll}).count();
+
+		console.log('revieFollCounts : ',revieFollCounts);
+		if (revieFollCounts > 1) {
+			console.log('in if review' );
+			return true;
+		}else{
+			console.log('in else review');
+			return false;
+		}
+
+	},
 	'userFollowerData': function(){
 		var id = '';
 		var url = FlowRouter.current().path;
@@ -79,6 +107,7 @@ Template.userFollowers.helpers({
 
 			for(var i=0;i<followUserObj.length;i++){
 				var id      = followUserObj[i].userId;
+				Session.set('finduserIdFoll',id);
 				var UserDataObj = Meteor.users.findOne({"_id":id});
 				if(UserDataObj){
 					var name           = UserDataObj.profile.name;
