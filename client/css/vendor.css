@@ -3524,6 +3524,7 @@ color:#f89b1c
 
 .tagedFrndSpansOuter {
     display: inline-block;
+    padding-left: 10px;
 }
 
 .taggedFrndShowLiImg {
@@ -3646,4 +3647,7 @@ border-radius: 0px!important;
 }
 .displayNone{
 	display: none;
+}
+.tagnames:hover{
+	color: #000;
 }
