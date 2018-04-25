@@ -82,7 +82,7 @@ Template.vendorBusinessInformation.events({
       else if(inputBoxLink!=myFuncVarLink){
         $(".SpanBusinessLink").addClass("ErrorRedText hvr-buzz-out");
         $(".businessLinkC").addClass("SpanLandLineRedBorder");
-        $(".SpanBusinessLink").text("Link already exist, Please enter different link");
+        $(".SpanBusinessLink").text("Link already exists, Please enter different link");
         $(".SpanBusinessLink").removeClass("linkAvail");
       }
     }      
@@ -231,7 +231,7 @@ Template.vendorBusinessInformation.events({
         else if(inputBoxLink!=myFuncVarLink){
           $(".SpanBusinessLink").addClass("ErrorRedText hvr-buzz-out");
           $(".businessLinkC").addClass("SpanLandLineRedBorder");
-          $(".SpanBusinessLink").text("Link already exist, Please enter different link");
+          $(".SpanBusinessLink").text("Link already exists, Please enter different link");
           $(".SpanBusinessLink").removeClass("linkAvail");
         }
       }      

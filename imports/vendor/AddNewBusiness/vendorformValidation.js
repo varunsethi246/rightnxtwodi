@@ -347,7 +347,7 @@ Template.addvendorOpeningAndClosing.events({
          if (!myFuncVar.match(nameRegex)) {
             $(".SpanUrl").addClass("ErrorRedText");
             $(".businessWebAdressC").addClass("SpanLandLineRedBorder");
-            $( ".SpanUrl" ).text("Please Enter Website Url as http://www.xyz.com OR www.xyz.com" );
+            $( ".SpanUrl" ).text("Please Enter Website URL as http://www.xyz.com OR www.xyz.com" );
 
          } else {
             $(".SpanUrl").removeClass("ErrorRedText");

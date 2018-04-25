@@ -255,7 +255,7 @@ Template.addVendorBusInfo.events({
          var data = Business.findOne({"businessLink":myFuncVarLink});
          if(data&&Session.get('backlinkurl') !== myFuncVarLink){
             $(".SpanBusinessLink").addClass("ErrorRedText hvr-buzz-out");
-            $(".SpanBusinessLink").text("Link already exist");
+            $(".SpanBusinessLink").text("Link already exists");
             $(".businessLinkC").addClass("SpanLandLineRedBorder");
             $(".SpanBusinessLink").removeClass("linkAvail");
          } else {
@@ -352,7 +352,7 @@ Template.addVendorBusInfo.events({
             var data = Business.findOne({"businessLink":myFuncVarLink});
             if(data){
                $(".SpanBusinessLink").addClass("ErrorRedText hvr-buzz-out");
-               $(".SpanBusinessLink").text("Link already exist, Please enter different link");
+               $(".SpanBusinessLink").text("Link already exists, Please enter different link");
                $(".businessLinkC").addClass("SpanLandLineRedBorder");
                $(".SpanBusinessLink").removeClass("linkAvail");
             } else {

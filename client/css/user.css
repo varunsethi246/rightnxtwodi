@@ -3287,14 +3287,14 @@ color:#4e4f51
 }
 
 .uploadButton1 {
-background-color:#fff;
-border:1px solid #ccc;
-box-sizing:content-box;
-color:#4e4f51;
-cursor:pointer;
-display:inline-block;
-font-size:14px;
-height:33px
+background-color: #f89b2f;
+    border: 1px solid #ccc;
+    box-sizing: content-box;
+    color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    height: 33px;
 }
 
 .upldTxtImg .fileName {

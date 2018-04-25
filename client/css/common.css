@@ -235,6 +235,9 @@ left:8px
 .form4General {
 margin-top:16px
 }
+.form4General {
+margin-top:0px
+}
 
 .optionOfAreaG {
 float:left;
@@ -1126,8 +1129,15 @@ top: 54%
         margin-right: -40px;
     margin-top: 1px;
 }
-}
+
 .selectareaclose{
     top: 18px!important;
     right: 14px!important;
+}
+
+.fromtomargin{
+    margin-top: 7px!important;
+}
+#businessPhotofiles{
+margin-left: 0px;
 }
