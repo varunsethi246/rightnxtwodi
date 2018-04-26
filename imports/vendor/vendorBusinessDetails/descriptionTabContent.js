@@ -24,6 +24,49 @@ tagedFriends = [];
 
 
 Template.userReviewTemplate.helpers({
+
+	showRating(){
+		// userId,businessLink
+		var userId = Meteor.userId();
+		var businessLink = FlowRouter.getParam('businessurl');
+		var ratingInt = Review.findOne({"userId" : userId,"businessLink":businessLink});
+		if(ratingInt){
+			console.log("ratingInt = ", ratingInt);
+			var latestRating = ratingInt.rating;
+
+			var intRating = parseInt(latestRating);
+			var balRating = latestRating - intRating;
+			var finalRating = intRating + balRating;
+			if(balRating > 0 && balRating < 0.5){
+				var finalRating = intRating + 0.5;
+			}
+			if(balRating > 0.5){
+				var finalRating = intRating + 1;
+			}
+
+			ratingObj = {};
+
+			for(i=1; i<=10; i++){
+				var x = "star" + i;
+				if(i <= finalRating*2){
+					if( i%2 == 0){
+						ratingObj[x] = "fixStar2";
+					}else{
+						ratingObj[x] = "fixStar1";
+					}				
+				}else{
+					ratingObj[x]  = "";
+				}
+			
+			}
+			console.log("ratingObj = ", ratingObj);
+			return ratingObj;
+		}else{
+			return {};
+		}
+	},
+
+
 	'getFrndsList' : function(){
 		var data =  tagFriend1.getData();
 	    var data1 = [];
@@ -1127,6 +1170,7 @@ Template.userReviewTemplate.events({
 		$('.userReviewTempcommTxt-'+id).css('display','none');
 		$('.editBoxCommentRev-'+id).css('display','block');
 		$('.tagFrnd-'+id).css('display','block');
+		$('.starRatingblock-'+id).css('display','block');
 		$('.reviewCancel-'+id).css('display','block');
 		$('.reviewBusSave-'+id).css('display','block');
 		$('.bus-page-edit-outer1-'+id).css('display','inline');
@@ -1190,6 +1234,7 @@ Template.userReviewTemplate.events({
 		var id = $(event.target).attr('id');
 		$('.userReviewTempcommTxt-'+id).css('display','block');
 		$('.editBoxCommentRev-'+id).css('display','none');
+		$('.starRatingblock-'+id).css('display','none');
 		$('.reviewCancel-'+id).css('display','none');
 		$('.reviewBusSave-'+id).css('display','none');
 		$('.bus-page-edit-outer1-'+id).css('display','none');
@@ -1230,7 +1275,12 @@ Template.userReviewTemplate.events({
 			var id = event.currentTarget.id;
 			var taggedPpl = tagedFriends;
 			
-			Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, function(error, result){
+			var starRating = $('.starRatingWrapper .fixStar1').length;
+			starRating = starRating + $('.starRatingWrapper .fixStar2').length;
+			var rating = parseFloat(starRating) / 2;
+
+
+			Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, rating, function(error, result){
 				if(error){
 					Bert.alert('Some technical issue happened... Your review is not posted.', 'danger', 'growl-top-right');
 				}else{
@@ -1238,6 +1288,7 @@ Template.userReviewTemplate.events({
 					$('.userReviewTempcommTxt-'+id).css('display','block');
 					$('.editBoxCommentRev-'+id).css('display','none');
 					$('.reviewCancel-'+id).css('display','none');
+					$('.starRatingblock-'+id).css('display','none');
 					$('.reviewBusSave-'+id).css('display','none');
 					$('.bus-page-edit-outer1-'+id).css('display','none');
 					$('.bus-page-edit-outerFrnd1-'+id).css('display','none');

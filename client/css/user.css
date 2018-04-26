@@ -4014,18 +4014,19 @@ color:#1d2129
 padding-right:6px
 }
 
-.editBoxComment {
-display:none;
-padding:0
+.editBoxComment, 
+.starRatingblock {
+	display:none;
+	padding:0
 }
 
 .userRevComEdit {
-/* padding-left:10px; */
-color:#666;
-font-size:13px;
-background: #f89b1c;
-color: #fff;
-text-align: center;
+	/* padding-left:10px; */
+	color:#666;
+	font-size:13px;
+	background: #f89b1c;
+	color: #fff;
+	text-align: center;
 }
 
 .userRevCommEdit {
