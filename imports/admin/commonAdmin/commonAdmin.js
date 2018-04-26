@@ -107,6 +107,7 @@ Template.ViewAllNotif.helpers({
         var notifDetails = Notification.find({'toUserId': Meteor.userId(), 'event': {"$in": notificationLocs}},{sort:{'date':-1}}).fetch();
         if(notifDetails){
           var notifCount = Notification.find({'toUserId': Meteor.userId(), 'event': {"$in": notificationLocs}}).count();
+          var viewAllNotif = Session.set('notifCounts',notifCount);
           var notifArray = [];
           for(i=0 ; i<notifCount ; i++){
             var statusClass = '';
@@ -130,6 +131,15 @@ Template.ViewAllNotif.helpers({
         }//notifDetails
         
       return notifArray;
+  },
+  'AllnotifCounts':function(){
+  	var AllnotifZero = Session.get('notifCounts');
+  	// console.log(AllnotifZero);
+  	if (AllnotifZero > 0) {
+  		return true;
+  	}else{
+  		return false;
+  	}
   }
 });
 
@@ -154,7 +164,7 @@ Template.ViewAllNotif.events({
 	      if(error){
 	        console.log(error);
 	      }else{
-	        Bert.alert( 'Deleted Successfully!', 'Success', 'growl-top-right' );
+	        Bert.alert( 'Deleted Successfully!', 'success', 'growl-top-right' );
 	      }
 	    });
 	},

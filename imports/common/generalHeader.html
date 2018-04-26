@@ -31,7 +31,8 @@
 			                    ({{notifcount}}) unread notifications</li>
 			                    <hr>
 			                      <li style="position: relative;">
-			                        <ul class="menu notifvalMenu">
+			                        <ul class="menu notifvalMenu newBackground">
+			                        {{#if notificationZero}}
 			                          {{#each notifVal}}
 			                          <li class="innerNotifLi">
 			                            <a href="/{{notifPath}}" target="_blank"  class="notifContent {{statusBackground}} col-lg-12 col-md-12 col-sm-12 col-xs-12 hoverColor" id="{{id}}">
@@ -41,6 +42,11 @@
 			                           </li>
 			                           <hr>
 			                          {{/each}}
+			                            {{else}}
+			                          	<li class="innerNotifLi">
+			                            	<div>No Notifications</div>
+			                         	</li>
+			                            {{/if}}
 			                        </ul>
 			                      </li>
 			                      <hr>
@@ -65,6 +71,7 @@
 			                    <hr>
 			                      <li style="position: relative;">
 			                        <ul class="menu notifvalMenu">
+			                          	{{#if notificationZero}}
 			                          {{#each notifVal}}
 			                          <li class="innerNotifLi">
 			                            <a href="/{{notifPath}}" target="_blank"  class="notifContent {{statusBackground}} col-lg-12 col-md-12 col-sm-12 col-xs-12 hoverColor" id="{{id}}">
@@ -74,6 +81,13 @@
 			                           </li>
 			                           <hr>
 			                          {{/each}}
+			                            {{else}}
+			                          <li class="innerNotifLi">
+
+			                            <div >No Notifications</div>
+			                           </li>
+			                            
+			                            {{/if}}
 			                        </ul>
 			                      </li>
 			                      <hr>

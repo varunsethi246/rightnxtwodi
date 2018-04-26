@@ -149,9 +149,18 @@ Template.generalHeader.helpers({
       	var notifDetails = Notification.find({'toUserId':userId,'status':'unread', 'event': {"$in": notificationLocs}}).fetch();
         	if(notifDetails){
           		var notifCount = Notification.find({'toUserId':userId,'status':'unread', 'event': {"$in": notificationLocs}}).count();
+          		var notifcountZero = Session.set('notifZero',notifCount);
         	}
       	return notifCount;
     },
+    'notificationZero':function(){
+    	var notcount = Session.get('notifZero');
+    	if (notcount >0) {
+    		return true;
+    	}else{
+    		return false;
+    	}
+    }
 });
 
 Template.generalHeader.events({

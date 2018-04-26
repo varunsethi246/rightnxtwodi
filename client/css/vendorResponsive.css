@@ -494,7 +494,7 @@ padding-left:0
 }
 
 .venClosePadd {
-right:20px!important
+    margin-right: 21px;
 }
 
 .city-close i {

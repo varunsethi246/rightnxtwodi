@@ -1141,3 +1141,10 @@ top: 54%
 #businessPhotofiles{
 margin-left: 0px;
 }
+.modalforgetpass{
+    height: 74%;
+}
+.newBackground{
+background-color: #ffe0b6;
+text-align: center;
+}

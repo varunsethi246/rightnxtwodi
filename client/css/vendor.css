@@ -3092,13 +3092,22 @@ margin-bottom:0
 }
 
 .venFileUpldBtnStyle #venFileUpldbutton {
+border: 1px solid #ccc;
+padding: 10px 15px;
+color: #0e1118;
+cursor: pointer;
+background: #efefef;
+opacity: .5;
+margin-left: -13px;
+}
+/*.venFileUpldBtnStyle #venFileUpldbutton {
 border:1px solid #ccc;
 padding:10px 15px;
 color:#666;
 cursor:pointer;
 background:#fff;
 opacity:.5
-}
+}*/
 
 .venFileUpldBtnStyle {
 margin:14px 0;
@@ -3660,4 +3669,7 @@ border-radius: 0px!important;
 .VuploadText{
 	color: #fff;
 	margin-left: -20px;
+}
+.notifyBody .deleteTrash:hover{
+	color: red;
 }

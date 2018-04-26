@@ -66,7 +66,7 @@ Template.LoginOTP.events({
 			var newID = Meteor.users.findOne({"emails.address":emailId});
 			if(newID){
 				var otp = newID.profile.emailotp;
-				if(otp == '0'){
+				if(otp == 0){
 					Bert.alert("Email already Verified");
 					FlowRouter.go('/');
 		                    $('#loginModal').modal();
@@ -110,8 +110,10 @@ Template.LoginOTP.events({
 							$('.modal-backdrop').hide();
 
 							var emailVar 		= userDetails.emails[0].address;
-							var reversePassWord = userDetails.profile.reverse; 
+							var reversePassWord = userDetails.profile.reverse;
+							console.log("reversePassWord",reversePassWord); 
 						    var passwordVar 	= reversePassWord.split("").reverse().join("");
+						    console.log("passwordVar",passwordVar);
 
 						    Meteor.loginWithPassword(emailVar,passwordVar, function(err,result){
 						    	if(err){

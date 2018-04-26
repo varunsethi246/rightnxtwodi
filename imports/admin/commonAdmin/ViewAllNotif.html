@@ -39,13 +39,19 @@
 				<h2 class="notifyWrapper">All Notifications</h2>
 				<hr class="notify">
 				<div class="box-body">
-				{{#each notifRes}}
-					<div class="{{statusBackground}} notifRowBunch" id="{{id}}">
-						<span class="col-lg-12 col-md-12 col-sm-12 col-xs-12  notifyBody"> {{ notifBody }} <i class="fa fa-trash fa-lg pull-right deleteTrash"></i> </span>
-						<span class="col-lg-12 col-md-12 col-sm-12 col-xs-12 notidate"> {{ createdAt }} </span>
-						<hr class="hrViewAll">
+					{{#if AllnotifCounts}}
+						{{#each notifRes}}
+							<div class="{{statusBackground}} notifRowBunch" id="{{id}}">
+								<span class="col-lg-12 col-md-12 col-sm-12 col-xs-12  notifyBody"> {{ notifBody }} <i class="fa fa-trash fa-lg pull-right deleteTrash"></i> </span>
+								<span class="col-lg-12 col-md-12 col-sm-12 col-xs-12 notidate"> {{ createdAt }} </span>
+								<hr class="hrViewAll">
+							</div>
+						{{/each}}
+					{{else}}
+					<div class="">
+						No Notification
 					</div>
-				{{/each}}
+					{{/if}}
 				</div>
 			</div>
 			{{/if}}
@@ -55,13 +61,19 @@
 				<h2 class="notifyWrapper">All Notifications</h2>
 				<hr class="notify">
 				<div class="box-body">
-				{{#each notifRes}}
-					<div class="{{statusBackground}} notifRowBunch" id="{{id}}">
-						<span class="col-lg-12 col-md-12 col-sm-12 col-xs-12  notifyBody"> {{ notifBody }} <i class="fa fa-trash fa-lg pull-right deleteTrash"></i> </span>
-						<span class="col-lg-12 col-md-12 col-sm-12 col-xs-12 notidate"> {{ createdAt }} </span>
-						<hr class="hrViewAll">
+					{{#if AllnotifCounts}}
+						{{#each notifRes}}
+							<div class="{{statusBackground}} notifRowBunch" id="{{id}}">
+								<span class="col-lg-12 col-md-12 col-sm-12 col-xs-12  notifyBody"> {{ notifBody }} <i class="fa fa-trash fa-lg pull-right deleteTrash"></i> </span>
+								<span class="col-lg-12 col-md-12 col-sm-12 col-xs-12 notidate"> {{ createdAt }} </span>
+								<hr class="hrViewAll">
+							</div>
+						{{/each}}
+					{{else}}
+					<div class="">
+						No Notification
 					</div>
-				{{/each}}
+					{{/if}}
 				</div>
 			</div>
 			{{/if}}
