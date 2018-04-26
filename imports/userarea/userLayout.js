@@ -7,6 +7,8 @@
       		}, 1000,
   		);
     },
+    
+
 });
 Template.userLayout.onRendered(function(){
 	$(window).scroll(function() {

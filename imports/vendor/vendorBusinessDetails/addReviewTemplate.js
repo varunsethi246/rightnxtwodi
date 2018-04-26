@@ -441,7 +441,7 @@ Template.addReviewTemplate.events({
 		var busLink = FlowRouter.getParam("businessurl");
 		if(Meteor.userId()){
 			var userReview = Review.findOne({"userId":Meteor.userId(),"businessLink":busLink});
-			// console.log('userReview',userReview);
+			console.log('userReview',userReview);
 			if(userReview){
 			// businessObj.alreadyReviewed = true;
 			$('.passwordWrongSpan').text("You have already reviewed this Business. Hence more review is not allowed.");

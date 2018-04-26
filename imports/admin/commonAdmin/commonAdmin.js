@@ -103,12 +103,10 @@ Template.ViewAllNotif.helpers({
 			}
 		}
 		var notificationLocs = notifArr.map(function(x) { return x } );
-
-        var notifDetails = Notification.find({'toUserId': Meteor.userId(), 'event': {"$in": notificationLocs}},{sort:{'date':-1}}).fetch();
+	    var notifDetails = Notification.find({'toUserId': Meteor.userId(), 'event': {"$in": notificationLocs}},{sort:{'date':-1}}).fetch();
         if(notifDetails){
-          var notifCount = Notification.find({'toUserId': Meteor.userId(), 'event': {"$in": notificationLocs}}).count();
-          var viewAllNotif = Session.set('notifCounts',notifCount);
-          var notifArray = [];
+        	var notifCount = Notification.find({'toUserId': Meteor.userId(), 'event': {"$in": notificationLocs}}).count();
+        	var notifArray = [];
           for(i=0 ; i<notifCount ; i++){
             var statusClass = '';
             if(notifDetails[i].status == "Read"){
@@ -129,18 +127,21 @@ Template.ViewAllNotif.helpers({
             })
           }//i
         }//notifDetails
-        
+        console.log('notifArray :',notifArray);
       return notifArray;
   },
-  'AllnotifCounts':function(){
-  	var AllnotifZero = Session.get('notifCounts');
-  	// console.log(AllnotifZero);
-  	if (AllnotifZero > 0) {
-  		return true;
-  	}else{
-  		return false;
-  	}
-  }
+ //  'AllnotifCounts':function(){
+	// var notifArr = ["Vendor Modal Image Report", 'Vendor Business Enquiry' ,"Vendor Modal Image Report","User Business Enquiry", "business-report-acknowledged", "business-image-report-acknowledged","User Business Enquiry All" ,'User Enquiry Message', "User Modal Image Report", "Admin Business Page Modal Report", "Admin Business Page Modal Report", "Vendor Business Page Bookmark", "Vendor Business Page Bookmark", "User Business Page Bookmark", "Vendor Business Page Been There", "Vendor Business Page Been There", "User Business Page Been There", "Business Page Share", "Vendor Business Page Report", "Vendor Business Page Report", "Vendor Business Page Report", "User Business Page Report", "Admin Business Page Report", "Admin Business Page Report", "You have been Tagged", "You have been Tagged", "Delete Business Admin", "Delete Business Admin", "Delete Business Vendor", "Delete Business Vendor", "Anything Else Business Admin", "Anything Else Business Admin", "Thanks for Submiting Offer", "Thanks for Submiting Offer", "Vendor has Submiting Offer", "Vendor has Submiting Offer", "Payment Received", "Payment Received", "Vendor Paid for Offer", "Vendor Paid for Offer", "Offer Deleted", "Offer Deleted", "Vendor deleted Offer", "Vendor deleted Offer", "Vendor Message Send", "Thanks for Registering New Business", "Thanks for Registering New Business", "Vendor Added New Business", "Vendor Added New Business"];
+	// var notificationLocs = notifArr.map(function(x) { return x } );
+ //    var notifDetails = Notification.find({'toUserId': Meteor.userId(),'status':'unread', 'event': {"$in": notificationLocs}}).count();
+ //  	console.log(notifDetails);
+ //  	if (notifDetails > 0) {
+ //  		return true;
+ //  	}else{
+ //  		return false;
+ //  	}
+    
+ //  }
 });
 
 Template.ViewAllNotif.events({

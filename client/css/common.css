@@ -840,16 +840,35 @@ display:block
 
 .reviewWrngErrorMsg {
 display:block;
+/*padding:10px;*/
+margin-top:28px;
+font-size:13px
+}
+/*.reviewWrngErrorMsg {
+display:block;
 padding:10px;
 margin-top:50px;
 font-size:13px
 }
-
+*/
 label.error {
 margin-bottom:-5px!important
 }
 
 .loginLabel {
+position:absolute;
+margin-top:5px;
+margin-left:14px;
+color:#4e4f51;
+font-weight:100;
+font-family:'PROXIMANOVA-REGULAR';
+-webkit-transform:translateY(6px);
+transform:translateY(6px);
+-webkit-transition:all .25s ease;
+transition:all .25s ease;
+-webkit-backface-visibility:hidden
+}
+/*.loginLabel {
 position:absolute;
 margin-top:7px;
 margin-left:14px;
@@ -862,7 +881,7 @@ transform:translateY(6px);
 transition:all .25s ease;
 -webkit-backface-visibility:hidden
 }
-
+*/
 .loginFormGroup {
 margin-bottom:35px
 }
@@ -1147,4 +1166,7 @@ margin-left: 0px;
 .newBackground{
 background-color: #ffe0b6;
 text-align: center;
+}
+.aboutNavbar{
+    margin-left:35%
 }

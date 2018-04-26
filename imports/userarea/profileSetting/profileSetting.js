@@ -25,6 +25,7 @@ Template.profileSetting.events({
               }else{
                 Bert.alert( 'Your password has been changed successfully!', 'success', 'fixed-top' );
                 FlowRouter.go('/');
+                $("html,body").scrollTop(0);
               }
           });
         }else{
