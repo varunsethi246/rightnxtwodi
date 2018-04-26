@@ -3651,3 +3651,13 @@ border-radius: 0px!important;
 .tagnames:hover{
 	color: #000;
 }
+.periodMargin{
+	margin-left: 18px;
+}
+.Vuploadicon{
+	margin-left: -30px;
+}
+.VuploadText{
+	color: #fff;
+	margin-left: -20px;
+}
