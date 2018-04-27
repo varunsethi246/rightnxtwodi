@@ -38,8 +38,10 @@ Template.ForgotPassword.events({
             Bert.alert('We are sorry but something went wrong:'+err.reason);
           }
         } else {
-          // console.log('Email Sent. Check your mailbox.');
+          console.log('Email Sent. Check your mailbox.');
+          
           Bert.alert('Email Sent. Check your mailbox.',"success","growl-top-right");
+          $('.resetPwd').addClass('diplayNoneresetPwd');
         }
       });
 
@@ -51,7 +53,7 @@ Template.ForgotPassword.events({
   'click .forgotEmail':function(e){
     e.preventDefault();
     $('.disableBtn').removeAttr('disabled');
-    console.log('value change');
+    // console.log('value change');
   },
 
 

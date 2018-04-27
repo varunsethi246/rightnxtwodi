@@ -23,6 +23,12 @@ Meteor.startup(() => {
 	global.Buffer.isBuffer = () => false
 });
 
+$(document).on("click",function(){
+	// if($('.activeDownList').hasClass('activeDownListBlock')&&!($('.activeSelC').is(":click"))){
+		$('.activeDownList').hide();
+		$('.activeDownListFlag').hide();
+	// }
+});
 Meteor.startup(function () {
   TimeSync.loggingEnabled = false;
 

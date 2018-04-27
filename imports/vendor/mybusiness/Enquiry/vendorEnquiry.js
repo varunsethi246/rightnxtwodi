@@ -758,12 +758,18 @@ Template.vendorEnquiry.events({
 	// Selected Items Click Events
 	'click .activeDownListPre': function(event){
     	event.preventDefault();
+    	event.stopPropagation();
+
 		$('.activeDownList').toggleClass('activeDownListBlock');
 		$('.activeDownListFlag').removeClass('activeDownListBlockFlag');
+		$('.activeDownList').toggle();
 	},
 	'click .activeDownListFlagPre': function(){
+    	event.stopPropagation();
+
 		$('.activeDownListFlag').toggleClass('activeDownListBlockFlag');
 		$('.activeDownList').removeClass('activeDownListBlock');
+		$('.activeDownListFlag').toggle();
 	},
 	'click .activeEnquiryTabsPre': function(){
 		$('.activeDownListFlag').removeClass('activeDownListBlockFlag');

@@ -56,7 +56,7 @@ Template.addReviewTemplate.events({
 		var selectedUser = $(e.currentTarget).attr('data-userName');
 		var frndId = $(e.currentTarget).attr('id');
 		var userImage = $(e.currentTarget).attr('data-photo');
-		
+		console.log('userImage :',userImage);
     	selectedUser = selectedUser.trim();
 		tagedFriends.push({'selectedUser':selectedUser, 'selectedUserId':frndId, 'userImage':userImage});
 		$('#searchFrnds').trigger('keyup');  
@@ -110,7 +110,13 @@ Template.addReviewTemplate.events({
 
 	    if(e.keyCode===9 &&selectedUser.length>0){
 	    	selectedUser = selectedUser.trim();
-	    	tagedFriends.push({'selectedUser':selectedUser, 'selectedUserId':frndId, 'userImage':userImage});
+	    	tagedFriends.push({
+	    		'selectedUser'	:selectedUser, 
+	    		'selectedUserId':frndId, 
+	    		'userImage'		:userImage
+
+	    	});
+	    	console.log('tagedFriends :',tagedFriends);
 			$('#searchFrnds').val("");
 	    }
 

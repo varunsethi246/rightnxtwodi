@@ -34,7 +34,7 @@ Template.userReviewTemplate.helpers({
 Template.userReviewTemplate.events({
 	'click .showMoreCommntDiv': function(event){
 		// To Expant All comments
-		var currentClass = $(event.currentTarget).parent().siblings();
+		var currentClass = $(event.currentTarget).parent().siblings().children();
 		currentClass.removeClass('showMoreCommntDivNone');
 
 		// To Change Buttons

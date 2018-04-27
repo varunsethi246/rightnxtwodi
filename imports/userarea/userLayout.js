@@ -7,7 +7,13 @@
       		}, 1000,
   		);
     },
-    
+
+	// 'click .contentBodys': function(event){
+ //    	event.preventDefault();
+ //    	var id = $(event.target).attr('id');
+ //    	console.log('id: ',id);
+ //    	// $('.activeDownList').hide();
+	// },
 
 });
 Template.userLayout.onRendered(function(){

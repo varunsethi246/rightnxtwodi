@@ -18,6 +18,7 @@ tagedFriends = [];
 
 Template.userTimeline.helpers({
 	userLoadmoreCmmnt(dataIndex){
+		console.log('dataIndex :',dataIndex);
 		if(dataIndex < 2){
 			return true;
 		} else{
@@ -26,6 +27,7 @@ Template.userTimeline.helpers({
 	},
 	userLoadmoreCmmntBtn(data){
 		if(data){
+			console.log('data :',data);
 			if(data.length > 2){
 				return true;
 			} else{
@@ -491,6 +493,7 @@ Template.userSuggestion.events({
 	                    }
                 	}//userVar
               	}//followData 
+              	$('.followU').hide();
 			}
 		});
 	},

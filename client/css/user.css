@@ -4143,3 +4143,18 @@ background: #fff
 	background-color: #eee!important;
 	/*border-radius: 4px!important;*/
 }
+.paddingZero{
+	padding: 0px;
+}
+.enqDateMargin{
+padding-left: 48px;
+}
+.enqActionMargin{
+	padding-left: 50px;
+}
+.enqDateMargin{
+	padding-left: 48px;
+}
+.enqDeleteThis{
+    margin-right: 22px;
+}

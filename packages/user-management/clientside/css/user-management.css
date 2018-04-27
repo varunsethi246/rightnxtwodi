@@ -32,7 +32,9 @@
 .clear {
     clear: both;
 }
-
+.diplayNoneresetPwd{
+  display: none;
+}
 .formTitle{
   /*background: #333;*/
   /*text-align: center;*/

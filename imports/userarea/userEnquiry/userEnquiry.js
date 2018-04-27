@@ -735,14 +735,27 @@ Template.userEnquiryPage.events({
 
 	'click .activeDownListPre': function(event){
     	event.preventDefault();
+    	// console.log('drop list');
+    	event.stopPropagation();
 		$('.activeDownList').toggleClass('activeDownListBlock');
 		$('.activeDownListFlag').removeClass('activeDownListBlockFlag');
+		$('.activeDownList').toggle();
+
+		// $('.activeDownList').attr('style', 'display:block !important');
+		// $('.activeDownList').css('display','block !important');
 	},
-	'click .activeDownListFlagPre': function(){
+
+	'click .activeDownListFlagPre': function(event){
+		event.preventDefault();
+    	event.stopPropagation();
 		$('.activeDownListFlag').toggleClass('activeDownListBlockFlag');
 		$('.activeDownList').removeClass('activeDownListBlock');
+		$('.activeDownListFlag').toggle();
+		
 	},
-	'click .activeEnquiryTabsPre': function(){
+	'click .activeEnquiryTabsPre': function(event){
+		event.preventDefault();
+		
 		$('.activeDownListFlag').removeClass('activeDownListBlockFlag');
 		$('.activeDownList').removeClass('activeDownListBlock');
 	},

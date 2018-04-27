@@ -842,7 +842,8 @@ display:block
 display:block;
 /*padding:10px;*/
 margin-top:28px;
-font-size:13px
+font-size:14px;
+color: red;
 }
 /*.reviewWrngErrorMsg {
 display:block;
@@ -1169,4 +1170,9 @@ text-align: center;
 }
 .aboutNavbar{
     margin-left:35%
+}
+.suggestedListScroll{
+        overflow-y: scroll;
+    height: 400px;
+    width: 100%;
 }
