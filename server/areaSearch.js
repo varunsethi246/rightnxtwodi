@@ -18,7 +18,7 @@ SearchSource.defineSource('area', function(currentArr, options) {
     }
   }
   
-  console.log("newAreaExcldArr: ",newAreaExcldArr);
+  // console.log("newAreaExcldArr: ",newAreaExcldArr);
   if(newAreaExcldArr.length>1){
     if(searchText) {
       //Area | City

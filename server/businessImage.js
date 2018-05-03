@@ -3,7 +3,6 @@ import {S3Details} from '/imports/api/s3Details.js';
 
 
 var s3Data =  S3Details.findOne({"_id":"1"});
-console.log('before s3');
 if(s3Data)
 {
 

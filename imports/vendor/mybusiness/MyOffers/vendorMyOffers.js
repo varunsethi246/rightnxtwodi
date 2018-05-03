@@ -144,9 +144,41 @@ Template.paymentSuccess.helpers({
 			return data;
 		}
 	},
-});
 
+});
+Template.vendorOffer1.helpers({
+	'newdesc':function(){
+		var dealdesOne = Session.get('dealDescriptionvalOne')
+		if (dealdesOne == 'Percent Off') {
+			var dealdes = 'X% off on your order';
+			return dealdes;
+		}else if(dealdesOne == 'Price Off'){
+			var dealdes = 'Rs.X off on your total bill (Eg. Any Salon Service)';
+			return dealdes;
+		}
+		else if(dealdesOne == 'Fixed Price'){
+			var dealdes = 'Rs. X for our fixed price menu(Mayur Thali)';
+			return dealdes;
+		}else if(dealdesOne == 'Free Item'){
+			var dealdes = 'X free glass of juice with every Entrée before 7';
+			return dealdes;
+		}else if(dealdesOne == 'Create Your own Deal'){
+			var dealdes = 'Create your own Deal';
+			return dealdes;
+		}
+		else{
+			return false;
+		}
+	}
+});
 Template.vendorMyOffers.events({
+	'click .dealx':function(event){
+		// var dealDescriptionval = event.target.dealTemplate.value;
+		var dealDescriptionval = $('.dealx').val();
+		console.log('dealDescriptionval :', dealDescriptionval);
+		var dealDescriptionvalone = Session.set('dealDescriptionvalOne',dealDescriptionval);
+		
+	},
 	'click .viewModal': function(event){
 		event.preventDefault();
 		var id = event.currentTarget.id;

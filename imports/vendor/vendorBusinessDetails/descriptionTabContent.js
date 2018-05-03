@@ -21,7 +21,8 @@ import { FollowUser } from '/imports/api/userFollowMaster.js';
 // tagFriend1 = new SearchSource('tagFriend', fields, options);
 tagedFriends = [];
 
-
+var filesR = [];
+var counterImg = 0;
 
 Template.userReviewTemplate.helpers({
 
@@ -94,13 +95,15 @@ Template.userReviewTemplate.helpers({
 
 		tagedFriends = resultFrnds;
 
-		// console.log('resultFrnds: ',resultFrnds);
+		console.log('resultFrnds: ',resultFrnds);
 
 			data = data1;
 			var result =  {data,resultFrnds};
 		}else{
 			var result =  {data,resultFrnds};
 		}
+		console.log('result: ',result);
+
 	    return result;
 	},
 });
@@ -343,7 +346,9 @@ Template.descriptionTabContent.helpers({
 									replyObj.commentReply = allReviews[i].commentReply[l].commentReply;
 									replyObj.userCommentID = allReviews[i].commentReply[l].userCommentId;
 									var replyId  = allReviews[i].commentReply[l].userReplyId;
+									var reviewId  = allReviews[i]._id;
 									replyObj.replyId = replyId;
+									replyObj.reviewId = reviewId;
 									var userId1  = allReviews[i].commentReply[l].userId;
 									var userObj1 = Meteor.users.findOne({"_id":userId1});
 
@@ -472,7 +477,86 @@ Template.descriptionTabContent.helpers({
 	},
 });
 
+
+Template.userReviewTemplate.onRendered(function(){
+
+	$(document).ready(function(){
+		$('.reComtOne').each(function(){
+			var i = 0;
+			$(this).children('.commentReplyArr').each(function(){
+				if(i>1){
+					$(this).hide();
+				}
+				i++;
+			});
+			if($(this).children('.showreplyCmt').length == 0){
+				$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
+			}
+		});
+
+	});
+
+});
+
+
 Template.userReviewTemplate.events({
+	'change #reviewImgfilesEdit' : function(event){
+			$('#reviewImgtext').hide();
+			// files = event.target.files; // FileList object\
+			var file = event.target.files; // FileList object\
+			// console.log('file ',file);
+			for(var j = 0 , f1;f1 = file[j]; j++){
+				filesR[counterImg] = file[j];
+				counterImg = counterImg + 1;
+			}
+			// console.log('filesR ',filesR);
+
+			// Loop through the FileList and render image files as thumbnails.
+			for (var i = 0, f; f = file[i]; i++) {
+				// filesR[i].businessLink = Session.get('SessionBusinessLink');
+			    // Only process image files.
+			    if (!f.type.match('image.*')) {
+			      continue;
+				}
+				var reader = new FileReader();
+				// Closure to capture the file information.
+			    reader.onload = (function(theFile) {
+			      return function(e) {
+			        // Render thumbnail.
+			        var span = document.createElement('span');
+			        span.innerHTML = ['<img class="draggedReviewImg" src="', e.target.result,
+			                          '" title="', escape(theFile.name), '"/>'].join('');
+			        document.getElementById('reviewImglistEdit').insertBefore(span, null);
+			      };
+			    })(f); //end of onload
+			    // Read in the image file as a data URL.
+			    reader.readAsDataURL(f);		    
+			}// end of for loop
+		},	
+	'click .showreplyCmt' : function(event){
+		event.preventDefault();
+		var thisElem = event.currentTarget;
+
+		$(thisElem).siblings('.commentReplyArr').slideDown();
+		$(thisElem).removeClass('showreplyCmt');
+		$(thisElem).addClass('hideReplyCmt');
+		$(thisElem).text("Show Less replies");	
+
+	},
+	'click .hideReplyCmt' : function(event){
+		event.preventDefault();
+		var thisElem = event.currentTarget;
+
+		$(thisElem).siblings('.commentReplyArr').slideUp();
+		$(thisElem).siblings('.commentReplyArr').first().slideDown();
+		$(thisElem).siblings('.commentReplyArr').first().next().slideDown();
+
+		$(thisElem).text("Show all replies");
+
+		$(thisElem).removeClass('hideReplyCmt');
+		$(thisElem).addClass('showreplyCmt');
+
+	},
 
 	"keydown #searchFrndsEdit":function(e){
 		//For Up and Down arrow selection in dropdown
@@ -529,7 +613,12 @@ Template.userReviewTemplate.events({
 		if(e.keyCode != 38 && e.keyCode != 40 && e.keyCode != 37 && e.keyCode != 39){
 			$('.tagFrndUlFrieldList').removeClass('searchDisplayHide').addClass('searchDisplayShow');
 			var text = $(e.currentTarget).val();
-			tagFriend1.search(text);
+			if (text) {
+				$('.tagFrndUlFrieldList').css('display','block');
+		// $('.tagFrndUlFrieldList').css('display','none');
+
+				tagFriend1.search(text);
+			}
 		}
 	}, 200),
 	'click #searchFrndsEdit': function(e){
@@ -1167,8 +1256,15 @@ Template.userReviewTemplate.events({
 		// TO edit the Review
 		event.preventDefault();
 		var id = $(event.target).attr('id');
+		$('.reviewImages-'+id).css('display','block');
 		$('.userReviewTempcommTxt-'+id).css('display','none');
 		$('.editBoxCommentRev-'+id).css('display','block');
+
+		// $('#searchFrndsEdit').focus();
+		// $('#searchFrndsEdit').focusout();
+
+		// $('.editBoxCommentRev-'+id).children('.editReviewTextArea').focus();
+
 		$('.tagFrnd-'+id).css('display','block');
 		$('.starRatingblock-'+id).css('display','block');
 		$('.reviewCancel-'+id).css('display','block');
@@ -1176,7 +1272,13 @@ Template.userReviewTemplate.events({
 		$('.bus-page-edit-outer1-'+id).css('display','inline');
 		$('.bus-page-edit-outerFrnd1-'+id).css('display','inline-block');
 		$('.tagedFrndDivPre-'+id).css('display','none');
+		$('.tagFrndUlFrieldList').css('display','none');
 
+		
+
+		console.log("1tagedFriends: ",tagedFriends);
+
+		tagedFriends = [];
 		var userData = Review.findOne({"_id": id});
 		for(i=0;i<userData.tagedFriends.length;i++){
 			var userVar = Meteor.users.findOne({"_id":userData.tagedFriends[i]});
@@ -1198,7 +1300,9 @@ Template.userReviewTemplate.events({
 						}
 			tagedFriends.push(obj);
 		}
+		// tagedFriends = [];
 		tagFriend1.search('');
+		
 	},
 	'click .bus-page-edit-outer1': function(event){
 		var currentImage = $(event.currentTarget).attr('data-imgId');
@@ -1242,6 +1346,7 @@ Template.userReviewTemplate.events({
 		$('.tagFrnd-'+id).css('display','none');
 		$('.tagFrnd').css('display','none');
 		$('.tagedFrndDivPre-'+id).css('display','block');
+		$('.reviewImages-'+id).css('display','none');
 		tagedFriends = [];
 	},
 	'keypress .editReviewTextArea': function(event){
@@ -1268,6 +1373,8 @@ Template.userReviewTemplate.events({
 			});
 		}
 	},
+
+
 	'click .reviewBusSave': function(event){
 		event.preventDefault();
 		var revComment = $(event.currentTarget).parent().siblings('.editBoxComment').children('.editReviewTextArea').val();
@@ -1276,9 +1383,49 @@ Template.userReviewTemplate.events({
 			var taggedPpl = tagedFriends;
 			
 			var starRating = $('.starRatingWrapper .fixStar1').length;
+			console.log('starRating: ', starRating);
 			starRating = starRating + $('.starRatingWrapper .fixStar2').length;
+			console.log('starRating: ', starRating);
+			console.log('rating: ', rating);
 			var rating = parseFloat(starRating) / 2;
+			// console.log("filesR: ",filesR)
+			 if(filesR){
+				for(i = 0 ; i < filesR.length; i++){		
+					Resizer.resize(filesR[i], {width: 300, height: 300, cropSquare: false}, function(err, file) {
+						if(err){
+							console.log('err ' , err.message);
+						}else{
+							UserReviewStoreS3New.insert(file, function (err, fileObj) {
+						        // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+						        if(err){
+						        	console.log('Error : ' + err.message);
+						        }else{
+						        	var imgId =  fileObj._id ;
+						        	console.log("imgId: ",imgId);
+							        Meteor.call("updateReviewBulkImg", id, imgId,
+							          function(error1, result1) { 
+							              if(error1) {
+							                console.log ('Error Message: ' + error ); 
+							              }else{
+											// console.log('img upload ', fileObj._id);	
+											// console.log('img added');
+											$('.publishReview').show();
+											$('.openReviewBox').hide();
+											$('.reviewImages').hide();
+											event.target.review.value	= '';
+							              }
+							        });
 
+						        }
+						    });
+						}
+					});
+				}
+				filesR = [];
+				counterImg = 0;
+				$('#reviewImglistEdit').empty();
+				$('#reviewImgfilesEdit').val('');
+			}
 
 			Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, rating, function(error, result){
 				if(error){
@@ -1295,6 +1442,7 @@ Template.userReviewTemplate.events({
 					$('.tagFrnd-'+id).css('display','none');
 					$('.tagFrnd').css('display','none');
 					$('.tagedFrndDivPre-'+id).css('display','block');
+					$('.reviewImages-'+id).css('display','none');
 					tagedFriends = [];
 					// console.log('tagedFriends:',tagedFriends);
 					

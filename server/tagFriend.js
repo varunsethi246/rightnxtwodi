@@ -30,7 +30,7 @@ SearchSource.defineSource('tagFriend', function(searchText, options) {
     var selector = { "profile.name":  regExp  ,
                       "profile.status":"Active",
                      "_id":{$ne: userId} , 
-                     "roles":{$nin: [ 'admin', 'Vendor']} 
+                     "roles":{$nin: [ 'admin', 'Vendor', "Staff"]} 
                    };
     var data =  Meteor.users.find(selector, options).fetch();
                   
@@ -48,7 +48,7 @@ SearchSource.defineSource('tagFriend', function(searchText, options) {
   }else {
     var data =  Meteor.users.find({"_id":{$ne: userId} , 
                                   "profile.status":"Active",
-                                  "roles":{$nin: [ 'admin', 'Vendor']}}, options).fetch();
+                                  "roles":{$nin: [ 'admin', 'Vendor', "Staff"]}}, options).fetch();
     if(data){
       for(i=0;i<data.length;i++){
         if(data[i].profile.userProfilePic){

@@ -14,6 +14,8 @@ import { Categories } from '../../api/masterData/categoriesMaster.js';
 import { emptyReviewTemplate } from '../../common/emptyReviewTemplate.html';
 
 tagedFriends = [];
+var filesR = [];
+var counterImg = 0;
 
 sortReviewDateAscending = function(){
     var products = $('.timeLine');
@@ -28,7 +30,25 @@ sortReviewDateDescending = function(){
     $("#reviewDateSort").html(products);
 
 }
+Template.userReview.onRendered(function(){
 
+	$(document).ready(function(){
+		$('.userCommentWrapper').each(function(){
+			var i = 0;
+			$(this).children('.commentReplyArr').each(function(){
+				if(i>1){
+					$(this).hide();
+				}
+				i++;
+			});
+			if($(this).children('.showreplyCmt').length == 0){
+				$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
+			}
+		});
+
+	});
+
+});
 
 Template.userReview.helpers({
 	userLoadmoreCmmnt(dataIndex){
@@ -93,11 +113,22 @@ Template.userReview.helpers({
 					data1.push(data[i]);
 				}
 			}
+		var resultFrnds = tagedFriends.reduce(function(memo, e1){
+		var matches = memo.filter(function(e2){
+		    return e1.selectedUserId == e2.selectedUserId && e1.selectedUserId == e2.selectedUserId
+		  })
+		  if (matches.length == 0)
+		    memo.push(e1)
+		    return memo;
+		}, []);
+
+		tagedFriends = resultFrnds;
 			data = data1;
-			var result =  {data,tagedFriends};
+			var result =  {data,resultFrnds};
 		}else{
-			var result =  {data,tagedFriends};
+			var result =  {data,resultFrnds};
 		}
+		// console.log('result : ',result);
 	    return result;
 	},
 	'businessReviews' :function(){
@@ -611,6 +642,30 @@ Template.userReviewSuggestion.helpers ({
 });
 
 Template.userReview.events({
+	'click .showreplyCmt' : function(event){
+		event.preventDefault();
+		var thisElem = event.currentTarget;
+
+		$(thisElem).siblings('.commentReplyArr').slideDown();
+		$(thisElem).removeClass('showreplyCmt');
+		$(thisElem).addClass('hideReplyCmt');
+		$(thisElem).text("Show Less replies");	
+
+	},
+	'click .hideReplyCmt' : function(event){
+		event.preventDefault();
+		var thisElem = event.currentTarget;
+
+		$(thisElem).siblings('.commentReplyArr').slideUp();
+		$(thisElem).siblings('.commentReplyArr').first().slideDown();
+		$(thisElem).siblings('.commentReplyArr').first().next().slideDown();
+
+		$(thisElem).text("Show all replies");
+
+		$(thisElem).removeClass('hideReplyCmt');
+		$(thisElem).addClass('showreplyCmt');
+
+	},
 	'click .showMoreCommntDiv': function(event){
 		// To Expant All comments
 		var currentClass = $(event.currentTarget).parent().siblings();
@@ -676,7 +731,11 @@ Template.userReview.events({
 		if(e.keyCode != 38 && e.keyCode != 40 && e.keyCode != 37 && e.keyCode != 39){
 			$('.tagFrndUlFrieldList').removeClass('searchDisplayHide').addClass('searchDisplayShow');
 			var text = $(e.currentTarget).val();
-			tagFriend1.search(text);
+			if (text) {
+				$('.tagFrndUlFrieldList').css('display','block');
+
+				tagFriend1.search(text);
+			}
 		}
 	}, 200),
 	'click #searchFrndsEdit': function(e){
@@ -1652,6 +1711,7 @@ Template.userReview.events({
 		$('.editBoxCommentRev-'+id).css('display','none');
 		$('.reviewCancel-'+id).css('display','none');
 		$('.reviewBusSave-'+id).css('display','none');
+		$('.reviewImages-'+id).css('display','none');
 		
 		$('.bus-page-edit-outer1-'+id).css('display','none');
 		$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
@@ -1895,19 +1955,24 @@ Template.userReview.events({
 
 	'click .userRevComEdit':function(event){
 		var id = $(event.target).attr('id');
+		console.log('id: ',id);
 		$('.userReviewTempcommTxt-'+id).css('display','none');
 		$('.editBoxCommentRev-'+id).css('display','block');
 		$('.reviewCancel-'+id).css('display','block');
 		$('.tagFrnd-'+id).css('display','block');
+		$('.reviewImages-'+id).css('display','block');
 		
 		$('.reviewBusSave-'+id).css('display','block');
 		$('.bus-page-edit-outer1-'+id).css('display','inline');
 		$('.bus-page-edit-outerFrnd1-'+id).css('display','inline-block');
 		$('.tagedFrndDivPre-'+id).css('display','none');
-					$('userRevComsEdit'+_id).css('display','block');
+		$('.userRevComsEdit'+id).css('display','block');
+		$('.tagFrndUlFrieldList').css('display','none');
 		
 
 		var userData = Review.findOne({"_id": id});
+		tagedFriends = [];
+
 		for(i=0;i<userData.tagedFriends.length;i++){
 			var userVar = Meteor.users.findOne({"_id":userData.tagedFriends[i]});
 			var userImg = "";
@@ -1928,6 +1993,7 @@ Template.userReview.events({
 						}
 			tagedFriends.push(obj);
 		}
+		
 		tagFriend1.search('');
 	},
 	'click .bus-page-edit-outer1': function(event){
@@ -1944,13 +2010,83 @@ Template.userReview.events({
 			Meteor.call('removePublishedReviewUser', currentId, taggeduser);
 		}
 	},
+	'change #reviewImgfileEdits' : function(event){
+			$('#reviewImgtext').hide();
+			// files = event.target.files; // FileList object\
+			var file = event.target.files; // FileList object\
+			// console.log('file ',file);
+			for(var j = 0 , f1;f1 = file[j]; j++){
+				filesR[counterImg] = file[j];
+				counterImg = counterImg + 1;
+			}
+			// console.log('filesR ',filesR);
 
+			// Loop through the FileList and render image files as thumbnails.
+			for (var i = 0, f; f = file[i]; i++) {
+				// filesR[i].businessLink = Session.get('SessionBusinessLink');
+			    // Only process image files.
+			    if (!f.type.match('image.*')) {
+			      continue;
+				}
+				var reader = new FileReader();
+				// Closure to capture the file information.
+			    reader.onload = (function(theFile) {
+			      return function(e) {
+			        // Render thumbnail.
+			        var span = document.createElement('span');
+			        span.innerHTML = ['<img class="draggedReviewImg" src="', e.target.result,
+			                          '" title="', escape(theFile.name), '"/>'].join('');
+			        document.getElementById('reviewImglistsEdits').insertBefore(span, null);
+			      };
+			    })(f); //end of onload
+			    // Read in the image file as a data URL.
+			    reader.readAsDataURL(f);		    
+			}// end of for loop
+		},
 	'click .reviewBusSave': function(event){
 		var revComment = $(event.currentTarget).parent().siblings('.editBoxComment').children('.editReviewTextArea').val();
 		if(revComment){
 			var id = event.currentTarget.id;
 			var taggedPpl = tagedFriends;
 			
+			if(filesR){
+				for(i = 0 ; i < filesR.length; i++){		
+					Resizer.resize(filesR[i], {width: 300, height: 300, cropSquare: false}, function(err, file) {
+						if(err){
+							console.log('err ' , err.message);
+						}else{
+							UserReviewStoreS3New.insert(file, function (err, fileObj) {
+						        // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+						        if(err){
+						        	console.log('Error : ' + err.message);
+						        }else{
+						        	var imgId =  fileObj._id ;
+						        	console.log("imgId: ",imgId);
+							        Meteor.call("updateReviewBulkImg", id, imgId,
+							          function(error1, result1) { 
+							              if(error1) {
+							                console.log ('Error Message: ' + error ); 
+							              }else{
+											// console.log('img upload ', fileObj._id);	
+											// console.log('img added');
+											$('.publishReview').show();
+											$('.openReviewBox').hide();
+											$('.reviewImages').hide();
+											// event.target.review.value	= '';
+							              }
+							        });
+
+						        }
+						    });
+						}
+					});
+				}
+				filesR = [];
+				counterImg = 0;
+				$('#reviewImglistEdit').empty();
+				$('#reviewImgfileEdits').val('');
+			}
+
 			Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, function(error, result){
 				if(error){
 					Bert.alert('Some technical issue happened... Your review is not posted.', 'danger', 'growl-top-right');
@@ -1963,7 +2099,8 @@ Template.userReview.events({
 					$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
 					$('.tagedFrndDivPre-'+id).css('display','block');
 					$('.tagFrnd-'+id).css('display','none');
-					$('userRevComsEdit'+_id).css('display','block');
+					$('.userRevComsEdit'+id).css('display','none');
+					$('.reviewImages-'+id).css('display','none');
 					
 					tagedFriends = [];
 				}

@@ -9,8 +9,7 @@ import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
 import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
 
 
-var filesR = [];
-var counterImg = 0;
+
 
 var options = {
   keepHistory: 1000 * 60 * 5,
@@ -138,7 +137,11 @@ Template.addReviewTemplate.events({
 		$('.tagFrndUl').removeClass('searchDisplayHide').addClass('searchDisplayShow');
 		
 	    var text = $('#searchFrnds').val();
-	    tagFriend1.search(text);
+	    if (text) {
+			$('.tagFrndLiFrieldList').css('display','block');
+
+	    	tagFriend1.search(text);
+	    }
 	  }, 200),
 
 	'click .addFriends': function(event){
@@ -557,8 +560,11 @@ Template.addReviewTemplate.events({
 });
 
 Template.addReviewTemplate.helpers({
+	//Get Friends list
 	'getFrndsList' : function(){
 		var data =  tagFriend1.getData();
+		console.log("data: ",data);
+		
 	    var data1 = [];
 		if(tagedFriends.length > 0){
 			for(var i = 0 ; i < data.length ; i++){

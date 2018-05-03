@@ -16,6 +16,9 @@ var limitReviews=0;
 var loggedinUser = '';
 tagedFriends = [];
 
+var filesR = [];
+var counterImg = 0;
+
 Template.userTimeline.helpers({
 	userLoadmoreCmmnt(dataIndex){
 		console.log('dataIndex :',dataIndex);
@@ -108,6 +111,46 @@ Template.userSuggestion.helpers ({
 });
 
 Template.userTimeline.helpers({
+	showRating(){
+		// userId,businessLink
+		var userId = Meteor.userId();
+		var businessLink = FlowRouter.getParam('businessurl');
+		var ratingInt = Review.findOne({"userId" : userId,"businessLink":businessLink});
+		if(ratingInt){
+			console.log("ratingInt = ", ratingInt);
+			var latestRating = ratingInt.rating;
+
+			var intRating = parseInt(latestRating);
+			var balRating = latestRating - intRating;
+			var finalRating = intRating + balRating;
+			if(balRating > 0 && balRating < 0.5){
+				var finalRating = intRating + 0.5;
+			}
+			if(balRating > 0.5){
+				var finalRating = intRating + 1;
+			}
+
+			ratingObj = {};
+
+			for(i=1; i<=10; i++){
+				var x = "star" + i;
+				if(i <= finalRating*2){
+					if( i%2 == 0){
+						ratingObj[x] = "fixStar2";
+					}else{
+						ratingObj[x] = "fixStar1";
+					}				
+				}else{
+					ratingObj[x]  = "";
+				}
+			
+			}
+			console.log("ratingObj = ", ratingObj);
+			return ratingObj;
+		}else{
+			return {};
+		}
+	},
 	'getFrndsList' : function(){
 		var data =  tagFriend1.getData();
 	    var data1 = [];
@@ -499,7 +542,51 @@ Template.userSuggestion.events({
 	},
 });
 
+Template.userTimeline.onRendered(function(){
+
+	$(document).ready(function(){
+		$('.userCommentWrapper').each(function(){
+			var i = 0;
+			$(this).children('.commentReplyArr').each(function(){
+				if(i>1){
+					$(this).hide();
+				}
+				i++;
+			});
+			if($(this).children('.showreplyCmt').length == 0){
+				$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
+			}
+		});
+
+	});
+
+});
+
 Template.userTimeline.events({
+	'click .showreplyCmt' : function(event){
+		event.preventDefault();
+		var thisElem = event.currentTarget;
+
+		$(thisElem).siblings('.commentReplyArr').slideDown();
+		$(thisElem).removeClass('showreplyCmt');
+		$(thisElem).addClass('hideReplyCmt');
+		$(thisElem).text("Show Less replies");	
+
+	},
+	'click .hideReplyCmt' : function(event){
+		event.preventDefault();
+		var thisElem = event.currentTarget;
+
+		$(thisElem).siblings('.commentReplyArr').slideUp();
+		$(thisElem).siblings('.commentReplyArr').first().slideDown();
+		$(thisElem).siblings('.commentReplyArr').first().next().slideDown();
+
+		$(thisElem).text("Show all replies");
+
+		$(thisElem).removeClass('hideReplyCmt');
+		$(thisElem).addClass('showreplyCmt');
+
+	},
 	'click .showMoreCommntDiv': function(event){
 		// To Expant All comments
 		var currentClass = $(event.currentTarget).parent().siblings();
@@ -565,7 +652,11 @@ Template.userTimeline.events({
 		if(e.keyCode != 38 && e.keyCode != 40 && e.keyCode != 37 && e.keyCode != 39){
 			$('.tagFrndUlFrieldList').removeClass('searchDisplayHide').addClass('searchDisplayShow');
 			var text = $(e.currentTarget).val();
-			tagFriend1.search(text);
+			if (text) {
+				$('.tagFrndUlFrieldList').css('display','block');
+
+				tagFriend1.search(text);
+			}
 		}
 	}, 200),
 	'click #searchFrndsEdit': function(e){
@@ -1668,18 +1759,22 @@ Template.userTimeline.events({
 
 	'click .userRevComEdit':function(event){
 		var id = $(event.target).attr('id');
+		$('.reviewImages-'+id).css('display','block');
 		$('.userReviewTempcommTxt-'+id).css('display','none');
 		$('.editBoxCommentRev-'+id).css('display','block');
 		$('.reviewCancel-'+id).css('display','block');
 		$('.reviewBusSave-'+id).css('display','block');
 		$('.bus-page-edit-outer1-'+id).css('display','inline');
 		$('.bus-page-edit-outerFrnd1-'+id).css('display','inline-block');
-		$('.tagedFrndDivPre-'+id).css('display','none');
+		$('.tagedFrndDivPre-'+id).css('display','block');
 		$('.tagFrnd-'+id).css('display','block');
+		$('.tagFrndUlFrieldList').css('display','none');
+		$('.starRatingblock-'+id).css('display','block');
 		
 		
-
 		var userData = Review.findOne({"_id": id});
+		tagedFriends = [];
+		
 		for(i=0;i<userData.tagedFriends.length;i++){
 			var userVar = Meteor.users.findOne({"_id":userData.tagedFriends[i]});
 			var userImg = "";
@@ -1726,7 +1821,8 @@ Template.userTimeline.events({
 		$('.editBoxCommentRev-'+id).css('display','none');
 		$('.reviewCancel-'+id).css('display','none');
 		$('.reviewBusSave-'+id).css('display','none');
-
+		$('.reviewImages-'+id).css('display','none');
+		$('.starRatingblock-'+id).css('display','none');
 		$('.bus-page-edit-outer1-'+id).css('display','none');
 		$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
 		$('.tagFrnd-'+id).css('display','none');
@@ -1800,7 +1896,39 @@ Template.userTimeline.events({
 			});
 		}
 	},
+	'change #reviewImgfilesEdits' : function(event){
+			$('#reviewImgtext').hide();
+			// files = event.target.files; // FileList object\
+			var file = event.target.files; // FileList object\
+			// console.log('file ',file);
+			for(var j = 0 , f1;f1 = file[j]; j++){
+				filesR[counterImg] = file[j];
+				counterImg = counterImg + 1;
+			}
+			// console.log('filesR ',filesR);
 
+			// Loop through the FileList and render image files as thumbnails.
+			for (var i = 0, f; f = file[i]; i++) {
+				// filesR[i].businessLink = Session.get('SessionBusinessLink');
+			    // Only process image files.
+			    if (!f.type.match('image.*')) {
+			      continue;
+				}
+				var reader = new FileReader();
+				// Closure to capture the file information.
+			    reader.onload = (function(theFile) {
+			      return function(e) {
+			        // Render thumbnail.
+			        var span = document.createElement('span');
+			        span.innerHTML = ['<img class="draggedReviewImg" src="', e.target.result,
+			                          '" title="', escape(theFile.name), '"/>'].join('');
+			        document.getElementById('reviewImglistEdits').insertBefore(span, null);
+			      };
+			    })(f); //end of onload
+			    // Read in the image file as a data URL.
+			    reader.readAsDataURL(f);		    
+			}// end of for loop
+		},	
 
 	'click .reviewBusSave': function(event){
 		var revComment = $(event.currentTarget).parent().siblings('.editBoxComment').children('.editReviewTextArea').val();
@@ -1808,7 +1936,51 @@ Template.userTimeline.events({
 			var id = event.currentTarget.id;
 			var taggedPpl = tagedFriends;
 			
-			Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, function(error, result){
+			var starRating = $('.starRatingWrapper .fixStar1').length;
+			console.log('starRating: ',starRating);
+			starRating = starRating + $('.starRatingWrapper .fixStar2').length;
+			console.log('starRating: ',starRating);
+			var rating = parseFloat(starRating) / 2;
+			console.log('rating: ', rating);
+			if(filesR){
+				for(i = 0 ; i < filesR.length; i++){		
+					Resizer.resize(filesR[i], {width: 300, height: 300, cropSquare: false}, function(err, file) {
+						if(err){
+							console.log('err ' , err.message);
+						}else{
+							UserReviewStoreS3New.insert(file, function (err, fileObj) {
+						        // Inserted new doc with ID fileObj._id, and kicked off the data upload using HTTP
+						        if(err){
+						        	console.log('Error : ' + err.message);
+						        }else{
+						        	var imgId =  fileObj._id ;
+						        	console.log("imgId: ",imgId);
+							        Meteor.call("updateReviewBulkImg", id, imgId,
+							          function(error1, result1) { 
+							              if(error1) {
+							                console.log ('Error Message: ' + error ); 
+							              }else{
+											// console.log('img upload ', fileObj._id);	
+											// console.log('img added');
+											$('.publishReview').show();
+											$('.openReviewBox').hide();
+											$('.reviewImages').hide();
+											// event.target.review.value	= '';
+							              }
+							        });
+
+						        }
+						    });
+						}
+					});
+				}
+				filesR = [];
+				counterImg = 0;
+				$('#reviewImglistEdit').empty();
+				$('#reviewImgfilesEdits').val('');
+			}
+			
+			Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, rating,function(error, result){
 				if(error){
 					Bert.alert('Some technical issue happened... Your review is not posted.', 'danger', 'growl-top-right');
 				}else{
@@ -1820,6 +1992,9 @@ Template.userTimeline.events({
 					$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
 					$('.tagFrnd-'+id).css('display','none');
 					$('.tagedFrndDivPre-'+id).css('display','block');
+					$('.reviewImages-'+id).css('display','none');
+					$('.starRatingblock-'+id).css('display','none');
+
 					tagedFriends = [];
 				}
 			});
@@ -1921,8 +2096,7 @@ fbShare = function(URL,title,description,image,id){
 //               gapi.interactivepost.render('vModalContentgp', options);
 
 // } 
-
- shareToGooglePlus =function(destination,title,description,imageurl){
+shareToGooglePlus =function(destination,title,description,imageurl){
     var go = "https://plus.google.com/share?";
     var url = "url="+encodeURIComponent(destination);
     var title = "title="+encodeURIComponent(title);

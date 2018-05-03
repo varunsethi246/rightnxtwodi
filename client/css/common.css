@@ -1176,3 +1176,14 @@ text-align: center;
     height: 400px;
     width: 100%;
 }
+.showreplyCmt,
+.hideReplyCmt{
+    text-align: center;
+    /* background: #c71010; */
+    background: #ffae40;
+    padding: 3px;
+    color: #000;
+    cursor: pointer;
+    font-size: 11px;
+    border-radius: 4px; 
+}

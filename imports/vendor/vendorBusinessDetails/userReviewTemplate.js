@@ -7,7 +7,11 @@ import { Business } from '/imports/api/businessMaster.js';
 import { Review } from '/imports/api/reviewMaster.js';
 import { ReviewCommentLikes } from '/imports/api/reviewCommentLikesMaster.js';
 import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
+import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
 
+
+// var filesR = [];
+// var counterImg = 0;
 
 Template.userReviewTemplate.helpers({
 	userLoadmoreCmmnt(dataIndex){
@@ -31,7 +35,15 @@ Template.userReviewTemplate.helpers({
 	},
 });
 
+
+
+
+
+
+
 Template.userReviewTemplate.events({
+	
+	
 	'click .showMoreCommntDiv': function(event){
 		// To Expant All comments
 		var currentClass = $(event.currentTarget).parent().siblings().children();

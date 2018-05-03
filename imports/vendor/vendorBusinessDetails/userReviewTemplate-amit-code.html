@@ -70,6 +70,9 @@
 
 
 			<!-- Tagged on Edit -->
+			<!-- Tagged on Edit -->
+			<!-- Tagged on Edit -->
+			<!-- Tagged on Edit -->
 			<div class="tagFrnd tagFrnd-{{_id}}">
 				<div class="col-lg-12" id="tagImgDiv">
 					<div class="reviewImgInputDiv">
@@ -107,20 +110,7 @@
 			<!-- Tagged on Edit -->
 			<!-- Tagged on Edit -->
 
-			
-			<!-- New  -->
-		    <div class="userRowTemp col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		    	<div class="reviewImages reviewImages-{{_id}}" id="{{_id}}">
-					<div class="col-lg-12" id="reviewImgDiv">
-						<div class="reviewImgInputDiv">
-							<output id="reviewImglistEdit"></output>
-							<div class="reviewImgtext">Click here to select images</div>
-							<input type="file" name="files[]" id="reviewImgfilesEdit" multiple="true"
-							class="inputImg">							
-						</div>
-					</div>
-				</div>
-		    </div>
+
 
 		    <div class="userRowTemp col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		   		<div class="">
@@ -140,7 +130,6 @@
 				    </div>
 		    	</div>
 		    </div>
-
 		    {{#if tagedFriendsValidate}}
 			    <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 tagedFrndDivPre tagedFrndDivPre-{{_id}}">
 			    	<div class="tagedFrndDiv">
@@ -267,6 +256,110 @@
 		         </div>
 		         <!-- Modal -->
 				{{/if}}
+				<!-- {{#if isInRole 'Vendor'}}
+			 		<div class="all-comment col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+			 			<div class="">     
+					        <div class="like col-lg-2 col-md-2 col-sm-2 col-xs-3">
+					        	<p>{{reviewLikeCount}} Like </p>
+					        </div>
+
+				     		<div class="heartv col-lg-1 col-md-1 col-sm-1 col-xs-1 {{likeClass}}" id="like-{{_id}}">
+				     			<i class="fa fa-heart" aria-hidden="true"></i>
+				     		</div>
+
+						    <div class="commentTxt col-lg-3 col-md-3 col-sm-3 col-xs-4">
+						    	<p>{{userCommentsCount}} Comments </p>
+						    </div>
+
+				    		<div class="comment col-lg-1 col-md-1 col-sm-1 col-xs-1">
+				    			<i class="fa fa-comment" aria-hidden="true"></i>
+				    		</div>
+
+							<div class="vndr_SharePage col-lg-1 col-lg-offset-2 col-md-1 col-md-offset-2 col-sm-1 col-sm-offset-2 col-xs-1 col-xs-offset-1" data-toggle="modal" data-target="#busPageShare">
+								<i class="fa fa-share" aria-hidden="true" ></i>
+							</div>
+
+							<div class="vndr_delete col-lg-1 col-md-1 col-sm-1 col-xs-1 pull-right {{deleteButton}}" data-toggle="modal" data-target="#busiDeleteModal">
+							<i class="fa fa-trash-o" aria-hidden="true"></i>
+							</div>
+						</div>
+					</div>
+					<div class="modal fade modaldelete" id="busiDeleteModal" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header delete-close editofferModal1">
+					        		<a href="#" data-dismiss="modal" aria-hidden="true" class="close pull-right">
+					        			<i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i>
+					        		</a>
+					   			</div>
+					            <div class="modal-body">
+				          			<p>Are you sure you want to delete your review?</p>
+				          			<div class="body-close">
+					                	<button type="button" class="btn btn-default busiDeleteRev" id="del-{{_id}}"><b>Yes</b></button>
+						            	<button type="button" class="btn btn-danger btn-ok" data-dismiss="modal"><b>No</b></button>
+					                </div>
+					            </div>
+					        </div>
+						</div>
+					</div>
+				
+		         <div class="modal fade" id="busPageShare" role="dialog">
+		            <div class="modal-dialog">
+		               <div class="modal-content VCommentModalMainContent">
+		                  <div class="modal-body">
+		                     <div class="vModalContentClose"></div>
+		                        <div class="vModalContentMain">
+		                           <div class="row">
+		                              
+		                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 vModalContent">
+		                                 <div class="row">
+		                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 vModalMarginBot vModalContentShare">
+		                                    Share
+		                                       <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+		                                    </div>
+		                                    
+		                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-left">
+		                                       <div class="busPagefbShare" id="{{_id}}">
+		                                          <i class="fa fa-facebook" aria-hidden="true"></i>
+		                                          <span>Continue with Facebook</span>
+		                                       </div>
+		                                    </div>
+		                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pull-right">
+		                                       <div class="busPagegpShare" id="{{_id}}">
+		                                          <i class="fa fa-google-plus" aria-hidden="true"></i>
+		                                          <span>Continue with Google+</span>
+		                                        </div>
+		                                    </div>
+		                                 </div>
+		                              </div>
+		                              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		                                 <form>
+		                                    <div class="vmodalForm">
+		                                       <input type="text" class="form-group vmodalFormOne" placeholder="http://rightnxt.com">
+		                                       <hr>
+		                                       <div class="vCenterOr">or</div>
+		                                       <div class="form-group">
+		                                          <label for="toVEmail">To (Email address)</label><br>
+		                                          <input type="text" id="toVEmail">
+		                                       </div>
+		                                       <div class="form-group">
+		                                          <label for="toVAddNote">Add a note (Optional)</label><br>
+		                                          <input type="text" id="toVAddNote">
+		                                       </div>
+		                                       <div class="vmodalFormButton">
+		                                          <button type="button" class="btn btn-warning">Share</button>
+		                                       </div>
+		                                    </div>
+		                                 </form>
+		                              </div>
+		                           </div>
+		                        </div>
+		                  </div>
+		               </div>
+		             </div>
+		         </div>
+
+				{{/if}} -->
 			{{/if}}
 			{{#if currentUser}}
 				{{#if isInRole 'user , Vendor'}}
@@ -286,14 +379,14 @@
 	  		
 			{{#each userComments}}
 				{{#if userLoadmoreCmmnt @index }}
-				<div class="userCommentRepliesBox">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userCommentWrapper" id="{{../_id}}-{{userCommentId}}" data-reviewId="{{../_id}}" data-reviewPostedBy="{{../userId}}" data-commentId="{{userCommentId}}" data-businesslink="{{../businessLink}}" > 
+				<div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userCommentWrapper" data-reviewId="{{../_id}}" data-reviewPostedBy="{{../userId}}" data-commentId="{{userCommentId}}" data-businesslink="{{../businessLink}}" > 
 						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 userRevTempPic">  
 							<img class="commentImg" src="{{userProfileImgPath}}" /> 
 						</div>
 
 						<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11  userRevTempCommentText">
-							<div class="reComtOne">
+							<div class="">
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-8 userRevname">	{{commentUserName}}</div>
 								<div class="col-lg-5 col-md-6 col-sm-6 col-xs-4 userCommDt">	{{userCommentDateAgo}} </div> 
 
@@ -353,7 +446,7 @@
 								</div>
 								<!-- reply -->
 								{{#each commentReplyArr}}
-									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 commentReplyArr commentReplyArr-{{reviewId}}-{{userCommentID}}" data-replyid="{{replyId}}">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 commentReplyArr" data-replyid="{{replyId}}">
 										<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 userReplyPic">  
 											<img class="replyImg" src="{{replyProfileImgPath}}" /> 
 										</div>
@@ -434,7 +527,7 @@
 				</div>
 				{{else}}
 				<div>
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userCommentWrapper showMoreCommntDivNone" data-reviewId="{{../_id}}" data-reviewPostedBy="{{../userId}}" id="{{../_id}}-{{userCommentId}}" data-commentId="{{userCommentId}}" data-businesslink="{{../businessLink}}" > 
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 userCommentWrapper showMoreCommntDivNone" data-reviewId="{{../_id}}" data-reviewPostedBy="{{../userId}}" data-commentId="{{userCommentId}}" data-businesslink="{{../businessLink}}" > 
 						<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 userRevTempPic">  
 							<img class="commentImg" src="{{userProfileImgPath}}" /> 
 						</div>

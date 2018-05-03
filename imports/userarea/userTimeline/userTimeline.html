@@ -52,6 +52,19 @@
             <textarea class="form-control editReviewTextArea" rows="5" name="review"  id="{{_id}}" placeholder="at least 140 characters" minlength="140" value="{{reviewComment}}"></textarea>
             <!-- <span class="passwordWrongSpan"></span> -->
           </div>
+
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
+              {{#with showRating}}
+                Your Current Rating: {{> starRating2 }}
+              {{/with}}
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 starRatingblock starRatingblock-{{_id}}" >
+                New Rating: {{> starRating }}
+            </div>
+          </div>
+          
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="dropdown pull-right reviewCancel reviewCancel-{{_id}}" id="{{_id}}">
               Cancel
@@ -65,6 +78,18 @@
     			<!-- Tagged on Edit -->
     			<!-- Tagged on Edit -->
     			<!-- Tagged on Edit -->
+          <div class="userRowTemp col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="reviewImages reviewImages-{{_id}}" id="{{_id}}">
+              <div class="col-lg-12" id="reviewImgDiv">
+                <div class="reviewImgInputDiv">
+                  <output id="reviewImglistEdits"></output>
+                  <div class="reviewImgtext">Click here to select images</div>
+                  <input type="file" name="files[]" id="reviewImgfilesEdits" multiple="true"
+                  class="inputImg">             
+                </div>
+              </div>
+            </div>
+          </div>
     			<div class="tagFrnd tagFrnd-{{_id}}">
     				<div class="col-lg-12" id="tagImgDiv">
     					<div class="reviewImgInputDiv">
@@ -289,6 +314,7 @@
                         </div>
                       </div>
                     </div>
+                    
                     <div class="editCommentBox_{{userCommentId}} editBoxComment col-lg-11 col-md-11 col-sm-11 col-xs-11">
                       <input class="editCommentInput" data-commentId="{{userCommentId}}" id="editComment-{{../_id}}" value="{{userComment}}" type="text">
                     </div>
@@ -313,9 +339,10 @@
                     </div>
                   </div>
                 </div>
-              </div>
-              {{#each commentReplyArr}}
-                <div class="col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12 commentReplyArr commReplyArray">
+              
+                {{#each commentReplyArr}}
+               
+                <div class="col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12 commentReplyArr">
                   <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 userReplyPic">
                     <img class="replyImg" src="{{replyProfileImgPath}}" />
                   </div>
@@ -374,6 +401,8 @@
                     </span>
                   </div>
                 </div>
+              
+                
               {{/each}}
               <div class="col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12 commentReplyInputBox commentReplyInputBox-{{userCommentId}}">
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 userReplyPic">
@@ -383,7 +412,7 @@
                   <input class="commentReplyInput" placeholder="Add your Reply here" type="text" data-reviewId="{{../_id}}" data-reviewPostedBy="{{../userId}}" data-commentId="{{userCommentId}}" data-businesslink="{{../businessLink}}" data-userCommentId={{userId}}>
                 </div>
               </div>
-            
+            </div>
             {{else}}
               
               <div class="col-lg-12 col-xs-12 col-md-12 userCommentWrapper showMoreCommntDivNone" data-reviewId="{{../_id}}" data-reviewPostedBy="{{../userId}}" data-commentId="{{userCommentId}}"  data-businesslink="{{../businessLink}}" >
@@ -456,9 +485,9 @@
                       </div>
                     </div>
                   </div>
-              </div>
+              
               {{#each commentReplyArr}}
-                <div class="col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12 commentReplyArr commReplyArray">
+                <div class="col-lg-11 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12 commentReplyArr">
                   <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 userReplyPic">
                     <img class="replyImg" src="{{replyProfileImgPath}}" />
                   </div>
@@ -517,6 +546,7 @@
                     </span>
                   </div>
                 </div>
+                
               {{/each}}
               <div class="col-lg-10 col-lg-offset-1 col-md-12 col-sm-12 col-xs-12 commentReplyInputBox commentReplyInputBox-{{userCommentId}}">
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 userReplyPic">
@@ -526,7 +556,7 @@
                   <input class="commentReplyInput" placeholder="Add your Reply here" type="text" data-reviewId="{{../_id}}" data-reviewPostedBy="{{../userId}}" data-commentId="{{userCommentId}}" data-businesslink="{{../businessLink}}" data-userCommentId={{userId}}>
                 </div>
               </div>
-            
+           </div> 
             {{/if}}
           
           {{/each}}
