@@ -550,6 +550,7 @@ Template.userTimeline.onRendered(function(){
 			$(this).children('.commentReplyArr').each(function(){
 				if(i>1){
 					$(this).hide();
+					console.log('this :',$(this));
 				}
 				i++;
 			});
@@ -563,6 +564,16 @@ Template.userTimeline.onRendered(function(){
 });
 
 Template.userTimeline.events({
+
+
+	'click .usrCommentReply': function(event){
+		event.preventDefault();
+		// alert('hi');
+
+		var commentID = this.userCommentID;
+		// console.log('commentID: ',commentID);
+		$(event.currentTarget).parent().parent().siblings('.commentReplyInputBox-'+commentID).toggle();
+	},
 	'click .showreplyCmt' : function(event){
 		event.preventDefault();
 		var thisElem = event.currentTarget;
@@ -1494,16 +1505,19 @@ Template.userTimeline.events({
 	},
 
 	'click .commentReply': function(event){
-		event.preventDefault();
+		// event.preventDefault();
+		// alert('hi');
 		var commentID = this.userCommentId;
-		$(event.currentTarget).parent().parent().parent().parent().siblings('.commentReplyInputBox-'+commentID).toggle();
+		// console.log('commentID: ',commentID);
+		// console.log('commentIDevent: ',$(event.currentTarget).parent().parent().parent().parent().siblings('.commentReplyInputBox-'+commentID).attr("class"));
+		// console.log('commentIDevent aage: ',$(event.currentTarget).parent().parent().parent().parent().parent().siblings('.commentReplyInputBox-'+commentID).attr("class"));
+		// console.log('commentIDevent piche: ',$(event.currentTarget).parent().parent().parent().siblings('.commentReplyInputBox-'+commentID).attr("class"));
+
+		$(event.currentTarget).parent().parent().parent().siblings('.commentReplyInputBox-'+commentID).toggle();
+		$(event.currentTarget).parent().parent().parent().siblings('.commentReplyInputBox-'+commentID).children().siblings('userReplyComent-'+commentID).children().focus();
+
 	},
 
-	'click .usrCommentReply': function(event){
-		event.preventDefault();
-		var commentID = this.userCommentID;
-		$(event.currentTarget).parent().parent().siblings('.commentReplyInputBox-'+commentID).toggle();
-	},
 
 	'keypress .commentReplyInput': function(event){
 		// event.preventDefault();

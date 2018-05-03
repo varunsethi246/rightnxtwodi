@@ -81,7 +81,7 @@ Template.userReview.helpers({
 			id = Meteor.userId();
 		}
 
-		console.log('check1: ',id);
+		// console.log('check1: ',id);
 		var reviewDataTotalCount = Review.find({"userId":id}).count();
 		if(reviewDataTotalCount<=0){
 			return true;
@@ -149,7 +149,7 @@ Template.userReview.helpers({
 			id = Meteor.userId();
 		}
 		// console.log("Id: ",id);
-		console.log('check1: ',id);
+		// console.log('check1: ',id);
 		var reviewDataTotalCount = Review.find({"userId":id},{sort: {reviewDate:-1}}).count();
 		var reviewData = Review.find({"userId":id},{sort: {reviewDate:-1},limit:limitReviews }).fetch();
 		// console.log("reviewData: ",reviewData);
@@ -179,7 +179,7 @@ Template.userReview.helpers({
 							reviewData[i].businessCity 	= businessData.businessCity;
 
 						if(businessData.businessImages && businessData.businessImages.length > 0){
-							console.log('check3: ',businessData.businessImages[0].img);
+							// console.log('check3: ',businessData.businessImages[0].img);
 							var pic = BusinessImgUploadS3.findOne({"_id":businessData.businessImages[0].img});
 							if(pic){
 								reviewData[i].businessImages = pic.url();
@@ -208,7 +208,7 @@ Template.userReview.helpers({
 						reviewData[i].userIDs = reviewData[i].userId;
 					}
 					if(data.profile.userProfilePic){
-						console.log('check4: ',data.profile.userProfilePic);
+						// console.log('check4: ',data.profile.userProfilePic);
 						var pic = UserProfileStoreS3New.findOne({"_id":data.profile.userProfilePic});
 						if(pic){
 							reviewData[i].userProfilePic = pic.url();	
@@ -227,12 +227,12 @@ Template.userReview.helpers({
 					reviewData[i].tagedFriendsValidate = true;
 					var tagedFriendsArray = [];
 					for(m=0;m<reviewData[i].tagedFriends.length;m++){
-						console.log('check5: ',reviewData[i].tagedFriends[m]);
+						// console.log('check5: ',reviewData[i].tagedFriends[m]);
 						var userTagObj = Meteor.users.findOne({"_id":reviewData[i].tagedFriends[m]});
 
 						var dataImgUser = '';
 						if(userTagObj.profile.userProfilePic){
-							console.log('check6: ',userTagObj.profile.userProfilePic);
+							// console.log('check6: ',userTagObj.profile.userProfilePic);
 							var imgData = UserProfileStoreS3New.findOne({"_id":userTagObj.profile.userProfilePic});
 							if(imgData)	{
 								dataImgUser = imgData.url();
@@ -270,7 +270,7 @@ Template.userReview.helpers({
 							}
 							reviewData[i].userComments[k].commentUserName = userObj.profile.name;
 								if(userObj.profile.userProfilePic){	
-									console.log('check7: ',userObj.profile.userProfilePic);							
+									// console.log('check7: ',userObj.profile.userProfilePic);							
 									var pic = UserProfileStoreS3New.findOne({"_id":userObj.profile.userProfilePic});
 									if(pic){
 										reviewData[i].userComments[k].userProfileImgPath = pic.url();	
@@ -309,7 +309,7 @@ Template.userReview.helpers({
 									if(userObj1){
 										replyObj.commentReplyUserName = userObj1.profile.name;
 										if(userObj1.profile.userProfilePic){	
-											console.log('check8: ',userObj1.profile.userProfilePic);							
+											// console.log('check8: ',userObj1.profile.userProfilePic);							
 											var pic = UserProfileStoreS3New.findOne({"_id":userObj1.profile.userProfilePic});
 											if(pic){
 												replyObj.replyProfileImgPath = pic.url();	
@@ -397,7 +397,7 @@ Template.userReview.helpers({
 
 				if(reviewData[i].reviewImages){
 					for(j=0;j<reviewData[i].reviewImages.length;j++){
-						console.log('check9: ',reviewData[i].reviewImages[j].img);
+						// console.log('check9: ',reviewData[i].reviewImages[j].img);
 						var reviewPhoto = UserReviewStoreS3New.findOne({"_id":reviewData[i].reviewImages[j].img});
 						if(reviewPhoto){
 							reviewData[i].reviewImages[j].imagePath = reviewPhoto.url();
@@ -684,16 +684,16 @@ Template.userReview.events({
 		}
 
 		var current_index = $('.selectedSearch').index();
-		console.log("current_index: ",current_index);
+		// console.log("current_index: ",current_index);
 		
 		var $number_list = $('.tagFrndUlFrieldList');
-		console.log("$number_list: ",$number_list);
+		// console.log("$number_list: ",$number_list);
 		
 		var $options = $number_list.find('.tagFrndLiFrieldList');
 		// console.log("$options: ",$options);
 		
 		var items_total = $options.length;
-		console.log("items_total: ",items_total);
+		// console.log("items_total: ",items_total);
 		if (e.keyCode == 40) {
 	        if (current_index + 1 < items_total) {
 	            current_index++;
@@ -1270,9 +1270,9 @@ Template.userReview.events({
 
 		var currenCommtUser = $(event.currentTarget).attr('data-userCommentId');
 		var userId 	= Meteor.userId();
-		console.log("reviewPostedByUser: ",reviewPostedByUser);
-		console.log("reviewId: ",reviewId);
-		console.log("commentId: ",commentId);
+		// console.log("reviewPostedByUser: ",reviewPostedByUser);
+		// console.log("reviewId: ",reviewId);
+		// console.log("commentId: ",commentId);
 		// console.log("reviewPostedByUser: ",reviewPostedByUser);
 
 		var checkReviewCommentLike = ReviewCommentLikes.findOne({
@@ -1643,7 +1643,8 @@ Template.userReview.events({
 	'click .commentReply': function(event){
 		event.preventDefault();
 		var commentID = this.userCommentId;
-		$(event.currentTarget).parent().parent().parent().parent().siblings('.commentReplyInputBox-'+commentID).toggle();
+		$(event.currentTarget).parent().parent().parent().siblings('.commentReplyInputBox-'+commentID).toggle();
+		
 	},
 
 	'click .usrCommentReply': function(event){
@@ -1955,7 +1956,7 @@ Template.userReview.events({
 
 	'click .userRevComEdit':function(event){
 		var id = $(event.target).attr('id');
-		console.log('id: ',id);
+		// console.log('id: ',id);
 		$('.userReviewTempcommTxt-'+id).css('display','none');
 		$('.editBoxCommentRev-'+id).css('display','block');
 		$('.reviewCancel-'+id).css('display','block');
@@ -2061,7 +2062,7 @@ Template.userReview.events({
 						        	console.log('Error : ' + err.message);
 						        }else{
 						        	var imgId =  fileObj._id ;
-						        	console.log("imgId: ",imgId);
+						        	// console.log("imgId: ",imgId);
 							        Meteor.call("updateReviewBulkImg", id, imgId,
 							          function(error1, result1) { 
 							              if(error1) {
