@@ -11,7 +11,7 @@
 	{{/if}}
 	{{#if isInRole 'user'}}
 	    {{#if alreadyReviewed}}
-		    <div class="NopublishReview">
+		    <div class="NopublishReview" id="publish3">
 		    	<i class="fa fa-pencil Valign" aria-hidden="true"></i>
 		    	<span class="Valignspan">Review</span>
 		        <button class="public_btn pull-right">Publish</button>
@@ -19,10 +19,10 @@
 		    </div>
 	    	
 	    {{else}}
-		    <div class="publishReview">
+		    <div class="publishReview" >
 		    	<i class="fa fa-pencil" aria-hidden="true"></i>
 		    	<span>Review</span>
-		        <button class="public_btn pull-right">Publish</button>
+		        <button class="public_btn pull-right" id="publish3">Publish</button>
 		        <span class="passwordWrongSpan text-danger"></span>
 		    </div>
 	    {{/if}}

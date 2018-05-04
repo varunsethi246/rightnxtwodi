@@ -26,9 +26,11 @@ Template.ForgotPassword.events({
 
         emailtrim = trimInput(emailVar);
         email     = emailtrim.toLowerCase();
+        console.log('emailtrim :',emailtrim);
+        console.log('email :',email);
 
 
-      Accounts.forgotPassword({email: email}, function(err) {
+      Accounts.forgotPassword({email: email}, function(err,result) {
         if (err) {
           if (err.message === 'User not found [403]') {
             // console.log('This email does not exist.');
@@ -39,7 +41,7 @@ Template.ForgotPassword.events({
           }
         } else {
           console.log('Email Sent. Check your mailbox.');
-          
+          console.log('result:',result);
           Bert.alert('Email Sent. Check your mailbox.',"success","growl-top-right");
           $('.resetPwd').addClass('diplayNoneresetPwd');
         }

@@ -110,6 +110,7 @@ Template.generalHeader.helpers({
 });
 
 Template.header.events({
+	
 	'click .login-btn': function(event){
 		$('.genLoginSignup').hide();
 		$('.signupScreen').hide();

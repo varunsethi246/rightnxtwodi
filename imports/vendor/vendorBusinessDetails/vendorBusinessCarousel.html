@@ -4,10 +4,11 @@
 			<!-- video present  -->
 			<div class="vedio col-lg-2 col-md-2 col-sm-3 col-xs-6" >
 				{{#each showVideo }}
-					<video  src="{{fileURL this}}?play=true" data-toggle="modal" data-target="#carouselvideo" class="showVideoDiv video-js vjs-default-skin" type="video/mp4" id="bussCarouselVideo"></video>
+					<video  src="{{fileURL this}}?play=true" data-toggle="modal" data-target="#carouselvideo" class="showVideoDiv video-js vjs-default-skin video" type="video/mp4" id="bussCarouselVideo" ></video>
 					<!-- <video controls="controls" width="300" height="200" src="{{fileURL this}}?play=true" class="videoBkImg"> -->
 													<!-- </video> -->
 					<!-- Modal  -->
+					<div class="playpause"></div>
 					<div id="carouselvideo" class="modal fade" role="dialog">
 						<div class="modal-dialog">
 					<!-- Modal content-->

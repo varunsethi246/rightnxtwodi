@@ -92,6 +92,10 @@ Template.businessEventIcons.events({
 				$('html, body').animate({
 					scrollTop: $("#scrollToReview-"+oldUserReview._id).offset().top-230
 				}, 500);
+			}else{
+				$('html, body').animate({
+					scrollTop: $("#publish3").offset().top-230
+				}, 500);
 			}
 
 		}else{

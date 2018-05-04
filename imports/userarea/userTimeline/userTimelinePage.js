@@ -550,7 +550,7 @@ Template.userTimeline.onRendered(function(){
 			$(this).children('.commentReplyArr').each(function(){
 				if(i>1){
 					$(this).hide();
-					console.log('this :',$(this));
+					console.log('this :',$(this).attr('class'));
 				}
 				i++;
 			});
