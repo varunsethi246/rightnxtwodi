@@ -10,6 +10,8 @@ import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
 
 
 
+var filesR = [];
+var counterImg = 0;
 
 var options = {
   keepHistory: 1000 * 60 * 5,
