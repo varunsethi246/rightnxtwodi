@@ -112,19 +112,16 @@ Template.header.events({
   'click .loginClosenew': function(event) {
     $('.modal-backdrop').hide();
   },
-  'click .loginClosenew':function(event){
-      $('#loginModal').on('hidden.bs.modal', function (e) {
-        console.log('in close');
-        console.log('input: ',$(this).find("input,textarea,select").val(''));
-        $(this)
-          .find("input,textarea,select")
-             .val('')
-             .end()
-          .find("input[type=checkbox], input[type=radio]")
-             .prop("checked", "")
-             .end();
-      });
-    },
+  // 'click .loginClosenew':function(event){
+  //     $('#loginModal').on('hidden.bs.modal', function (e) {
+  //       // console.log('in close');
+  //       // console.log('input: ',$(this).find("input,textarea,select").val(''));
+  //       $(this)
+  //         .find("input")
+  //            .val('')
+  //            .end();
+  //     });
+  //   },
 });
 
 

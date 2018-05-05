@@ -407,9 +407,11 @@ Template.vendorImagesVideos.events({
 
 
 	      if (currentPathURL == currentVendorURL) {
+	      	$("html,body").scrollTop(0);
 	          FlowRouter.go('/:businessurl',{'businessurl':businessLink});
 	      }
 	      else{
+	      	$("html,body").scrollTop(0);
 	          FlowRouter.go('/listOfBusiness');
 	      }
 	}

@@ -31,7 +31,8 @@ $(document).on("click",function(){
 });
 $(document).on('click',function(){
 	$(".loginClosenew").click(function() {
-	    $(this).closest('form').find("input[type=text]").val("");
+	    $('.loginEmail').val('');
+	    $('.loginPassword').val('');
 	});
 });
 

@@ -380,14 +380,14 @@ Meteor.startup(() => {
  // Welcome and Email Verification
 
   Accounts.emailTemplates.verifyEmail.subject = function(user) {
-    return 'Verify Account with RightNxt';
+    return 'Verify Account with rightNXT';
   };
 
    Accounts.emailTemplates.verifyEmail.html = function(user, url) {
     var newurl = url.split('verify-email');
     // console.log('user : ',user.profile.emailotp);
     // return 'Hello,<br><br>Thank You for Signing up on Rightnxt. Please verify your email address to continue.<br><br>To verify your account email, simply click the link below:<br>'+'\n' + 'http://qa.rightnxt.com/verify-email' + newurl[1] + '<br><br>Regards,<br>Team Rightnxt.';
-    return 'Hello,<br><br>Thank You for Signing up on Rightnxt. Please verify your email address to continue.<br><br>To verify your account email, simply enter OTP <b> ' + user.profile.emailotp + '</b><br><br>Regards,<br>Team Rightnxt.';
+    return 'Hello,<br><br>Thank You for Signing up on rightNXT. Please verify your email address to continue.<br><br>To verify your account email, simply enter OTP <b> ' + user.profile.emailotp + '</b><br><br>Regards,<br>Team rightNXT.';
   };
 
 });
