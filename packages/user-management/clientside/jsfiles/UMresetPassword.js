@@ -26,8 +26,8 @@ Template.ForgotPassword.events({
 
         emailtrim = trimInput(emailVar);
         email     = emailtrim.toLowerCase();
-        console.log('emailtrim :',emailtrim);
-        console.log('email :',email);
+        // console.log('emailtrim :',emailtrim);
+        // console.log('email :',email);
 
 
       Accounts.forgotPassword({email: email}, function(err,result) {
@@ -40,14 +40,13 @@ Template.ForgotPassword.events({
             Bert.alert('We are sorry but something went wrong:'+err.reason);
           }
         } else {
-          console.log('Email Sent. Check your mailbox.');
-          console.log('result:',result);
+          // console.log('Email Sent. Check your mailbox.');
+          // console.log('result:',result);
           Bert.alert('Email Sent. Check your mailbox.',"success","growl-top-right");
           $('.resetPwd').addClass('diplayNoneresetPwd');
         }
       });
-
-        
+ 
       // Bert.alert( "Instructions sent! We've sent an email with instructions on how to reset your password.If you don't receive an email within a few minutes, check your spam and junk folders.", 'success', 'growl-top-right' );
     return false;
   },
@@ -91,8 +90,6 @@ Template.ResetPassword.events({
     var resetPasswordForm = $(e.currentTarget),
         password = resetPasswordForm.find('#resetPasswordPassword').val(),
         passwordConfirm = resetPasswordForm.find('#resetPasswordPasswordConfirm').val();
-
-
     //Check password is at least 6 chars long
     var isValidPassword = function(password, passwordConfirm) {
        if (password === passwordConfirm) {
