@@ -10,8 +10,8 @@ import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
 import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
 
 
-// var filesR = [];
-// var counterImg = 0;
+var filesR = [];
+var counterImg = 0;
 
 Template.userReviewTemplate.helpers({
 	userLoadmoreCmmnt(dataIndex){
