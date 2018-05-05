@@ -367,7 +367,7 @@ Meteor.methods({
 Meteor.startup(() => {
   process.env.MAIL_URL="smtp://rightnxt123:Rightnxt@123@smtp.gmail.com:587";
   Accounts.emailTemplates.resetPassword.from = () => 'rightnxt <rightnxt123@gmail.com>';
-  Accounts.emailTemplates.siteName = "qa.rightnxt.com";
+  Accounts.emailTemplates.siteName = "facealbum.in";
   Accounts.urls.resetPassword = function(token) {
     return Meteor.absoluteUrl('reset-password/' + token);
   }
