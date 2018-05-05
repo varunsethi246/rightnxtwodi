@@ -29,6 +29,12 @@ $(document).on("click",function(){
 		$('.activeDownListFlag').hide();
 	// }
 });
+$(document).on('click',function(){
+	$(".loginClosenew").click(function() {
+	    $(this).closest('form').find("input[type=text], textarea").val("");
+	});
+});
+
 Meteor.startup(function () {
   TimeSync.loggingEnabled = false;
 
