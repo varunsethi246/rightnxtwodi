@@ -5,6 +5,19 @@ import { Session } from 'meteor/session';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { BusinessBanner } from '/imports/api/businessBannerMaster.js';
 import { BusinessAds } from '/imports/api/businessAdsMaster.js';
+import { BeenThere } from '/imports/api/beenThereMaster.js';
+import { BussImgLikes } from '/imports/api/businessImageLikesMaster.js';
+// import { BussVideo } from '/imports/videoUploadClient/videoUpload.js';
+
+import { Enquiry } from '/imports/api/enquiryMaster.js';
+import { ImageComment } from '/imports/api/imageCommentMaster.js';
+import { ImageCommentLike } from '/imports/api/imageCommentLikeMaster.js';
+import { Likes } from '/imports/api/likesMaster.js';
+import { Offers } from '/imports/api/offersMaster.js';
+import { Payment } from '/imports/api/paymentMaster.js';
+import { Reports } from '/imports/api/reportMaster.js';
+import { Review } from '/imports/api/reviewMaster.js';
+import { ReviewCommentLikes } from '/imports/api/reviewCommentLikesMaster.js';
 
 
 
@@ -45,6 +58,70 @@ if (Meteor.isServer) {
 
 
 Meteor.methods({
+	'removeBusinessPermanent' : function(formValues){
+
+		var busId = Business.findOne({"_id":formValues});
+		var busLink = busId.businessLink;
+		
+		
+		BusinessBanner.update(
+			{"businessLink":busLink}, 
+			{$set:	{
+					"status":"inactive",
+					}
+			},
+			{multi: true}
+		);
+		BusinessAds.update(
+			{"businessLink":busLink}, 
+			{$set:	{
+					"status":"inactive",
+					}
+			},
+			{multi: true}
+		);
+		BeenThere.remove(
+			{"businessLink":busLink},
+		);
+
+		BussImgLikes.remove(
+			{"businessLink":busLink},
+		);
+		// BussVideo.remove(
+		// 	{"businessLink":busLink},
+		// );
+		Enquiry.remove(
+			{"businessLink":busLink},
+		);
+		ImageComment.remove(
+			{"businessLink":busLink},
+		);
+		ImageCommentLike.remove(
+			{"businessLink":busLink},
+		);
+		Likes.remove(
+			{"businessLink":busLink},
+		);
+		Offers.remove(
+			{"businessLink":busLink},
+		);
+		Payment.remove(
+			{"businessLink":busLink},
+		);
+		Reports.remove(
+			{"businessLink":busLink},
+		);
+		Review.remove(
+			{"businessLink":busLink},
+		);
+		ReviewCommentLikes.remove(
+			{"businessLink":busLink},
+		);
+		Business.remove(formValues);
+
+		console.log("formValues: ",formValues);
+
+	},
 	'insertBusinessInfo':function(formValues){
 		var loggedInUser = Meteor.user();
 		if (Roles.userIsInRole(loggedInUser, 'admin')) {
@@ -330,34 +407,6 @@ Meteor.methods({
 		);
 
 	},
-	// Update Edit Form Options
-	// 'updateBusInfoAcc':function(id,formValues){
-	// 	Business.update(
-	// 		{_id: id},
-	// 		{$set : { 
-	// 			"businessTitle"     : formValues.businessTitle,
-	// 	        "businessLink"      : formValues.businessLink,
- //         		"businessAboutBus"  : formValues.businessAboutBus,
-	// 	        "businessEmailId"   : formValues.businessEmailId,
-	// 	        "businessAddress"   : formValues.businessAddress,
-	// 	        "businessCountry"   : formValues.businessCountry,
-	// 	        "businessState"     : formValues.businessState,
-	// 	        "businessCity"      : formValues.businessCity,
-	// 	        "businessArea"      : formValues.businessArea,
-	// 	        "businessZipCode"   : formValues.businessZipCode,
-	// 	        "businessLatitude"  : formValues.businessLatitude,
-	// 	        "businessLongitude" : formValues.businessLongitude,
-	// 			}
-	// 		}, 
-	// 		function(error,result){
-	// 			if(error){
-	// 				// console.log(error);
-	// 				return error;
-	// 			}
-	// 		}
-	// 	);
-	// 	return id;
-	// },
 	'updateBusInfoAcc':function(id,formValues){
 		Business.update(
 			{_id: id},
@@ -491,33 +540,7 @@ Meteor.methods({
 		);
 		return id;
 	},
-	'removeBusinessPermanent' : function(formValues){
-
-		var busId = Business.findOne({"_id":formValues});
-		var busLink = busId.businessLink;
-		
-		
-		BusinessBanner.update(
-			{"businessLink":busLink}, 
-			{$set:	{
-					"status":"inactive",
-					}
-			},
-			{multi: true}
-		);
-		BusinessAds.update(
-			{"businessLink":busLink}, 
-			{$set:	{
-					"status":"inactive",
-					}
-			},
-			{multi: true}
-		);
-
-		Business.remove(formValues);
-		console.log("formValues: ",formValues);
-
-	},
+	
 	'removeSelectedCategories':function (busLink,category) {
 			
 		var formedName = "businesscategories."+category;
