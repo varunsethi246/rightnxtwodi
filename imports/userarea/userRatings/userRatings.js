@@ -26,12 +26,13 @@ Template.userRatings.helpers({
 			id = Meteor.userId();
 		}
 		var userID  = id;
+		var useridArr = [];
 		var businessRatings = Review.find({"userId":userID}).fetch();
 		if(businessRatings){
 			// console.log(businessRatings);
 			for(i=0; i<businessRatings.length; i++){
 				var businessLink = businessRatings[i].businessLink;
-				var businessObj = Business.findOne({"businessLink":businessLink});
+				var businessObj = Business.findOne({"businessLink":businessLink, "status":'active'});
 				
 				if(businessObj){
 					businessRatings[i].businessName = businessObj.businessTitle;
@@ -53,11 +54,11 @@ Template.userRatings.helpers({
 					}else{
 						businessRatings[i].businessImages = '/images/rightnxt_image_nocontent.jpg';
 					}
-
-				}
-			}
+					useridArr.push(businessRatings[i]);
+				}// businessRatings
+			}// i
 			
-			return businessRatings;	
+			return useridArr;	
 		}
 	},
 

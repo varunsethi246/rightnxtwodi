@@ -41,8 +41,9 @@ Template.userBeenThere.helpers({
 			id = Meteor.userId();
 		}
 		var userID  = id;
+		var beenThereArr = [];
 		var userBeenThere = BeenThere.find({"userId":userID}).fetch();
-		if(userBeenThere)
+		if(userBeenThere.length > 0)
 		{
 			for(i=0; i<userBeenThere.length; i++){
 				var businessId = userBeenThere[i].businessId;
@@ -68,9 +69,13 @@ Template.userBeenThere.helpers({
 					else{
 						userBeenThere[i].ownerPhoto = '../images/rightnxt_image_nocontent.jpg'
 					}
-				}
-			}
-			return userBeenThere;	
+
+					beenThereArr.push(userBeenThere[i]);
+				}//businessObj
+			}// loop i
+
+			console.log(beenThereArr);
+			return beenThereArr;	
 		}
 	},
 	

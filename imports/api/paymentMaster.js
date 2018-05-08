@@ -172,6 +172,19 @@ Meteor.methods({
 			}
 		}
 
+
+
+
+		if (process.env.NODE_ENV === 'production') {
+		  let METEOR_URL = 'facealbum.in'; // your production server url
+		}else{
+			let METEOR_URL = 'localhost:3000';
+		}
+
+
+
+
+
 		if(paymentCheck.totalAmount){
 			var userId       	= Meteor.userId();
 			var userObj      	= Meteor.users.findOne({"_id":userId});
@@ -183,7 +196,7 @@ Meteor.methods({
 				"secret"   	:   "QbFMMdGFanNEkmdjeRnFJrUreJfjuqaAw",
 				"amount"   	:    grandTotal,
 				"udf1"		: 	paymentCheck._id,
-				"redirecturl" : 'http://localhost:3000/paymentAds-response?payId='+paymentCheck._id+"&InvNo="+paymentCheck.invoiceNumber+"&BusLink="+paymentCheck.businessLink,
+				"redirecturl" : 'http://'+METEOR_URL+'/paymentAds-response?payId='+paymentCheck._id+"&InvNo="+paymentCheck.invoiceNumber+"&BusLink="+paymentCheck.businessLink,
 			};
 
 			try {

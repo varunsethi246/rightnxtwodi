@@ -52,7 +52,7 @@ Template.userBookmarks.helpers({
 		}else{
 			id = Meteor.userId();
 		}
-
+		var bookmarkdataArr = [];
 		var userID  = id;
 		var businessBookmark = Bookmark.find({"userId":userID}).fetch();
 		if(businessBookmark)
@@ -104,10 +104,11 @@ Template.userBookmarks.helpers({
 							}
 						}
 					}
+					bookmarkdataArr.push(businessBookmark[i]);
 				}
 			}
 			// console.log('businessBookmark ' , businessBookmark);
-			return businessBookmark;	
+			return bookmarkdataArr;	
 		}
 	},
 

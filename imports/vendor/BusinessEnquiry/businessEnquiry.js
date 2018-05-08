@@ -382,7 +382,7 @@ Template.businessEnquiry.events({
             if (!enquiryDesc) {
                 $(".spanEnqDesc").addClass("ErrorRedText");
                 $(".enquiryDesc").addClass("SpanLandLineRedBorder");
-                $( ".spanEnqDesc" ).text("Please enter Business Description" );
+                $( ".spanEnqDesc" ).text("Please enter the description of the product you are looking for." );
             }
             $('.SpanLandLineRedBorder:visible:first').focus();
         }

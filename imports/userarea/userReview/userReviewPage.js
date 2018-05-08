@@ -150,9 +150,10 @@ Template.userReview.helpers({
 		}
 		// console.log("Id: ",id);
 		// console.log('check1: ',id);
+		var returnReviewData = [];
 		var reviewDataTotalCount = Review.find({"userId":id},{sort: {reviewDate:-1}}).count();
 		var reviewData = Review.find({"userId":id},{sort: {reviewDate:-1},limit:limitReviews }).fetch();
-		// console.log("reviewData: ",reviewData);
+		console.log("reviewData: ",reviewData);
 		
 		if(reviewData){
 			if(reviewData.length < 5  || reviewData.length == reviewDataTotalCount){
@@ -163,7 +164,7 @@ Template.userReview.helpers({
 			for (var i = 0; i < reviewData.length; i++) {
 
 				var businessLinkVar	= reviewData[i].businessLink;
-				var businessData   	= Business.findOne({'businessLink':businessLinkVar});
+				var businessData   	= Business.findOne({'businessLink':businessLinkVar,"status":'active'});
 				if (businessData){
 
 					var reviewDateNumber = reviewData[i].reviewDate.getTime();
@@ -178,234 +179,234 @@ Template.userReview.helpers({
 							reviewData[i].AreaClasses 	= businessData.businessArea.split('.').join('-');
 							reviewData[i].businessCity 	= businessData.businessCity;
 
-						if(businessData.businessImages && businessData.businessImages.length > 0){
+							if(businessData.businessImages && businessData.businessImages.length > 0){
 							// console.log('check3: ',businessData.businessImages[0].img);
-							var pic = BusinessImgUploadS3.findOne({"_id":businessData.businessImages[0].img});
-							if(pic){
-								reviewData[i].businessImages = pic.url();
+								var pic = BusinessImgUploadS3.findOne({"_id":businessData.businessImages[0].img});
+								if(pic){
+									reviewData[i].businessImages = pic.url();
+								}else{
+									reviewData[i].businessImages = '/images/rightnxt_image_nocontent.jpg';
+								}
+
 							}else{
 								reviewData[i].businessImages = '/images/rightnxt_image_nocontent.jpg';
 							}
 
+						}
+
+					}
+					reviewData[i].reviewDateAgo = moment(reviewData[i].reviewDate).fromNow();
+
+
+					var link = FlowRouter.current().path;
+					var checkIdExists = link.split('/');
+					var id = '';
+					id = Meteor.userId();
+					if(id){
+						var data = Meteor.users.findOne({"_id":id},{"profile":1});
+						if(reviewData[i].userId == id){
+							reviewData[i].userIDs = reviewData[i].userId;
+						}
+						if(data.profile.userProfilePic){
+							// console.log('check4: ',data.profile.userProfilePic);
+							var pic = UserProfileStoreS3New.findOne({"_id":data.profile.userProfilePic});
+							if(pic){
+								reviewData[i].userProfilePic = pic.url();	
+							}
+							else{
+								reviewData[i].userProfilePic = "/users/profile/profile_image_dummy.svg";	
+							}
 						}else{
-							reviewData[i].businessImages = '/images/rightnxt_image_nocontent.jpg';
+							reviewData[i].userProfilePic = "/users/profile/profile_image_dummy.svg";
 						}
-
-						}
-
+						
 					}
-				}
-				reviewData[i].reviewDateAgo = moment(reviewData[i].reviewDate).fromNow();
 
 
-				var link = FlowRouter.current().path;
-				var checkIdExists = link.split('/');
-				var id = '';
-				id = Meteor.userId();
-				if(id){
-					var data = Meteor.users.findOne({"_id":id},{"profile":1});
-					if(reviewData[i].userId == id){
-						reviewData[i].userIDs = reviewData[i].userId;
-					}
-					if(data.profile.userProfilePic){
-						// console.log('check4: ',data.profile.userProfilePic);
-						var pic = UserProfileStoreS3New.findOne({"_id":data.profile.userProfilePic});
-						if(pic){
-							reviewData[i].userProfilePic = pic.url();	
-						}
-						else{
-							reviewData[i].userProfilePic = "/users/profile/profile_image_dummy.svg";	
-						}
-					}else{
-						reviewData[i].userProfilePic = "/users/profile/profile_image_dummy.svg";
-					}
-					
-				}
+					if(reviewData[i].tagedFriends.length != 0){
+						reviewData[i].tagedFriendsValidate = true;
+						var tagedFriendsArray = [];
+						for(m=0;m<reviewData[i].tagedFriends.length;m++){
+							// console.log('check5: ',reviewData[i].tagedFriends[m]);
+							var userTagObj = Meteor.users.findOne({"_id":reviewData[i].tagedFriends[m]});
 
-
-				if(reviewData[i].tagedFriends.length != 0){
-					reviewData[i].tagedFriendsValidate = true;
-					var tagedFriendsArray = [];
-					for(m=0;m<reviewData[i].tagedFriends.length;m++){
-						// console.log('check5: ',reviewData[i].tagedFriends[m]);
-						var userTagObj = Meteor.users.findOne({"_id":reviewData[i].tagedFriends[m]});
-
-						var dataImgUser = '';
-						if(userTagObj.profile.userProfilePic){
-							// console.log('check6: ',userTagObj.profile.userProfilePic);
-							var imgData = UserProfileStoreS3New.findOne({"_id":userTagObj.profile.userProfilePic});
-							if(imgData)	{
-								dataImgUser = imgData.url();
+							var dataImgUser = '';
+							if(userTagObj.profile.userProfilePic){
+								// console.log('check6: ',userTagObj.profile.userProfilePic);
+								var imgData = UserProfileStoreS3New.findOne({"_id":userTagObj.profile.userProfilePic});
+								if(imgData)	{
+									dataImgUser = imgData.url();
+								}else{
+									dataImgUser = '/users/profile/profile_image_dummy.svg';
+								}
 							}else{
 								dataImgUser = '/users/profile/profile_image_dummy.svg';
 							}
-						}else{
-							dataImgUser = '/users/profile/profile_image_dummy.svg';
-						}
 
 
 
-						var obj = {
-							'tagedFriends'   : userTagObj.profile.name,
-							'tagedFriendsUrl': generateURLid(reviewData[i].tagedFriends[m]),
-							'userTagged':reviewData[i].tagedFriends[m],
-							'imagePath':dataImgUser,
-						}
-						tagedFriendsArray.push(obj);
-					}
-					reviewData[i].tagedFriendsArray = tagedFriendsArray;
-				} else{
-					reviewData[i].tagedFriendsValidate = false;
-				}
-				
-				if(reviewData[i].userComments){		
-					reviewData[i].userCommentsCount = reviewData[i].userComments.length;
-					reviewData[i].userComments = reviewData[i].userComments.reverse();
-					for(k=0;k<reviewData[i].userComments.length; k++){
-						var userId  = reviewData[i].userComments[k].userId;
-						var userObj = Meteor.users.findOne({"_id":userId});
-						if(userObj){
-							if(userObj._id == Meteor.userId()){
-								reviewData[i].userComments[k].userID = userObj._id;
+							var obj = {
+								'tagedFriends'   : userTagObj.profile.name,
+								'tagedFriendsUrl': generateURLid(reviewData[i].tagedFriends[m]),
+								'userTagged':reviewData[i].tagedFriends[m],
+								'imagePath':dataImgUser,
 							}
-							reviewData[i].userComments[k].commentUserName = userObj.profile.name;
-								if(userObj.profile.userProfilePic){	
-									// console.log('check7: ',userObj.profile.userProfilePic);							
-									var pic = UserProfileStoreS3New.findOne({"_id":userObj.profile.userProfilePic});
-									if(pic){
-										reviewData[i].userComments[k].userProfileImgPath = pic.url();	
-									}
-									else{
-										reviewData[i].userComments[k].userProfileImgPath = "/users/profile/profile_image_dummy.svg";
-									}				
-								}else{
-
-									reviewData[i].userComments[k].userProfileImgPath = '/users/profile/profile_image_dummy.svg';
-								}
-
-							reviewData[i].userComments[k].userCommentDateAgo = moment(reviewData[i].userComments[k].userCommentDate).fromNow();
-						}		
-
-						//=========== Comment Replies =============
-						if(reviewData[i].commentReply){
-							//create separate of all replies to each comment
-							var commentReplyArr = [];
-							var rn = 0;
-							for(l=0;l<reviewData[i].commentReply.length; l++){
-								var replyObj = {};
-								if(reviewData[i].commentReply[l].userCommentId == reviewData[i].userComments[k].userCommentId){
-									replyObj.commentReplyUserId = reviewData[i].commentReply[l].userId;
-									replyObj.commentReply = reviewData[i].commentReply[l].commentReply;
-									replyObj.userCommentID = reviewData[i].commentReply[l].userCommentId;
-
-									replyObj.replyId  = reviewData[i].commentReply[l].userReplyId;
-									var userId1  = reviewData[i].commentReply[l].userId;
-									if(userId1 === Meteor.userId()){
-										replyObj.repEditBlock = 'show';
-									}else{
-										replyObj.repEditBlock = 'hide';
-									}
-									var userObj1 = Meteor.users.findOne({"_id":userId1});
-									if(userObj1){
-										replyObj.commentReplyUserName = userObj1.profile.name;
-										if(userObj1.profile.userProfilePic){	
-											// console.log('check8: ',userObj1.profile.userProfilePic);							
-											var pic = UserProfileStoreS3New.findOne({"_id":userObj1.profile.userProfilePic});
-											if(pic){
-												replyObj.replyProfileImgPath = pic.url();	
-											}
-											else{
-												replyObj.replyProfileImgPath = "/users/profile/profile_image_dummy.svg";
-											}				
-										}else{
-											replyObj.replyProfileImgPath = '/users/profile/profile_image_dummy.svg';
-										}
-										replyObj.commentReplyDateAgo = moment(reviewData[i].commentReply[l].commentReplyDate).fromNow();
-
-										//check if current user has liked the current comment-reply
-										var replySelector = {
-															"reviewId" 		: reviewData[i]._id,
-															"replyId"		: replyObj.replyId.toString(),
-															"likedByUserId"	: Meteor.userId(),
-														};
-										var checkCommentReplyLike =  ReviewCommentLikes.findOne(replySelector);
-
-										// if(checkCommentReplyLike){
-										// 	replyObj.replyLikeUnlike = true;
-										// }else{
-										// 	replyObj.replyLikeUnlike = false;
-										// }
-										var commentReplyLikeCount = ReviewCommentLikes.find({
-																		"reviewId" 		: reviewData[i]._id,
-																		"replyId" 		: replyObj.replyId.toString(),
-																	}).fetch();
-										if(commentReplyLikeCount){
-											replyObj.commentReplyLikeCount = commentReplyLikeCount.length;
-										}
-									}
-									commentReplyArr.push(replyObj);
-									rn++;
-								}//if
-							}//for
-
-							reviewData[i].userComments[k].commentReplyArr = commentReplyArr;
-							reviewData[i].userComments[k].commentReplyCount = rn;
-							// commentReplyArr = [];
+							tagedFriendsArray.push(obj);
 						}
-
-						//check if current user has liked the current comment
-						var selector = {
-											"reviewId" 		: reviewData[i]._id,
-											"commentId" 	: reviewData[i].userComments[k].userCommentId.toString(),
-											"likedByUserId"	: Meteor.userId(),
-											"replyId" 		: ''
-										};
-						var checkCommentLike =  ReviewCommentLikes.findOne(selector);
-
-						if(checkCommentLike){
-							reviewData[i].userComments[k].likeUnlike = true;
-						}else{
-							reviewData[i].userComments[k].likeUnlike = false;
-						}
-						var commentLikeCount = ReviewCommentLikes.find({
-													"reviewId" 		: reviewData[i]._id,
-													"commentId" 	: reviewData[i].userComments[k].userCommentId.toString(),
-													"replyId" 		: ''
-												}).fetch();
-						if(commentLikeCount){
-							reviewData[i].userComments[k].commentLikeCount = commentLikeCount.length;
-						}
-					}
-				}else{
-					reviewData[i].userCommentsCount = 0;					
-				}
-
-				if(reviewData[i].reviewLikes){					
-					reviewData[i].reviewLikeCount = reviewData[i].reviewLikes.length;
-					reviewData[i].likeClass = '';
-					for(l=0; l<reviewData[i].reviewLikes.length; l++){
-						if(reviewData[i].reviewLikes[l].likedByUser == Meteor.userId() ){
-							reviewData[i].likeClass = 'orangeHeart';
-							break;
-						}
+						reviewData[i].tagedFriendsArray = tagedFriendsArray;
+					} else{
+						reviewData[i].tagedFriendsValidate = false;
 					}
 					
-				}else{
-					reviewData[i].reviewLikeCount = 0;
-					reviewData[i].likeClass = '';
-				} 
+					if(reviewData[i].userComments){		
+						reviewData[i].userCommentsCount = reviewData[i].userComments.length;
+						reviewData[i].userComments = reviewData[i].userComments.reverse();
+						for(k=0;k<reviewData[i].userComments.length; k++){
+							var userId  = reviewData[i].userComments[k].userId;
+							var userObj = Meteor.users.findOne({"_id":userId});
+							if(userObj){
+								if(userObj._id == Meteor.userId()){
+									reviewData[i].userComments[k].userID = userObj._id;
+								}
+								reviewData[i].userComments[k].commentUserName = userObj.profile.name;
+									if(userObj.profile.userProfilePic){	
+										// console.log('check7: ',userObj.profile.userProfilePic);							
+										var pic = UserProfileStoreS3New.findOne({"_id":userObj.profile.userProfilePic});
+										if(pic){
+											reviewData[i].userComments[k].userProfileImgPath = pic.url();	
+										}
+										else{
+											reviewData[i].userComments[k].userProfileImgPath = "/users/profile/profile_image_dummy.svg";
+										}				
+									}else{
 
-				if(reviewData[i].reviewImages){
-					for(j=0;j<reviewData[i].reviewImages.length;j++){
-						// console.log('check9: ',reviewData[i].reviewImages[j].img);
-						var reviewPhoto = UserReviewStoreS3New.findOne({"_id":reviewData[i].reviewImages[j].img});
-						if(reviewPhoto){
-							reviewData[i].reviewImages[j].imagePath = reviewPhoto.url();
+										reviewData[i].userComments[k].userProfileImgPath = '/users/profile/profile_image_dummy.svg';
+									}
+
+								reviewData[i].userComments[k].userCommentDateAgo = moment(reviewData[i].userComments[k].userCommentDate).fromNow();
+							}		
+
+							//=========== Comment Replies =============
+							if(reviewData[i].commentReply){
+								//create separate of all replies to each comment
+								var commentReplyArr = [];
+								var rn = 0;
+								for(l=0;l<reviewData[i].commentReply.length; l++){
+									var replyObj = {};
+									if(reviewData[i].commentReply[l].userCommentId == reviewData[i].userComments[k].userCommentId){
+										replyObj.commentReplyUserId = reviewData[i].commentReply[l].userId;
+										replyObj.commentReply = reviewData[i].commentReply[l].commentReply;
+										replyObj.userCommentID = reviewData[i].commentReply[l].userCommentId;
+
+										replyObj.replyId  = reviewData[i].commentReply[l].userReplyId;
+										var userId1  = reviewData[i].commentReply[l].userId;
+										if(userId1 === Meteor.userId()){
+											replyObj.repEditBlock = 'show';
+										}else{
+											replyObj.repEditBlock = 'hide';
+										}
+										var userObj1 = Meteor.users.findOne({"_id":userId1});
+										if(userObj1){
+											replyObj.commentReplyUserName = userObj1.profile.name;
+											if(userObj1.profile.userProfilePic){	
+												// console.log('check8: ',userObj1.profile.userProfilePic);							
+												var pic = UserProfileStoreS3New.findOne({"_id":userObj1.profile.userProfilePic});
+												if(pic){
+													replyObj.replyProfileImgPath = pic.url();	
+												}
+												else{
+													replyObj.replyProfileImgPath = "/users/profile/profile_image_dummy.svg";
+												}				
+											}else{
+												replyObj.replyProfileImgPath = '/users/profile/profile_image_dummy.svg';
+											}
+											replyObj.commentReplyDateAgo = moment(reviewData[i].commentReply[l].commentReplyDate).fromNow();
+
+											//check if current user has liked the current comment-reply
+											var replySelector = {
+																"reviewId" 		: reviewData[i]._id,
+																"replyId"		: replyObj.replyId.toString(),
+																"likedByUserId"	: Meteor.userId(),
+															};
+											var checkCommentReplyLike =  ReviewCommentLikes.findOne(replySelector);
+
+											// if(checkCommentReplyLike){
+											// 	replyObj.replyLikeUnlike = true;
+											// }else{
+											// 	replyObj.replyLikeUnlike = false;
+											// }
+											var commentReplyLikeCount = ReviewCommentLikes.find({
+																			"reviewId" 		: reviewData[i]._id,
+																			"replyId" 		: replyObj.replyId.toString(),
+																		}).fetch();
+											if(commentReplyLikeCount){
+												replyObj.commentReplyLikeCount = commentReplyLikeCount.length;
+											}
+										}
+										commentReplyArr.push(replyObj);
+										rn++;
+									}//if
+								}//for
+
+								reviewData[i].userComments[k].commentReplyArr = commentReplyArr;
+								reviewData[i].userComments[k].commentReplyCount = rn;
+								// commentReplyArr = [];
+							}
+
+							//check if current user has liked the current comment
+							var selector = {
+												"reviewId" 		: reviewData[i]._id,
+												"commentId" 	: reviewData[i].userComments[k].userCommentId.toString(),
+												"likedByUserId"	: Meteor.userId(),
+												"replyId" 		: ''
+											};
+							var checkCommentLike =  ReviewCommentLikes.findOne(selector);
+
+							if(checkCommentLike){
+								reviewData[i].userComments[k].likeUnlike = true;
+							}else{
+								reviewData[i].userComments[k].likeUnlike = false;
+							}
+							var commentLikeCount = ReviewCommentLikes.find({
+														"reviewId" 		: reviewData[i]._id,
+														"commentId" 	: reviewData[i].userComments[k].userCommentId.toString(),
+														"replyId" 		: ''
+													}).fetch();
+							if(commentLikeCount){
+								reviewData[i].userComments[k].commentLikeCount = commentLikeCount.length;
+							}
+						}
+					}else{
+						reviewData[i].userCommentsCount = 0;					
+					}
+
+					if(reviewData[i].reviewLikes){					
+						reviewData[i].reviewLikeCount = reviewData[i].reviewLikes.length;
+						reviewData[i].likeClass = '';
+						for(l=0; l<reviewData[i].reviewLikes.length; l++){
+							if(reviewData[i].reviewLikes[l].likedByUser == Meteor.userId() ){
+								reviewData[i].likeClass = 'orangeHeart';
+								break;
+							}
+						}	
+					}else{
+						reviewData[i].reviewLikeCount = 0;
+						reviewData[i].likeClass = '';
+					} 
+
+					if(reviewData[i].reviewImages){
+						for(j=0;j<reviewData[i].reviewImages.length;j++){
+							// console.log('check9: ',reviewData[i].reviewImages[j].img);
+							var reviewPhoto = UserReviewStoreS3New.findOne({"_id":reviewData[i].reviewImages[j].img});
+							if(reviewPhoto){
+								reviewData[i].reviewImages[j].imagePath = reviewPhoto.url();
+							}
 						}
 					}
-				}
+					returnReviewData.push(reviewData[i]);
+				}//end of businessData
 			}
-			return reviewData;
+			return returnReviewData;
 		}
 	},
 
@@ -558,6 +559,52 @@ Template.userReviewSuggestion.events({
               	}//followData 
 			}
 		});
+	},
+});
+Template.userReview.helpers({
+	showRating(){
+		// userId,businessLink
+		var userId = Meteor.userId();
+		var businessUrl = this.businessLink;
+		// var businessLinkNew = Business.findOne({"businessLink":businessLinks});
+		console.log('businessUrl :',businessUrl);
+		var ratingInt = Review.findOne({"userId" : userId,"businessLink":businessUrl});
+		console.log('ratingInt :',ratingInt);
+		if(ratingInt){
+			// console.log("ratingInt = ", ratingInt);
+			var latestRating = ratingInt.rating;
+			console.log('latestRating:',latestRating);
+			var intRating = parseInt(latestRating);
+			var balRating = latestRating - intRating;
+			var finalRating = intRating + balRating;
+			if(balRating > 0 && balRating < 0.5){
+				var finalRating = intRating + 0.5;
+			}
+			if(balRating > 0.5){
+				var finalRating = intRating + 1;
+			}
+
+			ratingObj = {};
+
+			for(i=1; i<=10; i++){
+				var x = "star" + i;
+				if(i <= finalRating*2){
+					if( i%2 == 0){
+						ratingObj[x] = "fixStar2";
+					}else{
+						ratingObj[x] = "fixStar1";
+					}				
+				}else{
+					ratingObj[x]  = "";
+				}
+			
+			}
+			console.log("ratingObj = ", ratingObj);
+
+			return ratingObj;
+		}else{
+			return {};
+		}
 	},
 });
 
@@ -2050,6 +2097,13 @@ Template.userReview.events({
 			var id = event.currentTarget.id;
 			var taggedPpl = tagedFriends;
 			
+			var starRating = $('.starRatingblock .fixStar1').length;
+			console.log('starRating time: ',starRating);
+			starRating = starRating + $('.starRatingblock .fixStar2').length;
+			console.log('starRating time: ',starRating);
+			var rating = parseFloat(starRating) / 2;
+			console.log('rating time: ', rating);
+
 			if(filesR){
 				for(i = 0 ; i < filesR.length; i++){		
 					Resizer.resize(filesR[i], {width: 300, height: 300, cropSquare: false}, function(err, file) {
@@ -2087,25 +2141,43 @@ Template.userReview.events({
 				$('#reviewImglistEdit').empty();
 				$('#reviewImgfileEdits').val('');
 			}
+			var allReviews = Review.findOne({"_id" : id});
+			if(allReviews){
+				var allReviewBusLink = allReviews.businessLink;
+				// console.log('allReviewBusLink: ',allReviewBusLink);
+				var ReviewBussLink = Review.find({"businessLink":allReviewBusLink}).fetch();
+				if(ReviewBussLink){						
 
-			Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, function(error, result){
-				if(error){
-					Bert.alert('Some technical issue happened... Your review is not posted.', 'danger', 'growl-top-right');
-				}else{
-					$('.userReviewTempcommTxt-'+id).css('display','block');
-					$('.editBoxCommentRev-'+id).css('display','none');
-					$('.reviewCancel-'+id).css('display','none');
-					$('.reviewBusSave-'+id).css('display','none');
-					$('.bus-page-edit-outer1-'+id).css('display','none');
-					$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
-					$('.tagedFrndDivPre-'+id).css('display','block');
-					$('.tagFrnd-'+id).css('display','none');
-					$('.userRevComsEdit'+id).css('display','none');
-					$('.reviewImages-'+id).css('display','none');
-					
-					tagedFriends = [];
+					var totalRating = 0;
+					var totalVote = ReviewBussLink.length;
+					for(i=0; i<ReviewBussLink.length; i++){
+
+						totalRating += ReviewBussLink[i].rating;
+						// console.log(ReviewBussLink[i].rating);
+					}
+					totalRating = totalRating / ReviewBussLink.length ;
+
+
+					Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, totalRating, function(error, result){
+						if(error){
+							Bert.alert('Some technical issue happened... Your review is not posted.', 'danger', 'growl-top-right');
+						}else{
+							$('.userReviewTempcommTxt-'+id).css('display','block');
+							$('.editBoxCommentRev-'+id).css('display','none');
+							$('.reviewCancel-'+id).css('display','none');
+							$('.reviewBusSave-'+id).css('display','none');
+							$('.bus-page-edit-outer1-'+id).css('display','none');
+							$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
+							$('.tagedFrndDivPre-'+id).css('display','block');
+							$('.tagFrnd-'+id).css('display','none');
+							$('.userRevComsEdit'+id).css('display','none');
+							$('.reviewImages-'+id).css('display','none');
+							
+							tagedFriends = [];
+						}
+					});
 				}
-			});
+			}
 		}
 	},
 

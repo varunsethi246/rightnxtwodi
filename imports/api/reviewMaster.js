@@ -428,7 +428,7 @@ Meteor.methods({
 		);
 	},
 
-	'updateRevCommentEdit':function(id,revComment,taggedPpl,rating){
+	'updateRevCommentEdit':function(id,revComment,taggedPpl,totalRating){
 		var taggedArr = [];
 		// console.log('in meteor call');
 		for(i=0;i<taggedPpl.length;i++){
@@ -438,7 +438,7 @@ Meteor.methods({
 			{_id : id},
 			{$set :{
 					reviewComment 	: revComment,
-					rating 			: rating,
+					rating 			: totalRating,
 					reviewDate 		: new Date(),
 					tagedFriends	: taggedArr,
 				}

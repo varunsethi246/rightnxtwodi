@@ -172,6 +172,7 @@ Template.addReviewTemplate.events({
 		var businessUrl = FlowRouter.getParam('businessurl');
 
 		var starRating = $('.starRatingWrapper .fixStar1').length;
+		console.log('starRating on add review :',starRating);
 		starRating = starRating + $('.starRatingWrapper .fixStar2').length;
 		var rating = parseFloat(starRating) / 2;
 
@@ -368,6 +369,9 @@ Template.addReviewTemplate.events({
 								// console.log('totalRating: ',totalRating);
 								var business = Business.findOne({"businessLink" : businessLink});
 								if(business){
+									// console.log('business._id: ',business._id);
+									// console.log('totalRating: ',totalRating);
+									// console.log('totalVote: ',totalVote);
 									Meteor.call('updateBusinessForRating',business._id,totalRating, totalVote, function(err,rslt){
 										if(err){
 											console.log('error occured in updating business for rating only: ', err);

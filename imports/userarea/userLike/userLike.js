@@ -35,18 +35,17 @@ Template.userLike.helpers({
 		}else{
 			id = Meteor.userId();
 		}
+		var count =0;
 		var dataArray = [];
+		var bussDataArray =[];
 		var likesData = Likes.find({"userid":id}).fetch();
 		if(likesData){
-			
-			var likedDataReturn = {
-				noofLikes		: likesData.length,
-				bussDataArray	: [],
-			}
+
 			
 			for(i=0;i<likesData.length;i++){
-			var bussdata = Business.findOne({'_id':likesData[i].businessId});
+			var bussdata = Business.findOne({'_id':likesData[i].businessId,"status":'active'});
 				if(bussdata){
+					count++;
 					// console.log('bussdata ', bussdata);
 					var businessName	 = bussdata.ownerFullName;
 					var businessArea	 = bussdata.businessArea;
@@ -72,7 +71,7 @@ Template.userLike.helpers({
 					}
 						var reviewDateAgo = moment(likesData[i].createdAt).fromNow();
 
-						likedDataReturn.bussDataArray.push({
+					bussDataArray.push({
 							ownerFullName	: businessName,
 							businessArea	: businessArea,
 							businessLink	: businessLink,
@@ -81,8 +80,15 @@ Template.userLike.helpers({
 							createdAt		  : likesData[i].createdAt,
 							businessImg   : businessImages,
 					});
+					// returnLikeData.push(bussDataArray[i]);
 				}
 
+			}// i
+
+
+			var likedDataReturn = {
+				noofLikes		: count,
+				bussDataArray	: bussDataArray,
 			}
 			return likedDataReturn;
 		}

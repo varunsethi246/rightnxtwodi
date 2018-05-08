@@ -81,7 +81,7 @@ Template.businessEnquiry.events({
 		if (myFuncVar==null||myFuncVar=="") {
 			$(".spanEnqDesc").addClass("ErrorRedText");
 			$(".enquiryDesc").addClass("SpanLandLineRedBorder");
-			$( ".spanEnqDesc" ).text("Please enter Business Description" );
+			$( ".spanEnqDesc" ).text("Please enter the description of the product you are looking for." );
 		} else {
 			$( ".spanEnqDesc" ).text("" );
 			$(".spanEnqDesc").removeClass("ErrorRedText");

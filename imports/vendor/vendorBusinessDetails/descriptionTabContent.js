@@ -1383,11 +1383,11 @@ Template.userReviewTemplate.events({
 			var taggedPpl = tagedFriends;
 			
 			var starRating = $('.starRatingWrapper .fixStar1').length;
-			console.log('starRating: ', starRating);
+			console.log('starRating description: ', starRating);
 			starRating = starRating + $('.starRatingWrapper .fixStar2').length;
 			console.log('starRating: ', starRating);
-			console.log('rating: ', rating);
 			var rating = parseFloat(starRating) / 2;
+			console.log('rating: ', rating);
 			// console.log("filesR: ",filesR)
 			 if(filesR){
 				for(i = 0 ; i < filesR.length; i++){		

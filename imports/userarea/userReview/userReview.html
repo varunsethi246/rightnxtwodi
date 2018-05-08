@@ -81,19 +81,22 @@
               <span class="passwordWrongSpan"></span>
           </div>
 
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
+              {{#with showRating}}
+                Your Current Rating: {{> starRating2 }}
+              {{/with}}
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 starRatingblock starRatingblock-{{_id}}" id="{{_id}}">
+                New Rating: {{> starRating }}
+            </div>
+          </div>
         
           <!-- <div class="dropdown pull-right col-lg-2 col-md-2 col-sm-2 col-xs-2 reviewCancel reviewCancel-{{_id}}" id="{{_id}}">
             Cancel
           </div> -->
 
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="dropdown pull-right reviewCancel reviewCancel-{{_id}}" id="{{_id}}">
-              Cancel
-            </div>
-            <div class="dropdownSaved pull-right reviewBusSave reviewBusSave-{{_id}}" id="{{_id}}">
-              Save
-            </div>
-          </div>
+          
 
 
         <!-- Add image -->
@@ -189,6 +192,15 @@
               </div>
             </div>
           {{/if}}
+
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="dropdown pull-right reviewCancel reviewCancel-{{_id}}" id="{{_id}}">
+              Cancel
+            </div>
+            <div class="dropdownSaved pull-right reviewBusSave reviewBusSave-{{_id}}" id="{{_id}}">
+              Save
+            </div>
+          </div>
 
           <!-- {{#if userIDs}}
             <div class="dropdown pull-right col-lg-2 col-md-2 col-sm-2 col-xs-2 RevEditBox RevEditBoxTimeline {{revEditButton}}">
@@ -319,13 +331,14 @@
                             <li class="userRevCommentEditPen" id='{{userCommentId}}'>
                               <i class="fa fa-pencil editPen" aria-hidden="true"></i> Edit
                             </li>
+                            asdasdasd
                             <li class="userRevvCommentDel" data-toggle="modal" data-target="#deleteDataModal-{{userCommentId}}">  
                               <i class="fa fa-trash-o deltrash" aria-hidden="true"></i> Delete
                             </li>
                         </ul>
                       </div>
                   {{/if}}
-
+                  sdfdsf
                   <div class="modal fade modaldelete" id="deleteDataModal-{{userCommentId}}" role="dialog">
                     <div class="modal-dialog">
                       <div class="modal-content">
@@ -427,9 +440,9 @@
                             <span>({{commentReplyLikeCount}})</span>
                         </span>
                         &nbsp;.&nbsp;
-                        <span class="usrCommentReply"> 
+                        <!-- <span class="usrCommentReply"> 
                             Reply
-                        </span>
+                        </span> -->
                       </div>
                   </div>
               {{/each}}
@@ -576,9 +589,9 @@
                             <span>({{commentReplyLikeCount}})</span>
                         </span>
                         &nbsp;.&nbsp;
-                        <span class="usrCommentReply"> 
+                        <!-- <span class="usrCommentReply"> 
                             Reply
-                        </span>
+                        </span> -->
                       </div>
                   </div>
               {{/each}}
