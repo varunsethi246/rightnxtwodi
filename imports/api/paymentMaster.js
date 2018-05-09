@@ -306,14 +306,14 @@ Meteor.methods({
 		if (process.env.NODE_ENV == 'development') {
 			var quickWalletUrl = 'https://uat.quikwallet.com';
 		  	var METEOR_URL = 'localhost:3000'; // your production server url
-		  	console.log('quickWalletUrl :',quickWalletUrl);
-		  	console.log('METEOR_URL :',METEOR_URL);
+		  	// console.log('quickWalletUrl :',quickWalletUrl);
+		  	// console.log('METEOR_URL :',METEOR_URL);
 		}else{
 			var quickWalletUrl = 'https://server.livquik.com';
 
 			var METEOR_URL = current;
-			console.log('quickWalletUrl :',quickWalletUrl);
-		  	console.log('METEOR_URL :',METEOR_URL);
+			// console.log('quickWalletUrl :',quickWalletUrl);
+		 //  	console.log('METEOR_URL :',METEOR_URL);
 		}
 
 		if(receiptObj.totalAmount){
@@ -332,7 +332,7 @@ Meteor.methods({
 
 			try {
 				if (Meteor.isServer) {
-					console.log('quickWalletUrl: ',quickWalletUrl);
+					// console.log('quickWalletUrl: ',quickWalletUrl);
 						var result = HTTP.call("POST", quickWalletUrl+"/api/partner/323/requestPayment",
 										{params: quickWalletInput});
 						if(result.data.status == 'success'){
