@@ -10,7 +10,7 @@
     {{#each todayTimings }}
       {{todayFromTime}} to {{todayToTime}}
     {{/each}}
-    {{#if todayTimings}}{{else}}<span class="busClosed">closed</span>{{/if}}
+    {{#if todayTimings}}{{else}}<span class="busClosed">Closed</span>{{/if}}
   </span>
   <br>
   <div class="timingData col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding">
@@ -24,7 +24,7 @@
               {{fromTime}} to {{toTime}}
             </div>
           {{/each}}
-          {{#if timing}}{{else}}<span class="busClosed">closed</span>{{/if}}
+          {{#if timing}}{{else}}<span class="busClosed">Closed</span>{{/if}}
         </div>
       </div>
     {{/each}}

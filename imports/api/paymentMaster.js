@@ -291,7 +291,6 @@ Meteor.methods({
 			"businessLink" : businessLink,
 			"invoiceNumber": parseInt(invoiceNumber),
 			"orderType"    :'Offer',
-			"current"	   : current,
 		});
 
 		if(receiptObj.totalAmount){
@@ -305,7 +304,7 @@ Meteor.methods({
 				"secret"   		:   "QbFMMdGFanNEkmdjeRnFJrUreJfjuqaAw",
 				"amount"   		:    grandTotal,
 				"udf1"			: receiptObj._id,
-				"redirecturl" 	: 'http://'+receiptObj.current+'/payment-response?orderId='+receiptObj._id+"&InvNo="+receiptObj.invoiceNumber+"&BusLink="+receiptObj.businessLink,
+				"redirecturl" 	: 'http://'+current+'/payment-response?orderId='+receiptObj._id+"&InvNo="+receiptObj.invoiceNumber+"&BusLink="+receiptObj.businessLink,
 			};
 
 			try {
