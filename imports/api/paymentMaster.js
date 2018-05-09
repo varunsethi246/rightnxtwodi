@@ -174,14 +174,14 @@ Meteor.methods({
 
 
 
-		console.log(process.env.NODE_ENV);
 		if (process.env.NODE_ENV == 'development') {
-		  var METEOR_URL = 'localhost:3000'; // your production server url
+			var quickWalletUrl = 'https://uat.quikwallet.com';
+		  	var METEOR_URL = 'localhost:3000'; // your production server url
 		}else{
-			var METEOR_URL = 'facealbum.in';
+			var quickWalletUrl = 'https://server.livquik.com';
+
+			var METEOR_URL = current;
 		}
-
-
 
 
 
@@ -203,7 +203,7 @@ Meteor.methods({
 			try {
 				console.log("Im trying");
 				if (Meteor.isServer) {
-						var result = HTTP.call("POST", "https://uat.quikwallet.com/api/partner/323/requestPayment",
+						var result = HTTP.call("POST", quickWalletUrl+"/api/partner/323/requestPayment",
 										{params: quickWalletInput});
 										console.log("result: ",result);
 						if(result.data.status == 'success'){
@@ -236,6 +236,15 @@ Meteor.methods({
 			}
 		}
 
+		if (process.env.NODE_ENV == 'development') {
+			var quickWalletUrl = 'https://uat.quikwallet.com';
+		  	var METEOR_URL = 'localhost:3000'; // your production server url
+		}else{
+			var quickWalletUrl = 'https://server.livquik.com';
+
+			var METEOR_URL = current;
+		}
+
 		if(paymentCheck.totalAmount){
 			var userId       	= Meteor.userId();
 			var userObj      	= Meteor.users.findOne({"_id":userId});
@@ -247,7 +256,7 @@ Meteor.methods({
 				"secret"   	:   "QbFMMdGFanNEkmdjeRnFJrUreJfjuqaAw",
 				"amount"   	:    grandTotal,
 				"udf1"		: 	paymentCheck._id,
-				"redirecturl" : 'http://'+current+'/paymentAds-response?payId='+paymentCheck._id+"&InvNo="+paymentCheck.invoiceNumber+"&BusLink="+paymentCheck.businessLink,
+				"redirecturl" : 'http://'+METEOR_URL+'/paymentAds-response?payId='+paymentCheck._id+"&InvNo="+paymentCheck.invoiceNumber+"&BusLink="+paymentCheck.businessLink,
 			};
 
 			console.log('quickWalletInput: ',quickWalletInput);
@@ -255,7 +264,8 @@ Meteor.methods({
 			try {
 				console.log("Im trying");
 				if (Meteor.isServer) {
-						var result = HTTP.call("POST", "https://uat.quikwallet.com/api/partner/323/requestPayment",
+
+						var result = HTTP.call("POST", quickWalletUrl+"/api/partner/323/requestPayment",
 										{params: quickWalletInput});
 										console.log("result: ",result);
 						if(result.data.status == 'success'){
@@ -293,6 +303,19 @@ Meteor.methods({
 			"orderType"    :'Offer',
 		});
 
+		if (process.env.NODE_ENV == 'development') {
+			var quickWalletUrl = 'https://uat.quikwallet.com';
+		  	var METEOR_URL = 'localhost:3000'; // your production server url
+		  	console.log('quickWalletUrl :',quickWalletUrl);
+		  	console.log('METEOR_URL :',METEOR_URL);
+		}else{
+			var quickWalletUrl = 'https://server.livquik.com';
+
+			var METEOR_URL = current;
+			console.log('quickWalletUrl :',quickWalletUrl);
+		  	console.log('METEOR_URL :',METEOR_URL);
+		}
+
 		if(receiptObj.totalAmount){
 			var userId       	= Meteor.userId();
 			var userObj      	= Meteor.users.findOne({"_id":userId});
@@ -304,12 +327,13 @@ Meteor.methods({
 				"secret"   		:   "QbFMMdGFanNEkmdjeRnFJrUreJfjuqaAw",
 				"amount"   		:    grandTotal,
 				"udf1"			: receiptObj._id,
-				"redirecturl" 	: 'http://'+current+'/payment-response?orderId='+receiptObj._id+"&InvNo="+receiptObj.invoiceNumber+"&BusLink="+receiptObj.businessLink,
+				"redirecturl" 	: 'http://'+METEOR_URL+'/payment-response?orderId='+receiptObj._id+"&InvNo="+receiptObj.invoiceNumber+"&BusLink="+receiptObj.businessLink,
 			};
 
 			try {
 				if (Meteor.isServer) {
-						var result = HTTP.call("POST", "https://uat.quikwallet.com/api/partner/323/requestPayment",
+					console.log('quickWalletUrl: ',quickWalletUrl);
+						var result = HTTP.call("POST", quickWalletUrl+"/api/partner/323/requestPayment",
 										{params: quickWalletInput});
 						if(result.data.status == 'success'){
 							var paymentUrl = result.data.data.url;
