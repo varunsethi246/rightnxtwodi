@@ -33,7 +33,9 @@
              
             <i class="fa fa-pencil revpencil" aria-hidden="true"></i>
             <span class="revws">Reviews</span>
-            <span class="revws countMargin">({{siderbarReviewCount}})</span>
+            {{#with siderbarReviewCount}}
+            <span class="revws countMargin">({{noofReviews}})</span>
+            {{/with}}
             
         </li>
     </a>
@@ -82,7 +84,9 @@
        
             <i class="fa fa-check-square squratng" aria-hidden="true"></i>
             <span class="ratng">Ratings</span>
-            <span class="ratng countMargin">({{ratingsCount}})</span>
+            {{#with ratingsCount}}
+            <span class="ratng countMargin">({{noofRatingData}})</span>
+            {{/with}}
                            
         </li>
     </a> 

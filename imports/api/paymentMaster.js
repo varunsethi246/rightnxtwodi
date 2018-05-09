@@ -174,11 +174,11 @@ Meteor.methods({
 
 
 
-
-		if (process.env.NODE_ENV === 'production') {
-		  let METEOR_URL = 'facealbum.in'; // your production server url
+		console.log(process.env.NODE_ENV);
+		if (process.env.NODE_ENV == 'development') {
+		  var METEOR_URL = 'localhost:3000'; // your production server url
 		}else{
-			let METEOR_URL = 'localhost:3000';
+			var METEOR_URL = 'facealbum.in';
 		}
 
 
@@ -190,6 +190,7 @@ Meteor.methods({
 			var userObj      	= Meteor.users.findOne({"_id":userId});
 			var mobileNumber 	= businessUser.ownerMobile;
 			var grandTotal 		= paymentCheck.totalAmount;
+			console.log("METEOR_URL: ",METEOR_URL);
 			var quickWalletInput = {
 				"partnerid"	:   "323",
 				"mobile"   	:   mobileNumber,

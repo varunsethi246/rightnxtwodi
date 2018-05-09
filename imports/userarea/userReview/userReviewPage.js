@@ -153,7 +153,7 @@ Template.userReview.helpers({
 		var returnReviewData = [];
 		var reviewDataTotalCount = Review.find({"userId":id},{sort: {reviewDate:-1}}).count();
 		var reviewData = Review.find({"userId":id},{sort: {reviewDate:-1},limit:limitReviews }).fetch();
-		console.log("reviewData: ",reviewData);
+		// console.log("reviewData: ",reviewData);
 		
 		if(reviewData){
 			if(reviewData.length < 5  || reviewData.length == reviewDataTotalCount){
@@ -567,13 +567,13 @@ Template.userReview.helpers({
 		var userId = Meteor.userId();
 		var businessUrl = this.businessLink;
 		// var businessLinkNew = Business.findOne({"businessLink":businessLinks});
-		console.log('businessUrl :',businessUrl);
+		// console.log('businessUrl :',businessUrl);
 		var ratingInt = Review.findOne({"userId" : userId,"businessLink":businessUrl});
-		console.log('ratingInt :',ratingInt);
+		// console.log('ratingInt :',ratingInt);
 		if(ratingInt){
 			// console.log("ratingInt = ", ratingInt);
 			var latestRating = ratingInt.rating;
-			console.log('latestRating:',latestRating);
+			// console.log('latestRating:',latestRating);
 			var intRating = parseInt(latestRating);
 			var balRating = latestRating - intRating;
 			var finalRating = intRating + balRating;
@@ -599,7 +599,7 @@ Template.userReview.helpers({
 				}
 			
 			}
-			console.log("ratingObj = ", ratingObj);
+			// console.log("ratingObj = ", ratingObj);
 
 			return ratingObj;
 		}else{
@@ -1760,6 +1760,7 @@ Template.userReview.events({
 		$('.reviewCancel-'+id).css('display','none');
 		$('.reviewBusSave-'+id).css('display','none');
 		$('.reviewImages-'+id).css('display','none');
+		$('.starRatingblock-'+id).css('display','none');
 		
 		$('.bus-page-edit-outer1-'+id).css('display','none');
 		$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
@@ -2009,6 +2010,7 @@ Template.userReview.events({
 		$('.reviewCancel-'+id).css('display','block');
 		$('.tagFrnd-'+id).css('display','block');
 		$('.reviewImages-'+id).css('display','block');
+		$('.starRatingblock-'+id).css('display','block');
 		
 		$('.reviewBusSave-'+id).css('display','block');
 		$('.bus-page-edit-outer1-'+id).css('display','inline');
@@ -2098,11 +2100,11 @@ Template.userReview.events({
 			var taggedPpl = tagedFriends;
 			
 			var starRating = $('.starRatingblock .fixStar1').length;
-			console.log('starRating time: ',starRating);
+			// console.log('starRating time: ',starRating);
 			starRating = starRating + $('.starRatingblock .fixStar2').length;
-			console.log('starRating time: ',starRating);
+			// console.log('starRating time: ',starRating);
 			var rating = parseFloat(starRating) / 2;
-			console.log('rating time: ', rating);
+			// console.log('rating time: ', rating);
 
 			if(filesR){
 				for(i = 0 ; i < filesR.length; i++){		
@@ -2166,6 +2168,7 @@ Template.userReview.events({
 							$('.editBoxCommentRev-'+id).css('display','none');
 							$('.reviewCancel-'+id).css('display','none');
 							$('.reviewBusSave-'+id).css('display','none');
+							$('.starRatingblock-'+id).css('display','none');
 							$('.bus-page-edit-outer1-'+id).css('display','none');
 							$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
 							$('.tagedFrndDivPre-'+id).css('display','block');

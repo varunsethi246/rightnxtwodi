@@ -65,11 +65,19 @@ Template.userSidebar.helpers({
 			}else{
 				id = Meteor.userId();
 			}
+			var count = 0;
 			var likesData = Likes.find({"userid":id}).fetch();	
 			if(likesData){
-				var likedDataReturn = {
-					noofLikes		: likesData.length,
-				}
+				for(i=0;i<likesData.length;i++){
+					var bussdata = Business.findOne({'_id':likesData[i].businessId,"status":'active'});
+						if(bussdata){
+							count++;
+						}
+					}
+					var likedDataReturn = {
+						noofLikes		: count,
+					}
+					// console.log("likedDataReturn:",likedDataReturn);
 				return likedDataReturn;
 			}
 		}else {
@@ -81,11 +89,20 @@ Template.userSidebar.helpers({
 			}else{
 				id = Meteor.userId();
 			}
+			var count = 0;
 			var likesData = Likes.find({"userid":id}).fetch();	
 			if(likesData){
-				var likedDataReturn = {
-					noofLikes		: likesData.length,
-				}
+				for(i=0;i<likesData.length;i++){
+					var bussdata = Business.findOne({'_id':likesData[i].businessId,"status":'active'});
+					// console.log('bussdata')
+						if(bussdata){
+							count++;
+						}
+					}
+					var likedDataReturn = {
+						noofLikes		: count,
+					}
+					// console.log("likedDataReturn 2:",likedDataReturn);
 				return likedDataReturn;
 			}
 		}
@@ -104,38 +121,51 @@ Template.userSidebar.helpers({
 			}else{
 				id = Meteor.userId();
 			}
+			var count = 0;
 			var bookmarkData = Bookmark.find({"userId":id}).fetch();
-			if(bookmarkData){	
-				var bookmarkDataReturn = {
-					noofBookmark		: bookmarkData.length,
+				if(bookmarkData){
+					for(i=0;i<bookmarkData.length;i++){
+						var bussdata = Business.findOne({'businessLink':bookmarkData[i].businessLink,"status":'active'});
+							if(bussdata){
+								count++;
+							}
+						}
+					var bookmarkDataReturn = {
+						noofBookmark		: count,
+					}
+					return bookmarkDataReturn;
 				}
-				return bookmarkDataReturn;
-			}else{
-				var bookmarkDataReturn = 0;
-				return bookmarkDataReturn;
-			}
-		}else {
-			$("html,body").scrollTop(0);
-			var id ='';
-			var url = FlowRouter.current().path;
-			var checkIdExists = url.split('/');
-			var data = {};
-			if(checkIdExists[2] != '' && checkIdExists[2]){
-				id = produceURLid(checkIdExists[2]);
-			}else{
-				id = Meteor.userId();
-			}
-			var bookmarkData = Bookmark.find({"userId":id}).fetch();
-			if(bookmarkData){	
-				var bookmarkDataReturn = {
-					noofBookmark		: bookmarkData.length,
+			}else {
+				$("html,body").scrollTop(0);
+				var id ='';
+				var url = FlowRouter.current().path;
+				var checkIdExists = url.split('/');
+				var data = {};
+				if(checkIdExists[2] != '' && checkIdExists[2]){
+					id = produceURLid(checkIdExists[2]);
+				}else{
+					id = Meteor.userId();
 				}
-				return bookmarkDataReturn;
-			}else{
-				var bookmarkDataReturn = 0;
-				return bookmarkDataReturn;
+				var count = 0;
+				var bookmarkData = Bookmark.find({"userId":id}).fetch();
+				if(bookmarkData){	
+					for(i=0;i<bookmarkData.length;i++){
+					var bussdata = Business.findOne({'businessLink':bookmarkData[i].businessLink,"status":'active'});
+					// consosle.log('bussdata 1:',bussdata);
+						if(bussdata){
+							count++;
+						}
+					}
+
+				// return likedDataReturn;	
+					var bookmarkDataReturn = {
+						noofBookmark		: count,
+					}
+					// console.log('bookmarkDataReturn 2 :',bookmarkDataReturn);
+
+					return bookmarkDataReturn;
+				}
 			}
-		}
 	
 	},
 
@@ -150,14 +180,18 @@ Template.userSidebar.helpers({
 			}else{
 				id = Meteor.userId();
 			}
+			count =0;
 			var beenThereData = BeenThere.find({"userId":id}).fetch();	
 			if(beenThereData){
+				for(i=0;i<beenThereData.length;i++){
+					var bussdata = Business.findOne({'businessLink':beenThereData[i].businessLink,"status":'active'});
+						if(bussdata){
+							count++;
+						}
+					}
 				var beenThereDataReturn = {
-					noofBeenThere		: beenThereData.length,
+					noofBeenThere		: count,
 				}
-				return beenThereDataReturn;
-			}else{
-				var beenThereDataReturn = 0;
 				return beenThereDataReturn;
 			}
 		}else {
@@ -170,14 +204,18 @@ Template.userSidebar.helpers({
 			}else{
 				id = Meteor.userId();
 			}
+			count = 0;
 			var beenThereData = BeenThere.find({"userId":id}).fetch();	
 			if(beenThereData){
+				for(i=0;i<beenThereData.length;i++){
+					var bussdata = Business.findOne({'businessLink':beenThereData[i].businessLink,"status":'active'});
+						if(bussdata){
+							count++;
+						}
+					}
 				var beenThereDataReturn = {
-					noofBeenThere		: beenThereData.length,
+					noofBeenThere		: count,
 				}
-				return beenThereDataReturn;
-			}else{
-				var beenThereDataReturn = 0;
 				return beenThereDataReturn;
 			}
 		}
@@ -326,8 +364,23 @@ Template.userSidebar.helpers({
 			}else{
 				id = Meteor.userId();
 			}
-			var ReviewData = Review.find({"userId":id}).count();
-			return ReviewData;
+			var count = 0;
+			var ReviewData = Review.find({"userId":id}).fetch();
+			if(ReviewData){
+				for(i=0;i<ReviewData.length;i++){
+					var bussdata = Business.findOne({'_id':ReviewData[i].businessLink,"status":'active'});
+					// console.log('bussdata')
+						if(bussdata){
+							count++;
+						}
+					}
+					var ReviewDataReturn = {
+						noofReviews		: count,
+					}
+					// console.log("ReviewDataReturn 2:",ReviewDataReturn);
+				return ReviewDataReturn;
+			}
+			// return ReviewData;
 		}else {
 			var id ='';
 			var url = FlowRouter.current().path;
@@ -338,8 +391,24 @@ Template.userSidebar.helpers({
 			}else{
 				id = Meteor.userId();
 			}
-			var ReviewData = Review.find({"userId":id}).count();
-			return ReviewData;
+			var count = 0;
+			var ReviewData = Review.find({"userId":id}).fetch();
+			// console.log('reviewdata :',ReviewData);
+			if(ReviewData){
+				for(i=0;i<ReviewData.length;i++){
+					var bussdata = Business.findOne({'businessLink':ReviewData[i].businessLink,"status":'active'});
+					// console.log('bussdata 1 :',bussdata);
+						if(bussdata){
+							count++;
+						}
+					}
+					var ReviewDataReturn = {
+						noofReviews		: count,
+					}
+					// console.log("ReviewDataReturn 2:",ReviewDataReturn);
+				return ReviewDataReturn;
+			}
+			// return ReviewData;
 		}
 	
 	},
@@ -355,13 +424,25 @@ Template.userSidebar.helpers({
 			}else{
 				id = Meteor.userId();
 			}
+			var count = 0;
 			var RatingData = Review.find({"userId":id}).fetch();	
 			if(RatingData){
-				var	noofRatingData   = RatingData.length;
-				return noofRatingData;
-			}else{
-				var noofRatingData = 0;
-				return noofRatingData;
+				for(i=0;i<RatingData.length;i++){
+					var bussdata = Business.findOne({'businessLink':RatingData[i].businessLink,"status":'active'});
+						if(bussdata){
+							count++;
+						}
+					}
+				var RatingDataReturn = {
+					noofRatingData		: count,
+				}
+				return RatingDataReturn;
+
+			// 	var	noofRatingData   = RatingData.length;
+			// 	return noofRatingData;
+			// }else{
+			// 	var noofRatingData = 0;
+			// 	return noofRatingData;
 			}
 		}else {
 			var id ='';
@@ -373,13 +454,25 @@ Template.userSidebar.helpers({
 			}else{
 				id = Meteor.userId();
 			}
+			var count = 0;
 			var RatingData = Review.find({"userId":id}).fetch();	
 			if(RatingData){
-				var	noofRatingData   = RatingData.length;
-				return noofRatingData;
-			}else{
-				var noofRatingData = 0;
-				return noofRatingData;
+				for(i=0;i<RatingData.length;i++){
+					var bussdata = Business.findOne({'businessLink':RatingData[i].businessLink,"status":'active'});
+						if(bussdata){
+							count++;
+						}
+					}
+				var RatingDataReturn = {
+					noofRatingData		: count,
+				}
+				return RatingDataReturn;
+
+			// 	var	noofRatingData   = RatingData.length;
+			// 	return noofRatingData;
+			// }else{
+			// 	var noofRatingData = 0;
+			// 	return noofRatingData;
 			}
 		}
 		
