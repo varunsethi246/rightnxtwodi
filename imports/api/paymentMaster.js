@@ -220,7 +220,7 @@ Meteor.methods({
 			}
 		}
 	},
-	'updateAdsPaymentOnline':function(businessLink){
+	'updateAdsPaymentOnline':function(businessLink,current){
 		var businessAds = BusinessAds.find({"businessLink":businessLink,"status":"new"}).fetch();
 		console.log("businessAds: ",businessAds);
 		var paymentCheck = Payment.findOne({"businessLink":businessLink,"orderType":"Ads","paymentStatus":"unpaid"});
@@ -247,7 +247,7 @@ Meteor.methods({
 				"secret"   	:   "QbFMMdGFanNEkmdjeRnFJrUreJfjuqaAw",
 				"amount"   	:    grandTotal,
 				"udf1"		: 	paymentCheck._id,
-				"redirecturl" : 'http://localhost:3000/paymentAds-response?payId='+paymentCheck._id+"&InvNo="+paymentCheck.invoiceNumber+"&BusLink="+paymentCheck.businessLink,
+				"redirecturl" : 'http://'+current+'/paymentAds-response?payId='+paymentCheck._id+"&InvNo="+paymentCheck.invoiceNumber+"&BusLink="+paymentCheck.businessLink,
 			};
 
 			console.log('quickWalletInput: ',quickWalletInput);
@@ -286,11 +286,12 @@ Meteor.methods({
 		);
 	},
 
-	'updateInvoiceforOnlinePayment':function(businessLink, invoiceNumber){
+	'updateInvoiceforOnlinePayment':function(businessLink, invoiceNumber,current){
 		var receiptObj = Payment.findOne({"vendorId" : Meteor.userId(),
 			"businessLink" : businessLink,
 			"invoiceNumber": parseInt(invoiceNumber),
 			"orderType"    :'Offer',
+			"current"	   : current,
 		});
 
 		if(receiptObj.totalAmount){
@@ -299,12 +300,12 @@ Meteor.methods({
 			var mobileNumber 	= userObj.profile.mobile;
 			var grandTotal 		= receiptObj.totalAmount;
 			var quickWalletInput = {
-				"partnerid"	:   "323",
-				"mobile"   	:   mobileNumber,
-				"secret"   	:   "QbFMMdGFanNEkmdjeRnFJrUreJfjuqaAw",
-				"amount"   	:    grandTotal,
-				"udf1"		: receiptObj._id,
-				"redirecturl" : 'http://localhost:3000/payment-response?orderId='+receiptObj._id+"&InvNo="+receiptObj.invoiceNumber+"&BusLink="+receiptObj.businessLink,
+				"partnerid"		:   "323",
+				"mobile"   		:   mobileNumber,
+				"secret"   		:   "QbFMMdGFanNEkmdjeRnFJrUreJfjuqaAw",
+				"amount"   		:    grandTotal,
+				"udf1"			: receiptObj._id,
+				"redirecturl" 	: 'http://'+receiptObj.current+'/payment-response?orderId='+receiptObj._id+"&InvNo="+receiptObj.invoiceNumber+"&BusLink="+receiptObj.businessLink,
 			};
 
 			try {

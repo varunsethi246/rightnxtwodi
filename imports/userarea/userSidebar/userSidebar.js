@@ -103,6 +103,8 @@ Template.userSidebar.helpers({
 						noofLikes		: count,
 					}
 					// console.log("likedDataReturn 2:",likedDataReturn);
+					var current = window.location.host;
+				console.log("window.location : ",current );
 				return likedDataReturn;
 			}
 		}
@@ -162,7 +164,7 @@ Template.userSidebar.helpers({
 						noofBookmark		: count,
 					}
 					// console.log('bookmarkDataReturn 2 :',bookmarkDataReturn);
-
+					
 					return bookmarkDataReturn;
 				}
 			}

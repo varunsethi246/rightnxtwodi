@@ -252,8 +252,10 @@ Template.adsInvoice.events({
 		console.log('data-busLink:',currentLink);
 		var currentVal = $(event.currentTarget).siblings('.bannerPayButtonRadio').val();
 		console.log('currentVal:',currentVal);
+		var current = window.location.host;
+		console.log("window.location : ",current );
 		if(currentVal == "online"){
-			Meteor.call("updateAdsPaymentOnline",currentLink,(error, result)=>{
+			Meteor.call("updateAdsPaymentOnline",currentLink,current,(error, result)=>{
 				if(result){
 					window.location = result;
 				}
