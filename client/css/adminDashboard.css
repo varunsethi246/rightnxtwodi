@@ -2318,10 +2318,17 @@ overflow-x:auto
 }
 
 .tableHeadColor {
-font-size:11px;
+font-size:13px;
 font-style:normal
 }
-
+.cursorPointerss{
+padding-right: 7px;
+    padding-left: 7px;
+}
+.paddingeye{
+	right: 22px;
+    top: 0px;
+}
 .businessCsv {
 margin-top:20px
 }
@@ -2891,4 +2898,7 @@ h4, .h4, h5, .h5, h6, .h6 {
 .saleheadbackground{
 	    background: #337ab7;
     color: #fff;
+}
+.fapdf{
+	    padding-left: 20px;
 }

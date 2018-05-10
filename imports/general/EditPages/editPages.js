@@ -22,7 +22,7 @@ Template.faqForm.onRendered( function() {
 Template.editPages.helpers({
 	editWebpages(){
 		var allPages = [];
-		allPages = GeneralContent.find({},{'contentBody':0, sort: {contentType: -1}}).fetch();
+		allPages = GeneralContent.find({},{'contentBody':0, sort: {contentType: 1}}).fetch();
 		if(allPages){
 			for(i=0;i<allPages.length;i++){
 				if(allPages[i].contentType == 'generalContent'){

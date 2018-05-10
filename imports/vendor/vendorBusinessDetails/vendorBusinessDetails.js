@@ -100,6 +100,7 @@ Template.businessLocation.onCreated(function() {
      	var businessLink = FlowRouter.getParam('businessurl');
 	    var businessData = Business.findOne({'businessLink':businessLink});
 	    if(businessData){
+	    	var area = businessData.businessArea;
 	    	var addr = businessData.businessAddress;
         	var city = businessData.businessCity;
         	var state = businessData.businessState;

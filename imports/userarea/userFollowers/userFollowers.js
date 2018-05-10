@@ -53,12 +53,12 @@ Template.userFollowers.helpers({
 	'followerCountDis':function(){
 		var userIdFoll = Session.get('finduserIdFoll');
 		var follCounts  = FollowUser.find({'followUserId': userIdFoll}).count();
-		console.log('follCounts : ',follCounts);
+		// console.log('follCounts : ',follCounts);
 		if (follCounts > 1) {
-			console.log('in if');
+			// console.log('in if');
 			return true;
 		}else{
-			console.log('in else');
+			// console.log('in else');
 			return false;
 		}
 
@@ -68,12 +68,12 @@ Template.userFollowers.helpers({
 		// var revieFollCounts  = FollowUser.find({'followUserId': userIdFoll}).count();
 		var revieFollCounts    = Review.find({'userId': userIdFoll}).count();
 
-		console.log('revieFollCounts : ',revieFollCounts);
+		// console.log('revieFollCounts : ',revieFollCounts);
 		if (revieFollCounts > 1) {
-			console.log('in if review' );
+			// console.log('in if review' );
 			return true;
 		}else{
-			console.log('in else review');
+			// console.log('in else review');
 			return false;
 		}
 
@@ -399,7 +399,7 @@ Template.suggestedFollowUsers.helpers ({
 			if(currentUserObj){
 				userCity = currentUserObj.profile.city;
 				var otherUsersData  = Meteor.users.find({"profile.city":userCity, "_id": { $nin: userIdArr }, "roles":{$nin: [ 'admin', 'Vendor']}}).fetch();
-				console.log("otherUsersData: ",otherUsersData);
+				// console.log("otherUsersData: ",otherUsersData);
 				
 				if(otherUsersData){
 					for(var i=0;i<otherUsersData.length;i++){
@@ -535,7 +535,7 @@ Template.findYourFriends.events({
 
 	"keyup #userSearch": function(e) {
 		var text = $(e.currentTarget).val().trim();
-		console.log("text: ",text);
+		// console.log("text: ",text);
 	    userSearch.search(text);
 	  },
 });

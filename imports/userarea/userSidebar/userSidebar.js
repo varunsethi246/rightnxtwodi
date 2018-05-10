@@ -104,7 +104,7 @@ Template.userSidebar.helpers({
 					}
 					// console.log("likedDataReturn 2:",likedDataReturn);
 					var current = window.location.host;
-				console.log("window.location : ",current );
+				// console.log("window.location : ",current );
 				return likedDataReturn;
 			}
 		}
