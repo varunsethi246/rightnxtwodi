@@ -35,6 +35,19 @@ $(document).on('click',function(){
 	    $('.loginPassword').val('');
 	});
 });
+// $(document).on('click',function(){
+// 	$(function(){
+// 		// alert('hi');
+// 	    $(".showreviewdiv").slice(0, 1).show(); // select the first ten
+// 	    $("#loadmorediv").click(function(e){ // click event for load more
+// 	        e.preventDefault();
+// 	        $(".showreviewdiv:hidden").slice(0, 1).show(); // select next 10 hidden divs and show them
+// 	        if($(".showreviewdiv:hidden").length == 0){ // check if any hidden divs still exist
+// 	            alert("No more divs"); // alert if there are none left
+// 	        }
+// 	    });
+// 	});
+// });
 
 Meteor.startup(function () {
   TimeSync.loggingEnabled = false;

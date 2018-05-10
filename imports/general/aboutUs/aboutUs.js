@@ -13,7 +13,7 @@ Template.aboutUs.helpers({
 	welcomeData(){
 		var currentURL = FlowRouter.current().path;
 		var splitUlr = currentURL.split('/');
-		var welcome = GeneralContent.findOne({"url": splitUlr[1] , "tabName": "COMPANY" , "sectionHeading": "Welcome to RightNxt"});
+		var welcome = GeneralContent.findOne({"url": splitUlr[1] , "tabName": "COMPANY" , "sectionHeading": "Welcome to rrightsNXT"});
 		return welcome;
 	},
 

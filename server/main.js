@@ -56,6 +56,10 @@ import '../imports/api/discountMaster.js';
 import '../imports/api/businessBannerMaster.js';
 import '../imports/api/businessAdsMaster.js';
 
+// ============================
+//      quickwallet
+// ============================
+import '../imports/api/quickwalletDetails.js';
 
 
 // Signup Setting

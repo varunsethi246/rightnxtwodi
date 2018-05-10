@@ -9,6 +9,7 @@ import { CompanySettings } from './companysettingsAPI.js';
 import { BusinessBanner } from '/imports/api/businessBannerMaster.js';
 import { BusinessAds } from '/imports/api/businessAdsMaster.js';
 import { Business } from '/imports/api/businessMaster.js';
+import { QuickwalletDetails } from '/imports/api/quickwalletDetails.js';
 
 
 
@@ -186,15 +187,17 @@ Meteor.methods({
 
 
 		if(paymentCheck.totalAmount){
+			var quickwalletDetail 	= QuickwalletDetails.findOne({'_id':'2'});
+			
 			var userId       	= Meteor.userId();
 			var userObj      	= Meteor.users.findOne({"_id":userId});
 			var mobileNumber 	= businessUser.ownerMobile;
 			var grandTotal 		= paymentCheck.totalAmount;
 			console.log("METEOR_URL: ",METEOR_URL);
 			var quickWalletInput = {
-				"partnerid"	:   "323",
+				"partnerid"	:   quickwalletDetail.partnerid,
 				"mobile"   	:   mobileNumber,
-				"secret"   	:   "QbFMMdGFanNEkmdjeRnFJrUreJfjuqaAw",
+				"secret"   	:   quickwalletDetail.secret,
 				"amount"   	:    grandTotal,
 				"udf1"		: 	paymentCheck._id,
 				"redirecturl" : 'http://'+METEOR_URL+'/paymentAds-response?payId='+paymentCheck._id+"&InvNo="+paymentCheck.invoiceNumber+"&BusLink="+paymentCheck.businessLink,
@@ -246,14 +249,16 @@ Meteor.methods({
 		}
 
 		if(paymentCheck.totalAmount){
+			var quickwalletDetail 	= QuickwalletDetails.findOne({'_id':'2'});
+
 			var userId       	= Meteor.userId();
 			var userObj      	= Meteor.users.findOne({"_id":userId});
 			var mobileNumber 	= businessUser.ownerMobile;
 			var grandTotal 		= paymentCheck.totalAmount;
 			var quickWalletInput = {
-				"partnerid"	:   "323",
+				"partnerid"	:   quickwalletDetail.partnerid,
 				"mobile"   	:   mobileNumber,
-				"secret"   	:   "QbFMMdGFanNEkmdjeRnFJrUreJfjuqaAw",
+				"secret"   	:   quickwalletDetail.secret,
 				"amount"   	:    grandTotal,
 				"udf1"		: 	paymentCheck._id,
 				"redirecturl" : 'http://'+METEOR_URL+'/paymentAds-response?payId='+paymentCheck._id+"&InvNo="+paymentCheck.invoiceNumber+"&BusLink="+paymentCheck.businessLink,
@@ -317,17 +322,19 @@ Meteor.methods({
 		}
 
 		if(receiptObj.totalAmount){
-			var userId       	= Meteor.userId();
-			var userObj      	= Meteor.users.findOne({"_id":userId});
-			var mobileNumber 	= userObj.profile.mobile;
-			var grandTotal 		= receiptObj.totalAmount;
-			var quickWalletInput = {
-				"partnerid"		:   "323",
+			var quickwalletDetail 	= QuickwalletDetails.findOne({'_id':'2'});
+			// console.log('quickwalletDetail :',quickwalletDetail);
+			var userId       		= Meteor.userId();
+			var userObj      		= Meteor.users.findOne({"_id":userId});
+			var mobileNumber 		= userObj.profile.mobile;
+			var grandTotal 			= receiptObj.totalAmount;
+			var quickWalletInput 	= {
+				"partnerid"		:   quickwalletDetail.partnerid,
 				"mobile"   		:   mobileNumber,
-				"secret"   		:   "QbFMMdGFanNEkmdjeRnFJrUreJfjuqaAw",
+				"secret"   		:   quickwalletDetail.secret,
 				"amount"   		:    grandTotal,
-				"udf1"			: receiptObj._id,
-				"redirecturl" 	: 'http://'+METEOR_URL+'/payment-response?orderId='+receiptObj._id+"&InvNo="+receiptObj.invoiceNumber+"&BusLink="+receiptObj.businessLink,
+				"udf1"			: 	receiptObj._id,
+				"redirecturl" 	: 	'http://'+METEOR_URL+'/payment-response?orderId='+receiptObj._id+"&InvNo="+receiptObj.invoiceNumber+"&BusLink="+receiptObj.businessLink,
 			};
 
 			try {
