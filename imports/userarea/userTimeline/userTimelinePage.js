@@ -540,20 +540,21 @@ Template.userSuggestion.events({
 Template.userTimeline.onRendered(function(){
 
 	$(document).ready(function(){
-		$('.userCommentWrapper').each(function(){
-			var i = 0;
-			$(this).children('.commentReplyArr').each(function(){
-				if(i>1){
-					$(this).hide();
-					console.log('this :',$(this).attr('class'));
+		Meteor.setTimeout(()=>{
+			$('.userCommentWrapper').each(function(){
+				var i = 0;
+				$(this).children('.commentReplyArr').each(function(){
+					if(i>1){
+						$(this).hide();
+						console.log('this :',$(this).attr('class'));
+					}
+					i++;
+				});
+				if($(this).children('.showreplyCmt').length == 0){
+					$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
 				}
-				i++;
-			});
-			if($(this).children('.showreplyCmt').length == 0){
-				$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
-			}
-		});
-
+			});			
+		},1000);
 	});
 
 });

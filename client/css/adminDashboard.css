@@ -767,7 +767,7 @@ position:absolute;
 background:#fff;
 width:auto;
 height:1500px;
-top:12%;
+top:20%;
 margin-right:15px;
 border-top:5px solid #3c8dbc;
 border-radius:5px;
@@ -863,9 +863,16 @@ padding-bottom:2%
 }
 
 hr {
-width:100%;
+/*width:100%;*/
+/*margin-top: -17px;*/
 margin-top:0!important;
 margin-bottom:0!important
+}
+.CreateStaffOne{
+	margin-top: 35px;
+}
+.marginQuery{
+	     margin-left: 30%; 
 }
 
 .masterNavTab>li {
@@ -2904,4 +2911,10 @@ h4, .h4, h5, .h5, h6, .h6 {
 }
 .fapdf{
 	    padding-left: 20px;
+}
+.RevEditBoxTimeline{
+	margin-right: 19px;
+}
+.saleheadback{
+	margin-top: 15px;
 }

@@ -157,7 +157,6 @@ input:valid {
   border:0;
   margin-right: 1% !important;
 }
-
 .option-input:hover { background: #9faab7; border:0;}
 
 .option-input:checked { background: #40e0d0; border:0; }
@@ -430,7 +429,7 @@ click-wave { 0% {
 }*/
 
 .editFormUnderline{
-  width: 27%;
+  /*width: 27%;*/
 }
 .signUpInput{
   border: #2e6da4;
