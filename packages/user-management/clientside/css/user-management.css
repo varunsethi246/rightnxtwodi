@@ -28,7 +28,14 @@
   text-decoration: none;
   color: #fff;
 }
-
+.umHeader {
+  text-align: center;
+  font-size: 15px;
+}
+.addRoleNew{
+      width: 50%;
+    margin-left: 25%;
+}
 .clear {
     clear: both;
 }
@@ -386,6 +393,7 @@ click-wave { 0% {
   padding-left: 0;
   font-size: 15px;
   font-weight: 900;
+  font-family: 'PROXIMANOVA-REGULAR';
 }
 
 /*Error Page*/

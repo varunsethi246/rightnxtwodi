@@ -20,7 +20,7 @@ Template.UMlistOfUsers.helpers({
   users:function() {
     var userCounts  = Counts.get('noOfUser');
     // userCounts = parseInt(userCounts);
-    console.log('userCounts ',userCounts);
+    // console.log('userCounts ',userCounts);
       if (userCounts > 10) {
         $('.loadMoreRows50').addClass('showMore50').removeClass('hideMore50');
       }else if(userCounts > 100){
@@ -40,16 +40,16 @@ Template.UMlistOfUsers.helpers({
     // console.log("roleSetget : " + roleSetVar);
     var user       =  Meteor.users.find({},{ limit: listLimit}).fetch();
     if(user){
-      console.log('print1');
+      // console.log('print1');
       var userCount =  user.length;
-      console.log('userCount ', userCount);
+      // console.log('userCount ', userCount);
       if(roleSetVar){ 
-        console.log('roleSetVar');
+        // console.log('roleSetVar');
         if(roleSetVar == 'all'){
-          console.log('roleSetVar all');
+          // console.log('roleSetVar all');
 
           for(i=0;i<userCount;i++){
-            console.log('user Data ', user[i]);
+            // console.log('user Data ', user[i]);
             if(user[i].status){
               if(user[i].status.lastLogin){
                 roleSetArray.push({
@@ -82,12 +82,12 @@ Template.UMlistOfUsers.helpers({
                   'lastLogin'             : '',
                 });
             }
-            console.log('roleSetArray ',roleSetArray);
+            // console.log('roleSetArray ',roleSetArray);
           }//roleSetVar all loop
         }else{
-          console.log('else roleSetVar all'); 
+          // console.log('else roleSetVar all'); 
             for(i=0;i<userCount;i++){
-            console.log('user Data ', user[i]);
+            // console.log('user Data ', user[i]);
               
               if ( Roles.userIsInRole( user[i]._id, roleSetVar ) ) {
                 if(user[i].status){
@@ -123,15 +123,15 @@ Template.UMlistOfUsers.helpers({
                   });
               }
             }
-            console.log('roleSetArray1 ',roleSetArray);
+            // console.log('roleSetArray1 ',roleSetArray);
 
           }
 
         }   
       }else{
-        console.log('else roleSetVar');
+        // console.log('else roleSetVar');
           for(i=0;i<userCount;i++){
-            console.log('user ',user[i]);
+            // console.log('user ',user[i]);
             if(user[i].status){
               if(user[i].status.lastLogin){
 
@@ -143,7 +143,7 @@ Template.UMlistOfUsers.helpers({
                   'createdAt'             : user[i].createdAt,
                   'lastLogin'             : user[i].status.lastLogin.date,
                 });
-                console.log('roleSetArray1 ',roleSetArray);
+                // console.log('roleSetArray1 ',roleSetArray);
 
                 // console.log('true: ',user[i]._id);
               }else{
@@ -167,11 +167,11 @@ Template.UMlistOfUsers.helpers({
                   'lastLogin'             : '',
                 });
             }
-            console.log('roleSetArray1 ',roleSetArray);
+            // console.log('roleSetArray1 ',roleSetArray);
             
           }
       }
-      console.log('roleSetArray 1',roleSetArray);
+      // console.log('roleSetArray 1',roleSetArray);
       return roleSetArray;
     } 
     
@@ -292,7 +292,7 @@ Template.UMlistOfUsers.events({
   			break;
 
   		case 'cancel_selected':
-        var confirmDelete = window.confirm("Are you sure you want to remove this record?"+ Meteor.users.find({'_id' : checkedUsersList}));
+        var confirmDelete = window.confirm("Are you sure you want to remove this record?");
 		  	if(confirmDelete) {
 		  		Meteor.call('deleteSelectedUser', checkedUsersList, function(error, result){
           if(error){
