@@ -115,7 +115,7 @@ Template.jobList.helpers({
 		// var todayDate = moment(new Date()).format('YYYY-MM-DD');
 		// var todayMonth = (moment(todayDate).month())+1;
 
-		allPages = Newjob.find({}).fetch();
+		allPages = Newjob.find({},{sort:{createdAt:-1}}).fetch();
 		if(allPages){
 			for(i=0;i<allPages.length;i++){
 

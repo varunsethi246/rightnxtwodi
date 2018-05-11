@@ -1,6 +1,6 @@
 <template name="careerJoinUsForm ">
 	<div class="careerForms webpageForm careerJoinForm">
-		<h1 class="">Career Application</h1>
+		<h1 class="">Job Applicants</h1>
 		<hr class="webpageFormUnderline">
 		<table class="table table-hover table-striped">
 			<thead>
@@ -8,9 +8,9 @@
 					<th>Name</th>
 					<th>Email</th>
 					<th>Mobile No.</th>
-					<th>Date of Applied</th>
+					<th>Date of Application</th>
 					<th>Qualification</th>
-					<th>Post For Apply</th>
+					<th>Post applied for</th>
 					<th>Resume</th>
 					<th>Action</th>
 				</tr>
@@ -26,7 +26,7 @@
 						<td class="topCareer">{{PostForApply}}</td>
 						<td class="iCareer">
 							<a href="{{resume.url}}" download title="Download resume">
-  								<i class="fa fa-download fa-2x {{#if resume.url}}careerColorOrange{{else}}careerColorGrey{{/if}}" aria-hidden="true" title="{{#if resume.url}}Download resume{{else}}Resume not available{{/if}}"></i>
+  								<i class="fa fa-download fa-2x {{#if resume.url}}careerColorOrange{{else}}careerColorGrey{{/if}}" aria-hidden="true" title="{{#if resume.url}}Download Resume{{else}}Resume not available{{/if}}"></i>
 							</a>
 						</td>
 						<td id="careerData">

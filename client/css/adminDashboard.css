@@ -2332,7 +2332,9 @@ padding-right: 7px;
 .businessCsv {
 margin-top:20px
 }
-
+.modalheightHelpus{
+	    height: 130px;
+}
 .areaStaes.error,.stateBorder.error,.areaCitys.error,.stateSelect.error,.citySelect.error,.areaMasterSelect.error,.pinCodess.error {
 border:1px solid red
 }

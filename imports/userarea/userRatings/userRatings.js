@@ -97,31 +97,57 @@ Template.userRatings.helpers({
 		return ratingObj;
 	},
 	ratingsDataCount(){
-		var id = '';
-		var url = FlowRouter.current().path;
-		var checkIdExists = url.split('/');
-		var data = {};
-		if(checkIdExists[2] != '' && checkIdExists[2]){
-			id = produceURLid(checkIdExists[2]);
-		}else{
-			id = Meteor.userId();
-		}
-		var userId  = id;
-		var ratingInt = Review.find({"userId" : userId}).fetch();
-		var ratingCount = '';
-		if(ratingInt){
-			ratingCount = ratingInt.length;
-			var count = {
-				"ratingCount" : ratingCount,
+		if(Session.get("updateUserTimeline")==true){
+			var id ='';
+			var url = FlowRouter.current().path;
+			var checkIdExists = url.split('/');
+			var data = {};
+			if(checkIdExists[2] != '' && checkIdExists[2]){
+				id = produceURLid(checkIdExists[2]);
+			}else{
+				id = Meteor.userId();
 			}
-			return count;
-
-		}else{
-			var count = {
-				"ratingCount" : 0,
+			var count = 0;
+			var RatingData = Review.find({"userId":id}).fetch();	
+			if(RatingData){
+				for(i=0;i<RatingData.length;i++){
+					var bussdata = Business.findOne({'businessLink':RatingData[i].businessLink,"status":'active'});
+						if(bussdata){
+							count++;
+						}
+					}
+				var RatingDataReturn = {
+					noofRatingData		: count,
+				}
+				// console.log(RatingDataReturn)
+				return RatingDataReturn;
 			}
-			return count;
+		}else {
+			var id ='';
+			var url = FlowRouter.current().path;
+			var checkIdExists = url.split('/');
+			var data = {};
+			if(checkIdExists[2] != '' && checkIdExists[2]){
+				id = produceURLid(checkIdExists[2]);
+			}else{
+				id = Meteor.userId();
+			}
+			var count = 0;
+			var RatingData = Review.find({"userId":id}).fetch();	
+			if(RatingData){
+				for(i=0;i<RatingData.length;i++){
+					var bussdata = Business.findOne({'businessLink':RatingData[i].businessLink,"status":'active'});
+						if(bussdata){
+							count++;
+						}
+					}
+				var RatingDataReturn = {
+					noofRatingData		: count,
+				}
+				// console.log(RatingDataReturn)
 
+				return RatingDataReturn;
+			}
 		}
 
 	}
