@@ -238,7 +238,7 @@ margin-top:10px
 }
 
 .searchBusinessList input[type=text]:focus {
-width:50%
+width:90%
 }
 
 .searchBusinessList span {
@@ -859,9 +859,13 @@ margin:1% 15px 30px
 border:none!important;
 padding-right:0;
 padding-left:0;
-padding-bottom:2%
+padding-bottom:2%;
+padding-top:1%;
 }
-
+.catClose{
+	    color: black;
+    margin-right: 1px;
+}
 hr {
 /*width:100%;*/
 /*margin-top: -17px;*/
@@ -998,10 +1002,12 @@ word-wrap:break-word
 }
 
 .plusEdit {
-margin-right:15px;
+margin-right:7px;
 cursor:pointer
 }
-
+.fa-question-circle{
+	cursor: pointer;
+}
 .levelTable > h3 {
 text-align:center;
 margin-bottom:2%
@@ -2843,7 +2849,7 @@ margin-left: 10%;
 
 .nav-pills>li>a {
     border-radius: 0;
-    border-top: 3px solid transparent;
+    border-top: 1px solid #000;
     color: #444;
 }
 .salesTab {

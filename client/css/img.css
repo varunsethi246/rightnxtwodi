@@ -196,8 +196,11 @@ width:7px
 width:125px
 }
 
-.catgTableAction {
+/*.catgTableAction {
 width:35px
+}*/
+.catgTableAction {
+width:0px
 }
 
 .categoryLevel1Show,.categoryLevel2Show,.categoryLevel3Show,.categoryLevel4Show {

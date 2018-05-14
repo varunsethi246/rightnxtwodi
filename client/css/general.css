@@ -2318,8 +2318,16 @@ text-decoration:none
 color:blue
 }
 
-.othermodal .close {
+/*.othermodal .close {
 margin-top:-3%
+}*/
+.othermodal .close {
+    margin-top: -1%;
+    position: absolute;
+    right: 28px;
+}
+.othermodal .close :hover {
+    color:black;
 }
 
 .uploadpicvendor h4 {
