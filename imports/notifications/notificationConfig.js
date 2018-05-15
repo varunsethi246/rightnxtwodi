@@ -27,7 +27,7 @@ Template.notificationConfig.events({
 			if(error){
 				Bert.alert('Something went wrong :',error);
 			}else{
-				Bert.alert('Updated Successfully!','success','growl-top-right')
+				Bert.alert('Updated Successfully!','success','growl-top-right');
 			}
 		})
 	},

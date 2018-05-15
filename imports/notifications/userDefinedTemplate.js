@@ -26,17 +26,21 @@ Template.userDefinedTemplate.events({
 	event.preventDefault();
 	var toVar = $('.tofield').val();
 	var subject = $('.subjectfield').val();
-	var body = $('#mailContent').summernote('code');
-	var from  = 'social@rightnxt.com';
-	var splitTo = toVar.split(',');
-	for(i=0 ; i<splitTo.length ; i++){
-		var to = splitTo[i];
-		Meteor.call('sendEmailRightNxt',to , from, subject ,body);
-	}//i
-	Bert.alert("Mail Sent!",'success', 'growl-top-right');
-	$('.tofield').val('');
-	$('.subjectfield').val('');
-	$('#mailContent').summernote('code','');
+	if (subject != '') {
+		var body = $('#mailContent').summernote('code');
+		var from  = 'social@rightnxt.com';
+		var splitTo = toVar.split(',');
+		for(i=0 ; i<splitTo.length ; i++){
+			var to = splitTo[i];
+			Meteor.call('sendEmailRightNxt',to , from, subject ,body);
+		}//i
+		Bert.alert("Mail Sent!",'success', 'growl-top-right');
+		$('.tofield').val('');
+		$('.subjectfield').val('');
+		$('#mailContent').summernote('code','');
+	}else{
+		Bert.alert('Please enter subject.','danger','growl-top-right');
+	}
 },
 
 });

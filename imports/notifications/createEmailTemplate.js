@@ -78,39 +78,44 @@ Template.createEmailTemplate.events({
 
 	},
 	
-	'click .sendtxtmsgbtn':function(event){
+	'submit .newTemplateForm':function(event){
 		event.preventDefault();
 		var templateType     = $('.templateType').val();
 		var templateName     = $('.templateName').val();
 		var subject          = $('.subject').val();
 		var emailContent     = $('#messageContent').summernote('code');
+		console.log('emailContent: ',emailContent);
+		if (emailContent != "<p><br></p>" && emailContent != "") {
+			var NotificationData = NotificationTemplate.findOne({'templateType':templateType,'templateName':templateName});
+			if(NotificationData){
+				swal("Template Name Already Exist");
+			}else if(templateType == 'Notification' || templateType == 'SMS'){
+				Meteor.call('insertTemplate',templateType,templateName,emailContent,function(error,result){
+		        	if(error){
+		        		console.log(error.reason);
+		        	}else if(result){
+		        		Bert.alert("Successfully Inserted..!!");
+		        	}
+		        });	
 
-		var NotificationData = NotificationTemplate.findOne({'templateType':templateType,'templateName':templateName});
-		if(NotificationData){
-			swal("Template Name Already Exist");
-		}else if(templateType == 'Notification' || templateType == 'SMS'){
-			Meteor.call('insertTemplate',templateType,templateName,emailContent,function(error,result){
-	        	if(error){
-	        		console.log(error.reason);
-	        	}else if(result){
-	        		Bert.alert("Successfully Inserted..!!");
-	        	}
-	        });	
+		        $('.templateName').value  = '';
+		        $('#messageContent').val('');
+			}else{
+				Meteor.call('insertNewTemplate',templateType,templateName,subject,emailContent,function(error,result){
+		        	if(error){
+		        		console.log(error.reason);
+		        	}else if(result){
+		        		Bert.alert("Successfully Inserted..!!");
+		        	}
+		        });	
 
-	        $('.templateName').value  = '';
-	        $('#messageContent').summernote('code','');
+		        $('.templateName').val('');
+		        $('.subject').val('');
+		        $('#messageContent').val('');
+			}
 		}else{
-			Meteor.call('insertNewTemplate',templateType,templateName,subject,emailContent,function(error,result){
-	        	if(error){
-	        		console.log(error.reason);
-	        	}else if(result){
-	        		Bert.alert("Successfully Inserted..!!");
-	        	}
-	        });	
-
-	        $('.templateName').val('');
-	        $('.subject').val('');
-	        $('#messageContent').summernote('code','');
+		        Bert.alert("Please insert message..!");
+			
 		}
 
         
@@ -277,9 +282,20 @@ Template.viewTemplate.events({
 				console.log(error);
 			}else{
 				console.log('Deleted!');
+	        	Bert.alert('Deleted Successfully','success','growl-top-right');
+
 			}
-		})
-	}
+		});
+	},
+	'click .smsPill':function(){
+		$('.smsValue').val('');
+	},
+	'click .NotificationPill':function(){
+		$('.notificationValue').val('');
+	},
+	'click .EmailPill':function(){
+		$('.emailValue').val('');
+	},
 
 	// clickTemplate(){
 	//   $(".showTemplate").slideToggle( "slow");

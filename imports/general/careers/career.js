@@ -278,6 +278,15 @@ Template.jobApplicationForm.events({
 });
 
 Template.AddNewJobForm.helpers({
+	'changeJobFormTitle':function(){
+		var id = Session.get('id');
+		if(id){
+			return "Edit Post Job";
+		}else{
+			return "Add New Job";
+		}
+
+	},
 	stateData: function(){
 		var state = State.find({"status":"active"}).fetch();
 		return state;
@@ -363,8 +372,10 @@ Template.AddNewJobForm.events({
 
 						$('#jobFormState').find('option:first').attr('selected','true');
 						$('#jobFormState').find('option:first').next().removeAttr('selected');
-
 						$('#inactiveOk').removeAttr('style');
+
+						Session.set('id',"");
+
 					}
 				});
 			}

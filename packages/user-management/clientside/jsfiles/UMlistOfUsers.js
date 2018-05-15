@@ -279,6 +279,8 @@ Template.UMlistOfUsers.events({
 		  	Meteor.call('blockSelectedUser', checkedUsersList, function(error, result){
           if(result){
             Bert.alert('User Blocked Successfully','success','growl-top-right');
+          }else{
+            Bert.alert('Select Username','danger','growl-top-right');
           }
         });
   			break;
@@ -287,6 +289,8 @@ Template.UMlistOfUsers.events({
 		  	Meteor.call('activeSelectedUser', checkedUsersList, function(error, result){
           if(result){
             Bert.alert('User Activated Successfully','success','growl-top-right');
+          }else{
+            Bert.alert('Select Username','danger','growl-top-right');
           }
         });
   			break;
@@ -306,10 +310,12 @@ Template.UMlistOfUsers.events({
 
   		case 'add':
         Meteor.call('addRoleToUser', role, checkedUsersList, function(error, result){
-          if(error){
-            // nothing
-          } else{
+          if(result){
             Bert.alert('Role Added Successfully','success','growl-top-right');
+            // nothing
+          } 
+          else{
+            Bert.alert('Select Username','danger','growl-top-right');
           }
         });
 
@@ -317,10 +323,10 @@ Template.UMlistOfUsers.events({
 
   		case 'remove':
         Meteor.call('removeRoleFromUser', role, checkedUsersList, function(error, result){
-          if(error){
-            // nothing
-          } else{
+          if(result){
             Bert.alert('Role Removed Successfully','success','growl-top-right');
+          } else{
+            Bert.alert('Select Username','danger','growl-top-right');
           }
         });
   			break;

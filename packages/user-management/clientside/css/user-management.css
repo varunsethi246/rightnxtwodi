@@ -384,8 +384,12 @@ click-wave { 0% {
 .editUser{
   border: 0;
   background: 0;
-  font-size: 20px;
+  /*font-size: 20px;*/
   color: #337ab7;
+}
+.userDel{
+  color:red!important;
+  /*font-size: 0px!important;*/
 }
 
 .selectTitle{
