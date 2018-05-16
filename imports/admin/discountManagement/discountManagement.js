@@ -12,6 +12,9 @@ Template.discountManagement.events({
 		    var id = Session.get("id");
 			var rate     = $('#price').val();
 			var discount = $('#discount').val();
+			console.log('id :' ,id);
+			console.log('rate :',rate);
+			console.log('discount :', discount);
 			if(id){
 				Meteor.call('updateDiscount',id,rate,discount,function(error,result){
 					if(error){
@@ -21,9 +24,10 @@ Template.discountManagement.events({
 						$('#discount').val('');
 						$('#price').focus();
 
+						delete Session.keys['id'];
 					}
-				})
-			}else{
+				});
+			}else if(rate != '' && discount != ''){
 				Meteor.call('insertDiscount',rate,discount,function(error,result){
 					if(error){
 						console.log(error);
@@ -110,7 +114,7 @@ Template.positionManagement.events({
 			e.preventDefault();
 			var id = Session.get("positionId");
 			var position = $('.selectPosition').val();
-
+			console.log('position :',position);
 			var positionAdded = '';
 			var positionTrue = false;
 			var posId = id;
@@ -130,7 +134,7 @@ Template.positionManagement.events({
 
 
 			var rate     = $('#rate').val();
-			if((id || positionTrue)&&position!='-- Select --'){
+			if((id || positionTrue) && position != '-- Select --' && position != null){
 				Meteor.call('updatePosition',posId,position,rate,function(error,result){
 					if(error){
 						console.log(error);
@@ -143,7 +147,7 @@ Template.positionManagement.events({
 					}
 				})
 			}else{
-				if(position!='-- Select --'){
+				if(position != '-- Select --' && position != null){
 					Meteor.call('insertPosition',position,rate,function(error,result){
 						if(error){
 							console.log(error);
