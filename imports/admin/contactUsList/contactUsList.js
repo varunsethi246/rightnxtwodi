@@ -93,6 +93,7 @@ Template.contactUsList.events({
 		if(tr){
 		  for (var i=0; i<tr.length; i++) {
 		    var td = tr[i].getElementsByTagName("td")[0];
+		    console.log('td',td);
 		    if(td) {
 		      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
 		        tr[i].style.display = "";
@@ -102,6 +103,8 @@ Template.contactUsList.events({
 		    }
 
 		    var td = tr[i].getElementsByTagName("td")[3];
+		    console.log('td 2',td);
+
 		    if(td) {
 		      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
 		        tr[i].style.display = "";

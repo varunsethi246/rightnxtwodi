@@ -90,6 +90,7 @@ Template.createEmailTemplate.events({
 			if(NotificationData){
 				swal("Template Name Already Exist");
 			}else if(templateType == 'Notification' || templateType == 'SMS'){
+				console.log('in notification');
 				Meteor.call('insertTemplate',templateType,templateName,emailContent,function(error,result){
 		        	if(error){
 		        		console.log(error.reason);
@@ -281,9 +282,9 @@ Template.viewTemplate.events({
 			if(error){
 				console.log(error);
 			}else{
-				console.log('Deleted!');
+				// console.log('Deleted!');
 	        	Bert.alert('Deleted Successfully','success','growl-top-right');
-
+	        	$('.modal-backdrop').hide();
 			}
 		});
 	},
