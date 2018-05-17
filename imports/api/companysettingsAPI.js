@@ -81,7 +81,7 @@ Meteor.methods({
 	'insertCompanyLocations':function(companyLocationFormValue){
 			// var address = Session.get("companyAddress");
 			var userId = CompanySettings.findOne({"companyId" : 101});
-			if(userId){			
+			if(userId && companyLocationFormValue.companyLocation !="" && companyLocationFormValue.companyAddress !=""){			
 				CompanySettings.update({"companyId" : 101},
 					{$push:{ companyLocationsInfo : {
 							companyLocation: companyLocationFormValue.companyLocation,
@@ -126,11 +126,11 @@ Meteor.methods({
 	'updateBankDetails':function(companyBankDetailsFormValue){
 		
 		var userId = CompanySettings.findOne({"companyId" : 101});
-		if(userId){
+		if(userId && companyBankDetailsFormValue.accNumber != "" && companyBankDetailsFormValue.ifscCode != "" && companyBankDetailsFormValue.accHolderName != ""){
 			
 			CompanySettings.update({'_id': userId._id,'bankDetails.branchName':companyBankDetailsFormValue.ifscCode},
 				{$set:{ 
-					'bankDetails.$.accHolderName':companyBankDetailsFormValue.accHolderName,
+					'bankDetails.$.accHolderName': companyBankDetailsFormValue.accHolderName,
 					'bankDetails.$.bankName'	 : companyBankDetailsFormValue.bankName,
 					'bankDetails.$.branchName'	 : companyBankDetailsFormValue.branchName,
 					'bankDetails.$.accNumber'	 : companyBankDetailsFormValue.accNumber,
@@ -152,7 +152,7 @@ Meteor.methods({
 		
 		
 		var userId = CompanySettings.findOne({"companyId" : 101});
-		if(userId){
+		if(userId && companyBankDetailsFormValue.accNumber != "" && companyBankDetailsFormValue.ifscCode != "" && companyBankDetailsFormValue.accHolderName != ""){
 			
 			CompanySettings.update({'_id': userId._id},
 				{$push:{ bankDetails : {
@@ -311,7 +311,7 @@ Meteor.methods({
 	'insertLabourCharges':function(labourChargesDetailsFormValue){
 		
 		var userId = CompanySettings.findOne({"companyId" : 101});
-		if(userId){
+		if(userId && labourChargesDetailsFormValue.labourChargeCategory !="" && labourChargesDetailsFormValue.labourChargeRate != ""){
 			
 			CompanySettings.update({'_id': userId._id},
 				{$push:{ labourChargesDetails:{
@@ -326,7 +326,7 @@ Meteor.methods({
 	'insertEventName':function(eventInfoFormValue){
 		
 		var userId = CompanySettings.findOne({"companyId" : 101});
-		if(userId){
+		if(userId && eventInfoFormValue.eventName != ""){
 			
 			CompanySettings.update({'_id': userId._id},
 				{$push:{ TemplateEventName:{
@@ -340,7 +340,7 @@ Meteor.methods({
 	'insertBusinessRate':function(eventInfoFormValue){
 		console.log(eventInfoFormValue);
 		var userId = CompanySettings.findOne({"companyId" : 101});
-		if(userId){
+		if(userId && eventInfoFormValue.monthlyRate != "" && eventInfoFormValue.categoryRate != "" && eventInfoFormValue.areaRate != ""){
 			
 			CompanySettings.update({'_id': userId._id},
 				{$push:{ BusinessRates:{
@@ -356,7 +356,7 @@ Meteor.methods({
 	'insertEventTemplateName':function(eventTemplateInfoFormValue){
 		
 		var userId = CompanySettings.findOne({"companyId" : 101});
-		if(userId){
+		if(userId && eventTemplateInfoFormValue.eventTemplateName != ""){
 			
 			CompanySettings.update({'_id': userId._id},
 				{$push:{ TemplateName:{
@@ -403,7 +403,7 @@ Meteor.methods({
     'insertRateDetails':function(rateDetailsFormValue){
 		
 		var userId = CompanySettings.findOne({"companyId" : 101});
-		if(userId){
+		if(userId && rateDetailsFormValue.silverRate != ""){
 			
 			CompanySettings.update({'_id': userId._id},
 				{$push:{ rates:{

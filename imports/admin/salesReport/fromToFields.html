@@ -30,9 +30,15 @@
 						</tr>
 					</thead>
 					<tbody class="myTableData">
-			            {{#each result}}
-			            {{> salesTableView}}
-			            {{/each}}
+						{{#if result}}
+				            {{#each result}}
+				            	{{> salesTableView}}
+			            	{{/each}}
+			        	{{else}}
+							<td colspan=6 > 
+						      Nothing to Display.
+						    </td>
+						{{/if}}
 					</tbody>
 				</table>
 				</div>

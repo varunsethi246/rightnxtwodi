@@ -112,8 +112,8 @@ Template.fromToFieldsBanner.events({
 		var fromDate = $("input#fromdate").val();
 		var toDate = $("input#todate").val();
 		if(fromDate > toDate){
-			alert("From Date cannot be less than To Date");
-			Bert.alert( 'From Date cannot be less than To Date', 'danger', 'growl-top-right' );
+			alert("To Date cannot be less than From Date");
+			Bert.alert( 'To Date cannot be less than From Date', 'danger', 'growl-top-right' );
 			//Throw Error Alert to to User
 			// throw new Meteor.Error("From Date cannot be less than To Date");
 		}else{

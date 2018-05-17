@@ -12,9 +12,9 @@ Template.discountManagement.events({
 		    var id = Session.get("id");
 			var rate     = $('#price').val();
 			var discount = $('#discount').val();
-			console.log('id :' ,id);
-			console.log('rate :',rate);
-			console.log('discount :', discount);
+			// console.log('id :' ,id);
+			// console.log('rate :',rate);
+			// console.log('discount :', discount);
 			if(id){
 				Meteor.call('updateDiscount',id,rate,discount,function(error,result){
 					if(error){

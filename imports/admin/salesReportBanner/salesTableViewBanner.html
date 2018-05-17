@@ -2,42 +2,32 @@
 	<tr class="clickableRow" id={{orderId}}>
     {{#if isGreaterThan0 rowSpanCount}}
       <td class="rowspanElement" rowspan="{{rowSpanCount}}"> 
-        <a href="" data-toggle="modal" data-target="#myModalSales" id="{{orderId}}" class="showModal"> {{ date }} </a> 
+        <a href="" class="showModal"> {{ date }} </a> 
       </td>
     {{/if}}
     <td> 
-      <a href="" data-toggle="modal" data-target="#myModalSales" id="{{orderId}}"> {{ orderNo }} </a> 
+      <a href=""> {{ orderNo }} </a> 
     </td>
     <td> 
-      <a href="" data-toggle="modal" data-target="#myModalSales" id="{{orderId}}"> {{ businessLink}} </a>
+      <a href=""> {{ businessLink}} </a>
     </td>
     <td>
-      <a href="" data-toggle="modal" data-target="#myModalSales" id="{{orderId}}"> &#x20B9; {{ totalAmount }}</a> 
+      <a href=""> &#x20B9; {{ totalAmount }}</a> 
     </td>
     <td> 
-      <a href="" data-toggle="modal" data-target="#myModalSales" id="{{orderId}}"> &#x20B9; {{ discountedPrice }}</a> 
+      <a href=""> &#x20B9; {{ discountedPrice }}</a> 
     </td>
     <td> 
-      <a href="" data-toggle="modal" data-target="#myModalSales" id="{{orderId}}"> {{ orderType }} </a> 
+      <a href=""> {{ orderType }} </a> 
+    </td>
+    <td> 
+      <a href="/bannerInvoice/{{businessLink}}"><i class="fa fa-eye"></i></a>
+      <!-- <a ><i class="fa fa-file-pdf-o pdfOne" id={{orderId}}></i>
+        {{>bannerInvoice}}
+      </a> -->
+
     </td>
   </tr>
 
 		<!-- modal -->
-<div id="myModalSales" class="modal fade " role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content salesModalStyle">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Invoice</h4>
-      </div>
-      <div class="modal-body modalBody">
-        {{> salesModalBanner}}
-      </div>
-      
-    </div>
-
-  </div>
-</div>
 </template>

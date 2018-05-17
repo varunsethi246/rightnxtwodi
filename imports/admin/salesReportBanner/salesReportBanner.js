@@ -19,6 +19,7 @@ import './fromToFieldsBanner.js';
 import './salesTableViewBanner.html';
 import './salesModalBanner.html';
 import './reviewOrderViewBanner.html';
+import '../businessAds/adsInvoice.html';
 
 
 Template.salesTableViewBanner.onRendered(function(){
@@ -28,7 +29,23 @@ Template.salesTableViewBanner.onRendered(function(){
 		Session.set("id",id);
 	});
 });
-
+// Template.salesTableViewBanner.events({
+//   'click .pdfOne':function(event){
+//     event.preventDefault();
+  
+//     var doc = new jsPDF();
+//     var specialElementHandlers = {
+//         '#PDF': function (element, renderer) {
+//             return true;
+//         }
+//     };
+//       doc.fromHTML($('#PDF').html(), 15, 15, {
+//           'width': 170,
+//               'elementHandlers': specialElementHandlers
+//       });
+//       doc.save('todaysSalesReport.pdf');
+//   }
+// });
 Template.salesTableViewBanner.helpers({
 
   'isGreaterThan0' : function(rowSpanCount){

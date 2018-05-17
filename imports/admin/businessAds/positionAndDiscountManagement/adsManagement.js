@@ -46,15 +46,18 @@ Template.adsDiscountManagement.events({
 					}else{
 						$('#price').val('');
 						$('#discount').val('');
+						delete Session.keys['adsId'];
 					}
 				})
-			}else{
+			}else if (rate != '' && discount != ''){
 				Meteor.call('insertAdsDiscount',rate,discount,function(error,result){
 					if(error){
 						console.log(error);
 					}else{
 						$('#price').val('');
 						$('#discount').val('');
+						$('#price').focus();
+
 					}
 				});
 			}
@@ -65,15 +68,19 @@ Template.adsDiscountManagement.events({
 	'click .delete':function(event){
 		event.preventDefault();
 		var value = this;
+		// console.log(event.currentTarget);
 		var id = value.id;
-
+		// var id = $(event.currentTarget).attr('id');
+		// console.log(id);
+		// console.log($(this).attr('id'));
 		Meteor.call('removeAdsDiscount',id,function(error,result){
 			if(error){
 				console.log(error);
 			}else{
 				Bert.alert("Deleted Successfully!","success","growl-top-right");
+				$('.modal-backdrop').hide();
 			}
-		})
+		});
 	},
 
 	'click .edit':function(event){

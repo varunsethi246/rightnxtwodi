@@ -27,12 +27,19 @@
 							<th> Total Amount </th>
 							<th> Discounted Price </th>
 							<th> Order Type</th>
+							<th> Action</th>
 						</tr>
 					</thead>
 					<tbody class="myTableData">
+					{{#if result}}
 			            {{#each result}}
-			            {{> salesTableViewBanner}}
+			            	{{> salesTableViewBanner}}
 			            {{/each}}
+			        {{else}}
+							<td colspan=6 > 
+						      Nothing to Display.
+						    </td>
+					{{/if}}
 					</tbody>
 				</table>
 				</div>
