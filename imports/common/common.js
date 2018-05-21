@@ -277,18 +277,19 @@ showStarRating = function(){
 } 
 
 Template.header.events({
+	
 	'click .login-facebook': function(e) {
-        e.preventDefault();
+ 	       e.preventDefault();
 
-        Meteor.loginWithFacebook({requestPermissions: ['public_profile', 'email']}, function(err,result){
-            if (err) {
-                console.log('Handle errors here: ', err);
-            }else{
-            	// console.log('result ',result);
-            	Meteor.call('fbLogin',Meteor.userId(),function(err,res){
-            		if(err){
-            			console.log ( err ); 
-            		}else{
+	       Meteor.loginWithFacebook({requestPermissions: ['public_profile', 'email']}, function(err,result){
+	           if (err) {
+	               console.log('Handle errors here: ', err);
+	           }else{
+	           	// console.log('result ',result);
+	           	Meteor.call('fbLogin',Meteor.userId(),function(err,res){
+	           		if(err){
+	           			console.log ( err ); 
+	           		}else{
 			            Meteor.call('addRoles',Meteor.userId(),'user',function(err,res){
 		            		if(err){
 		            			console.log ( err ); 
@@ -302,11 +303,15 @@ Template.header.events({
 					            	$('.modal-backdrop').hide();
 		            		}
 		            	});
-            		}
-            	})
-            }
-        });
-    },
+	           		}
+	           	})
+	           }
+	       });
+	   },
+	
+   //  'click loginfb':function(event){
+	  //   checkLoginState();
+	  // },
     'click .login-google': function(e) {
         e.preventDefault();
 
