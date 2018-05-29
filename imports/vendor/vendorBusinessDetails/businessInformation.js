@@ -71,7 +71,6 @@ Template.businessInformation.events({
 		$('.od-read-more').show();
 	},
 
-
 	'click .busAbutod-read-more':function(event){
 		$('.aboutOwnerDesc2').show();
 		$('.busAbutod-read-less').show();

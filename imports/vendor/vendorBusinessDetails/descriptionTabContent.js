@@ -32,7 +32,7 @@ Template.userReviewTemplate.helpers({
 		var businessLink = FlowRouter.getParam('businessurl');
 		var ratingInt = Review.findOne({"userId" : userId,"businessLink":businessLink});
 		if(ratingInt){
-			console.log("ratingInt = ", ratingInt);
+			// console.log("ratingInt = ", ratingInt);
 			var latestRating = ratingInt.rating;
 
 			var intRating = parseInt(latestRating);
@@ -60,7 +60,7 @@ Template.userReviewTemplate.helpers({
 				}
 			
 			}
-			console.log("ratingObj = ", ratingObj);
+			// console.log("ratingObj = ", ratingObj);
 			return ratingObj;
 		}else{
 			return {};
@@ -95,14 +95,14 @@ Template.userReviewTemplate.helpers({
 
 		tagedFriends = resultFrnds;
 
-		console.log('resultFrnds: ',resultFrnds);
+		// console.log('resultFrnds: ',resultFrnds);
 
 			data = data1;
 			var result =  {data,resultFrnds};
 		}else{
 			var result =  {data,resultFrnds};
 		}
-		console.log('result: ',result);
+		// console.log('result: ',result);
 
 	    return result;
 	},
@@ -126,6 +126,7 @@ Template.descriptionTabContent.helpers({
 			}else{
 				allReviews.showLoadMore = '';
 			}
+
 			for(i=0; i<allReviews.length; i++){
 				allReviews[i].userProfileUrl = generateURLid(allReviews[i].userId);	
 
@@ -148,6 +149,18 @@ Template.descriptionTabContent.helpers({
 				// }else{
 				// 	allReviews[i].revEditButton = 'hide';
 				// }	
+				if(allReviews[i].reviewComment){
+				// console.log("allReviews[i].reviewComment :",allReviews[i].reviewComment);
+				if(allReviews[i].reviewComment.length > 300){
+					var desc3 = allReviews[i].reviewComment.substring(0,300);
+					var desc4 = allReviews[i].reviewComment.substring(300,allReviews[i].reviewComment.length);
+					allReviews[i].ownerDesc3 = desc3;
+					allReviews[i].ownerDesc4 = desc4;
+					// console.log("allReviews[i].ownerDesc3: ",allReviews[i].ownerDesc3);
+					// console.log("allReviews[i].ownerDesc4 :===>",allReviews[i].ownerDesc4);
+
+				}
+			}
 
 				var userId = allReviews[i].userId;
 				var userObj = Meteor.users.findOne({"_id":userId});
@@ -461,6 +474,9 @@ Template.descriptionTabContent.helpers({
 					allReviews[i].reviewLikeCount = 0;
 					allReviews[i].likeClass = '';
 				} 
+
+
+
 				var verifyFollow = FollowUser.findOne({
 														"userId": Meteor.userId(),
 														"followUserId": allReviews[i].userId
@@ -567,16 +583,16 @@ Template.userReviewTemplate.events({
 		}
 
 		var current_index = $('.selectedSearch').index();
-		console.log("current_index: ",current_index);
+		// console.log("current_index: ",current_index);
 		
 		var $number_list = $('.tagFrndUlFrieldList');
-		console.log("$number_list: ",$number_list);
+		// console.log("$number_list: ",$number_list);
 		
 		var $options = $number_list.find('.tagFrndLiFrieldList');
 		// console.log("$options: ",$options);
 		
 		var items_total = $options.length;
-		console.log("items_total: ",items_total);
+		// console.log("items_total: ",items_total);
 		if (e.keyCode == 40) {
 	        if (current_index + 1 < items_total) {
 	            current_index++;
@@ -613,6 +629,7 @@ Template.userReviewTemplate.events({
 		if(e.keyCode != 38 && e.keyCode != 40 && e.keyCode != 37 && e.keyCode != 39){
 			$('.tagFrndUlFrieldList').removeClass('searchDisplayHide').addClass('searchDisplayShow');
 			var text = $(e.currentTarget).val();
+			console.log('text:',text);
 			if (text) {
 				$('.tagFrndUlFrieldList').css('display','block');
 		// $('.tagFrndUlFrieldList').css('display','none');
@@ -621,6 +638,11 @@ Template.userReviewTemplate.events({
 			}
 		}
 	}, 200),
+	// 'click .tagFrndLiDiv':function(e){
+	// 	event.preventDefault();
+	// 	$('#searchFrndsEdit').val();
+	// 	console.log('#searchFrndList:',$('#searchFrndsEdit').val());
+	// },
 	'click #searchFrndsEdit': function(e){
 		e.stopPropagation();
 		$('.tagFrndUlFrieldList').removeClass('searchDisplayHide').addClass('searchDisplayShow');
@@ -632,8 +654,9 @@ Template.userReviewTemplate.events({
     	selectedUser = selectedUser.trim();
 		tagedFriends.push({'selectedUser':selectedUser, 'selectedUserId':frndId, 'userImage':userImage});
 		$('#searchFrndsEdit').trigger('keyup');
+		$('#searchFrndsEdit').val('');
+		// console.log('$(#searchFrndsEdit).val();',$('#searchFrndsEdit').val(''));
 		$('.tagFrndUlFrieldList').removeClass('searchDisplayHide').addClass('searchDisplayShow');
-		
 	},
 
 	"click .bunchTagFrndCross":function(e){
@@ -1276,7 +1299,7 @@ Template.userReviewTemplate.events({
 
 		
 
-		console.log("1tagedFriends: ",tagedFriends);
+		// console.log("1tagedFriends: ",tagedFriends);
 
 		tagedFriends = [];
 		var userData = Review.findOne({"_id": id});
@@ -1383,13 +1406,13 @@ Template.userReviewTemplate.events({
 			var taggedPpl = tagedFriends;
 			
 			var starRating = $('.starRatingWrapper .fixStar1').length;
-			console.log('starRating description: ', starRating);
+			// console.log('starRating description: ', starRating);
 			starRating = starRating + $('.starRatingWrapper .fixStar2').length;
-			console.log('starRating: ', starRating);
+			// console.log('starRating: ', starRating);
 			var rating = parseFloat(starRating) / 2;
-			console.log('rating: ', rating);
+			// console.log('rating: ', rating);
 			// console.log("filesR: ",filesR)
-			 if(filesR){
+			if(filesR){
 				for(i = 0 ; i < filesR.length; i++){		
 					Resizer.resize(filesR[i], {width: 300, height: 300, cropSquare: false}, function(err, file) {
 						if(err){
@@ -1401,7 +1424,7 @@ Template.userReviewTemplate.events({
 						        	console.log('Error : ' + err.message);
 						        }else{
 						        	var imgId =  fileObj._id ;
-						        	console.log("imgId: ",imgId);
+						        	// console.log("imgId: ",imgId);
 							        Meteor.call("updateReviewBulkImg", id, imgId,
 							          function(error1, result1) { 
 							              if(error1) {
@@ -1426,28 +1449,35 @@ Template.userReviewTemplate.events({
 				$('#reviewImglistEdit').empty();
 				$('#reviewImgfilesEdit').val('');
 			}
+			if(revComment.length >=0 && revComment.length<=140){
 
-			Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, rating, function(error, result){
-				if(error){
-					Bert.alert('Some technical issue happened... Your review is not posted.', 'danger', 'growl-top-right');
-				}else{
+				$('.passwordWrongSpan').text("Your comment is too short, please write min 140 characters.");
+	            $('.passwordWrongSpan').addClass('passwordWrongWar');
+				$('.openReviewBox').show();
+				$('.publishReview').hide();
+			}else{
+				Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, rating, function(error, result){
+					if(error){
+						Bert.alert('Some technical issue happened... Your review is not posted.', 'danger', 'growl-top-right');
+					}else{
 
-					$('.userReviewTempcommTxt-'+id).css('display','block');
-					$('.editBoxCommentRev-'+id).css('display','none');
-					$('.reviewCancel-'+id).css('display','none');
-					$('.starRatingblock-'+id).css('display','none');
-					$('.reviewBusSave-'+id).css('display','none');
-					$('.bus-page-edit-outer1-'+id).css('display','none');
-					$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
-					$('.tagFrnd-'+id).css('display','none');
-					$('.tagFrnd').css('display','none');
-					$('.tagedFrndDivPre-'+id).css('display','block');
-					$('.reviewImages-'+id).css('display','none');
-					tagedFriends = [];
-					// console.log('tagedFriends:',tagedFriends);
-					
-				}
-			});
+						$('.userReviewTempcommTxt-'+id).css('display','block');
+						$('.editBoxCommentRev-'+id).css('display','none');
+						$('.reviewCancel-'+id).css('display','none');
+						$('.starRatingblock-'+id).css('display','none');
+						$('.reviewBusSave-'+id).css('display','none');
+						$('.bus-page-edit-outer1-'+id).css('display','none');
+						$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
+						$('.tagFrnd-'+id).css('display','none');
+						$('.tagFrnd').css('display','none');
+						$('.tagedFrndDivPre-'+id).css('display','block');
+						$('.reviewImages-'+id).css('display','none');
+						tagedFriends = [];
+						// console.log('tagedFriends:',tagedFriends);
+						
+					}
+				});
+			}
 		}else{
 			swal({
 			  title: 'Please write review to save!',

@@ -422,6 +422,9 @@ Template.vendorBusinessLayout.helpers({
 					businessObj.ownerDesc2 = desc2;					
 				}
 			}
+
+			
+
 			if(Meteor.userId()){
 				var userReview = Review.findOne({"userId":Meteor.userId(),"businessLink":currentUrl});
 				if(userReview){

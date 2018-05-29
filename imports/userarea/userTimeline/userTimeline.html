@@ -46,7 +46,18 @@
           </div>
           {{/if}}
           <div class="userReviewTempcommTxt-{{_id}} timelineCommTxt col-lg-12">
-            <p>{{reviewComment}}</p>
+            {{ #if userReviewTimelineDesc2 }}
+              <p>
+                {{ userReviewTimelineDesc1 }}
+                <span class="userReviewTimelineDesc2">{{ userReviewTimelineDesc2 }}</span>
+                <span class="clr timelineReview-read-more">...<a>read more</a></span>
+                <span class="clr timelineReview-read-less">...<a>read less</a></span>
+              </p>
+            {{else}}
+              <p>
+                {{reviewComment}}
+              </p>
+            {{/if}}
           </div>
           <div class="editBoxCommentRev-{{_id}} editBoxComment col-lg-11 col-md-11 col-sm-11 col-xs-11 ">
             <textarea class="form-control editReviewTextArea" rows="5" name="review"  id="{{_id}}" placeholder="at least 140 characters" minlength="140" value="{{reviewComment}}"></textarea>

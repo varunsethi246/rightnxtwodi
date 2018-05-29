@@ -39,10 +39,24 @@ Template.userReviewTemplate.helpers({
 
 
 
-
-
 Template.userReviewTemplate.events({
-	
+	'keydown .editReviewOneTime':function(event){
+      setTimeout(function() {
+         var comment = $('.editReviewOneTime').val();
+         if(comment){
+            var commentlen = comment.length;
+            var remainText = 140 - commentlen;
+            if(remainText < 0){
+	            $('.textRemain').css('display','none');
+            }else{
+	            $('.textRemain').css('display','block');
+	            $('.textRemain').text(remainText + ' /140');
+            }
+         }else{
+            $('.textRemain').text('0 /140');
+         }
+      }, 1);
+   },
 	
 	'click .showMoreCommntDiv': function(event){
 		// To Expant All comments
@@ -52,6 +66,19 @@ Template.userReviewTemplate.events({
 		// To Change Buttons
 		$(event.currentTarget).parent().css('display','none');
 		$(event.currentTarget).parent().siblings('showLessCommnt').css('display','block');
+	},
+
+
+	'click .review-read-more': function(event){
+		$('.ownerDesc4').show();
+		$('.review-read-less').show();
+		$('.review-read-more').hide();
+	},
+
+	'click .review-read-less': function(event){
+		$('.ownerDesc4').hide();
+		$('.review-read-less').hide();
+		$('.review-read-more').show();
 	},
 
 

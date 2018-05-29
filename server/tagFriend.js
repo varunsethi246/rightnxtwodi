@@ -32,6 +32,9 @@ SearchSource.defineSource('tagFriend', function(searchText, options) {
                      "_id":{$ne: userId} , 
                      "roles":{$nin: [ 'admin', 'Vendor', "Staff"]} 
                    };
+    // var selector = { "userId" : userId ,
+    //                  "name" : regExp
+    //                }
     var data =  Meteor.users.find(selector, options).fetch();
                   
 

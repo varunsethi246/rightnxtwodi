@@ -3781,6 +3781,11 @@ display:none;
 cursor:pointer
 }
 
+.userReviewDesc2,.userReview-read-less,.userReviewTimelineDesc2,.timelineReview-read-less,.ownerDesc4,.review-read-less{
+display:none;
+cursor:pointer
+}
+
 .od-read-more a {
 cursor:pointer;
 color:#f89b1c
@@ -3791,6 +3796,27 @@ cursor:pointer;
 color:#f89b1c
 }
 
+.review-read-more a {
+cursor:pointer;
+color:#f89b1c
+}
+
+.review-read-more {
+cursor:pointer;
+color:#f89b1c
+}
+
+.review-read-less a {
+cursor:pointer;
+color:#f89b1c
+}
+
+.review-read-less {
+cursor:pointer;
+color:#f89b1c
+}
+
+
 .od-read-less a {
 cursor:pointer;
 color:#f89b1c
@@ -3800,6 +3826,29 @@ color:#f89b1c
 cursor:pointer;
 color:#f89b1c
 }
+
+
+.userReview-read-more,.userReview-read-less {
+cursor:pointer;
+color:#f89b1c
+}
+
+.userReview-read-more a,.userReview-read-less a {
+cursor:pointer;
+color:#f89b1c
+}
+
+.timelineReview-read-more,.timelineReview-read-less {
+cursor:pointer;
+color:#f89b1c
+}
+
+.timelineReview-read-more a,.timelineReview-read-less a {
+cursor:pointer;
+color:#f89b1c
+}
+
+
 
 .busAbutod-read-more,.busAbutod-read-less {
 cursor:pointer;

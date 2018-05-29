@@ -257,6 +257,20 @@ Template.userReview.helpers({
 					} else{
 						reviewData[i].tagedFriendsValidate = false;
 					}
+
+
+					if(reviewData[i].reviewComment){
+						// console.log("reviewData[i].reviewComment :",reviewData[i].reviewComment);
+						if(reviewData[i].reviewComment.length > 300){
+							var userRevDesc1 = reviewData[i].reviewComment.substring(0,300);
+							var userRevDesc2 = reviewData[i].reviewComment.substring(300,reviewData[i].reviewComment.length);
+							reviewData[i].userReviewDesc1 = userRevDesc1;
+							reviewData[i].userReviewDesc2 = userRevDesc2;
+							// console.log("allReviews[i].ownerDesc3: ",allReviews[i].ownerDesc3);
+							// console.log("allReviews[i].ownerDesc4 :===>",allReviews[i].ownerDesc4);
+
+						}
+					}
 					
 					if(reviewData[i].userComments){		
 						reviewData[i].userCommentsCount = reviewData[i].userComments.length;
@@ -689,6 +703,20 @@ Template.userReviewSuggestion.helpers ({
 });
 
 Template.userReview.events({
+
+
+	'click .userReview-read-more': function(event){
+		$('.userReviewDesc2').show();
+		$('.userReview-read-less').show();
+		$('.userReview-read-more').hide();
+	},
+
+	'click .userReview-read-less': function(event){
+		$('.userReviewDesc2').hide();
+		$('.userReview-read-less').hide();
+		$('.userReview-read-more').show();
+	},
+
 	'click .showreplyCmt' : function(event){
 		event.preventDefault();
 		var thisElem = event.currentTarget;

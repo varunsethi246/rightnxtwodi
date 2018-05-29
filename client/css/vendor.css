@@ -3674,3 +3674,7 @@ border-radius: 0px!important;
 .notifyBody .deleteTrash:hover{
 	color: red;
 }
+.newReviewMsg{
+	    margin-top: -9px;
+    margin-bottom: -5px;
+}

@@ -73,7 +73,18 @@
             </div>
           {{/if}}
           <div class="ReviewTxt timelineCommTxt userReviewTempcommTxt-{{_id}} col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <p>{{reviewComment}}</p>
+            {{ #if userReviewDesc2 }}
+              <p>
+                {{ userReviewDesc1 }}
+                <span class="userReviewDesc2">{{ userReviewDesc2 }}</span>
+                <span class="clr userReview-read-more">...<a>read more</a></span>
+                <span class="clr userReview-read-less">...<a>read less</a></span>
+              </p>
+            {{else}}
+              <p>
+                {{reviewComment}}
+              </p>
+            {{/if}}
           </div>
 
           <div class="editBoxCommentRev-{{_id}} editBoxComment col-lg-11 col-md-11 col-sm-11 col-xs-11 ">
@@ -331,7 +342,6 @@
                             <li class="userRevCommentEditPen" id='{{userCommentId}}'>
                               <i class="fa fa-pencil editPen" aria-hidden="true"></i> Edit
                             </li>
-                            asdasdasd
                             <li class="userRevvCommentDel" data-toggle="modal" data-target="#deleteDataModal-{{userCommentId}}">  
                               <i class="fa fa-trash-o deltrash" aria-hidden="true"></i> Delete
                             </li>

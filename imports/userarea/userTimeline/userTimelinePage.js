@@ -298,6 +298,19 @@ Template.userTimeline.helpers({
 					allReviews[i].tagedFriendsValidate = false;
 				}
 
+				if(allReviews[i].reviewComment){
+					// console.log("allReviews[i].reviewComment :",allReviews[i].reviewComment);
+					if(allReviews[i].reviewComment.length > 300){
+						var revDesc1 = allReviews[i].reviewComment.substring(0,300);
+						var revDesc2 = allReviews[i].reviewComment.substring(300,allReviews[i].reviewComment.length);
+						allReviews[i].userReviewTimelineDesc1 = revDesc1;
+						allReviews[i].userReviewTimelineDesc2 = revDesc2;
+						// console.log("allReviews[i].ownerDesc3: ",allReviews[i].ownerDesc3);
+						// console.log("allReviews[i].ownerDesc4 :===>",allReviews[i].ownerDesc4);
+
+					}
+				}
+
 				allReviews[i].redirectUid = generateURLid(allReviews[i].userId);
 				var userId = allReviews[i].userId;
 				if(userId){
@@ -535,6 +548,8 @@ Template.userSuggestion.events({
 			}
 		});
 	},
+
+	
 });
 
 Template.userTimeline.onRendered(function(){
@@ -560,6 +575,18 @@ Template.userTimeline.onRendered(function(){
 });
 
 Template.userTimeline.events({
+
+	'click .timelineReview-read-more': function(event){
+		$('.userReviewTimelineDesc2').show();
+		$('.timelineReview-read-less').show();
+		$('.timelineReview-read-more').hide();
+	},
+
+	'click .timelineReview-read-less': function(event){
+		$('.userReviewTimelineDesc2').hide();
+		$('.timelineReview-read-less').hide();
+		$('.timelineReview-read-more').show();
+	},
 
 
 	'click .usrCommentReply': function(event){

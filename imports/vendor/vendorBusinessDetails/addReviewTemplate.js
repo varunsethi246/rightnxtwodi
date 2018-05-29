@@ -57,7 +57,7 @@ Template.addReviewTemplate.events({
 		var selectedUser = $(e.currentTarget).attr('data-userName');
 		var frndId = $(e.currentTarget).attr('id');
 		var userImage = $(e.currentTarget).attr('data-photo');
-		console.log('userImage :',userImage);
+		// console.log('userImage :',userImage);
     	selectedUser = selectedUser.trim();
 		tagedFriends.push({'selectedUser':selectedUser, 'selectedUserId':frndId, 'userImage':userImage});
 		$('#searchFrnds').trigger('keyup');  
@@ -117,7 +117,7 @@ Template.addReviewTemplate.events({
 	    		'userImage'		:userImage
 
 	    	});
-	    	console.log('tagedFriends :',tagedFriends);
+	    	// console.log('tagedFriends :',tagedFriends);
 			$('#searchFrnds').val("");
 	    }
 
@@ -172,7 +172,7 @@ Template.addReviewTemplate.events({
 		var businessUrl = FlowRouter.getParam('businessurl');
 
 		var starRating = $('.starRatingWrapper .fixStar1').length;
-		console.log('starRating on add review :',starRating);
+		// console.log('starRating on add review :',starRating);
 		starRating = starRating + $('.starRatingWrapper .fixStar2').length;
 		var rating = parseFloat(starRating) / 2;
 
@@ -185,7 +185,7 @@ Template.addReviewTemplate.events({
 
 		if(rating == 0){
 			$('.passwordWrongSpan').text("Please rate the business before submitting the review!");
-      $('.passwordWrongSpan').addClass('passwordWrongWar');
+      		$('.passwordWrongSpan').addClass('passwordWrongWar');
 			$('.openReviewBox').show();
 			$('.publishReview').hide();			
 		}else{
@@ -209,7 +209,7 @@ Template.addReviewTemplate.events({
 							event.target.review.value	= '';
 							// Bert.alert('Your message submitted successfully!!! ', 'success', 'growl-top-right' );	
 							var reviewId = result;
-							console.log("reviewId: ",reviewId);
+							// console.log("reviewId: ",reviewId);
 
 							//============================================================
 							// 			Notification Email / SMS / InApp
@@ -456,7 +456,7 @@ Template.addReviewTemplate.events({
 		var busLink = FlowRouter.getParam("businessurl");
 		if(Meteor.userId()){
 			var userReview = Review.findOne({"userId":Meteor.userId(),"businessLink":busLink});
-			console.log('userReview',userReview);
+			// console.log('userReview',userReview);
 			if(userReview){
 			// businessObj.alreadyReviewed = true;
 			$('.passwordWrongSpan').text("You have already reviewed this Business. Hence more review is not allowed.");
@@ -477,7 +477,7 @@ Template.addReviewTemplate.events({
 	},	
 
 	'click .uploadImg': function(event){
-		console.log("hi uploadImg");
+		// console.log("hi uploadImg");
 		// $('.reviewImages').toggle();
 		// var div1 = document.getElementsByClassName("tagImg");
 	 //  var div2 = document.getElementsByClassName("reviewImages");
@@ -569,7 +569,7 @@ Template.addReviewTemplate.helpers({
 	//Get Friends list
 	'getFrndsList' : function(){
 		var data =  tagFriend1.getData();
-		console.log("data: ",data);
+		// console.log("data: ",data);
 		
 	    var data1 = [];
 		if(tagedFriends.length > 0){
