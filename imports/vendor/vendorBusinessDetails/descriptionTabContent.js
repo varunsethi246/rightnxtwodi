@@ -1451,10 +1451,10 @@ Template.userReviewTemplate.events({
 			}
 			if(revComment.length >=0 && revComment.length<=140){
 
-				$('.passwordWrongSpan').text("Your comment is too short, please write min 140 characters.");
-	            $('.passwordWrongSpan').addClass('passwordWrongWar');
-				$('.openReviewBox').show();
-				$('.publishReview').hide();
+				$('.passwordWrongSpans').text("Your comment is too short, please write min 140 characters.");
+	            $('.passwordWrongSpans').addClass('passwordWrongWar');
+				// $('.openReviewBox').show();
+				// $('.publishReview').hide();
 			}else{
 				Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, rating, function(error, result){
 					if(error){
