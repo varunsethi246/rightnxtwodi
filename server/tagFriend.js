@@ -1,19 +1,19 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { UserProfileStoreS3New } from './UserProfileS3.js';
+import { FollowUser } from '/imports/api/userFollowMaster.js';
 
 SearchSource.defineSource('tagFriend', function(searchText, options) {
   var options = {};
   var userId = Meteor.userId();
 
-
-    // =========================================================
+  // =========================================================
     // ==================Get Image URL from Start ==============
     // =========================================================
     var userPageShowImage = (imgId)=> {
       if(imgId){
           var imgData = UserProfileStoreS3New.findOne({"_id":imgId});
-          if(imgData)	{
+          if(imgData) {
             var data = imgData.url();
           }else{
             var data = '/users/profile/profile_image_dummy.svg';
@@ -25,43 +25,27 @@ SearchSource.defineSource('tagFriend', function(searchText, options) {
     // ==================Get Image URL from End ================
     // =========================================================
 
-  if(searchText) {
+  if(userId){
     var regExp = buildRegExp(searchText);
-    var selector = { "profile.name":  regExp  ,
-                      "profile.status":"Active",
-                     "_id":{$ne: userId} , 
-                     "roles":{$nin: [ 'admin', 'Vendor', "Staff"]} 
-                   };
-    // var selector = { "userId" : userId ,
-    //                  "name" : regExp
-    //                }
-    var data =  Meteor.users.find(selector, options).fetch();
-                  
+    
+    var data =  FollowUser.find({"userId" : userId}).fetch();
+    var userList = [];
+    for(i = 0 ; i < data.length ; i++){
+      userList.push(data[i].followUserId);
+    }
+    var tagListUsers = Meteor.users.find({ $and: [{"_id" : {$in: userList}} , { "profile.name" : regExp}]}).fetch();
+    if(tagListUsers){
+      console.log('tagListUsers ',tagListUsers);
+      for(i=0;i<tagListUsers.length;i++){
+        if(tagListUsers[i].profile.userProfilePic){
+          tagListUsers[i].userPhoto = userPageShowImage(tagListUsers[i].profile.userProfilePic);
+        }else{
+          tagListUsers[i].userPhoto = '/users/profile/profile_image_dummy.svg';
+        }
+      }
+      return tagListUsers;
+    }
 
-    if(data){
-      for(i=0;i<data.length;i++){
-        if(data[i].profile.userProfilePic){
-          data[i].userPhoto = userPageShowImage(data[i].profile.userProfilePic);
-        }else{
-          data[i].userPhoto = '/users/profile/profile_image_dummy.svg';
-        }
-      }
-      return data;
-    }
-  }else {
-    var data =  Meteor.users.find({"_id":{$ne: userId} , 
-                                  "profile.status":"Active",
-                                  "roles":{$nin: [ 'admin', 'Vendor', "Staff"]}}, options).fetch();
-    if(data){
-      for(i=0;i<data.length;i++){
-        if(data[i].profile.userProfilePic){
-          data[i].userPhoto = userPageShowImage(data[i].profile.userProfilePic);
-        }else{
-          data[i].userPhoto = '/users/profile/profile_image_dummy.svg';
-        }
-      }
-      return data;
-    }
   }
 });
 

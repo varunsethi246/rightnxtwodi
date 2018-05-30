@@ -116,39 +116,47 @@ Template.userTimeline.helpers({
 		var userId = Meteor.userId();
 		var businessUrl = this.businessLink;
 		// var businessLinkNew = Business.findOne({"businessLink":businessLinks});
-		console.log('businessUrl :',businessUrl);
-		var ratingInt = Review.findOne({"userId" : userId,"businessLink":businessUrl});
-		console.log('ratingInt :',ratingInt);
+		// console.log('businessUrl :',businessUrl);
+		var ratingInt = Review.find({
+										$or:[ 
+												{ "userId":{$in  : uniqueId},"businessLink":businessUrl } , 
+											]
+										},
+									).fetch();
+		// console.log('ratingInt :',ratingInt);
 		if(ratingInt){
-			// console.log("ratingInt = ", ratingInt);
-			var latestRating = ratingInt.rating;
-			console.log('latestRating:',latestRating);
-			var intRating = parseInt(latestRating);
-			var balRating = latestRating - intRating;
-			var finalRating = intRating + balRating;
-			if(balRating > 0 && balRating < 0.5){
-				var finalRating = intRating + 0.5;
-			}
-			if(balRating > 0.5){
-				var finalRating = intRating + 1;
-			}
-
-			ratingObj = {};
-
-			for(i=1; i<=10; i++){
-				var x = "star" + i;
-				if(i <= finalRating*2){
-					if( i%2 == 0){
-						ratingObj[x] = "fixStar2";
-					}else{
-						ratingObj[x] = "fixStar1";
-					}				
-				}else{
-					ratingObj[x]  = "";
+			for (var i = 0; i < ratingInt.length; i++) {
+				
+				var latestRating = ratingInt[i].rating;
+				// console.log('latestRating:',latestRating);
+				var intRating = parseInt(latestRating);
+				var balRating = latestRating - intRating;
+				var finalRating = intRating + balRating;
+				if(balRating > 0 && balRating < 0.5){
+					var finalRating = intRating + 0.5;
 				}
-			
+				if(balRating > 0.5){
+					var finalRating = intRating + 1;
+				}
+
+				ratingObj = {};
+
+				for(i=1; i<=10; i++){
+					var x = "star" + i;
+					if(i <= finalRating*2){
+						if( i%2 == 0){
+							ratingObj[x] = "fixStar2";
+						}else{
+							ratingObj[x] = "fixStar1";
+						}				
+					}else{
+						ratingObj[x]  = "";
+					}
+				
+				}
+				console.log("ratingObj = ", ratingObj);
 			}
-			console.log("ratingObj = ", ratingObj);
+			// console.log("ratingInt = ", ratingInt);
 
 			return ratingObj;
 		}else{

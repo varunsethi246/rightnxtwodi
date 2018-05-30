@@ -715,7 +715,7 @@ font-family:'PROXIMANOVA-BOLD'
 
 .img-circle {
 border-radius:100px;
-padding-right:5px
+/*padding-right:5px*/
 }
 
 .dropVender a {
@@ -1219,4 +1219,8 @@ text-align: center;
 }
 .right-Carousel{
     width: 9%!important;
+}
+.myRatingOnBuss{
+    padding: 0;
+    margin: 0;
 }

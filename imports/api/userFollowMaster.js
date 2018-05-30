@@ -44,6 +44,8 @@ Meteor.methods({
 			var id = FollowUser.insert({  
 				"userId"  				: id,  
 				"followUserId"			: followUserId,
+				// "userProfilePic"		: profile.userProfilePic,
+				// "name"					: profile.name,
 				"followingDate"		    : new Date(),
 			}, 
 			function(error,result){
