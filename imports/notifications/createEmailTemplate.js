@@ -71,8 +71,13 @@ Template.createEmailTemplate.events({
 	'change .templateType':function(event){
 		event.preventDefault();
 		if($('.templateType').val()  == 'Notification' || $('.templateType').val()  == 'SMS' ){
+			console.log('$(.templateType).val()',$('.templateType').val());
+			console.log('$(.templateType).val()',$('.templateType').val());
 			$('.subjectRow').css({'display':'none'});
 		}else{
+			console.log('$(.templateType).val()',$('.templateType').val());
+			console.log('$(.templateType).val()',$('.templateType').val());
+			console.log('block');
 			$('.subjectRow').css({'display':'block'});
 		}
 
@@ -84,13 +89,14 @@ Template.createEmailTemplate.events({
 		var templateName     = $('.templateName').val();
 		var subject          = $('.subject').val();
 		var emailContent     = $('#messageContent').summernote('code');
-		console.log('emailContent: ',emailContent);
+		// console.log('emailContent: ',emailContent);
+		// console.log('templateType: ',templateType);
 		if (emailContent != "<p><br></p>" && emailContent != "") {
 			var NotificationData = NotificationTemplate.findOne({'templateType':templateType,'templateName':templateName});
 			if(NotificationData){
 				swal("Template Name Already Exist");
 			}else if(templateType == 'Notification' || templateType == 'SMS'){
-				console.log('in notification');
+				// console.log('in notification');
 				Meteor.call('insertTemplate',templateType,templateName,emailContent,function(error,result){
 		        	if(error){
 		        		console.log(error.reason);
@@ -102,6 +108,7 @@ Template.createEmailTemplate.events({
 		        $('.templateName').value  = '';
 		        $('#messageContent').val('');
 			}else{
+				// console.log('in email');
 				Meteor.call('insertNewTemplate',templateType,templateName,subject,emailContent,function(error,result){
 		        	if(error){
 		        		console.log(error.reason);
