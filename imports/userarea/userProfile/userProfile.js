@@ -23,6 +23,7 @@ Template.userProfile.helpers({
 				if(data){
 					// data.aboutText =  data.profile.aboutMe;
 					var pic = UserProfileStoreS3New.findOne({"_id":data.profile.userProfilePic});
+					console.log('pic :',pic);
 					if(pic){
 						data.profile.userProfilePic = pic.url();	
 					}

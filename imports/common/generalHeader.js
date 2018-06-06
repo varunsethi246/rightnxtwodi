@@ -39,7 +39,6 @@ Template.generalHeader.helpers({
 				else{
 					data.profile.userProfilePic = "/users/profile/profile_image_dummy.svg";	
 				}
-				// console.log('data ', data);
 				return data;
 			}
 			

@@ -1,6 +1,4 @@
-console.log('before common');
 import '/imports/common/common.js';
-console.log('homepage.js');
 
 import './homepage.html';
 import './homepageSearch';

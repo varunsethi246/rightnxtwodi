@@ -64,9 +64,7 @@ Meteor.startup(function () {
 });
 
 HomepageFunc = function () {  
-    console.log('HomepageFunc in');  
 	import('/imports/general/homepage/homepage.js').then(function (handle) {  
-	    console.log('hi',handle);      
 		handle.Homepage();    
 	})
 }

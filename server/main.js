@@ -73,9 +73,9 @@ Meteor.publish('getBizVideo', function() {
 
 
 
- Meteor.publish('followUser', function() {
-    return FollowUser.find({});
-  });
+ // Meteor.publish('followUser', function() {
+ //    return FollowUser.find({});
+ //  });
   Meteor.publish('followerCounts', function() {
       Counts.publish(this, 'followerCounts', FollowUser.find({}));
   });
