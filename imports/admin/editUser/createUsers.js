@@ -1,10 +1,13 @@
 import './createUsers.html';
+import '../commonAdmin/commonAdmin.js';
 
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 import { Accounts } from 'meteor/accounts-base';
 import { ConfigSettings } from '../../api/configSettingsMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 
 
 import { State } from '../../api/masterData/stateMaster.js';
@@ -481,3 +484,9 @@ Template.createUsers.onRendered(function(){
 //   });
 //    $("body").scrollTop(0);
 // });
+
+createUsersForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'createUsers'});
+}
+
+export { createUsersForm };

@@ -1,12 +1,8 @@
 import { Session } from 'meteor/session';
-// import { Products } from '../../../api/products.js';
-// import { Orders } from '../../../api/orderMaster.js';
-// import { CompanySettings } from  '../../../api/companysettingsMaster.js';
-// import { ProductImgUploadS3 } from '../../../../client/productStoreToS3.js';
 import { moment } from "meteor/momentjs:moment";
 import { Payment } from '../../api/paymentMaster.js';
 
-
+import '/imports/admin/commonAdmin/commonAdmin.js';
 import './salesReport.html';
 import './salesReportTabs.html';
 import './todaysSalesReport/todaysSalesReport.js';
@@ -42,7 +38,7 @@ Template.salesTableView.helpers({
 Template.salesModal.helpers({
 
    
-     resultVar: ()=> {
+    resultVar: ()=> {
      	  var idFromSession = Session.get("id");
         // console.log('idFromSession'+idFromSession);
         var report_data = [];
@@ -136,4 +132,8 @@ Template.salesModal.helpers({
 
 });
 
+salesTableViewForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'salesReportTabs'});
+}
 
+export { salesTableViewForm }

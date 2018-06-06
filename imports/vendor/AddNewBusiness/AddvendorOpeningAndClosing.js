@@ -3,11 +3,15 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 
 import { Business } from '../../api/businessMaster.js';
 
+import '../vendor.js';
 import '../categoriesSearchField/categoriesSearchField.js';
 import '/imports/common/tagInputField/tagInputField.js';
+import '/imports/vendor/AddNewBusiness/AddvendorOpeningAndClosing.html'
 
 Meteor.subscribe('vendorBusiness');
 
@@ -287,13 +291,13 @@ Template.addvendorOpeningAndClosing.events({
     }
   },
 
-	'submit .businessOpenAndClose': function(event){
-		event.preventDefault();
-		var businessLink = FlowRouter.getParam('businessLink');
-		
-		// Use to add comma separated array in array
-		
-		var catglist = $('#asearchCategories').val();
+  'submit .businessOpenAndClose': function(event){
+    event.preventDefault();
+    var businessLink = FlowRouter.getParam('businessLink');
+    
+    // Use to add comma separated array in array
+    
+    var catglist = $('#asearchCategories').val();
     
     var sepratelist = catglist.split('|');
     var listCatg = [];
@@ -492,20 +496,20 @@ Template.addvendorOpeningAndClosing.events({
         }
         $('.SpanLandLineRedBorder:visible:first').focus();
     }
-		
-		
-	},
-	'click .WeekClassPre':function(event){
-		var id = $(event.target).attr("id");
-		$("#"+id).toggleClass("WeekClassPost");
-	},
+    
+    
+  },
+  'click .WeekClassPre':function(event){
+    var id = $(event.target).attr("id");
+    $("#"+id).toggleClass("WeekClassPost");
+  },
 
-	'click .TimeFrameBtn': function(event) {
-		event.preventDefault();
-		var saveDay = [];
-		var formValues = [];
-		var weekVar = 1;
-		var n = 0;
+  'click .TimeFrameBtn': function(event) {
+    event.preventDefault();
+    var saveDay = [];
+    var formValues = [];
+    var weekVar = 1;
+    var n = 0;
     var dayNum = [];
     dayNum['Monday']    = 1;
     dayNum['Tuesday']   = 2;
@@ -516,26 +520,26 @@ Template.addvendorOpeningAndClosing.events({
     dayNum['Sunday']    = 7;
 
 
-		$( ".WeekClassPost" ).each(function() {
-		  saveDay[n] = $(this).attr('id');
-		  n++;
-		});
+    $( ".WeekClassPost" ).each(function() {
+      saveDay[n] = $(this).attr('id');
+      n++;
+    });
 
-		$('.WeekClassPre').removeClass("WeekClassPost");
-		
-		var saveFromTime  = $("#fromTime").val();
-		var saveToTime 	  = $("#toTime").val();
-		var docLink = FlowRouter.getParam('businessLink');
-		var docId = Business.findOne({"businessLink":docLink});
-		for(i=0;i<saveDay.length;i++){
-			var valueObj = {
+    $('.WeekClassPre').removeClass("WeekClassPost");
+    
+    var saveFromTime  = $("#fromTime").val();
+    var saveToTime    = $("#toTime").val();
+    var docLink = FlowRouter.getParam('businessLink');
+    var docId = Business.findOne({"businessLink":docLink});
+    for(i=0;i<saveDay.length;i++){
+      var valueObj = {
         "day"       :  saveDay[i],
-				"dayNum" 		:  dayNum[saveDay[i]],
-				"fromTime" 	:  saveFromTime,
-				"toTime" 	  :  saveToTime,			
-			}
-			formValues[i] = valueObj;
-		}
+        "dayNum"    :  dayNum[saveDay[i]],
+        "fromTime"  :  saveFromTime,
+        "toTime"    :  saveToTime,      
+      }
+      formValues[i] = valueObj;
+    }
     if(saveFromTime&&saveToTime&&formValues[0]){
       Meteor.call('insertOpenCloseTiming', docId._id, formValues, function(error,result){
         if(error){
@@ -551,9 +555,9 @@ Template.addvendorOpeningAndClosing.events({
       $('.shwDayError').addClass('redTextDays fadeOut');
 
     }
-	},
+  },
 
-	'click .selectOption': function(e){
+  'click .selectOption': function(e){
     e.stopPropagation(); 
     $('.showOption').toggleClass( 'hideDiv');
   },
@@ -561,7 +565,7 @@ Template.addvendorOpeningAndClosing.events({
     e.stopPropagation(); 
   },
 
-	'click #checkAll' : function(event){
+  'click #checkAll' : function(event){
     $(".selectAll").prop('checked',$('#checkAll').prop('checked'));
     if($('#checkAll').prop('checked')){
       paymentModeE = {
@@ -575,12 +579,12 @@ Template.addvendorOpeningAndClosing.events({
     }
     else{
       paymentModeE = {
-        CreditCard 	: false, 
-        DebitCard  	: false,
-        Netbanking 	: false,
-        Paytm		    : false,
-        Cheque		  : false,
-        Cash		    : false,
+        CreditCard  : false, 
+        DebitCard   : false,
+        Netbanking  : false,
+        Paytm       : false,
+        Cheque      : false,
+        Cash        : false,
       };  
     }
 
@@ -640,16 +644,16 @@ Template.addvendorOpeningAndClosing.events({
 });
 
 Template.showOpenCloseTiming.helpers({
-	businessOpenCloseTiming(){
-		var businessTiming = [];
-		var vendorLink = FlowRouter.getParam('businessLink');
-		var businessObj = Business.findOne({"businessLink":vendorLink},{"businessTimings":1});
+  businessOpenCloseTiming(){
+    var businessTiming = [];
+    var vendorLink = FlowRouter.getParam('businessLink');
+    var businessObj = Business.findOne({"businessLink":vendorLink},{"businessTimings":1});
     
-		if(businessObj){
-			for(i=0;i<businessObj.businessTimings.length;i++){
-				businessTiming[i] = businessObj.businessTimings[i];
-				businessTiming[i].index = i;
-			}			
+    if(businessObj){
+      for(i=0;i<businessObj.businessTimings.length;i++){
+        businessTiming[i] = businessObj.businessTimings[i];
+        businessTiming[i].index = i;
+      }     
 
       var result = businessTiming.sort(function (a,b) {
         if (a.dayNum > b.dayNum){
@@ -661,24 +665,24 @@ Template.showOpenCloseTiming.helpers({
         return 0;
       });
     return result;      
-		}
+    }
 
-		// return businessTiming;
-	},
+    // return businessTiming;
+  },
 });
 
 Template.showOpenCloseTiming.events({
-	'click .btClear': function(event){
-		var btId = event.currentTarget.id;
-		// console.log(btId);
-		var docLink = FlowRouter.getParam('businessLink');
-		var docId = Business.findOne({"businessLink" : docLink});
-		Meteor.call('deleteBusinessTime',btId,docId._id,
-					function(error,result){
-						return;
-					});
-	},
-	
+  'click .btClear': function(event){
+    var btId = event.currentTarget.id;
+    // console.log(btId);
+    var docLink = FlowRouter.getParam('businessLink');
+    var docId = Business.findOne({"businessLink" : docLink});
+    Meteor.call('deleteBusinessTime',btId,docId._id,
+          function(error,result){
+            return;
+          });
+  },
+  
 });
 
 
@@ -688,7 +692,11 @@ $(document).on("click",function() {
     }
 });
 
+addvendorOpeningAndClosingForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'addvendorOpeningAndClosing'});
+}
 
+export { addvendorOpeningAndClosingForm };
 
 
 

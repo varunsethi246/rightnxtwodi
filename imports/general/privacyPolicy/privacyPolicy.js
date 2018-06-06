@@ -4,7 +4,8 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import { Template } from 'meteor/templating';
 
 import { GeneralContent } from '../../api/webPages/generalContentMaster.js';
-
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+import '../generalLayout/generalLayout.js';
 import './privacyPolicy.html';
 
 Template.privacyPolicy.helpers({
@@ -36,3 +37,9 @@ Template.privacyPolicy.onRendered(function(){
     });
 	$('html, body').scrollTop(0);
 });
+privacyPolicyForm = function () {  
+  BlazeLayout.render("generalLayout",{generalcontent: 'privacyPolicy'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+
+export { privacyPolicyForm };

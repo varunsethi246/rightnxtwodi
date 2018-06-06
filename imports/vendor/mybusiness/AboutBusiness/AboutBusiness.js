@@ -8,6 +8,14 @@ import { City } from '/imports/api/masterData/cityMaster.js';
 import { Area } from '/imports/api/masterData/areaMaster.js';
 import { BusinessImgUploadS3 } from '/client/businessImage';
 import { Categories } from '/imports/api/masterData/categoriesMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+import '../../vendor.js';
+import '../../../common/starRating2.html';
+import './VendorBusinessInformation.js';
+import './VendorOpeningAndClosing.js';
+import './vendorAboutOwner.js';
+import './VendorImagesVideos.js';
 
 
 
@@ -545,3 +553,10 @@ Template.aboutBusiness.events({
   // 	$('[data-toggle="tooltip"]').tooltip();
   // }
 });
+
+aboutBusinessForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'aboutBusiness'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+
+export { aboutBusinessForm };

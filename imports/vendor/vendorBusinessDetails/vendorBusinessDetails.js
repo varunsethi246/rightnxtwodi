@@ -20,11 +20,14 @@ import { BusinessMenuUpload } from '/client/businessMenu.js';
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
 import { SavedOffer } from '/imports/api/savedOffersMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../BusinessEnquiry/businessEnquiry.js';
 import './vendorBusinessLayout.html';
 import './vendorBusinessCarousel.js';
 import './imageReports/imageReports.js';
 import './imageReports/imageReports.html';
+import '/imports/common/common.js';
 
 
 /* leftSidebar */
@@ -51,6 +54,7 @@ import './addReviewTemplate.html';
 import './addReviewTemplate.js';
 import './userReviewTemplate.html';
 import './userReviewTemplate.js';
+import './vendorLayoutOne.html';
 
 import './offersTabContent.html';
 import './offersTabContent.js';
@@ -63,6 +67,16 @@ import './businessRightSidebar.html';
 import './businessLocation.html';
 import './nearbyBusiness.html';
 import './nearbyBusiness.js';
+import '../../common/loading.html'
+import '../../common/header.html'
+import '../../common/footer.html'
+import '../../common/generalHeader.js'
+import '../../common/vendorSignUpForm.js'
+
+
+/*image Carousel*/
+// import './imageCarouselItems.js' 
+import './imageReports/imageReports.js' 
 
 
 if (Meteor.isClient) {
@@ -223,11 +237,13 @@ Template.vendorBusinessLayout.onRendered(function(){
 Template.vendorBusinessLayout.helpers({
    	isReady: function(){
    		// console.log("hi... ", FlowRouter.subsReady('userfunction'));
-       if(FlowRouter.subsReady('userfunction')){
-       		return FlowRouter.subsReady('userfunction');
-       }else{
-       	return false;
-       }
+       // if(FlowRouter.subsReady('userfunction')){
+       // 		return FlowRouter.subsReady('userfunction');
+       // }else{
+       // 	return false;
+       // }
+       console.log(Meteor.subscribe('userfunction').ready());
+        return Meteor.subscribe('userfunction').ready();
     },
 });
 
@@ -725,6 +741,13 @@ Template.vendorBusinessCarousel.helpers({
 
 
 
+vendorBusinessLayoutForm = function () { 
+	console.log('function render');
+	BlazeLayout.render("vendorLayoutOne",{vendorMain: 'vendorBusinessLayout'}); 
+  	// Blaze.render(Template.vendorBusinessLayout,document.body);
+}
+
+export { vendorBusinessLayoutForm };
 
 
 

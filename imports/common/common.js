@@ -1,7 +1,11 @@
+// console.log('1');
+import './anonymousUserLayout1.html';
 import './anonymousUserLayout.html';
-import './authenticatedUserLayout.html';
+import './header.html';
+import './footer.html';
 import './loading.html';
-
+import './authenticatedUserLayout.html';
+// console.log('1');
 
 import './header.html';
 import './footer.html';
@@ -13,8 +17,9 @@ import './searchbar.js';
 
 import './generalHeader.html';
 import './generalHeader.js';
-
+// console.log('loginScreen html');
 import './loginScreen.html';
+// console.log('loginScreen js');
 import './loginScreen.js';
 
 import './signupScreen.html';
@@ -26,8 +31,11 @@ import './vendorLoginForm.js';
 import './vendorSignUpForm.html';
 import './vendorSignUpForm.js';
 
-import './forgotPassword.html';
-import './forgotPassword.js';
+// import './ForgotPassword.html';
+// import './forgotPassword.js';
+// import './forgotPassword.html';
+// import '/imports/commom/forgotPassword.html';
+
 
 import './resetPassword.html';
 
@@ -40,18 +48,34 @@ import './starRating.js';
 
 import './LoginOTP.js';
 
+import { Meteor } from 'meteor/meteor';
 import { Review } from '/imports/api/reviewMaster.js';
-
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 Template.anonymousUserLayout.helpers({
    	isReady: function(){
+   		// console.log('isReady: ',FlowRouter.subsReady('userfunction'));
+     //   if(FlowRouter.subsReady('userfunction')){
+     //   		return FlowRouter.subsReady('userfunction');
+     //   }else{
+	   	// 	// console.log(FlowRouter.subsReady('userfunction' ,'state' ,'area'));
+     //   	return false;
+     //   }
+       return Meteor.subscribe('userfunction').ready();
+    },
+});
 
-       if(FlowRouter.subsReady('userfunction' )){
-       		return FlowRouter.subsReady('userfunction');
-       }else{
-	   		// console.log(FlowRouter.subsReady('userfunction' ,'state' ,'area'));
-       	return false;
-       }
+Template.anonymousUserLayout1.helpers({
+   	isReady: function(){
+
+      //  if(Meteor.subscription('userfunction').ready()){
+      //  		// return FlowRouter.subsReady('userfunction');
+      //  		return true;
+      //  }else{
+	   		// // console.log(FlowRouter.subsReady('userfunction' ,'state' ,'area'));
+      //  	return true;
+      //  }
+      return Meteor.subscribe('userfunction').ready();
     },
 });
 

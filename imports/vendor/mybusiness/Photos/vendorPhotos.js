@@ -7,6 +7,10 @@ import { Business } from '../../../api/businessMaster.js';
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
 import { Review } from '../../../api/reviewMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+import '../../vendor.js';
+import './vendorPhotos.html';
 
 var files = [];
 var counterImg = 0;
@@ -390,3 +394,10 @@ Template.vendorPhotos.onRendered(function(){
 	counterImg = 0;
 	files=[];
 });
+
+
+vendorPhotosForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'vendorPhotos'});
+}
+
+export { vendorPhotosForm };

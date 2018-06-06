@@ -1,8 +1,10 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import './contactUsList.html';
+import '../commonAdmin/commonAdmin.js';
 
 import { ContactUs } from '/imports/api/webPages/contactUsMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 Template.contactUsList.onRendered( ()=>{
 	Session.set('contactUsListLimit',15);
@@ -117,3 +119,9 @@ Template.contactUsList.events({
 
 	}, 200),
 });
+
+contactUsListForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'contactUsList'});
+}
+
+export { contactUsListForm };

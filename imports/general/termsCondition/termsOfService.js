@@ -4,7 +4,8 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import { Template } from 'meteor/templating';
 
 import { GeneralContent } from '../../api/webPages/generalContentMaster.js';
-
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+import '../generalLayout/generalLayout.js';
 import './termsOfService.html';
 
 Template.termsOfService.helpers({
@@ -36,3 +37,9 @@ Template.termsOfService.onRendered(function(){
     });
 	$('html, body').scrollTop(0);
 });
+termsOfServiceForm = function () {  
+  BlazeLayout.render("generalLayout",{generalcontent: 'termsOfService'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+
+export { termsOfServiceForm };

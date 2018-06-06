@@ -58,11 +58,11 @@ if(s3Data)
       return false;
     }
   });
-
-  if (Meteor.isServer) {
-
   Meteor.publish('businessVideo', function() {
     return BusinessVideoUpload.find({}, { limit: 0 });
   });
+
+  if (Meteor.isServer) {
+
   }
 }

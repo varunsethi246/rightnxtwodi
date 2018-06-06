@@ -4,7 +4,11 @@ import { Business } from '/imports/api/businessMaster.js';
 import { Likes } from '/imports/api/likesMaster.js';
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { emptyReviewTemplate } from '../../common/emptyReviewTemplate.html';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+import '../userLayout.js'
 import './userLike.html'
+import '../../common/emptyReviewTemplate.html'
 
 
 Template.userLike.helpers({
@@ -95,4 +99,32 @@ Template.userLike.helpers({
 		
 
 	},
+    'timeAgo': function(datetime) {
+
+		console.log('datetime: ',datetime);
+	  // if(datetime == ''){
+	  //   return 'Never Logged In';
+	  // }else{
+	  //   // Session.get('time');
+	    return moment(datetime).fromNow();
+	  // }
+	},
 });
+userLikeForm = function () {  
+  BlazeLayout.render("userLayout",{content: 'userLike'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { userLikeForm }
+
+UI.registerHelper('timeAgo', function(datetime) {
+  if(datetime == ''){
+    return 'Never Logged In';
+  }else{
+    Session.get('time');
+    return moment(datetime).fromNow();
+  }
+});
+
+setInterval(function() {
+    Session.set("time", new Date())
+}, 60); //Every minute

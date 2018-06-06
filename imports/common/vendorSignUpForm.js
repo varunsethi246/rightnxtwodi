@@ -3,6 +3,9 @@ import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { Accounts } from 'meteor/accounts-base'; 
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+import '/imports/common/common.js';
+// import './forgotPassword.js';
 
 Template.vendorSignUpForm.events({
 
@@ -187,5 +190,9 @@ Template.vendorSignUpForm.onRendered(function(){
      });
 });
 
+vendorSignUpForm = function () {  
+  BlazeLayout.render("anonymousUserLayout",{main: 'vendorSignUpForm'});
+}
 
+export { vendorSignUpForm };
 

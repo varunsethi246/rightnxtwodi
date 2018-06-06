@@ -1,19 +1,21 @@
+import '../../common/searchinitialisation.js'
 import './mainBusinessSearch.html';
 import { Business } from '/imports/api/businessMaster.js';
-Meteor.subscribe('vendorBusiness');
+// Meteor.subscribe('vendorBusiness');
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 
-var options = {
-  keepHistory: 0,
-  localSearch: true
-};
+// var options = {
+//   keepHistory: 0,
+//   localSearch: true
+// };
 
-var fields = ['businessTitle','businessTag','businesscategories'];
+// var fields = ['businessTitle','businessTag','businesscategories'];
 
-businessSearch1 = new SearchSource('business', fields, options);
+// businessSearch1 = new SearchSource('business', fields, options);
 
-var dataIndex = 0;
+// var dataIndex = 0;
 
 Template.mainBusinessSearch.onRendered(function(){
 	$('.homeSearchBarList').removeClass('searchDisplayShow').addClass('searchDisplayHide');

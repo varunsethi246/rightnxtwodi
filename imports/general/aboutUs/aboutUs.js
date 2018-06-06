@@ -5,7 +5,10 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import { Tracker } from 'meteor/tracker';
 
 import { GeneralContent } from '../../api/webPages/generalContentMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../generalLayout/generalLayout.js';
+import '../../admin/commonAdmin/commonAdmin.js';
 import './aboutUs.html';
 import './aboutUsForm.html';
 
@@ -98,3 +101,18 @@ Template.aboutUs.onRendered(function(){
 Template.aboutUsForm.onRendered(function(){
 	$('html, body').scrollTop(0);
 });
+
+
+aboutUsForm = function () {  
+  BlazeLayout.render("generalLayoutWithImage",{generalcontent: 'aboutUs'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+
+export { aboutUsForm };
+
+aboutUsFormTwo = function () {  
+  BlazeLayout.render("adminLayout",{main: 'aboutUsForm'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+
+export { aboutUsFormTwo };

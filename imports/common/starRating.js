@@ -4,6 +4,9 @@ import { Template } from 'meteor/templating';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { Accounts } from 'meteor/accounts-base'; 
 
+import './starRating.html'; 
+
+
 function starCaptions() {
 	var captions = [
 		"Eek! Something else next time.",

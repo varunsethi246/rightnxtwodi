@@ -1,5 +1,7 @@
 import './userProfile.html';
 import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 
 
 

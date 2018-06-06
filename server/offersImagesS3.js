@@ -3,7 +3,6 @@ import {S3Details} from '/imports/api/s3Details.js';
 
 
 var s3Data =  S3Details.findOne({});
-// console.log(s3Data);
 if(s3Data)
 {
   var offerImagesS3 = new FS.Store.S3("offerImagesS3", {
@@ -55,12 +54,12 @@ if(s3Data)
       return false;
     }
   });
+  Meteor.publish('offerImagesS3', function() {
+    return OfferImagesS3.find({}, { limit: 0 });
+  });
 
   if (Meteor.isServer) {
 
-  Meteor.publish('offerImagesS3', function() {
-    return OfferImagesS3.find({});
-  });
   }
 
 }

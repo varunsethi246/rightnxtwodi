@@ -1,3 +1,14 @@
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+import './userLayout.html';
+import './userProfile/userProfile.js';
+import './userSidebar/userSidebar.js';
+import '../common/header.html';
+import '../common/generalHeader.js';
+import '../common/searchbar.js';
+import '../common/vendorSignUpForm.js';
+import './userPhotos/userPhotos.html'
+
  Template.userLayout.events({
 
 	'click .bussScrollTop' : function(event){
@@ -26,18 +37,18 @@ Template.userLayout.onRendered(function(){
     });
 });
 
-// Template.userLayout.onRendered(function(){
-// 	var link = FlowRouter.current().path;
-// 	var checkIdExists = link.split('/');
-// 	if(checkIdExists[2]){
-// 		alert('checkIdExists'); 
-// 		// console.log('checkIdExists');
-// 		$(".addPhotoTxt").hide();
-// 		$(".prfSetting").hide();
-// 		$(".usersidebarUl").children().first('userMenuItem').hide();
-// 		$(".usersidebarUl").children().last('userMenuItem').hide();
-// 		$(".usersidebarUl").children('.userMenuItem:nth-child(3)').addClass('active');
-// 	}
-// });
+Template.userLayout.onRendered(function(){
+	var link = FlowRouter.current().path;
+	var checkIdExists = link.split('/');
+	if(checkIdExists[2]){
+		alert('checkIdExists'); 
+		// console.log('checkIdExists');
+		$(".addPhotoTxt").hide();
+		$(".prfSetting").hide();
+		$(".usersidebarUl").children().first('userMenuItem').hide();
+		$(".usersidebarUl").children().last('userMenuItem').hide();
+		$(".usersidebarUl").children('.userMenuItem:nth-child(3)').addClass('active');
+	}
+});
 
  

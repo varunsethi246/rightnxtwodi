@@ -2,6 +2,7 @@ import { Session } from 'meteor/session';
 import { NotificationTemplate } from '../api/NotificationTemplate.js';
 
 import './userDefinedTemplate.html';
+import '/imports/admin/commonAdmin/commonAdmin.js';
 
 Template.userDefinedTemplate.onRendered (function() {
 	 $(document).ready(function() {
@@ -75,3 +76,8 @@ Template.userDefinedTemplate.helpers({
 		return emailArray;
 	},
 })
+
+userDefinedTemplateForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'userDefinedTemplate'});
+}
+export { userDefinedTemplateForm };

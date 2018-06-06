@@ -1,5 +1,7 @@
 import { Accounts } from 'meteor/accounts-base';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 
 Template.signupScreen.events({
     'click .loginLabel' : function(event){

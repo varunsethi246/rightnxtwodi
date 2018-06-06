@@ -7,7 +7,9 @@ import { Business } from '../../api/businessMaster.js';
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { BeenThere } from '../../api/beenThereMaster.js';
 import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../userLayout.js';
 import '../../vendor/vendorBusinessDetails/businessEventIcons.html';
 import './userBeenThere.html';
 
@@ -81,3 +83,9 @@ Template.userBeenThere.helpers({
 	
 });
 
+
+userBeenThereForm = function () {  
+  BlazeLayout.render("userLayout",{content: 'userBeenThere'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { userBeenThereForm }

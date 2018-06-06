@@ -1,7 +1,62 @@
-if (Meteor.isClient) {
+import { Bert } from 'meteor/themeteorchef:bert';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+// import './forgotPassword.js';
+
+import '/imports/common/common.js';
+
+
+
+// if (Meteor.isClient) {
 
   Template.loginScreen.events({
-  
+     'click .UMloginbutton': function(event, template) {
+    event.preventDefault();
+
+    // var forgotPasswordForm = $(e.currentTarget);
+    // console.log(forgotPasswordForm);
+    var email , trimInput ;
+
+    // var emailVar = e.target.email.value;
+    var emailVar = $("#forgotPasswordEmail").val();
+    $('.enteredEmail').text(emailVar);
+    $('.forgotEmailMessage').show();
+    
+    trimInput = function(val) {
+      return val.replace(/^\s*|\s*$/g, "");
+    }
+
+        emailtrim = trimInput(emailVar);
+        email     = emailtrim.toLowerCase();
+
+
+      Accounts.forgotPassword({email: email}, function(err) {
+        if (err) {
+          if (err.message === 'User not found [403]') {
+            // console.log('This email does not exist.');
+            Bert.alert('This email does not exist:'+err.reason);
+          } else {
+            // console.log('We are sorry but something went wrong.');
+            Bert.alert('We are sorry but something went wrong:'+err.reason);
+          }
+        } else {
+          // console.log('Email Sent. Check your mailbox.');
+          Bert.alert('Email Sent. Check your mailbox.',"success","growl-top-right");
+        }
+      });
+
+        
+      // Bert.alert( "Instructions sent! We've sent an email with instructions on how to reset your password.If you don't receive an email within a few minutes, check your spam and junk folders.", 'success', 'growl-top-right' );
+    return false;
+  },
+
+  'click .forgotEmail':function(e){
+    e.preventDefault();
+    $('.disableBtn').removeAttr('disabled');
+    console.log('value change');
+  },
+
+    
   'click .loginLabel' : function(event){
       $(event.target).siblings().focus();
     },
@@ -9,6 +64,7 @@ if (Meteor.isClient) {
   'submit .loginForm': function(event) {
     event.preventDefault();
 
+    $('#loginModal').hide();
     var email = event.target.email.value;
     var pwd   = event.target.pwd.value;
 
@@ -30,18 +86,21 @@ if (Meteor.isClient) {
     //   }
     // }
 
-    Meteor.call('checkEmailVerification', email, function(error,data){
+
+    Meteor.call('checkEmailVerification', email, (error,data)=>{
     if (data == "verified"){
 
 
-      Meteor.loginWithPassword(email, pwd, function(error) {
+      Meteor.loginWithPassword(email, pwd, (error)=> {
          if (error) {
+            $('#loginModal').show();
             $('.passwordWrongSpan').text("Please Enter Valid Email or Password");
             $('.passwordWrongSpan').addClass('passwordWrongWar');
             
             // Bert.alert( error.reason, 'danger', 'fixed-top', 'fa-frown-o' );
           } else {
             // Bert.alert('Welcome To Rightnxt.com!');
+           
             $('.passwordWrongSpan').removeClass('passwordWrongWar');
              
           event.target.email.value   ='';
@@ -51,7 +110,8 @@ if (Meteor.isClient) {
             $('.modal-backdrop').remove();
 
             var loggedInUser = Meteor.userId();
-            var user = Meteor.users.findOne({'_id' : loggedInUser });
+            // var user = Meteor.users.findOne({'_id' : loggedInUser });
+            var user = Meteor.user();
             if(user){
                 if (Roles.userIsInRole(loggedInUser, ['user'])) {
                       // var msgvariable = {
@@ -81,12 +141,15 @@ if (Meteor.isClient) {
         );
 
     }else if(data == "unverified"){
+           $('#loginModal').show();
            $('.passwordWrongSpan').text("Please use the option Verify Account for OTP verification.");
            $('.passwordWrongSpan').addClass('passwordWrongWar');
     }else if(data == "Blocked"){
+           $('#loginModal').show();
            $('.passwordWrongSpan').text("You're profile is blocked. Please contact Admin.");
            $('.passwordWrongSpan').addClass('passwordWrongWar');
     }else{    
+          $('#loginModal').show();
           $('.passwordWrongSpan').text("Please Enter Valid Email or Password");
           $('.passwordWrongSpan').addClass('passwordWrongWar');         
     }
@@ -105,28 +168,19 @@ if (Meteor.isClient) {
 
 });
  
-}
+// }
 
 Template.header.events({
   
   'click .loginClosenew': function(event) {
     $('.modal-backdrop').hide();
   },
-  // 'click .loginClosenew':function(event){
-  //     $('#loginModal').on('hidden.bs.modal', function (e) {
-  //       // console.log('in close');
-  //       // console.log('input: ',$(this).find("input,textarea,select").val(''));
-  //       $(this)
-  //         .find("input")
-  //            .val('')
-  //            .end();
-  //     });
-  //   },
-  
 });
 
 
 Template.loginScreen.onRendered(function(){
+  $('.disableBtn').attr('disabled','disabled');
+
     $.validator.addMethod("regex_1", function(value, element, regexpr) {          
       return regexpr.test(value);
   }, "Please Enter valid Email Address");

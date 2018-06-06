@@ -7,7 +7,10 @@ import { BizVideo } from '/imports/videoUploadClient/videoUpload.js';
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { BusinessMenuUpload } from '/client/businessMenu.js';
 import { Categories } from '/imports/api/masterData/categoriesMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../vendor.js';
+import './AddvendorImagesVideos.html'
 
 var videoListCount = 0;
 var files = [];
@@ -534,3 +537,9 @@ Template.addvendorImagesVideos.events({
 	      }
 	}
 });
+
+addvendorImagesVideosForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'addvendorImagesVideos'});
+}
+
+export { addvendorImagesVideosForm };

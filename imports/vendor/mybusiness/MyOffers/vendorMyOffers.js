@@ -8,7 +8,9 @@ import { Offers } from '../../../api/offersMaster.js';
 import { Payment } from '../../../api/paymentMaster.js';
 import { CompanySettings } from '../../../api/companysettingsAPI.js';
 import { OfferImagesS3 } from '/client/offersImagesS3.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../../vendor.js';
 import './VendorMyoffers.html';
 import './vendorOffer1.html';
 import './vendorOffer2.html';
@@ -1285,6 +1287,19 @@ Template.receipt.events({
 });
 
 Template.editOffer.events({
+	'click .editModal': function(event){
+		event.preventDefault();
+		
+		var id = event.currentTarget.id;
+		Session.set('id',id);
+
+		// $('.modal-backdrop').hide();
+		
+		if($(event.target).hasClass('inactiveOk')){
+			$('#inactOfferModal-'+id).modal('hide');
+			// $('#editDataModal-'+id).modal('show');
+		}
+	},
 	'click .deleteModal':function(event){
 		event.preventDefault();
 		var businessLink = FlowRouter.getParam('businessLink');
@@ -1391,7 +1406,7 @@ Template.editOffer.events({
 				if(error){
 					Bert.alert(error.reason,"danger","growl-top-right");
 				}else{
-					Bert.alert('Your offer inactivate sucessfully.','success',"growl-top-right");
+					Bert.alert('Your offer inactivated sucessfully.','success',"growl-top-right");
 				}
 			});
 		}
@@ -1408,7 +1423,7 @@ Template.editOffer.events({
 						if(error){
 							Bert.alert(error.reason,"danger","growl-top-right");
 						}else{
-							Bert.alert('Your offer activate sucessfully.','success',"growl-top-right");
+							Bert.alert('Your offer activated sucessfully.','success',"growl-top-right");
 						}
 					});	
 				}
@@ -1565,3 +1580,34 @@ Template.vendorMyOffers.onRendered(function(){
 Template.editOffer.onRendered(function(){
 	Session.set('id','');
 });
+
+
+vendorMyOffersForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'vendorMyOffers'});
+}
+
+export { vendorMyOffersForm };
+
+paymentInvoiceForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'paymentInvoice'});
+}
+
+export { paymentInvoiceForm };
+
+paymentSuccessForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'paymentSuccess'});
+}
+
+export { paymentSuccessForm };
+
+paymentFailedForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'paymentFailed'});
+}
+
+export { paymentFailedForm };
+
+receiptForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'receipt'});
+}
+
+export { receiptForm };

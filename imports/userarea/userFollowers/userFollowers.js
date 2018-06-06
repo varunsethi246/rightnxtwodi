@@ -6,8 +6,12 @@ import { Review } from '../../api/reviewMaster.js';
 import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
 // import  'lib/collections/userCollection.js';
 // import swal from 'sweetalert2'
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+import '../userLayout.js';
 import './findYourFriends.html';
 import './suggestedFollowUsers.html';
+import './userFollowers.html'
 
 userCity = 'Pune';
 var options = {
@@ -684,6 +688,18 @@ function handleAuthResult(authResult) {
 }
 
 
+userFollowersForm = function () {  
+  BlazeLayout.render("userLayout",{content: 'userFollowers'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { userFollowersForm }
+
+
+findYourFriendsForm = function () {  
+  BlazeLayout.render("userLayout",{content: 'findYourFriends'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { findYourFriendsForm }
 
 
 

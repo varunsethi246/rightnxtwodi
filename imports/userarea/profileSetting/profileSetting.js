@@ -2,7 +2,13 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../userLayout.js';
+import './profileSetting.html';
+import './profileSettingSidebar.js';
+import './profileSettingLayout.html';
+import './editProfile.js';
 
 Template.profileSetting.events({
 
@@ -29,7 +35,7 @@ Template.profileSetting.events({
               }
           });
         }else{
-         Bert.alert('Your New Password do not match!', 'danger', 'fixed-top', 'fa-frown-o' );        
+         Bert.alert('Your New Passwords do not match!', 'danger', 'fixed-top', 'fa-frown-o' );        
         }
       }else{
         Bert.alert('Your Old Password is not correct', 'danger', 'fixed-top', 'fa-frown-o' );        
@@ -52,3 +58,8 @@ Template.profileSetting.events({
 });
 
 
+profileSettingForm = function () {  
+  BlazeLayout.render("profileSettingLayout",{profileSettings: 'profileSetting'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { profileSettingForm }

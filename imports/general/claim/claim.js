@@ -2,6 +2,13 @@ import './claim.html';
 import './claimOtp.html';
 import './claimProcess.html';
 import './alreadyClaimed.html';
+import '../../common/header.html';
+import '../../common/generalHeader.js';
+import '../../common/searchbar.js';
+import '../../common/vendorSignUpForm.js';
+import '../generalLayout/generalLayout.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 import { Meteor } from 'meteor/meteor';
 import { Business } from '/imports/api/businessMaster.js';
 import { Area } from '/imports/api/masterData/areaMaster.js';
@@ -549,3 +556,16 @@ Template.claimOtp.events({
 	    }//userData 
 	},
 });
+
+// claimForm = function () {  
+//   // BlazeLayout.render("generalLayoutWithImage",{generalcontent: 'career'});
+//   Blaze.render(Template.claim,document.body);
+// }
+
+// export { claimForm };
+claimForm = function () {  
+  BlazeLayout.render("generalLayoutWithImage" ,{generalcontent: 'claim'});
+  // Blaze.render(Template.claim,document.body);
+}
+
+export { claimForm };

@@ -58,9 +58,10 @@ if(s3Data)
     }
   });
 
-  if (Meteor.isServer) {
-    Meteor.publish("userReviewS3", function() {
-      return UserReviewStoreS3New.find({}, { limit: 0 });
+    Meteor.publish("userReviewS3", function userReviewS3() {
+      // console.log(UserReviewStoreS3New.find({}).fetch());
+      return UserReviewStoreS3New.find({});
     });
+  if (Meteor.isServer) {
   }
 }

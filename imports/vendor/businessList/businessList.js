@@ -7,8 +7,10 @@ import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { BusinessBanner } from '/imports/api/businessBannerMaster.js';
 import { BusinessAds } from '/imports/api/businessAdsMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
-
+import '../../common/searchinitialisation.js'
+import './businessList.html'
 import './allbusinessList.html';
 import './sidebarBusinessList.html';
 import './thumbnailBusinessList.html';
@@ -16,6 +18,12 @@ import './rightSidebarBusList.html';
 import './businessListSearchbar.html';
 import './businessMapView/businessMapView.js';
 import './businessSearchList.js';
+import '../../common/header.html';
+import '../../common/generalHeader.js';
+import '../../common/vendorSignUpForm.js';
+import '../../common/common.js';
+import '../BusinessEnquiry/businessEnquiry.js';
+import './businessMapView/businessMapView.js';
 
 
 Session.set('showMapView',false);
@@ -878,3 +886,10 @@ Template.thumbnailBusinessList.events({
 	}
 });
 
+
+businessListForm = function () {  
+  BlazeLayout.render("anonymousUserLayout1",{main: 'businessList'});
+  // Blaze.render(Template.businessList,document.body);
+}
+
+export { businessListForm };

@@ -8,6 +8,8 @@ import { State } from '../../api/masterData/stateMaster.js';
 import { City } from '../../api/masterData/cityMaster.js';
 import { Area } from '../../api/masterData/areaMaster.js';
 import { Categories } from '../../api/masterData/categoriesMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 
 import './manageLocations.html';
 
@@ -22,6 +24,10 @@ import './categoriesList.html';
 import './categoriesBulkUpload.html';
 import './businessBlkup.html';
 // Meteor.subscribe('categories');
+import '/imports/admin/commonAdmin/commonAdmin.js';
+import '/imports/admin/catgManagement/catgBulkUpload.html';
+import '/imports/admin/catgManagement/catgBulkUpload.js';
+
 
 
 
@@ -1453,3 +1459,17 @@ Template.masterState.onRendered(function(){
     	}
 	 });
 });
+// =================================================================
+//                  dynamic import
+// =================================================================
+
+
+manageLocationsForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'manageLocations'});
+}
+export { manageLocationsForm }
+
+manageCategoriesListForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'manageCategoriesList'});
+}
+export { manageCategoriesListForm }

@@ -4,7 +4,9 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import { Template } from 'meteor/templating';
 
 import { GeneralContent } from '../../api/webPages/generalContentMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../generalLayout/generalLayout.js'
 import './merchantGuidelines.html';
 
 Template.merchantGuidelines.helpers({
@@ -42,4 +44,9 @@ Template.merchantGuidelines.onRendered(function(){
 });
 
 
+merchantGuidelinesForm = function () {  
+  BlazeLayout.render("generalLayout",{generalcontent: 'merchantGuidelines'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
 
+export { merchantGuidelinesForm };

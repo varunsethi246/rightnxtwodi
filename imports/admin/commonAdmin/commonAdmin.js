@@ -1,12 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Notification } from '/imports/api/notification.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 
 import './adminLayout.html';
 import './adminHeader.html';
 import './adminSidebar.html';
 import './adminFooter.html';
 import './ViewAllNotif.html';
+import '../../vendor/vendor.js';
+import '../../userarea/userLayout.html';
+import '../../userarea/userLayout.js';
 
 Template.adminHeader.helpers({
     'notifVal': function(){
@@ -1159,3 +1164,24 @@ Template.adminFooter.helpers({
 		return (new Date()).getFullYear();
 	}
 });
+
+ViewAllNotifForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'ViewAllNotif'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+
+export { ViewAllNotifForm };
+
+ViewAllNotifsForm = function () {  
+  BlazeLayout.render("userLayout",{main: 'ViewAllNotif'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+
+export { ViewAllNotifsForm };
+
+ViewAllNotifsForms = function () {  
+  BlazeLayout.render("adminLayout",{main: 'ViewAllNotif'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+
+export { ViewAllNotifsForms };

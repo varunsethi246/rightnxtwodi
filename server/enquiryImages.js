@@ -56,10 +56,10 @@ if(s3Data)
     }
   });
 
-  if (Meteor.isServer) {
-
   Meteor.publish("enquiryImgS3", function() {
     return EnquiryImgUploadS3.find({}, { limit: 0 });
   });
+  if (Meteor.isServer) {
+
   }
 }

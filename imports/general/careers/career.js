@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 import { State } from '/imports/api/masterData/stateMaster.js';
 import { City } from '/imports/api/masterData/cityMaster.js';
@@ -10,8 +11,11 @@ import { Career } from '../../api/webPages/joinusMaster.js';
 import { Newjob } from '../../api/webPages/AddNewJobMaster.js';
 import { ResumeS3 } from '/client/resumeS3.js';
 
-
+import '../generalLayout/generalLayout.js'
 import '../../admin/careerJoinUsForm/careerJoinUsForm.html';
+import '../../admin/commonAdmin/commonAdmin.js';
+// import '../../admin/admin.js';
+// import './imports/admin/commomAdmin/commomAdmin.js';
 import './career.html';
 import './join-us.html';
 import './AddNewJobForm.html';
@@ -596,3 +600,32 @@ Template.AddNewJobForm.onRendered(function(){
 		}
 	});
 });
+
+addNewJobForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'AddNewJobForm'});
+}
+
+export { addNewJobForm };
+
+careerForm = function () {  
+  BlazeLayout.render("generalLayoutWithImage",{generalcontent: 'career'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+export { careerForm };
+
+// ===
+
+joinUsForm = function () {  
+  BlazeLayout.render("generalLayout",{generalcontent: 'joinUs'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+export { joinUsForm };
+
+// ===
+
+jobListForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'jobList'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+
+export { jobListForm };

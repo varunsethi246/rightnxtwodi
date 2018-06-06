@@ -20,7 +20,15 @@ import './businessList/businessList.js';
 
 import './vendorDashboard/vendorDashboard.js';
 import { Business } from '/imports/api/businessMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../userarea/userProfile/userProfile.js';
+// import '../userarea/userSidebar/userSidebar.js';
+import '../common/header.html';
+import '../common/generalHeader.js';
+import '../common/searchbar.js';
+import '../common/vendorSignUpForm.js';
+import './VendorSidebar/VendorSidebar.js'
 
 
 Template.vendorLayout.events({

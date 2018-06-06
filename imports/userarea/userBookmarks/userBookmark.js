@@ -7,7 +7,9 @@ import { Business } from '../../api/businessMaster.js';
 import { Bookmark } from '../../api/bookmarkMaster.js';
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../userLayout.js';
 import '../../vendor/vendorBusinessDetails/businessEventIcons.html';
 import './userBookmarks.html';
 
@@ -255,3 +257,8 @@ Template.userBookmarks.events({
 	},
 });
 
+userBookmarksForm = function () {  
+  BlazeLayout.render("userLayout",{content: 'userBookmarks'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { userBookmarksForm }

@@ -1,8 +1,11 @@
 import { Template } from 'meteor/templating';
  
 import { ConfigSettings } from '../../api/configSettingsMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 import './configSettings.html';
+import '../commonAdmin/commonAdmin.js';
+
 
 Template.configSettings.onCreated(function(){
     Meteor.subscribe('userfunction');
@@ -113,37 +116,37 @@ Template.configSettings.events({
     formValues = {
         
        checkboxcompanyName    : event.target.checkboxcompanyName.value, 
-    	 checkboxtitle          : event.target.checkboxtitle.value,
-    	 checkboxfirstName      : event.target.checkboxfirstName.value,
-    	 checkboxlastName       : event.target.checkboxlastName.value,
-    	 checkboxemailAddress   : event.target.checkboxemailAddress.value,
-    	 checkboxuserName       : event.target.checkboxuserName.value,
-    	 checkboxgender         : event.target.checkboxgender.value,
-    	 checkboxpicture        : event.target.checkboxpicture.value,
-    	 checkboxhomeAddress    : event.target.checkboxhomeAddress.value,
-    	 checkboxcountry        : event.target.checkboxcountry.value,
+       checkboxtitle          : event.target.checkboxtitle.value,
+       checkboxfirstName      : event.target.checkboxfirstName.value,
+       checkboxlastName       : event.target.checkboxlastName.value,
+       checkboxemailAddress   : event.target.checkboxemailAddress.value,
+       checkboxuserName       : event.target.checkboxuserName.value,
+       checkboxgender         : event.target.checkboxgender.value,
+       checkboxpicture        : event.target.checkboxpicture.value,
+       checkboxhomeAddress    : event.target.checkboxhomeAddress.value,
+       checkboxcountry        : event.target.checkboxcountry.value,
        checkboxstate          : event.target.checkboxstate.value,
        checkboxcity           : event.target.checkboxcity.value,
        checkboxpin            : event.target.checkboxpin.value,
-    	 checkboxmobNum         : event.target.checkboxmobNum.value,
-    	 checkboxalterMobNum    : event.target.checkboxalterMobNum.value,
+       checkboxmobNum         : event.target.checkboxmobNum.value,
+       checkboxalterMobNum    : event.target.checkboxalterMobNum.value,
        checkboxpassword       : event.target.checkboxpassword.value,
        checkboxconfirmPassword    : event.target.checkboxconfirmPassword.value,
        checkboxNewsLetterSubscription    : event.target.checkboxNewsLetterSubscription.value,
-	     title        : event.target.title.value,
-	     firstName    : event.target.firstName.value,
-	     lastName     : event.target.lastName.value,
-	     emailAddress : event.target.emailAddress.value,
-	     userName     : event.target.userName.value,
-	     gender       : event.target.gender.value,
-	     picture      : event.target.picture.value,
-	     homeAddress  : event.target.homeAddress.value,
-	     city         : event.target.city.value,
-	     state        : event.target.state.value,
-	     pin          : event.target.pin.value,
-	     country      : event.target.country.value,
-	     mobNum       : event.target.mobNum.value,
-	     alterMobNum  : event.target.alterMobNum.value,
+       title        : event.target.title.value,
+       firstName    : event.target.firstName.value,
+       lastName     : event.target.lastName.value,
+       emailAddress : event.target.emailAddress.value,
+       userName     : event.target.userName.value,
+       gender       : event.target.gender.value,
+       picture      : event.target.picture.value,
+       homeAddress  : event.target.homeAddress.value,
+       city         : event.target.city.value,
+       state        : event.target.state.value,
+       pin          : event.target.pin.value,
+       country      : event.target.country.value,
+       mobNum       : event.target.mobNum.value,
+       alterMobNum  : event.target.alterMobNum.value,
        companyDomain: event.target.companyDomain.value,
        defaultRoleToUser : event.target.defaultRole.value,
        // defaultRoleToUser : 'Staff',
@@ -151,7 +154,7 @@ Template.configSettings.events({
        confirmPassword   : event.target.confirmPassword.value,
        companyName   : event.target.companyName.value,
        newsLetterSubscription   : event.target.newsLetterSubscription.value,
-	}
+  }
 
 
     var countMatchedRows = ConfigSettings.find({ 'companyDomain' : formValues.companyDomain }).count();
@@ -165,7 +168,7 @@ Template.configSettings.events({
                         // console.log ( 'Insert error : ' + error ); 
                     } 
                     else {
-                    	// console.log ( 'Insert success' ); 
+                      // console.log ( 'Insert success' ); 
                     }
                 }
             );
@@ -191,3 +194,10 @@ Template.configSettings.events({
 
 
 });
+
+
+configSettingsForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'configSettings'});
+}
+
+export { configSettingsForm };

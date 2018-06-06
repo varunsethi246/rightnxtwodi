@@ -58,10 +58,10 @@ if(s3Data)
     }
   });
 
-  if (Meteor.isServer) {
-
   Meteor.publish('businessMenu', function() {
     return BusinessMenuUpload.find({}, { limit: 0 });
   });
+  if (Meteor.isServer) {
+
   }
 }

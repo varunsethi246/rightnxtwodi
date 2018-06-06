@@ -1,6 +1,8 @@
 import { Business } from '/imports/api/businessMaster.js';
 import { BusinessImgUploadS3 } from '/client/businessImage';
 
+import './VendorAboutOwner.html'
+
 Template.vendorAboutOwner.onRendered(function(){
   // $('#asearch  Categories').val(catList);
   $('#venFileUpldval').text('');

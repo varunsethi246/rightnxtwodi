@@ -2,6 +2,9 @@ import { BusinessBanner } from '/imports/api/businessBannerMaster.js';
 import { Session } from 'meteor/session';
 import { Business } from '/imports/api/businessMaster.js';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+import '/imports/admin/commonAdmin/commonAdmin.js';
+import './businessBannerList.html';
 
 
 
@@ -214,3 +217,9 @@ Template.businessBannerList.events({
 		}
 	},
 });
+
+businessBannerListForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'businessBannerList'});
+}
+
+export { businessBannerListForm }

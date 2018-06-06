@@ -5,7 +5,10 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 import { GeneralContent } from '../../api/webPages/generalContentMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+import '../../admin/commonAdmin/commonAdmin.js';
 
+import '../generalLayout/generalLayout.js';
 import './faq.html';
 import './introduction.html';
 import './yourAccount.html';
@@ -308,4 +311,17 @@ Template.faqForm.onRendered(function(event, instance){
 });
 
 
+faqForm = function () {  
+  BlazeLayout.render("generalLayout",{generalcontent: 'faq'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+
+export { faqForm };
+
+faqFormThree = function () {  
+  BlazeLayout.render("adminLayout",{main: 'faqForm'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+
+export { faqFormThree };
 

@@ -5,6 +5,10 @@ import { Mongo } from 'meteor/mongo';
 import { Email } from 'meteor/email';
 
 import './notificationConfig.html';
+import '../userarea/profileSetting/profileSettingSidebar.js';
+import '../userarea/profileSetting/profileSettingLayout.html';
+import '../userarea/profileSetting/editProfile.js';
+import '../userarea/profileSetting/editProfile.html';
 
 Template.notificationConfig.events({
 	'click .submitConfig':function(){
@@ -192,3 +196,9 @@ Template.notificationConfig.helpers({
     	return (this.report === reportProcess) ? "checked" : "";
     },
 });
+
+notificationConfigForm = function () {  
+  BlazeLayout.render("profileSettingLayout",{profileSettings: 'notificationConfig'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { notificationConfigForm }

@@ -1,4 +1,5 @@
 import './vendorSidebar.html';
+import '../../userarea/userSidebar/userSidebar.js';
 
 import { Likes } from '/imports/api/likesMaster.js';
 import { BeenThere } from '/imports/api/beenThereMaster.js';
@@ -9,6 +10,8 @@ import { Review } from '/imports/api/reviewMaster.js';
 
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { Offers } from '/imports/api/offersMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 
 Template.vendorSidebar.helpers({
 	'bussinessDetails' : function () {

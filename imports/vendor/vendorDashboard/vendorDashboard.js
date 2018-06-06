@@ -2,11 +2,13 @@ import { Session } from 'meteor/session';
 import { UserLatLng } from '../../api/userViewMaster.js';
 import { UserStatistics } from '../../api/userViewMaster.js';
 import { Business } from '../../api/businessMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 import './vendorDashboard.html';
 import './userViewGraph.html';
 import './customerLeadsGraph.js';
 import './customerLeadsGraph.html';
+import '../vendor.js';
 
 Template.vendorDashboard.onCreated(function() {
   chart = this.subscribe('allStatistics');
@@ -427,7 +429,12 @@ Template.customerLeadsGraph.helpers({
 });
 
 
+vendorDashboardForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'vendorDashboard'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
 
+export { vendorDashboardForm };
 
 
 

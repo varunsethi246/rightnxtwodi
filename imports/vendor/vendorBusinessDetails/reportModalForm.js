@@ -6,6 +6,7 @@ import { Template } from 'meteor/templating';
 import { Bert } from 'meteor/themeteorchef:bert';
 
 import { Business } from '/imports/api/businessMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 Template.reportModalForm.events({
 	'click #reportSubmit': function(event) {

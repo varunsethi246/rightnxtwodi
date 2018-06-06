@@ -4,6 +4,7 @@ import { Session } from 'meteor/session';
 
 import './adsDiscountManagement.html';
 import './adsPositionManagement.html';
+import '/imports/admin/commonAdmin/commonAdmin.js';
 
 
 
@@ -46,7 +47,6 @@ Template.adsDiscountManagement.events({
 					}else{
 						$('#price').val('');
 						$('#discount').val('');
-						delete Session.keys['adsId'];
 					}
 				})
 			}else if (rate != '' && discount != ''){
@@ -193,3 +193,12 @@ Template.adsPositionManagement.events({
         Session.set("adsPositionId",id);
 	}
 });
+adsDiscountManagementForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'adsDiscountManagement'});
+}
+export { adsDiscountManagementForm }
+
+adsPositionManagementForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'adsPositionManagement'});
+}
+export { adsPositionManagementForm }

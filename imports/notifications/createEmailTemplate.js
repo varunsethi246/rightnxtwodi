@@ -1,9 +1,12 @@
 import { Session } from 'meteor/session';
 import { NotificationTemplate } from '../api/NotificationTemplate.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 
 import './createEmailTemplate.html';
 import './viewTemplate.html';
 import './editTemplate.html';
+import '/imports/admin/commonAdmin/commonAdmin.js';
 
 Template.createEmailTemplate.onRendered (function() {
 	 $(document).ready(function() {
@@ -320,3 +323,17 @@ Template.viewTemplate.events({
 	// },
 		
 });
+createEmailTemplateForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'createEmailTemplate'});
+}
+export { createEmailTemplateForm };
+
+editTemplateForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'editTemplate'});
+}
+export { editTemplateForm };
+
+viewTemplateForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'viewTemplate'});
+}
+export { viewTemplateForm };

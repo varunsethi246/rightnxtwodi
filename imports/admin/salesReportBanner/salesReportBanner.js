@@ -6,7 +6,7 @@ import { Session } from 'meteor/session';
 import { moment } from "meteor/momentjs:moment";
 import { Payment } from '../../api/paymentMaster.js';
 
-
+import '/imports/admin/commonAdmin/commonAdmin.js';
 import './salesReportBanner.html';
 import './salesReportTabsBanner.html';
 import './todaysSalesReport/todaysSalesReportBanner.js';
@@ -51,7 +51,6 @@ Template.salesTableViewBanner.helpers({
   'isGreaterThan0' : function(rowSpanCount){
     return rowSpanCount > 0;
   },
-
 });
 
 
@@ -59,7 +58,7 @@ Template.salesTableViewBanner.helpers({
 Template.salesModalBanner.helpers({
 
    
-     resultVar: ()=> {
+    resultVar: ()=> {
      	  var idFromSession = Session.get("id");
         // console.log('idFromSession'+idFromSession);
         var report_data = [];
@@ -149,7 +148,12 @@ Template.salesModalBanner.helpers({
         });
 
     },
-
 });
+
+salesReportTabsBannerForm = function () {  
+  BlazeLayout.render("adminLayout", {main: 'salesReportTabsBanner'});
+}
+
+export { salesReportTabsBannerForm }
 
 

@@ -2,27 +2,28 @@ import './generalHeader.html';
 import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
 import { Notification } from '/imports/api/notification.js';
 import { ConfigSettings } from '/imports/api/companysettingsAPI.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
-// Template.generalHeader.onRendered(function(){
+Template.generalHeader.onRendered(function(){
 
-// 	$(document).ready(function(){
-// 		$('.userCommentWrapper').each(function(){
-// 			var i = 0;
-// 			$(this).children('.commentReplyArr').each(function(){
-// 				if(i>1){
-// 					$(this).hide();
-// 					console.log('this :',$(this).attr('class'));
-// 				}
-// 				i++;
-// 			});
-// 			if($(this).children('.showreplyCmt').length == 0){
-// 				$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
-// 			}
-// 		});
+	$(document).ready(function(){
+		$('.userCommentWrapper').each(function(){
+			var i = 0;
+			$(this).children('.commentReplyArr').each(function(){
+				if(i>1){
+					$(this).hide();
+					console.log('this :',$(this).attr('class'));
+				}
+				i++;
+			});
+			if($(this).children('.showreplyCmt').length == 0){
+				$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
+			}
+		});
 
-// 	});
+	});
 
-// });
+});
 Template.generalHeader.helpers({
 	'userDetails' : function(){
 		// alert('userDetails');

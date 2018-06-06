@@ -6,7 +6,13 @@ import { Accounts } from 'meteor/accounts-base';
 
 import { State } from '/imports/api/masterData/stateMaster.js';
 import { City } from '/imports/api/masterData/cityMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../userLayout.js';
+import './editProfile.js';
+import './editProfile.html';
+import './profileSettingSidebar.js';
+import './profileSettingLayout.html';
 
 Template.editProfile.helpers({
 	userProfileData(){
@@ -193,3 +199,9 @@ Template.editProfile.events({
 // 	    }
 // 	});
 // });
+
+editProfileForm = function () {  
+  BlazeLayout.render("profileSettingLayout",{profileSettings: 'editProfile'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { editProfileForm }

@@ -4,6 +4,7 @@ import { Template } from 'meteor/templating';
 import { Bert } from 'meteor/themeteorchef:bert';
 
 import './vendorbanners.html';
+import '../../VendorPayments/VendorPayments.js'
 import { Business } from '../../../api/businessMaster.js';
 import { Payment } from '../../../api/paymentMaster.js';
 import { Position } from '/imports/api/discountMaster.js';
@@ -39,3 +40,9 @@ Template.vendorbanners.helpers({
 
 	},
 });
+vendorbannersForm = function () {  
+  BlazeLayout.render("vendorLayout" ,{main: 'vendorbanners'});
+  // Blaze.render(Template.claim,document.body);
+}
+
+export { vendorbannersForm };

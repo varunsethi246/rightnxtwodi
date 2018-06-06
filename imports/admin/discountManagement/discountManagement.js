@@ -4,6 +4,7 @@ import { Session } from 'meteor/session';
 
 import './discountManagement.html';
 import './positionManagement.html';
+import '/imports/admin/commonAdmin/commonAdmin.js';
 
 Template.discountManagement.events({
 	'keypress #discount':function(e){
@@ -186,4 +187,12 @@ Template.positionManagement.events({
         Session.set("positionId",id);
 	}
 });
+discountManagementForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'discountManagement'});
+}
+export { discountManagementForm };
 
+positionManagementForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'positionManagement'});
+}
+export { positionManagementForm };

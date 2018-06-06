@@ -6,6 +6,10 @@ import { Template } from 'meteor/templating';
 import { BizVideo } from '/imports/videoUploadClient/videoUpload.js';
 import { BusinessImgUploadS3 } from '/client/businessImage';
 import { BusinessMenuUpload } from '/client/businessMenu.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+
+import './VendorImagesVideos.html'
 
 var videoListCountEdit = 0;
 var uploader = new ReactiveVar();
@@ -22,12 +26,8 @@ Template.vendorImagesVideos.helpers({
     files: function() {
 		var businessLink = FlowRouter.getParam('businessLink');
     	var bussData = Business.findOne({"businessLink":businessLink});
-    	// console.log('bussData: ',bussData);
     	if(bussData){
-    		// console.log('bussData 2: ',bussData.businessVideo);
-    		var imageId = bussData.businessVideo;
-	        var data = BizVideo.find({"_id":imageId}).fetch();
-	        // console.log('data: ',data);
+	        var data = BizVideo.find({"_id":bussData.businessVideo}).fetch();
 	        return data;
 	    }
     },	
@@ -211,10 +211,7 @@ Template.vendorImagesVideos.events({
 
 		      upload.on('end', function (error, fileObj) {
 		        if (error) {
-		          // alert('Error during upload: ' + error);
-		          // console.log('Error during upload: ' + error);
-		          // console.log('Error during upload: ' + error.reason);
-
+		          alert('Error during upload: ' + error);
 		        } else {
 		          // alert('File "' + fileObj._id + '" successfully uploaded');
 		          Bert.alert('Business Video uploaded','success','growl-top-right');
@@ -407,11 +404,9 @@ Template.vendorImagesVideos.events({
 
 
 	      if (currentPathURL == currentVendorURL) {
-	      	$("html,body").scrollTop(0);
 	          FlowRouter.go('/:businessurl',{'businessurl':businessLink});
 	      }
 	      else{
-	      	$("html,body").scrollTop(0);
 	          FlowRouter.go('/listOfBusiness');
 	      }
 	}

@@ -1,7 +1,11 @@
 import './editMyProfiles.html';
+import '../commonAdmin/commonAdmin.js';
+
 
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 
 
 Template.editMyProfiles.onCreated(function(){
@@ -193,3 +197,9 @@ Template.editMyProfiles.onRendered(function(){
 
    $("body").scrollTop(0);
 });
+
+editMyProfilesForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'editMyProfiles'});
+}
+
+export { editMyProfilesForm };

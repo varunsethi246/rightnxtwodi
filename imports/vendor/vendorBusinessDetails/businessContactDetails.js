@@ -4,6 +4,9 @@ import { Session } from 'meteor/session';
 import { Bert } from 'meteor/themeteorchef:bert';
 
 import { Review } from '/imports/api/reviewMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+import '../../common/starRating2.html'
 
 Template.businessContactDetails.helpers({
 	showRating(){

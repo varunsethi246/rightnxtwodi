@@ -3,8 +3,10 @@ import { Business } from '/imports/api/businessMaster.js';
 import { State } from '/imports/api/masterData/stateMaster.js';
 import { City } from '/imports/api/masterData/cityMaster.js';
 import { Area } from '/imports/api/masterData/areaMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 
+import './VendorBusinessInformation.html'
 // Template.vendorBusinessInformation.onRendered(function(){
 
 // });

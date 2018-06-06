@@ -1,3 +1,5 @@
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 import './adminDashboard.html';
 import './commonAdmin/commonAdmin.js';
 
@@ -16,6 +18,8 @@ import './userManagement/listofUser.html';
 import './userManagement/adminAddRolesList.html';
 import './userManagement/createUser.html';
 import './userManagement/editMyProfileAdmin.html';
+import './userManagement/UMlistOfUsers.js';
+import './userManagement/UMeditMyProfile.js';
 
 import './masterData/businessBlkup.html';
 import './masterData/businessBlkup.js';
@@ -170,3 +174,14 @@ Template.createUsers.onRendered(()=>{
 
 
 
+adminDashboard = function () {  
+  BlazeLayout.render("adminLayout",{main: 'adminDashboard'});
+}
+
+export { adminDashboard };
+
+careerJoinUsForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'careerJoinUsForm'});
+}
+
+export { careerJoinUsForm };

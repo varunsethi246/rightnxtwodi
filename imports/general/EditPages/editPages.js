@@ -4,8 +4,12 @@ import { Session } from 'meteor/session';
 import { Bert } from 'meteor/themeteorchef:bert';
 
 import { GeneralContent } from '../../api/webPages/generalContentMaster.js';
-
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+import '../../admin/commonAdmin/commonAdmin.js';
 import './editPages.html';
+import '../aboutUs/aboutUs.js';
+import '../FAQ/faq.js';
+import '../generalLayout/generalLayout.js';
 
 Template.generalContentForm.onRendered( function() {
    CKEDITOR.replace( 'textarea' );
@@ -111,3 +115,10 @@ Template.editPages.events({
 Template.editPages.onRendered(function(){
 	$("body").scrollTop(0);
 });
+
+editPagesForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'editPages'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+
+export { editPagesForm };

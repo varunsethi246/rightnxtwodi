@@ -8,6 +8,10 @@ import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
 import { Review } from '../../api/reviewMaster.js';
 import { UserImgLikes } from '/imports/api/UserImgLikesMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+import '../userLayout.js';
+import './userPhotos.html';
 
 var files = [];
 var checked = [];
@@ -178,3 +182,9 @@ Template.userPhotos.events({
 		}
 	}
 });
+
+userPhotosForm = function () {  
+  BlazeLayout.render("userLayout",{content: 'userPhotos'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { userPhotosForm }

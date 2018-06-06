@@ -8,7 +8,12 @@ import { Review } from '../../../api/reviewMaster.js';
 
 import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
 import { FollowUser } from '/imports/api/userFollowMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../../vendor.js';
+
+
+// console.log('-------------before code----------');
 
 
 Template.VendorBeenThere.helpers({
@@ -95,3 +100,9 @@ Template.VendorBeenThere.helpers({
 });
 
 
+
+VendorBeenThereForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'VendorBeenThere'});
+}
+
+export { VendorBeenThereForm };

@@ -14,7 +14,10 @@ import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
 import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { Categories } from '../../api/masterData/categoriesMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../userLayout.js';
+import './userOffers.html';
 
 sortOfferDateAscending = function(){
     var products = $('.businessVendorOfferText');
@@ -263,3 +266,9 @@ Template.userOffers.events({
 		}
 	},
 });
+
+userOffersForm = function () {  
+  BlazeLayout.render("userLayout",{content: 'userOffers'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { userOffersForm }

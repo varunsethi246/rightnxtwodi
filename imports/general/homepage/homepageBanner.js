@@ -1,6 +1,15 @@
 import './homepageBanner.html';
+import '../../admin/commonAdmin/adminLayout.html';
+import '../../admin/commonAdmin/adminSidebar.html';
+import '../../admin/commonAdmin/adminHeader.html';
+import '../../admin/commonAdmin/adminFooter.html';
+import '../mainBusinessSearch/mainBusinessSearch.js';
+
+
 import { Area } from '/imports/api/masterData/areaMaster.js';
 import { City } from '/imports/api/masterData/cityMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 Meteor.subscribe('vendorBusiness');
 
 var options = {
@@ -85,10 +94,10 @@ Template.homepageBanner.helpers({
     
       var currentAreaList = Area.find({'city':currentCity,"status":"active"}).fetch();
       currentAreaList.sort(function(a, b) {
-		    var textA = a.area.toUpperCase();
-		    var textB = b.area.toUpperCase();
-		    return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-		  });
+        var textA = a.area.toUpperCase();
+        var textB = b.area.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      });
 
       return {currentCityList, currentAreaList};
   },
@@ -177,7 +186,11 @@ Template.homepageBanner.events({
 
 });
 
+HomepageBannerForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'homepage'});
+}
 
+export { HomepageBannerForm };
 
 
 

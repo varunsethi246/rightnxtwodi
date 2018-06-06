@@ -3,6 +3,7 @@ import { Accounts } from 'meteor/accounts-base';
 //============================================================
 //   Admin Masters
 //============================================================
+import '../imports/api/UMAPI.js';
 import '../imports/api/companysettingsAPI.js';
 // import '../imports/api/dailyOrderAPI.js';
 
@@ -56,26 +57,28 @@ import '../imports/api/discountMaster.js';
 import '../imports/api/businessBannerMaster.js';
 import '../imports/api/businessAdsMaster.js';
 
-// ============================
-//      quickwallet
-// ============================
-import '../imports/api/quickwalletDetails.js';
 
 
 // Signup Setting
 import '../imports/api/configSettingsMaster.js';
 import '../imports/api/s3Details.js';
 
+
 import { BizVideo } from '/imports/videoUploadserver/videoUpload.js';
-if (Meteor.isServer) {
-  Meteor.publish('getBizVideo', function() {
-      return BizVideo.find({}).cursor;
+import { FollowUser } from '/imports/api/userFollowMaster.js';
+
+Meteor.publish('getBizVideo', function() {
+    return BizVideo.find({}).cursor;
+});
+
+
+
+ Meteor.publish('followUser', function() {
+    return FollowUser.find({});
   });
-}
-
-
-
-
+  Meteor.publish('followerCounts', function() {
+      Counts.publish(this, 'followerCounts', FollowUser.find({}));
+  });
 
 // import '../imports/notifications/notification.js';
 
@@ -122,7 +125,7 @@ Meteor.methods({
     var imgUri = "images/logo.png";
     var image  = Meteor.absoluteUrl(imgUri)
     var name = Meteor.users.findOne({_id:Meteor.userId()}).profile.name;
-    var msg   = 'Hi there, <br/><br/>'+name+' has share offer with you. Check it out.<br/><br/><p></p><br/><br/><div style="border: 1px solid #ccc; width: 800px;"><img src='+image+' alt="" style="height: 60px; width: 60px; padding-left: 15px; padding-top: 15px;" /><SPAN style= "font-size: 16px; font-weight: 700; float: right; margin-top: 4%; margin-right: 73%;">Dominos Offer-4 </SPAN><span style=""><h5 style="padding-right: 15px; padding-left: 15px;">Expiration Date: From 19 Jul To 19 Aug 2017</h5><hr style="margin-right: 15px; margin-left: 15px;"><p style="font-size: 14px; padding-right: 15px; padding-left: 15px; text-align: justify; font-weight: 400; color: #555;">Buy 4 medium pan pizzas @ Rs. 1000/- Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p></span></div>';
+    var msg = 'Hi there, <br/><br/>'+name+ ' has share offer with you. Check it out.<br/><br/><p></p><br/><br/><div style="border: 1px solid #ccc; width: 800px;"><img src='+image+' alt="" style="height: 60px; width: 60px; padding-left: 15px; padding-top: 15px;" /><SPAN style= "font-size: 16px; font-weight: 700; float: right; margin-top: 4%; margin-right: 73%;">Dominos Offer-4 </SPAN><span style=""><h5 style="padding-right: 15px; padding-left: 15px;">Expiration Date: From 19 Jul To 19 Aug 2017</h5><hr style="margin-right: 15px; margin-left: 15px;"><p style="font-size: 14px; padding-right: 15px; padding-left: 15px; text-align: justify; font-weight: 400; color: #555;">Buy 4 medium pan pizzas @ Rs. 1000/- Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p></span></div>';
     Email.send({
       to: to,
       from: from,
@@ -189,8 +192,8 @@ Meteor.methods({
     });
 
     var params = {
-      'src'  : '+919096758067', // Sender's phone number with country code
-      'dst'  : mobile.toString(), // Receiver's phone Number with country code
+      'src': '+919096758067', // Sender's phone number with country code
+      'dst' : mobile.toString(), // Receiver's phone Number with country code
       'text' : "Your One time Passsword for rightnxt.com is "+otp.toString(), // Your SMS Text Message - English
     };
 

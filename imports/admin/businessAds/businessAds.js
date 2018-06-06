@@ -9,6 +9,7 @@ import { AdsDiscount } from '/imports/api/discountMaster.js';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { AdsPosition } from '/imports/api/discountMaster.js';
 import { Payment } from '/imports/api/paymentMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 
 
@@ -17,6 +18,7 @@ import './businessAds.html';
 import './businessAdsList.html';
 import './businessAdsList.js';
 import './positionAndDiscountManagement/adsManagement.js';
+import '/imports/admin/commonAdmin/commonAdmin.js';
 
 var options = {
   keepHistory: 0,
@@ -659,4 +661,14 @@ Template.businessAds.events({
 	},
 
 });
+businessAdsForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'businessAds'});
+}
 
+export { businessAdsForm }
+
+adsInvoiceForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'adsInvoice'});
+}
+
+export { adsInvoiceForm }

@@ -5,7 +5,12 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import { Tracker } from 'meteor/tracker';
 
 import { Categories } from '/imports/api/masterData/categoriesMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../../general/homepage/homepageProductCarousel.js'
+import '../../general/homepage/homepageServicesCarousel.js'
+import '../../common/searchinitialisation.js'
+import './sidebarBusinessList.html'
 var categoryRouteList = '';
 Template.homepageProductCarousel.events({
    'click .item' : function(event){

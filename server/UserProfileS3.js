@@ -1,10 +1,10 @@
 import {S3Details} from '/imports/api/s3Details.js';
 
-
 var s3Data =  S3Details.findOne({});
+// console.log('s3Details:',s3Data);
 if(s3Data)
 {
-
+  // console.log(s3Data);
   var userProfileStoreS3New = new FS.Store.S3("userProfileS3", {
     region : s3Data.region, 
     accessKeyId: s3Data.key, 
@@ -57,14 +57,22 @@ if(s3Data)
     }
   });
 
-  if (Meteor.isServer) {
-
   Meteor.publish("userProfileS3", function() {
-    return UserProfileStoreS3New.find({}, { limit: 0 });
+    return UserProfileStoreS3New.find({});
   });
   Meteor.publish("userProfileS3OneUser", function() {
-    var userDetails = Meteor.users.findOne({"_id":Meteor.userId()});
-    if(userDetails){ return UserProfileStoreS3New.find({"_id":userDetails.profile.userProfilePic});}
+
+      if(Meteor.user()){
+        var imgId = Meteor.user().profile.userProfilePic;
+      }else{
+         var imgId = '101';
+      }
+      var data = UserProfileStoreS3New.find({"_id": imgId});
+      console.log('data:',data);
+      return data;
+
   });
-  }
+  // if (Meteor.isServer) {
+
+  // }
 }

@@ -12,6 +12,10 @@ import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
 import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { FollowUser } from '/imports/api/userFollowMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+import './businessEventIcons.js'
+import './businessEvntIcons2.html'
 
 // var options = {
 // 	keepHistory: 1000 * 60 * 5,
@@ -842,6 +846,7 @@ Template.userReviewTemplate.events({
 
 	'click .heart' : function(event){
 		event.preventDefault();
+		console.log('like page');
 		var businessUrl = FlowRouter.getParam('businessurl');
 		var likeid = event.currentTarget.id.split('-');
 		var id = likeid[1];

@@ -8,7 +8,12 @@ import { Business } from '/imports/api/businessMaster.js';
 import { State } from '/imports/api/masterData/stateMaster.js';
 import { City } from '/imports/api/masterData/cityMaster.js';
 import { Area } from '/imports/api/masterData/areaMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+
+import './addvendorBusInfo.html';
+import '../vendor.js';
+import '../../notifications/sendMailnNotification.js';
 
 Template.addVendorBusInfo.helpers({
    // To retrive Data on back button
@@ -724,4 +729,10 @@ function markerCoords(markerobject){
       // console.log("marker is being dragged");
    });     
 }
+
+addVendorBusInfoForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'addVendorBusInfo'});
+}
+
+export { addVendorBusInfoForm };
    

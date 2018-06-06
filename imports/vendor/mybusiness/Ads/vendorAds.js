@@ -2,9 +2,11 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 import { Bert } from 'meteor/themeteorchef:bert';
-
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import './vendorAds.html';
-
+import '../../vendor.js';
+import './vendorAds.html';
+import '../../VendorPayments/VendorPayments.js';
 // import '../../VendorPayments/VendorPayments.html'
 
 
@@ -43,3 +45,9 @@ Template.vendorAds.helpers({
 
 	},
 });
+
+vendorAdsForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'vendorAds'});
+}
+
+export { vendorAdsForm };

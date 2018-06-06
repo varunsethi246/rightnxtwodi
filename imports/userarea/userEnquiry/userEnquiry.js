@@ -2,7 +2,12 @@ import { Business } from '/imports/api/businessMaster.js';
 import { Enquiry } from '/imports/api/enquiryMaster.js';
 import { EnquiryImgUploadS3 } from '/client/enquiryImages.js';
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../userLayout.js';
+import './userEnquiry.html';
+import './userEnquiryDetails.html';
+import './userEnquiryPage.html';
 
 Template.userEnquiryPage.onRendered(function(){
 	Session.set("tabStatus","activeTab");
@@ -797,3 +802,8 @@ Template.userEnquiryPage.events({
 	},
 	
 });
+userEnquiryPageForm = function () {  
+  BlazeLayout.render("userLayout",{content: 'userEnquiryPage'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { userEnquiryPageForm }

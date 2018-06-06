@@ -10,6 +10,14 @@ import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
 import { Business } from '/imports/api/businessMaster.js';
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+import '../userLayout.js';
+import './userTimelinePage.html';
+import './userSuggestion.html';
+import './userTimeline.html';
+import '../../common/tagFrnd.js'
+
 var uniqueId = [];
 var allReviewsTotalCount = '';
 var limitReviews=0;
@@ -111,6 +119,16 @@ Template.userSuggestion.helpers ({
 });
 
 Template.userTimeline.helpers({
+	'timeAgo': function(datetime) {
+
+		console.log('datetime: ',datetime);
+	  // if(datetime == ''){
+	  //   return 'Never Logged In';
+	  // }else{
+	  //   // Session.get('time');
+	    return moment(datetime).fromNow();
+	  // }
+	},
 	showRating(){
 		// userId,businessLink
 		var userId = Meteor.userId();
@@ -1983,11 +2001,11 @@ Template.userTimeline.events({
 
 
 			var starRating = $('.starRatingblock .fixStar1').length;
-			console.log('starRating time: ',starRating);
+			// console.log('starRating time: ',starRating);
 			starRating = starRating + $('.starRatingblock .fixStar2').length;
-			console.log('starRating time: ',starRating);
+			// console.log('starRating time: ',starRating);
 			var rating = parseFloat(starRating) / 2;
-			console.log('rating time: ', rating);
+			// console.log('rating time: ', rating);
 
 			if(filesR){
 				for(i = 0 ; i < filesR.length; i++){		
@@ -2144,7 +2162,7 @@ fbShare = function(URL,title,description,image,id){
   };
 }
 
- googleplusshare = function(url) {
+googleplusshare = function(url) {
   sharelink = "https://plus.google.com/share?url="+url;
   newwindow=window.open(sharelink,'name','height=400,width=600');
   if (window.focus) {newwindow.focus()}                                                                                                                                
@@ -2199,3 +2217,10 @@ googleShare = function(){
   // the button.
   gapi.interactivepost.render('sharePost', options);
 }
+
+
+userTimelinePageForm = function () {  
+  BlazeLayout.render("userLayout",{content: 'userTimelinePage'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { userTimelinePageForm }

@@ -2,7 +2,10 @@ import { BusinessAds } from '/imports/api/businessAdsMaster.js';
 import { Session } from 'meteor/session';
 import { Business } from '/imports/api/businessMaster.js';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '/imports/admin/commonAdmin/commonAdmin.js';
+import './businessAdsList.html';
 
 
 
@@ -190,3 +193,9 @@ Template.businessAdsList.events({
 		}
 	},
 });
+
+businessAdsListForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'businessAdsList'});
+}
+
+export { businessAdsListForm }

@@ -12,11 +12,21 @@ import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { Categories } from '../../api/masterData/categoriesMaster.js';
 import { emptyReviewTemplate } from '../../common/emptyReviewTemplate.html';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+import '../userLayout.js';
+import './userReviewPage.html';
+import './userReview.html';
+import './userReviewSuggestion.html';
+import '../../common/tagFrnd.js'
+import '../../common/starRating2.html'
+import '../../common/starRating.js'
+
 
 tagedFriends = [];
 var filesR = [];
 var counterImg = 0;
-var uniqueId = [];
+const uniqueId = [];
 
 sortReviewDateAscending = function(){
     var products = $('.timeLine');
@@ -42,13 +52,15 @@ Template.userReview.onRendered(function(){
 				}
 				i++;
 			});
+				// console.log('before length',$(this).children('.showreplyCmt').length);
+
 			if($(this).children('.showreplyCmt').length == 0){
+				// console.log($(this).children('.showreplyCmt').length);
 				$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
 			}
 		});
 
 	});
-
 });
 
 Template.userReview.helpers({
@@ -165,7 +177,9 @@ Template.userReview.helpers({
 			for (var i = 0; i < reviewData.length; i++) {
 
 				var businessLinkVar	= reviewData[i].businessLink;
-				var businessData   	= Business.findOne({'businessLink':businessLinkVar,"status":'active'});
+				// console.log("businesslinkVar :",businessLinkVar);
+				var businessData   	= Business.findOne({'businessLink':businessLinkVar,'status':'active'});
+				// console.log('businessData :',businessData);
 				if (businessData){
 
 					var reviewDateNumber = reviewData[i].reviewDate.getTime();
@@ -197,7 +211,8 @@ Template.userReview.helpers({
 
 					}
 					reviewData[i].reviewDateAgo = moment(reviewData[i].reviewDate).fromNow();
-
+					var timeAgo = reviewData[i].reviewDateAgo;
+					// console.log('time One 1st :',timeAgo);
 
 					var link = FlowRouter.current().path;
 					var checkIdExists = link.split('/');
@@ -420,7 +435,11 @@ Template.userReview.helpers({
 					}
 					returnReviewData.push(reviewData[i]);
 				}//end of businessData
+				// var timeAgo = moment(reviewData[i].createdAt).fromNow();
+				// reviewData[i].timeAgo = timeAgo;
+				// console.log('time one 2nd' , timeAgo);
 			}
+			// console.log('returnReviewData :',returnReviewData);
 			return returnReviewData;
 		}
 	},
@@ -484,8 +503,6 @@ Template.userReview.helpers({
 		}
 
 	},
-
-
 });
 
 getCategory = function(categoriesArray){
@@ -526,52 +543,40 @@ Template.userReviewSuggestion.events({
 	'click .followII':function(event){
 		var url = FlowRouter.current().path;
 		var userid = url.split('/');
-		var value  = this;
-		id     = value._id;
+		if(userid[2] != ''&& userid[2]){
+			id = userid[2];
+		}else{
+			var value  = this;
+			id     = value._id;
+		}
+		// var value  = this;
+		// id     = value._id;
+		console.log('id:',id);
 		Meteor.call('insertUserFollow',id,function(error,result){
 			if(error){
 				// console.log(error.reason);
 			}else{
+			// console.log('id',id);
 				var getResult = result;
-
-				//send mail to the user//
-			    var admin = Meteor.users.findOne({'roles':'admin'});
-			     if(admin){
-			     	var adminId = admin._id;
-			     }//admin  
-             	var followData = FollowUser.findOne({"_id":getResult});
+				var followData = FollowUser.findOne({"_id":getResult});
               	if(followData){
                 	var usermailId = followData.followUserId;
                 	var userVar    = Meteor.users.findOne({'_id':usermailId});
                 	if(userVar){
-                		var username 	= userVar.profile.name;
-                		var date 		= new Date();
-                		var currentDate = moment(date).format('DD/MM/YYYY');
-                		var msgvariable = {
-							'[username]' 	: username,
-		   					'[currentDate]'	: currentDate
-		               	};
-
-
-						var inputObj = {
-						    to           : usermailId,
-						    templateName : 'Follow',
-						    variables    : msgvariable,
-						}
-
-						sendInAppNotification(inputObj);
-
-						var inputObj = {
-							from         : adminId,
-						    to           : usermailId,
-						    templateName : 'Follow',
-						    variables    : msgvariable,
-						}
-
-						sendMailNotification(inputObj); 
-                		
+                		var notifConfig = userVar.notificationConfiguration.follow;
+                        if(notifConfig == "true"){
+		                	var inputObj = {
+		                        roles       : 'user',
+		                        to          : usermailId,
+		                        templateName: 'Follow',
+		                        OrderId     : getResult,
+		                	}
+		                	sendMailnNotif(inputObj);
+	                    }
                 	}//userVar
               	}//followData 
+              	// $('.followII').hide();
+
 			}
 		});
 	},
@@ -583,19 +588,30 @@ Template.userReview.helpers({
 		var businessUrl = this.businessLink;
 		// var businessLinkNew = Business.findOne({"businessLink":businessLinks});
 		// console.log('businessUrl :',businessUrl);
-		// var ratingInt = Review.findOne({"userId" : userId,"businessLink":businessUrl});
-		var ratingInt = Review.find({
-										$or:[ 
-												{ "userId":{$in  : uniqueId},"businessLink":businessUrl } , 
-											]
-										},
-									).fetch();
-		// console.log('ratingInt :',ratingInt);
+// <<<<<<< Updated upstream
+// 		// var ratingInt = Review.findOne({"userId" : userId,"businessLink":businessUrl});
+// 		var ratingInt = Review.find({
+// 										$or:[ 
+// 												{ "userId":{$in  : uniqueId},"businessLink":businessUrl } , 
+// 											]
+// 										},
+// 									).fetch();
+// 		// console.log('ratingInt :',ratingInt);
+// 		if(ratingInt){
+// 			// console.log("ratingInt = ", ratingInt);
+// 			for (var i = 0; i < ratingInt.length; i++) {	
+// 				var latestRating = ratingInt[i].rating;
+// 				// console.log('latestRating:',latestRating);
+// =======
+		var ratingInt = Review.find({"userId" : userId,"businessLink":businessUrl}).fetch();
+		console.log('ratingInt :',ratingInt);
 		if(ratingInt){
 			// console.log("ratingInt = ", ratingInt);
-			for (var i = 0; i < ratingInt.length; i++) {	
-				var latestRating = ratingInt[i].rating;
-				// console.log('latestRating:',latestRating);
+			for (var j = 0; j < ratingInt.length; j++) {
+				
+				var latestRating = ratingInt[j].rating;
+				console.log('latestRating:',latestRating);
+// >>>>>>> Stashed changes
 				var intRating = parseInt(latestRating);
 				var balRating = latestRating - intRating;
 				var finalRating = intRating + balRating;
@@ -622,7 +638,7 @@ Template.userReview.helpers({
 				
 				}
 			}
-			// console.log("ratingObj = ", ratingObj);
+			console.log("ratingObj = ", ratingObj);
 
 			return ratingObj;
 		}else{
@@ -667,10 +683,10 @@ Template.userReviewSuggestion.helpers ({
 		// console.log('uid ',uid);
 		var currentUserObj = Meteor.users.findOne({"_id":uid});
 
-			if(currentUserObj){
+			if(currentUserObj && currentUserObj.profile){
 				userCity = currentUserObj.profile.city;
 				var otherUsersData  = Meteor.users.find({"profile.city":userCity, "_id":{$ne: uid}, "roles":{$nin: [ 'admin', 'Vendor']}}).fetch();
-				if(otherUsersData){
+				if(otherUsersData && otherUsersData.length>0){
 					for(var i=0;i<otherUsersData.length;i++){
 						var name    = otherUsersData[i].profile.name;
 						var id      = otherUsersData[i]._id;
@@ -2041,7 +2057,7 @@ Template.userReview.events({
 
 	'click .userRevComEdit':function(event){
 		var id = $(event.target).attr('id');
-		// console.log('id: ',id);
+		console.log('id: ',id);
 		$('.userReviewTempcommTxt-'+id).css('display','none');
 		$('.editBoxCommentRev-'+id).css('display','block');
 		$('.reviewCancel-'+id).css('display','block');
@@ -2196,7 +2212,7 @@ Template.userReview.events({
 					}
 					totalRating = totalRating / ReviewBussLink.length ;
 
-
+					// console.log('totalRating:',totalRating);
 					Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, totalRating, function(error, result){
 						if(error){
 							Bert.alert('Some technical issue happened... Your review is not posted.', 'danger', 'growl-top-right');
@@ -2329,6 +2345,12 @@ fbShare = function(URL,title,description,image,id){
   	return false;
 }
 
+userReviewPageForm = function () {  
+		// console.log("hello this is review page");
+  BlazeLayout.render("userLayout",{content : 'userReviewPage'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { userReviewPageForm }
 
 
 

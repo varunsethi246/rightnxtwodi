@@ -5,7 +5,10 @@ import { Notification } from '/imports/api/notification.js';
 import { Categories } from '/imports/api/masterData/categoriesMaster.js';
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { Business } from '/imports/api/businessMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import './searchbar.html'
+import '../vendor/businessList/businessMapView/businessMapView.js'
 
 
 
@@ -547,7 +550,9 @@ Template.searchbar.events({
 	  }, 200),
 
 	'click .mapVwPointer':function(){
+		console.log('map view');
 		var data = Template.currentData(self.view);
+		console.log('data:',data);
         Blaze.renderWithData(Template.businessMap, data, $(".mapContainer")[0]);
 	}
 });

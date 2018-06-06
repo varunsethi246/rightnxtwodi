@@ -1,4 +1,5 @@
 import './vendorReport1.html';
+// import './vendorReport.html';
 import './businessReport.html';
 import './imageReport.html';
 import '../../vendorBusinessDetails/reportModalForm.html';
@@ -7,7 +8,9 @@ import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { Business } from '/imports/api/businessMaster.js';
 import { Reports } from '/imports/api/reportMaster.js';
 import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../../vendor.js';
 
 // var tabStatus = '';
 
@@ -367,3 +370,9 @@ Template.businessReport.events({
 	},
 
 });
+
+vendorReportForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'vendorReport'});
+}
+
+export { vendorReportForm };

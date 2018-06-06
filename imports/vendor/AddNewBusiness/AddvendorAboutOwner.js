@@ -3,9 +3,13 @@ import { Mongo } from 'meteor/mongo';
 import { Template } from 'meteor/templating';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { Business } from '../../api/businessMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 
 import { BusinessImgUploadS3 } from '/client/businessImage';
+
+import '../vendor.js';
+import './AddvendorAboutOwner.html'
 
 Template.addvendorAboutOwner.helpers({
 	vendorBusOwInfoRetrive() {
@@ -210,3 +214,9 @@ Template.addvendorAboutOwner.events({
 	},
 
 });
+
+addvendorAboutOwnerForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'addvendorAboutOwner'});
+}
+
+export { addvendorAboutOwnerForm };

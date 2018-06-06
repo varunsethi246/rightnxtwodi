@@ -11,10 +11,12 @@ import { FollowUser } from '../../api/userFollowMaster.js';
 import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
 import { SavedOffer } from '/imports/api/savedOffersMaster.js';
 import { Enquiry } from '/imports/api/enquiryMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import './userSidebar.html';
 
 Template.userSidebar.events({
-	'click .userMenuItem':function(event){        
+	'click .userMenuItem':function(event){       
         $('.userMenuItem').removeClass('active');
         $(event.currentTarget).addClass('active');
         $("html,body").scrollTop(0);
@@ -357,6 +359,7 @@ Template.userSidebar.helpers({
 
 	'siderbarReviewCount':function(){
 		if(Session.get("updateUserTimeline")==true){
+			console.log('inside update Session if');
 			var id ='';
 			var url = FlowRouter.current().path;
 			var checkIdExists = url.split('/');
@@ -384,6 +387,7 @@ Template.userSidebar.helpers({
 			}
 			// return ReviewData;
 		}else {
+			console.log('inside else');
 			var id ='';
 			var url = FlowRouter.current().path;
 			var checkIdExists = url.split('/');
@@ -395,15 +399,19 @@ Template.userSidebar.helpers({
 			}
 			var count = 0;
 			var ReviewData = Review.find({"userId":id}).fetch();
-			// console.log('reviewdata :',ReviewData);
+			console.log('reviewdata :',ReviewData);
 			if(ReviewData){
 				for(i=0;i<ReviewData.length;i++){
-					var bussdata = Business.findOne({'businessLink':ReviewData[i].businessLink,"status":'active'});
-					// console.log('bussdata 1 :',bussdata);
+					console.log('ReviewData length :',ReviewData.length);
+					console.log('ReviewData[i].businessLink :',ReviewData[i].businessLink);
+
+					var bussdata = Business.find({'businessLink':ReviewData[i].businessLink,"status":'active'}).fetch();
+					console.log('bussdata 1 :',bussdata);
 						if(bussdata){
 							count++;
 						}
 					}
+					console.log('count :',count);
 					var ReviewDataReturn = {
 						noofReviews		: count,
 					}

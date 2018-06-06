@@ -4,7 +4,9 @@ import { Template } from 'meteor/templating';
 import { Bert } from 'meteor/themeteorchef:bert';
 
 import { ContactUs } from '../../api/webPages/contactUsMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../generalLayout/generalLayout.js'
 import './contactUs.html';
 
 Template.contactUs.helpers({
@@ -94,3 +96,12 @@ Template.contactUs.onRendered(function(){
     	}
 	});
 });
+
+
+
+contactUsForm = function () {  
+  BlazeLayout.render("generalLayoutWithImage",{generalcontent: 'contactUs'});
+  // Blaze.render(Template.vendorLayout,document.body);
+}
+
+export { contactUsForm };

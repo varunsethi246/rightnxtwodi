@@ -9,12 +9,18 @@ import { Position } from '/imports/api/discountMaster.js';
 import { CompanySettings } from '/imports/api/companysettingsAPI.js';
 import { BusinessBanner } from '/imports/api/businessBannerMaster.js';
 import { BusinessAds } from '/imports/api/businessAdsMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import './VendorPayments.js';
 import './VendorPayments.html';
 import './vendorBannerInvoice.html';
+import '../vendor.js';
+import './VendorPayments.html';
 import './vendorAdsInvoice.html';
 import './paymentSuccess.html';
-
+import '/imports/admin/businessBanner/businessBanner.js';
+import '/imports/admin/businessAds/businessAds.js';
+import '/imports/admin/businessAds/adsInvoice.html';
 
 
 
@@ -274,3 +280,29 @@ Template.vendorPayments.helpers({
 
 	},
 });
+
+vendorPaymentsForm = function () {  
+ 	BlazeLayout.render("vendorLayout",{main: 'vendorPayments'});
+}
+
+export { vendorPaymentsForm };
+
+vendorBannerInvoiceForm = function () {  
+	// console.log('in function banner');
+  	BlazeLayout.render("vendorLayout",{main: 'vendorBannerInvoice'});
+}
+
+export { vendorBannerInvoiceForm };
+
+vendorAdsInvoiceForm = function () {  
+	// console.log('in function of invoice');
+  	BlazeLayout.render("vendorLayout",{main: 'vendorAdsInvoice'});
+}
+
+export { vendorAdsInvoiceForm };
+
+paymentSuccessAdsBannersForm = function () {  
+  	BlazeLayout.render("vendorLayout",{main: 'paymentSuccessAdsBanners'});
+}
+
+export { paymentSuccessAdsBannersForm };

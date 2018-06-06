@@ -8,7 +8,10 @@ import { Review } from '../../../api/reviewMaster.js';
 
 import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
 import { FollowUser } from '/imports/api/userFollowMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
+import '../../vendor.js';
+// import '../../vendorBusinessDetails/businessEventIcons.js';
 
 
 Template.VendorGotLikes.helpers({
@@ -99,130 +102,138 @@ Template.VendorGotLikes.helpers({
 });
 
 Template.businessEventIcons.events({
-	'click #likeme': function(event){
-		event.preventDefault();
-		var businessurl = FlowRouter.getParam('businessurl');
-		var usersData = Meteor.users.findOne({"_id":Meteor.userId()});
-		if(usersData){
-			if(usersData.roles){
-				if(usersData.roles[0] == "user"){
-					if($("#likeme").hasClass('inactivelike')){
-						$("#likeme").removeClass('inactivelike');
-						$("#likeme").addClass('activelike');
+	// 'click #likeme': function(event){
+	// 	event.preventDefault();
+	// 	alert('ji');
+	// 	var businessurl = FlowRouter.getParam('businessurl');
+	// 	var usersData = Meteor.users.findOne({"_id":Meteor.userId()});
+	// 	if(usersData){
+	// 		if(usersData.roles){
+	// 			if(usersData.roles[0] == "user"){
+	// 				if($("#likeme").hasClass('inactivelike')){
+	// 					$("#likeme").removeClass('inactivelike');
+	// 					$("#likeme").addClass('activelike');
 				
-						Meteor.call('insertLikes',businessurl,'active',
-							function(error,result){
-								if(error){
-									Bert.alert('Some error occured while liking this page!','danger','growl-top-right','fa-remove');
-								}else{
+	// 					Meteor.call('insertLikes',businessurl,'active',
+	// 						function(error,result){
+	// 							if(error){
+	// 								Bert.alert('Some error occured while liking this page!','danger','growl-top-right','fa-remove');
+	// 							}else{
 
-									//============================================================
-									// 			Notification Email / SMS / InApp
-									//============================================================
-									var admin = Meteor.users.findOne({'roles':'admin'});
-								    if(admin){
-								    	var adminId = admin._id;
-								    }
-									var businessData = Business.findOne({"businessLink":businessurl});
-									if(businessData){
-										var vendorId = businessData.businessOwnerId;
-										var vendorDetail = Meteor.users.findOne({'_id':vendorId});
-										var userId = Meteor.userId();
-										var userDetail = Meteor.users.findOne({'_id':userId});
-										if(vendorDetail&&userDetail){
-																//Send Notification, Mail and SMS to Vendor
-											var vendorname 	= vendorDetail.profile.name;
-													var date 		= new Date();
-													var currentDate = moment(date).format('DD/MM/YYYY');
-													var msgvariable = {
-																	'[username]' 	  : vendorname,
-																	'[currentDate]'	: currentDate,
-																	'[businessName]': businessData.businessTitle
-														};
+	// 								//============================================================
+	// 								// 			Notification Email / SMS / InApp
+	// 								//============================================================
+	// 								var admin = Meteor.users.findOne({'roles':'admin'});
+	// 							    if(admin){
+	// 							    	var adminId = admin._id;
+	// 							    }
+	// 								var businessData = Business.findOne({"businessLink":businessurl});
+	// 								if(businessData){
+	// 									var vendorId = businessData.businessOwnerId;
+	// 									var vendorDetail = Meteor.users.findOne({'_id':vendorId});
+	// 									var userId = Meteor.userId();
+	// 									var userDetail = Meteor.users.findOne({'_id':userId});
+	// 									if(vendorDetail&&userDetail){
+	// 															//Send Notification, Mail and SMS to Vendor
+	// 										var vendorname 	= vendorDetail.profile.name;
+	// 												var date 		= new Date();
+	// 												var currentDate = moment(date).format('DD/MM/YYYY');
+	// 												var msgvariable = {
+	// 																'[username]' 	  : vendorname,
+	// 																'[currentDate]'	: currentDate,
+	// 																'[businessName]': businessData.businessTitle
+	// 													};
 
-																var inputObj = {
-																	notifPath	   : businessurl,
-																to           : vendorId,
-																templateName : 'Vendor Business Page Like',
-																variables    : msgvariable,
-																}
-																sendInAppNotification(inputObj);
+	// 															var inputObj = {
+	// 																notifPath	   : businessurl,
+	// 															to           : vendorId,
+	// 															templateName : 'Vendor Business Page Like',
+	// 															variables    : msgvariable,
+	// 															}
+	// 															sendInAppNotification(inputObj);
 
-																var inputObj = {
-																	notifPath	   : businessurl,
-																	from         : adminId,
-																to           : vendorId,
-																templateName : 'Vendor Business Page Like',
-																variables    : msgvariable,
-																}
-																sendMailNotification(inputObj);
+	// 															var inputObj = {
+	// 																notifPath	   : businessurl,
+	// 																from         : adminId,
+	// 															to           : vendorId,
+	// 															templateName : 'Vendor Business Page Like',
+	// 															variables    : msgvariable,
+	// 															}
+	// 															sendMailNotification(inputObj);
 
-																//Send Notification, Mail and SMS to Current User
-												var username 	= userDetail.profile.name;
-												var date 		= new Date();
-												var currentDate = moment(date).format('DD/MM/YYYY');
-												var msgvariable = {
-																'[username]' 	  : username,
-																'[currentDate]'	: currentDate,
-																'[businessName]': businessData.businessTitle
-														};
+	// 															//Send Notification, Mail and SMS to Current User
+	// 											var username 	= userDetail.profile.name;
+	// 											var date 		= new Date();
+	// 											var currentDate = moment(date).format('DD/MM/YYYY');
+	// 											var msgvariable = {
+	// 															'[username]' 	  : username,
+	// 															'[currentDate]'	: currentDate,
+	// 															'[businessName]': businessData.businessTitle
+	// 													};
 
-																// var inputObj = {
-																// 	notifPath	 : businessurl,
-																//     to           : vendorId,
-																//     templateName : 'Vendor Business Page Like',
-																//     variables    : msgvariable,
-																// }
-																// sendInAppNotification(inputObj);
+	// 															// var inputObj = {
+	// 															// 	notifPath	 : businessurl,
+	// 															//     to           : vendorId,
+	// 															//     templateName : 'Vendor Business Page Like',
+	// 															//     variables    : msgvariable,
+	// 															// }
+	// 															// sendInAppNotification(inputObj);
 
-																var inputObj = {
-																	notifPath	   : businessurl,
-																	from         : adminId,
-																to           : userId,
-																templateName : 'User Business Page Like',
-																variables    : msgvariable,
-																}
-																sendMailNotification(inputObj); 
-										}
-									}
-									//============================================================
-									// 			End Notification Email / SMS / InApp
-									//============================================================
-								}
-							}
-						);			
-					}else{
-						$("#likeme").removeClass('activelike');
-						$("#likeme").addClass('inactivelike');			
+	// 															var inputObj = {
+	// 																notifPath	   : businessurl,
+	// 																from         : adminId,
+	// 															to           : userId,
+	// 															templateName : 'User Business Page Like',
+	// 															variables    : msgvariable,
+	// 															}
+	// 															sendMailNotification(inputObj); 
+	// 									}
+	// 								}
+	// 								//============================================================
+	// 								// 			End Notification Email / SMS / InApp
+	// 								//============================================================
+	// 							}
+	// 						}
+	// 					);			
+	// 				}else{
+	// 					$("#likeme").removeClass('activelike');
+	// 					$("#likeme").addClass('inactivelike');			
 				
-						Meteor.call('insertLikes',businessurl,'inactive',
-							function(error,result){
-								if(error){
-									Bert.alert('Some error occured while disliking this page!','danger','growl-top-right','fa-remove');
-								}else{
+	// 					Meteor.call('insertLikes',businessurl,'inactive',
+	// 						function(error,result){
+	// 							if(error){
+	// 								Bert.alert('Some error occured while disliking this page!','danger','growl-top-right','fa-remove');
+	// 							}else{
 									
-								}
-							}
-						);			
-					}
-				}			
-			}else{
-				$('#loginModal').modal('show');
-				$('.loginScreen').hide();
-				$('.signupScreen').hide();
-				$('.thankyouscreen').hide();
-				$('.genLoginSignup').show();
-				$('.thankyouscreen').hide();
-				$('.signUpBox').hide();
-			}
-		}else{
-			$('#loginModal').modal('show');
-			$('.loginScreen').hide();
-			$('.signupScreen').hide();
-			$('.thankyouscreen').hide();
-			$('.genLoginSignup').show();
-			$('.thankyouscreen').hide();
-			$('.signUpBox').hide();
-		}
-	},
+	// 							}
+	// 						}
+	// 					);			
+	// 				}
+	// 			}			
+	// 		}else{
+	// 			$('#loginModal').modal('show');
+	// 			$('.loginScreen').hide();
+	// 			$('.signupScreen').hide();
+	// 			$('.thankyouscreen').hide();
+	// 			$('.genLoginSignup').show();
+	// 			$('.thankyouscreen').hide();
+	// 			$('.signUpBox').hide();
+	// 		}
+	// 	}else{
+	// 		$('#loginModal').modal('show');
+	// 		$('.loginScreen').hide();
+	// 		$('.signupScreen').hide();
+	// 		$('.thankyouscreen').hide();
+	// 		$('.genLoginSignup').show();
+	// 		$('.thankyouscreen').hide();
+	// 		$('.signUpBox').hide();
+	// 	}
+	// },
 });
+
+
+VendorGotLikesForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'VendorGotLikes'});
+}
+
+export { VendorGotLikesForm };

@@ -34,7 +34,8 @@ Meteor.methods({
 				if(result){
 					return result;
 				}
-			});	
+			});
+			console.log('id',id);
 			return id;
 	    }
 	},

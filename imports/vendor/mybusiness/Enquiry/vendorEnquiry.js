@@ -2,10 +2,12 @@ import { Business } from '/imports/api/businessMaster.js';
 import { Enquiry } from '/imports/api/enquiryMaster.js';
 import { EnquiryImgUploadS3 } from '/client/enquiryImages.js';
 import { UserProfileStoreS3New } from '/client/UserProfileS3.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
-
+import '../../vendor.js';
 import './allEnquries.html';
 import './enquiryDetails.html';
+import './vendorEnquiry.html';
 
 // Template.enquiryDetails.events({
 // 	'click .vEnqsndEnqBtn':function(event){
@@ -816,3 +818,10 @@ Template.vendorEnquiry.events({
 	},
 	
 });
+
+
+vendorEnquiryForm = function () {  
+  BlazeLayout.render("vendorLayout",{main: 'vendorEnquiry'});
+}
+
+export { vendorEnquiryForm };

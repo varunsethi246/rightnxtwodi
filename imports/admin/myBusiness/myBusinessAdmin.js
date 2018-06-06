@@ -5,6 +5,19 @@ import './openCloseDayAdmin.html';
 import './aboutOwnerAdmin.html';
 import './addNewBusInfoAdmin.html';
 import './editBusinessAdmin.html';
+import '/imports/admin/commonAdmin/commonAdmin.js';
+import '/imports/vendor/mybusiness/AboutBusiness/AboutBusiness.js';
+import '/imports/vendor/mybusiness/AboutBusiness/VendorBusinessInformation.js';
+import '/imports/vendor/mybusiness/AboutBusiness/VendorOpeningAndClosing.js';
+import '/imports/vendor/mybusiness/AboutBusiness/vendorAboutOwner.js';
+import '/imports/vendor/mybusiness/AboutBusiness/VendorImagesVideos.js';
+import '/imports/vendor/AddNewBusiness/addvendorBusInfo.js';
+import '/imports/common/starRating2.html';
+import '/imports/vendor/AddNewBusiness/AddvendorOpeningAndClosing.js'
+import '/imports/vendor/AddNewBusiness/AddvendorAboutOwner.js'
+import '/imports/vendor/AddNewBusiness/AddvendorImagesVideos.js'
+
+
 
 import { Business } from '/imports/api/businessMaster.js';
 import { State } from '../../api/masterData/stateMaster.js';
@@ -17,6 +30,8 @@ import { BusinessVideoUpload } from '/client/businessVideo.js';
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { BizVideo } from '/imports/videoUploadClient/videoUpload.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 
 
 var videoListCount = 0;
@@ -710,4 +725,33 @@ Template.listOfBusiness.onRendered(function(){
 		$("html,body").scrollTop(0);
 });
 
+listOfBusinessForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'listOfBusiness'});
+}
+export { listOfBusinessForm }
+
+editBusinessAdminForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'editBusinessAdmin'});
+}
+export { editBusinessAdminForm }
+
+addNewBusInfoAdminForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'addNewBusInfoAdmin'});
+}
+export { addNewBusInfoAdminForm }
+
+openCloseDayAdminForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'openCloseDayAdmin'});
+}
+export { openCloseDayAdminForm }
+
+aboutOwnerAdminForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'aboutOwnerAdmin'});
+}
+export { aboutOwnerAdminForm }
+
+addImagesVidAdminForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'addImagesVidAdmin'});
+}
+export { addImagesVidAdminForm }
 

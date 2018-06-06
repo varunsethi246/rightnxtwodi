@@ -10,6 +10,7 @@ import { Discount } from '/imports/api/discountMaster.js';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { Position } from '/imports/api/discountMaster.js';
 import { Payment } from '/imports/api/paymentMaster.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 
 
@@ -18,6 +19,8 @@ import './businessBanner.html';
 import './bannerInvoice.html';
 import './businessBannerList.html';
 import './businessBannerList.js';
+import '/imports/admin/commonAdmin/commonAdmin.js';
+
 
 bannerListArr = [];
 
@@ -812,3 +815,15 @@ Template.businessBanner.events({
 	},
 	
 });
+
+businessBannerForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'businessBanner'});
+}
+
+export { businessBannerForm }
+
+bannerInvoiceForm = function () {  
+  BlazeLayout.render("adminLayout",{main: 'bannerInvoice'});
+}
+
+export { bannerInvoiceForm }

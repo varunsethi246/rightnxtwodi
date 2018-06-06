@@ -53,10 +53,10 @@ if(s3Data)
     }
   });
 
+  Meteor.publish('resumeS3', function() {
+    return ResumeS3.find({}, { limit: 0 });
+  });
   if (Meteor.isServer) {
 
-  Meteor.publish('resumeS3', function() {
-    return ResumeS3.find({});
-  });
   }
 }

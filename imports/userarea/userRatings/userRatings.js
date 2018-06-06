@@ -6,6 +6,11 @@ import { Bert } from 'meteor/themeteorchef:bert';
 import { Business } from '../../api/businessMaster.js';
 import { Review } from '/imports/api/reviewMaster.js';
 import { BusinessImgUploadS3 } from '/client/businessImage.js';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
+import '../userLayout.js';
+import './userRatings.html';
+import '../../common/starRating2.html';
 
 Template.userRatings.helpers({
 	checnRatingLoading(count){
@@ -100,6 +105,7 @@ Template.userRatings.helpers({
 		if(Session.get("updateUserTimeline")==true){
 			var id ='';
 			var url = FlowRouter.current().path;
+			console.log('url:',url);
 			var checkIdExists = url.split('/');
 			var data = {};
 			if(checkIdExists[2] != '' && checkIdExists[2]){
@@ -119,12 +125,14 @@ Template.userRatings.helpers({
 				var RatingDataReturn = {
 					noofRatingData		: count,
 				}
-				// console.log(RatingDataReturn)
+				console.log(RatingDataReturn)
 				return RatingDataReturn;
 			}
 		}else {
 			var id ='';
 			var url = FlowRouter.current().path;
+			console.log('url:',url);
+
 			var checkIdExists = url.split('/');
 			var data = {};
 			if(checkIdExists[2] != '' && checkIdExists[2]){
@@ -133,7 +141,8 @@ Template.userRatings.helpers({
 				id = Meteor.userId();
 			}
 			var count = 0;
-			var RatingData = Review.find({"userId":id}).fetch();	
+			var RatingData = Review.find({"userId":id}).fetch();
+			console.log(RatingData);	
 			if(RatingData){
 				for(i=0;i<RatingData.length;i++){
 					var bussdata = Business.findOne({'businessLink':RatingData[i].businessLink,"status":'active'});
@@ -144,8 +153,8 @@ Template.userRatings.helpers({
 				var RatingDataReturn = {
 					noofRatingData		: count,
 				}
-				// console.log(RatingDataReturn)
-
+				console.log(RatingDataReturn)
+		
 				return RatingDataReturn;
 			}
 		}
@@ -154,3 +163,8 @@ Template.userRatings.helpers({
 });
 
 
+userRatingsForm = function () {  
+  BlazeLayout.render("userLayout",{content: 'userRatings'});
+  // Blaze.render(Template.userLayout,document.body);
+}
+export { userRatingsForm }

@@ -1,4 +1,6 @@
 import './imageCarouselItems.html';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+
 
 Template.imageCarouselItems.onRendered(function(){
     $('#imageSliderCarousel').hide();
