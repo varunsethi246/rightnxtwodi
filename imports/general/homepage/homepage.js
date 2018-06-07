@@ -12,16 +12,41 @@ import './homepageBanner.js';
 
 import { City } from '../../api/masterData/cityMaster.js';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
-
+import { Template } from 'meteor/templating';
 
 import '../mainBusinessSearch/mainBusinessSearch.js';
 
+/*Template.homepage.onRendered({
+          Meteor.subscribe('userfunction').ready();
+          Meteor.subscribe('allCity').ready();
+          Meteor.subscribe('area').ready();
+          // Meteor.subscribe('userProfileS3OneUser').ready();
+          Meteor.subscribe('categories').ready();
+          Meteor.subscribe('notification').ready();
+          Meteor.subscribe('notificationTemplate').ready();
+          Meteor.subscribe('vendorBusiness').ready();
+          Meteor.subscribe('userProfileS3').ready(); 
+          Meteor.subscribe('businessImgS3').ready(); 
+});*/
+Template.anonymousUserLayout.onCreated(function () {
+  // Use this.subscribe inside onCreated callback
+  this.subscribe('userfunction');
+  this.subscribe('allCity');
+  this.subscribe('area');
+  // this.subscribe('userProfileS3OneUser');
+  this.subscribe('categories');
+  this.subscribe('notification');
+  this.subscribe('notificationTemplate');
+  this.subscribe('vendorBusiness');
+  this.subscribe('userProfileS3'); 
+  this.subscribe('businessImgS3');
+});
 
 Template.homepage.helpers({
-    isReady: function(){
-      console.log('FlowRouter.subsReady()',FlowRouter.subsReady());
-       return FlowRouter.subsReady();
-   },
+   //  isReady: function(){
+   //    console.log('FlowRouter.subsReady()',FlowRouter.subsReady());
+   //     return FlowRouter.subsReady();
+   // },
 });
 
 Template.homepageBanner.onRendered(function(){
