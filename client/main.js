@@ -63,7 +63,8 @@ Meteor.startup(function () {
 	}
 });
 
-HomepageFunc = function () {  
+HomepageFunc = function () {
+console.log('1st');  
 	import('/imports/general/homepage/homepage.js').then(function (handle) {  
 		handle.Homepage();    
 	})
@@ -374,6 +375,11 @@ notificationConfigFunc= function () {
 ViewAllNotifFuncs = function () {    
 	import('/imports/admin/commonAdmin/commonAdmin.js').then(function (handle) {        
 		handle.ViewAllNotifsForms();    
+	})
+}
+loadingFf = function () {    
+	import('/imports/common/common.js').then(function (handle) {        
+		handle.loadingF();    
 	})
 }
 // ViewAllNotifsForms

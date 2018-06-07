@@ -16,6 +16,7 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 import '../mainBusinessSearch/mainBusinessSearch.js';
 
+
 Template.homepage.helpers({
     isReady: function(){
       console.log(FlowRouter.subsReady());

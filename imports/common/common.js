@@ -1,4 +1,5 @@
 // console.log('1');
+import './loadingLayout.html';
 import './anonymousUserLayout1.html';
 import './anonymousUserLayout.html';
 import './header.html';
@@ -356,3 +357,9 @@ Template.header.events({
         });
     }
 });
+
+loadingF = function () {  
+  BlazeLayout.render("loadingLayout",{mains: 'loading'});
+}
+
+export { loadingF };
