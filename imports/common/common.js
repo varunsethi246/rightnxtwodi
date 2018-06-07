@@ -62,7 +62,11 @@ Template.anonymousUserLayout.helpers({
 	   	// 	// console.log(FlowRouter.subsReady('userfunction' ,'state' ,'area'));
      //   	return false;
      //   }
-       return Meteor.subscribe('userfunction').ready();
+
+      console.log('FlowRouter.subsReady() anonymousUserLayout:',FlowRouter.subsReady());
+       return FlowRouter.subsReady();
+
+       // return Meteor.subscribe('userfunction').ready();
     },
 });
 

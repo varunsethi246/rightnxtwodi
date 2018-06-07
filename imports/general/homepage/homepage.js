@@ -19,7 +19,7 @@ import '../mainBusinessSearch/mainBusinessSearch.js';
 
 Template.homepage.helpers({
     isReady: function(){
-      console.log(FlowRouter.subsReady());
+      console.log('FlowRouter.subsReady():',FlowRouter.subsReady());
        return FlowRouter.subsReady();
    },
 });
