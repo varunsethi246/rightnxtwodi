@@ -16,11 +16,15 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 import '../mainBusinessSearch/mainBusinessSearch.js';
 
+// Template.homepage.onCreated({
 
+//     var sub = FlowRouter.subsReady();
+// });
 Template.homepage.helpers({
     isReady: function(){
       console.log('FlowRouter.subsReady():',FlowRouter.subsReady());
-       return FlowRouter.subsReady();
+       // return FlowRouter.subsReady();
+       return Meteor.subscribe('userfunction').ready();
    },
 });
 
