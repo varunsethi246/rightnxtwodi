@@ -46,11 +46,14 @@ Template.homepageBanner.onRendered(function(){
       var currentCity = "Pune";
     }
   }
-
+  // $("#video").get(0).play();
   $('#getCity').val(currentCity);
   $('.curUserCity').text(currentCity);
   
-
+    // var video = document.getElementById("myVideo").autoplay;
+    // console.log('videoHome:',videoHome);
+    // video.autoplay = true;
+    // video.load();
 });
 
 Template.homepageBanner.helpers({

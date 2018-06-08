@@ -40,6 +40,7 @@ Template.anonymousUserLayout.onCreated(function () {
   this.subscribe('vendorBusiness');
   this.subscribe('userProfileS3'); 
   this.subscribe('businessImgS3');
+  
 });
 
 Template.homepage.helpers({

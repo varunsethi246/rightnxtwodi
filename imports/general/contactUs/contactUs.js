@@ -9,6 +9,17 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import '../generalLayout/generalLayout.js'
 import './contactUs.html';
 
+
+Template.contactUs.onCreated(function () {
+	this.subscribe('businessImgS3');  
+	this.subscribe('area');
+	this.subscribe('notification');
+	this.subscribe('userfunction');
+	this.subscribe('notificationTemplate') ;  
+	this.subscribe('userProfileS3');  
+	
+});
+
 Template.contactUs.helpers({
 	getCityName(){
 		var currentCity = FlowRouter.getParam('city');

@@ -12,6 +12,28 @@ import '../../admin/commonAdmin/commonAdmin.js';
 import './aboutUs.html';
 import './aboutUsForm.html';
 
+Template.aboutUs.onCreated(function () {
+  // // Use this.subscribe inside onCreated callback
+  // this.subscribe('userfunction');
+  // this.subscribe('allCity');
+  // this.subscribe('area');
+  // // this.subscribe('userProfileS3OneUser');
+  // this.subscribe('categories');
+  // this.subscribe('notification');
+  // this.subscribe('notificationTemplate');
+  // this.subscribe('vendorBusiness');
+  // this.subscribe('userProfileS3'); 
+  // this.subscribe('businessImgS3');
+
+	this.subscribe('area');
+	this.subscribe('generalContent'); 
+	this.subscribe('userProfileS3');
+	this.subscribe('notification');
+	this.subscribe('userfunction');
+	this.subscribe('notificationTemplate') ;
+	this.subscribe('businessImgS3');
+});
+
 Template.aboutUs.helpers({
 	welcomeData(){
 		var currentURL = FlowRouter.current().path;

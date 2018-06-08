@@ -24,6 +24,19 @@ import './jobList.html';
 
 var files = [];
 
+
+Template.career.onCreated(function () {
+	this.subscribe('area');
+	this.subscribe('generalContent');  
+	this.subscribe('newjob');
+	this.subscribe('userProfileS3'); 
+	this.subscribe('notification');
+	this.subscribe('userfunction');
+	this.subscribe('notificationTemplate') ;
+	this.subscribe('businessImgS3');
+});
+
+
 Template.career.helpers({
 	careerContent(){
 		var jobTitle = Newjob.find({"jobStatus" : 'active'}).fetch();
@@ -411,8 +424,6 @@ Template.AddNewJobForm.events({
 	},
 });
 
-
-
 Template.jobList.events({
 	'click .classActive': function(event){
 		event.preventDefault();
@@ -573,7 +584,6 @@ Template.joinUs.onRendered(function(){
     });
 	$('html, body').scrollTop(0);
 });
-
 
 Template.AddNewJobForm.onRendered(function(){
 	CKEDITOR.replace( 'desc' );

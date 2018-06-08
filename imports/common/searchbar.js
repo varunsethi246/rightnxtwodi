@@ -550,11 +550,7 @@ Template.searchbar.events({
 
 	'click .mapVwPointer':function(event){
 		event.preventDefault();
-		console.log('map view');
 		var data = Template.currentData(self.view);
-		console.log('data:',data);
-		console.log('Template.businessMap',Template.businessMap);
-		console.log('$(".mapContainer")',$(".mapContainer"));
         Blaze.renderWithData(Template.businessMap, data, $(".mapContainer")[0]);
         $('.sidebarMapPre').css('display','none');
 		

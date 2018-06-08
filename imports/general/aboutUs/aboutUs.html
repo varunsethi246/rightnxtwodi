@@ -16,7 +16,7 @@
 			    <li><a data-toggle="pill" href="#menu2">HOW WE HELP</a></li>
 			</ul>
 		</div>
-		
+	{{#if Template.subscriptionsReady}}
 		<div class="tab-content">	
 			<div id="home" class="tab-pane fade in active">
 				{{#if welcomeData}}
@@ -74,5 +74,8 @@
 				</div>
 			</div>
 		</div>
+	{{else}}
+		<dir>nothing</dir>
+	{{/if}}
 	</div>
 </template>
