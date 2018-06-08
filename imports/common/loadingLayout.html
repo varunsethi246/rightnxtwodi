@@ -1,11 +1,11 @@
 <template name="loadingLayout">
 <!-- {{#if isReady}} -->
 	<div class="container-fluid anonymousUserContainer">		
-			
+			{{> header}}
 			
 			{{> Template.dynamic template=mains}}
 
-			<!-- {{> footer }} -->
+			{{> footer }}
 	</div>
 {<!-- {else}}
 	{{> loading}}

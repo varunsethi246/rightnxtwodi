@@ -9,7 +9,8 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 import './searchbar.html'
 import '../vendor/businessList/businessMapView/businessMapView.js'
-
+import '/imports/vendor/businessList/businessMapView/businessMap.html'
+import '/imports/vendor/businessList/businessMapView/businessMapView.js'
 
 
 var options = {
@@ -370,8 +371,6 @@ Template.searchbar.events({
 	    		FlowRouter.go(flowGo);
 	    	}
 		}
-		
-	
 	},
 	
 	'click .seachBusiness': function(e){
@@ -549,11 +548,66 @@ Template.searchbar.events({
 		}
 	  }, 200),
 
-	'click .mapVwPointer':function(){
+	'click .mapVwPointer':function(event){
+		event.preventDefault();
 		console.log('map view');
 		var data = Template.currentData(self.view);
 		console.log('data:',data);
+		console.log('Template.businessMap',Template.businessMap);
+		console.log('$(".mapContainer")',$(".mapContainer"));
         Blaze.renderWithData(Template.businessMap, data, $(".mapContainer")[0]);
+        $('.sidebarMapPre').css('display','none');
+		
+        $('.displayMapView').show();
+		$('.displayMapView').addClass('col-lg-5');
+		$('.displayGridView').removeClass('col-lg-8');
+		$('.displayGridView').addClass('col-lg-5');
+		$('.displayGridBus').hide();
+
+		$('.gridViewBusList').hide();
+		$('.mapViewBusList').show();
+		$('.thumbBusList').addClass('scrollMapVwBus');
+		$('.gridVwBus').removeClass('bkgOrange');
+		$('.mapVwPointer').addClass('bkgOrange');
+
+		Session.set('showMapView',true);
+		Session.set('showGridView',false);
+
+
+		setTimeout(function() {
+        	if($('.listRelevance').hasClass('busListSelected')){
+				$('.listRelevance').click();
+			}
+			if($('.listOffers').hasClass('busListSelected')){
+				$('.listOffers').click();
+			}
+			if($('.listDistance').hasClass('busListSelected')){
+				$('.listDistance').click();
+			}
+      	}, 1);
+	},
+	'click .gridVwBus':function(event){
+		event.preventDefault();
+		$('.sidebarMapPre').css('display','block');
+		
+        $('.displayMapView').hide();
+        $('.displayGridView').show();
+        $('.displayGridBus').show();
+       
+       	$('.displayMapView').removeClass('col-lg-5');
+		$('.displayGridView').addClass('col-lg-8');
+		$('.displayGridView').removeClass('col-lg-5');
+
+		$('.gridViewBusList').show();
+
+		$('.mapViewBusList').hide();
+		$('.thumbBusList').removeClass('scrollMapVwBus');
+		$('.gridVwBus').addClass('bkgOrange');
+		$('.mapVwPointer').removeClass('bkgOrange');
+
+		Session.set('showMapView',false);
+		Session.set('showGridView',true);
+
 	}
 });
 

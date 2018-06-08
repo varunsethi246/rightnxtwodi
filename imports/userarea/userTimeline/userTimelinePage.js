@@ -29,7 +29,7 @@ var counterImg = 0;
 
 Template.userTimeline.helpers({
 	userLoadmoreCmmnt(dataIndex){
-		console.log('dataIndex :',dataIndex);
+		// console.log('dataIndex :',dataIndex);
 		if(dataIndex < 2){
 			return true;
 		} else{
@@ -38,7 +38,7 @@ Template.userTimeline.helpers({
 	},
 	userLoadmoreCmmntBtn(data){
 		if(data){
-			console.log('data :',data);
+			// console.log('data :',data);
 			if(data.length > 2){
 				return true;
 			} else{
@@ -121,7 +121,7 @@ Template.userSuggestion.helpers ({
 Template.userTimeline.helpers({
 	'timeAgo': function(datetime) {
 
-		console.log('datetime: ',datetime);
+		// console.log('datetime: ',datetime);
 	  // if(datetime == ''){
 	  //   return 'Never Logged In';
 	  // }else{
@@ -172,7 +172,7 @@ Template.userTimeline.helpers({
 					}
 				
 				}
-				console.log("ratingObj = ", ratingObj);
+				// console.log("ratingObj = ", ratingObj);
 			}
 			// console.log("ratingInt = ", ratingInt);
 
@@ -587,11 +587,12 @@ Template.userTimeline.onRendered(function(){
 				$(this).children('.commentReplyArr').each(function(){
 					if(i>1){
 						$(this).hide();
-						console.log('this :',$(this).attr('class'));
+						// console.log('this :',$(this).attr('class'));
 					}
 					i++;
 				});
 				if($(this).children('.showreplyCmt').length == 0){
+					// console.log('count :',$(this).children('.showreplyCmt').length);
 					$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
 				}
 			});			
