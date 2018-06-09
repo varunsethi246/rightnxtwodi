@@ -18,9 +18,35 @@ import './main.html';
 // import '../imports/common/starRating/themes/krajee-svg/theme.js';
 // import '../imports/common/starRating/themes/krajee-svg/theme.css';
 
+// if (Meteor.isServer) {
+//   if (!Package.appcache)
+//   WebApp.connectHandlers.use(function(req, res, next) {
+//     if(Inject.appUrl(req.url)) {
+//       Inject.obj('myData', makeDataFor(req), res);
+//     }
+//     next();
+//   });
+// }
+	
+// if (Meteor.isClient) {
+//   // available immediately
+//   var myData = Injected.obj('myData');
+// }
+
 Meteor.startup(() => {
 	global.Buffer = function() {}
 	global.Buffer.isBuffer = () => false
+	if (Meteor.isServer) {
+		Inject.rawHead("loader", Assets.getText('loadhtml.html'));
+	}
+
+	if (Meteor.isClient) {
+		Meteor.startup(function() {
+			setTimeout(function() {
+				$("#inject-loader-wrapper").fadeOut(500, function() { $(this).remove(); });
+			}, 500);
+		});
+	}
 });
 
 $(document).on("click",function(){

@@ -74,3 +74,5 @@ chuangbo:cookie
 meteorhacks:subs-manager
 ostrio:flow-router-extra
 staringatlights:inject-data
+#webdeb:app-loader
+meteorhacks:inject-initial
