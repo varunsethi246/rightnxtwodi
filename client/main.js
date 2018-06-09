@@ -361,8 +361,9 @@ editProfileFunc= function () {
 	})
 }
 
-ResetPasswordFunc= function () {    
-	import('/imports/userarea/ForgotPassword.js').then(function (handle) {           
+ResetPasswordFunc= function () { 
+	console.log('infunction');   
+	import('/imports/common/passwords.js').then(function (handle) {           
 		handle.ResetPasswordForm();    
 	})
 }

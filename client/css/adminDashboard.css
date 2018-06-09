@@ -282,7 +282,7 @@ font-family:'PROXIMANOVA-REGULAR'
 border-bottom:1px solid #fff
 }
 
-.sidebar .collapse12,,.sidebar #firstLink,.sidebar #collapse2,.sidebar #secondLink,.sidebar #thirdLink,.sidebar #fourthLink,.sidebar #collapse5,.siderbar #fifthLink,.sidebar #collapse6,.sidebar #collapse7 {
+.sidebar .collapse12 ,.sidebar #firstLink,.sidebar #collapse2,.sidebar #secondLink,.sidebar #thirdLink,.sidebar #fourthLink,.sidebar #collapse5,.siderbar #fifthLink,.sidebar #collapse6,.sidebar #collapse7 {
 font-size:12px!important;
 padding-left:7px;
 background:#08254c;
@@ -2882,7 +2882,7 @@ h4, .h4, h5, .h5, h6, .h6 {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: inherit;
     font-weight: 500;
     line-height: 1.1;

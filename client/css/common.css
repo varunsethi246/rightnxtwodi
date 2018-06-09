@@ -792,7 +792,7 @@ float:left;
 margin-left:-20px;
 margin-top:10px;
 cursor:pointer;
-outline-color:none
+outline-color:initial;
 }
 
 .gernalHeaderNav {
@@ -1174,7 +1174,7 @@ margin-left: 0px;
 background-color: #ffe0b6;
 text-align: center;
 }
-@media screen (max-width: 1280px){
+@media only screen and (max-width: 1280px){
     .aboutNavbar{
         margin-left:35%;
     }

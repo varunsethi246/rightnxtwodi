@@ -1397,7 +1397,7 @@ display:block;
 font-family:"PROXIMANOVA-REGULAR";
 font-size:14px;
 padding:4px 14px;
-text-decoration-style:none
+text-decoration-style:initial;
 }
 
 .suggInfoReview {

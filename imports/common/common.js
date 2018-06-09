@@ -38,7 +38,7 @@ import './vendorSignUpForm.js';
 // import '/imports/commom/forgotPassword.html';
 
 
-import './resetPassword.html';
+// import './resetPassword.html';
 
 
 import './signUpThankYou.html';

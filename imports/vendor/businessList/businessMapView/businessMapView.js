@@ -168,8 +168,8 @@ Template.businessMap.onCreated(function() {
                                             ` + addr + `
                                                     </div>
                                                     <div class="markerSInfoModal">
-                                                        <img src="/images/search/phone-icon.png" style="display:inline">
-                                                        <div style="display:inline">
+                                                        <img src="/images/search/phone-icon.png" style="display:block">
+                                                        <div style="display:block">
                                             ` + contactNumbers + `
                                                         </div>
                                                     </div>

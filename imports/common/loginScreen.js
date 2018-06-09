@@ -1,15 +1,66 @@
 import { Bert } from 'meteor/themeteorchef:bert';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
-// import './forgotPassword.js';
+// import '/imports/common/forgotPassword.js';
 
 import '/imports/common/common.js';
 
-
+// import '.ForgotPassword.js';
 
 // if (Meteor.isClient) {
 
   Template.loginScreen.events({
+    'click .UMloginbutton': function(event, template) {
+      event.preventDefault();
+
+      // var forgotPasswordForm = $(e.currentTarget);
+      // console.log(forgotPasswordForm);
+      var email , trimInput ;
+
+      // var emailVar = e.target.email.value;
+      var emailVar = $("#forgotPasswordEmail").val();
+      $('.enteredEmail').text(emailVar);
+      $('.forgotEmailMessage').show();
+      
+      trimInput = function(val) {
+        return val.replace(/^\s*|\s*$/g, "");
+      }
+
+          emailtrim = trimInput(emailVar);
+          email     = emailtrim.toLowerCase();
+
+
+        Accounts.forgotPassword({email: email}, function(err) {
+          if (err) {
+            if (err.message === 'User not found [403]') {
+              // console.log('This email does not exist.');
+              Bert.alert('This email does not exist:'+err.reason);
+            } else {
+              // console.log('We are sorry but something went wrong.');
+              Bert.alert('We are sorry but something went wrong:'+err.reason);
+            }
+          } else {
+            // console.log('Email Sent. Check your mailbox.');
+            Bert.alert('Email Sent. Check your mailbox.',"success","growl-top-right");
+          }
+        });
+
+          
+        // Bert.alert( "Instructions sent! We've sent an email with instructions on how to reset your password.If you don't receive an email within a few minutes, check your spam and junk folders.", 'success', 'growl-top-right' );
+      return false;
+    },
+
+    'click .forgotEmail':function(e){
+      e.preventDefault();
+      $('.disableBtn').removeAttr('disabled');
+      console.log('value change');
+    },
+    'click .frgtClose':function(e){
+      $('.forgotEmailMessage').hide();
+      $('.resetPwd').removeClass('diplayNoneresetPwd');
+
+    },
+
      'click .UMloginbutton': function(event, template) {
     event.preventDefault();
 
@@ -181,7 +232,7 @@ Template.header.events({
 Template.loginScreen.onRendered(function(){
   $('.disableBtn').attr('disabled','disabled');
 
-    $.validator.addMethod("regex_1", function(value, element, regexpr) {          
+  $.validator.addMethod("regex_1", function(value, element, regexpr) {          
       return regexpr.test(value);
   }, "Please Enter valid Email Address");
 
