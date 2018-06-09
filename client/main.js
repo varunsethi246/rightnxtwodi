@@ -36,17 +36,18 @@ import './main.html';
 Meteor.startup(() => {
 	global.Buffer = function() {}
 	global.Buffer.isBuffer = () => false
+
 	if (Meteor.isServer) {
-		Inject.rawHead("loader", Assets.getText('loadhtml.html'));
+		Inject.rawBody("loader", Assets.getText('loadhtml.html'));
 	}
 
-	if (Meteor.isClient) {
-		Meteor.startup(function() {
-			setTimeout(function() {
-				$("#inject-loader-wrapper").fadeOut(500, function() { $(this).remove(); });
-			}, 500);
-		});
-	}
+	// if (Meteor.isClient) {
+	// 	Meteor.startup(function() {
+	// 		setTimeout(function() {
+	// 			$("#inject-loader-wrapper").fadeOut(500, function() { $(this).remove(); });
+	// 		}, 5000);
+	// 	});
+	// }
 });
 
 $(document).on("click",function(){
@@ -91,9 +92,14 @@ Meteor.startup(function () {
 
 HomepageFunc = function () {
 // console.log('1st');  
-	import('/imports/general/homepage/homepage.js').then(function (handle) {  
+	import('/imports/general/homepage/homepage.js')
+	.then(function (handle) {  
 		handle.Homepage();    
 	})
+	.then(function(){
+		$("#inject-loader-wrapper").fadeOut(500, function() { $(this).remove(); });
+	})
+
 }
 
 UMregisterFunc= function () {
