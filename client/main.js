@@ -73,9 +73,9 @@ HomepageFunc = function () {
 	.then(function (handle) {  
 		handle.Homepage();    
 	})
-	// .then(function(){
-	// 	$("#inject-loader-wrapper").fadeOut(500, function() { $(this).remove(); });
-	// })
+	.then(function(){
+		$("#inject-loader-wrapper").fadeOut(1500, function() { $(this).remove(); });
+	})
 
 }
 
