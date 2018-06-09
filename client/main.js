@@ -18,43 +18,20 @@ import './main.html';
 // import '../imports/common/starRating/themes/krajee-svg/theme.js';
 // import '../imports/common/starRating/themes/krajee-svg/theme.css';
 
-// if (Meteor.isServer) {
-//   if (!Package.appcache)
-//   WebApp.connectHandlers.use(function(req, res, next) {
-//     if(Inject.appUrl(req.url)) {
-//       Inject.obj('myData', makeDataFor(req), res);
-//     }
-//     next();
-//   });
-// }
-	
-// if (Meteor.isClient) {
-//   // available immediately
-//   var myData = Injected.obj('myData');
-// }
 
 Meteor.startup(() => {
 	global.Buffer = function() {}
 	global.Buffer.isBuffer = () => false
 
-	if (Meteor.isServer) {
-		Inject.rawBody("loader", Assets.getText('loadhtml.html'));
-	}
-
-	// if (Meteor.isClient) {
-	// 	Meteor.startup(function() {
-	// 		setTimeout(function() {
-	// 			$("#inject-loader-wrapper").fadeOut(500, function() { $(this).remove(); });
-	// 		}, 5000);
-	// 	});
+	// if (Meteor.isServer) {
+	// 	Inject.rawBody("loader", Assets.getText('loadhtml.html'));
 	// }
+
 });
 
 $(document).on("click",function(){
-	// if($('.activeDownList').hasClass('activeDownListBlock')&&!($('.activeSelC').is(":click"))){
-		$('.activeDownList').hide();
-		$('.activeDownListFlag').hide();
-	// }
+	$('.activeDownList').hide();
+	$('.activeDownListFlag').hide();
 });
 $(document).on('click',function(){
 	$(".loginClosenew").click(function() {
@@ -96,9 +73,9 @@ HomepageFunc = function () {
 	.then(function (handle) {  
 		handle.Homepage();    
 	})
-	.then(function(){
-		$("#inject-loader-wrapper").fadeOut(500, function() { $(this).remove(); });
-	})
+	// .then(function(){
+	// 	$("#inject-loader-wrapper").fadeOut(500, function() { $(this).remove(); });
+	// })
 
 }
 
