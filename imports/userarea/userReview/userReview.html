@@ -40,9 +40,9 @@
             </ul>
           </div>
       </div>
-      <div id="reviewDateSort">
+    <div id="reviewDateSort">
       {{#each businessReviews}} 
-        <div class="timeline-reviews timeLine col-lg-12 col-md-12- col-sm-12 col-xs-12 {{categoryClasses}} {{AreaClasses}}" data-date="{{reviewDateNumber}}">     
+      <div class="timeline-reviews timeLine col-lg-12 col-md-12- col-sm-12 col-xs-12 {{categoryClasses}} {{AreaClasses}}" data-date="{{reviewDateNumber}}">     
           <div class="reviewBox col-lg-12">
             <div class="">
               <div class="reviewLeftImg col-lg-2 col-md-1 col-sm-3 col-xs-3">
@@ -53,17 +53,13 @@
               <div class="reviewRightTxt col-lg-5 col-md-6 col-xs-9" id="reviewRightTxt"> 
                 <a href="/{{businessLink}}">{{businessTitle}}</a>
                 <p>{{businessArea}}, {{businessCity}}</p>
-<!-- <<<<<<< Updated upstream -->
-                <!-- <p>{{timeAgo reviewDate}}</p> -->
                 <p>{{timeAgo}}</p>
               </div>
               <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 myRatingOnBuss" >
                 {{#with showRating}}
                   Rating: {{> starRating2 }}
                 {{/with}}
-<!-- =======
-                
->>>>>>> Stashed changes -->
+
               </div>          
             </div>     
           </div>
@@ -123,7 +119,7 @@
 
         <!-- Add image -->
         <div class="userRowTemp col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="reviewImages reviewImages-{{_id}}" id="{{_id}}">
+          <div class="reviewImages reviewImages-{{_id}}" id="{{_id}}">
             <div class="col-lg-12" id="reviewImgDiv">
               <div class="reviewImgInputDiv">
                 <output id="reviewImglistsEdits"></output>
@@ -175,19 +171,19 @@
         <!-- Tagged on Edit -->
         
 
-          <div class="userRowTemp col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="">
-              <div class="userReviewTempImg">
+        <div class="userRowTemp col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="">
+            <div class="userReviewTempImg">
                 <ul>
                   {{#each reviewImages}}
-                    <li>
-                  <div class="bus-page-edit-outer">
-                    <div data-imgId="{{img}}" data-reviewId="{{../_id}}" class="bus-page-edit-outer1 bus-page-edit-outer1-{{../_id}} pull-right">x</div>
-                    <div class="bus-page-edit-outer2">
-                      <img src="{{imagePath}}" height="83px" width="81px" class="{{checkpngImg}}">
+                  <li>
+                    <div class="bus-page-edit-outer">
+                      <div data-imgId="{{img}}" data-reviewId="{{../_id}}" class="bus-page-edit-outer1 bus-page-edit-outer1-{{../_id}} pull-right">x</div>
+                      <div class="bus-page-edit-outer2">
+                        <img src="{{imagePath}}" height="83px" width="81px" class="{{checkpngImg}}">
+                      </div>
                     </div>
-                  </div>
-                </li> 
+                  </li> 
                 {{/each}}
                 </ul>
             </div>

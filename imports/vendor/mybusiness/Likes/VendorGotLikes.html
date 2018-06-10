@@ -5,7 +5,7 @@
 				<h3 class="likesTitleClass">{{businessTitle}}</h3>
 				<h4 class="likesClass">Likes <span class="likesSpan">({{likeCount}})</span></h4>
 			{{/with}}
-
+		{{#if likeNumber}}
 			{{#each businessLikesData}}
 				<div class="UserLikesList vendorlikelist">
 					<img src="{{userProfilePic}}" alt="">
@@ -32,11 +32,16 @@
 						</div>
 						<div class="LikesReviewsandFollowTime revClass">
 							<!-- 20 min ago -->
-							{{timeAgo createdAt}}
+							{{timeAgo}}
 						</div>
 					</span>
 				</div>
 			{{/each}}
+		{{else}}
+				<div class="UserLikesList vendorlikelist">
+					<h4>No Likes yet.</h4>
+				</div>
+		{{/if}}
 		</div>
 	</div>
 </template>

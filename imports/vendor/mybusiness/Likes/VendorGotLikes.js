@@ -64,6 +64,19 @@ Template.VendorGotLikes.helpers({
 		}
 
 	},
+	'likeNumber':function(){
+		var businessLink = FlowRouter.getParam('businessLink');
+		var businessObj = Business.findOne({"businessLink":businessLink,"status": "active"});
+		if(businessObj){
+			var likeCount = Likes.find({"businessId":businessObj._id}).count();
+			if (likeCount == 0) {
+				return false;
+			}else{
+				return true;
+			}
+		}
+
+	},
 	'UserFollowerCount': function(userid){
 		var followersObj = FollowUser.find({"followUserId":userid}).count();
 		console.log("followersObj: ",followersObj);

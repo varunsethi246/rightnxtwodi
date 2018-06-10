@@ -8,7 +8,7 @@
 
 			{{#each businessBeenThereData}}
 				<div class="UserLikesList vendorlikelist">
-					<img src="{{userProfilePic}}" alt="">
+					<img src="{{userProfilePic}}" alt="" class="margintopBeenThere">
 					<span class="UserInfoClass">
 						<div class="LikesUserName">
 							{{username}}
@@ -26,7 +26,7 @@
 						</div>
 						<div class="LikesReviewsandFollowTime revClass">
 							<!-- 20 min ago -->
-							{{timeAgo createdAt}}
+							{{timeAgo}}
 						</div>
 					</span>
 				</div>

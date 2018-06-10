@@ -45,9 +45,9 @@ Template.VendorBeenThere.helpers({
 					}		
 				}
 				var timeAgo = moment(businessBeenThere[i].createdAt).fromNow();
-				businessBeenThere[i].timeAgo = timeAgo;
+				// businessBeenThere[i].timeAgo = timeAgo;
 			}	
-			console.log('businessBeenThere ',businessBeenThere);
+			// console.log('businessBeenThere ',businessBeenThere);
 			return businessBeenThere;
 		}
 	},
