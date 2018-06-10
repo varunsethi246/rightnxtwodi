@@ -2939,7 +2939,8 @@ text-align:center
 
 .userFollow:hover {
 background:#6cc233;
-color:#fff
+color:#fff;
+cursor: pointer;
 }
 
 .vndr_SharePage {
@@ -4206,4 +4207,8 @@ padding-left: 48px;
 }
 .enqDeleteThis{
     margin-right: 22px;
+}
+.vEnqListBorder{
+	    overflow-y: scroll;
+    height: 400px;
 }

@@ -1921,7 +1921,23 @@ Template.userTimeline.events({
 			}
 		});
 	},
-
+	'keydown .editreviewsOne':function(event){
+      setTimeout(function() {
+         var comment = $('.editreviewsOne').val();
+         if(comment){
+            var commentlen = comment.length;
+            var remainText = 140 - commentlen;
+            if(remainText < 0){
+	            $('.textRemain').css('display','none');
+            }else{
+	            $('.textRemain').css('display','block');
+	            $('.textRemain').text(remainText + ' /140');
+            }
+         }else{
+            $('.textRemain').text('0 /140');
+         }
+      }, 1);
+   },
 	'keypress .editReviewTextArea': function(event){
 
 		var revComment = $(event.currentTarget).val();
@@ -1937,27 +1953,35 @@ Template.userTimeline.events({
 			// console.log("id: ",id);
 			// // console.log("commentId: ",commentId);
 			// // console.log("userComment :"+ userComment);
+			if(revComment.length >=0 && revComment.length<=140){
 
-			Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, function(error, result){
-				if(error){
-					Bert.alert('Some technical issue happened... Your review is not posted.', 'danger', 'growl-top-right');
-				}else{
-			
-					// Bert.alert('Your comment posted successfully!', 'success', 'growl-top-right');
-					// $(event.currentTarget).val('');
-					$('.userReviewTempcommTxt-'+id).css('display','block');
-					$('.editBoxCommentRev-'+id).css('display','none');
-					$('.reviewCancel-'+id).css('display','none');
-					$('.reviewBusSave-'+id).css('display','none');
-					$('.bus-page-edit-outer1-'+id).css('display','none');
-					$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
-					$('.tagFrnd-'+id).css('display','none');
-					$('.tagedFrndDivPre-'+id).css('display','block');
-					tagedFriends = [];
-					
-				}
-			
-			});
+				$('.passwordWrongSpans').text("Your comment is too short, please write min 140 characters.");
+	            $('.passwordWrongSpans').addClass('passwordWrongWar');
+				// $('.openReviewBox').show();
+				// $('.publishReview').hide();
+			}else{
+
+				Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, function(error, result){
+					if(error){
+						Bert.alert('Some technical issue happened... Your review is not posted.', 'danger', 'growl-top-right');
+					}else{
+				
+						// Bert.alert('Your comment posted successfully!', 'success', 'growl-top-right');
+						// $(event.currentTarget).val('');
+						$('.userReviewTempcommTxt-'+id).css('display','block');
+						$('.editBoxCommentRev-'+id).css('display','none');
+						$('.reviewCancel-'+id).css('display','none');
+						$('.reviewBusSave-'+id).css('display','none');
+						$('.bus-page-edit-outer1-'+id).css('display','none');
+						$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
+						$('.tagFrnd-'+id).css('display','none');
+						$('.tagedFrndDivPre-'+id).css('display','block');
+						tagedFriends = [];
+						
+					}
+				
+				});
+			}
 		}
 	},
 	'change #reviewImgfilesEdits' : function(event){
@@ -2067,27 +2091,33 @@ Template.userTimeline.events({
 					// console.log('revComment: ',revComment);
 					// console.log('taggedPpl: ',taggedPpl);
 					// console.log('totalRating: ',totalRating);
+					if(revComment.length >=0 && revComment.length<=140){
 
+						$('.passwordWrongSpans').text("Your comment is too short, please write min 140 characters.");
+			            $('.passwordWrongSpans').addClass('passwordWrongWar');
+						// $('.openReviewBox').show();
+						// $('.publishReview').hide();
+					}else{
 
-					Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, totalRating,function(error, result){
-						if(error){
-							Bert.alert('Some technical issue happened... Your review is not posted.', 'danger', 'growl-top-right');
-						}else{
-							$('.userReviewTempcommTxt-'+id).css('display','block');
-							$('.editBoxCommentRev-'+id).css('display','none');
-							$('.reviewCancel-'+id).css('display','none');
-							$('.reviewBusSave-'+id).css('display','none');
-							$('.bus-page-edit-outer1-'+id).css('display','none');
-							$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
-							$('.tagFrnd-'+id).css('display','none');
-							$('.tagedFrndDivPre-'+id).css('display','block');
-							$('.reviewImages-'+id).css('display','none');
-							$('.starRatingblock-'+id).css('display','none');
+						Meteor.call('updateRevCommentEdit', id, revComment, taggedPpl, totalRating,function(error, result){
+							if(error){
+								Bert.alert('Some technical issue happened... Your review is not posted.', 'danger', 'growl-top-right');
+							}else{
+								$('.userReviewTempcommTxt-'+id).css('display','block');
+								$('.editBoxCommentRev-'+id).css('display','none');
+								$('.reviewCancel-'+id).css('display','none');
+								$('.reviewBusSave-'+id).css('display','none');
+								$('.bus-page-edit-outer1-'+id).css('display','none');
+								$('.bus-page-edit-outerFrnd1-'+id).css('display','none');
+								$('.tagFrnd-'+id).css('display','none');
+								$('.tagedFrndDivPre-'+id).css('display','block');
+								$('.reviewImages-'+id).css('display','none');
+								$('.starRatingblock-'+id).css('display','none');
 
-							tagedFriends = [];
-						}
-					});
-
+								tagedFriends = [];
+							}
+						});
+					}
 				}
 			}
 
