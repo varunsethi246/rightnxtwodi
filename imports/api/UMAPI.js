@@ -178,12 +178,12 @@ Meteor.methods({
       Roles.createRole(roleName);
   },
 
- /* deleteUser: function(userId){
-      console.log('userId:',userId);
-      var businessName  =  Business.find({'businessOwnerId':userId}).fetch();
-      console.log('businessName:',businessName);
-        // Meteor.users.remove({'_id': userId});
-  },*/
+  deleteUser: function(uid){
+      // console.log('userId:',userId);
+      // var businessName  =  Business.find({'businessOwnerId':userId}).fetch();
+      // console.log('businessName:',businessName);
+        Meteor.users.remove({'_id': uid});
+  },
 
     deleteRole: function(roleID){
       // Roles.deleteRole('super-admin');

@@ -216,6 +216,7 @@ Template.UMdeleteUserConfirm.events({
     var uid = FlowRouter.getParam('userId');
     console.log('uid:',uid);
     // console.log('uid : ' + uid);
+    
     Meteor.call('deleteUser', uid,
                 (err, res) => {
                 if (err) {
@@ -228,6 +229,23 @@ Template.UMdeleteUserConfirm.events({
         });
     FlowRouter.go('/listOfUsers');
   },
+});
+Template.UMuser.events({
+  'click .deleteUserConfirmOne': function(event){
+    event.preventDefault();
+    var uid = event.target.id;
+    console.log('uidone :',uid);
+    Meteor.call('deleteUser', uid,
+                (err, res) => {
+                if (err) {
+                    alert('hello');
+                } else {
+                    $('.modal-backdrop').hide(); 
+                    Bert.alert('User deleted..');
+
+                }
+        });
+    }
 });
 
 Template.UMlistOfUsers.events({
