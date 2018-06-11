@@ -400,7 +400,7 @@ Template.aboutBusiness.events({
 		var vendorId = $(event.currentTarget).attr("data-vendorId");
 		var businessTitle = $(event.currentTarget).attr("data-busTitle");
 		var businessLink = $(event.currentTarget).attr("data-busLink");
-
+		console.log('in delete');
 		Meteor.call('deleteBusiness',businessId,function(error,result){
 			if(error){
 				Bert.alert(error.reason,"danger",'growl-top-right');
@@ -481,10 +481,14 @@ Template.aboutBusiness.events({
 				//============================================================
 				// 			End Notification Email / SMS / InApp
 				//============================================================
-
+				console.log('in meteor');
 				// var currentUserId = ;
 				var currentRoleData = Meteor.users.findOne({'_id':Meteor.userId()});
+				console.log('currentRoleData :',currentRoleData);
+
 				if(currentRoleData){
+					console.log('currentRoleData :',currentRoleData);
+
 					if(currentRoleData.roles[0] == "Vendor"){
 						FlowRouter.go('/addNewBusiness/businessInfo/');
 					}else{

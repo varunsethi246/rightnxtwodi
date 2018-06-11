@@ -68,6 +68,43 @@ Template.businessEnquiry.events({
         var enquiryEmail = $('.enquiryEmail').val();
         var enquiryPhone = $('.enquiryPhone').val();
         var enquiryDesc = $('.enquiryDesc').val();
+        if (!enquiryDesc) {
+            $(".spanEnqDesc").addClass("ErrorRedText");
+            $(".enquiryDesc").addClass("SpanLandLineRedBorder");
+            $( ".spanEnqDesc" ).text("Please enter the description of the product you are looking for." );
+        }else{
+            $(".spanEnqDesc").removeClass("ErrorRedText");
+            $(".enquiryDesc").removeClass("SpanLandLineRedBorder");
+            $( ".spanEnqDesc" ).text("");
+        }
+        if (!enquiryName) {
+            $(".spanEnqName").addClass("ErrorRedText");
+            $(".enquiryName").addClass("SpanLandLineRedBorder");
+            $(".spanEnqName").text("Please Enter Valid Name" );
+        }else{
+            $(".spanEnqName").removeClass("ErrorRedText");
+            $(".enquiryName").removeClass("SpanLandLineRedBorder");
+            $(".spanEnqName").text("");
+        }
+        if (!enquiryEmail) {
+            $(".spanEnqEmail").addClass("ErrorRedText");
+            $(".enquiryEmail").addClass("SpanLandLineRedBorder");
+            $( ".spanEnqEmail" ).text("Please Enter Valid Business Email Id" );
+        }else{
+            $(".spanEnqEmail").removeClass("ErrorRedText");
+            $(".enquiryEmail").removeClass("SpanLandLineRedBorder");
+            $( ".spanEnqEmail" ).text("");
+        }
+        if (!enquiryPhoneTwo) {
+            $(".spanEnqPhone").addClass("ErrorRedText");
+            $(".enquiryPhone").addClass("SpanLandLineRedBorder");
+            $(".spanEnqPhone").text("Please Enter Valid 10 digit Mobile Number" );
+        }else{
+            $(".spanEnqPhone").removeClass("ErrorRedText");
+            $(".enquiryPhone").removeClass("SpanLandLineRedBorder");
+            $(".spanEnqPhone").text("");
+
+        }
         var enquiryPhoneTwo = '';
         if(enquiryPhone){
             enquiryPhoneTwo = '+91' + enquiryPhone;
@@ -367,26 +404,30 @@ Template.businessEnquiry.events({
         }else {
             // Bert.alert('Fill all fields before sending enquiry','danger','growl-top-right');
 
-            if (!enquiryName) {
-                $(".spanEnqName").addClass("ErrorRedText");
-                $(".enquiryName").addClass("SpanLandLineRedBorder");
-                $(".spanEnqName").text("Please Enter Valid Name" );
-            }
-            if (!enquiryEmail) {
-                $(".spanEnqEmail").addClass("ErrorRedText");
-                $(".enquiryEmail").addClass("SpanLandLineRedBorder");
-                $( ".spanEnqEmail" ).text("Please Enter Valid Business Email Id" );
-            }
-            if (!enquiryPhoneTwo) {
-                $(".spanEnqPhone").addClass("ErrorRedText");
-                $(".enquiryPhone").addClass("SpanLandLineRedBorder");
-                $(".spanEnqPhone").text("Please Enter Valid 10 digit Mobile Number" );
-            }
-            if (!enquiryDesc) {
-                $(".spanEnqDesc").addClass("ErrorRedText");
-                $(".enquiryDesc").addClass("SpanLandLineRedBorder");
-                $( ".spanEnqDesc" ).text("Please enter the description of the product you are looking for." );
-            }
+            // if (!enquiryName) {
+            //     $(".spanEnqName").addClass("ErrorRedText");
+            //     $(".enquiryName").addClass("SpanLandLineRedBorder");
+            //     $(".spanEnqName").text("Please Enter Valid Name" );
+            // }
+            // if (!enquiryEmail) {
+            //     $(".spanEnqEmail").addClass("ErrorRedText");
+            //     $(".enquiryEmail").addClass("SpanLandLineRedBorder");
+            //     $( ".spanEnqEmail" ).text("Please Enter Valid Business Email Id" );
+            // }
+            // if (!enquiryPhoneTwo) {
+            //     $(".spanEnqPhone").addClass("ErrorRedText");
+            //     $(".enquiryPhone").addClass("SpanLandLineRedBorder");
+            //     $(".spanEnqPhone").text("Please Enter Valid 10 digit Mobile Number" );
+            // }
+            // if (!enquiryDesc) {
+            //     $(".spanEnqDesc").addClass("ErrorRedText");
+            //     $(".enquiryDesc").addClass("SpanLandLineRedBorder");
+            //     $( ".spanEnqDesc" ).text("Please enter the description of the product you are looking for." );
+            // }else{
+            //     $(".spanEnqDesc").removeClass("ErrorRedText");
+            //     $(".enquiryDesc").removeClass("SpanLandLineRedBorder");
+            //     $( ".spanEnqDesc" ).text("");
+            // }
             $('.SpanLandLineRedBorder:visible:first').focus();
         }
 

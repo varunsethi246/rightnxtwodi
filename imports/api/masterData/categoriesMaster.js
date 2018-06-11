@@ -8,9 +8,11 @@ export const Categories = new Mongo.Collection('categories');
 
 if (Meteor.isServer) {
 	Meteor.publish('categories', function categories() {
+		if (!this.userId) return this.ready();
 		return Categories.find({});
 	});
 	Meteor.publish('categoriesListSearch', function() {
+		if (!this.userId) return this.ready();
 		return Categories.find({},{fields:{"level0":1,"level1":1,"level2":1,"level3":1,"level4":1,"tags":1}});
 	});
 }

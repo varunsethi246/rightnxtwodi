@@ -206,6 +206,7 @@ Template.generalHeader.events({
 		// 	}
 		// });
 		Meteor.logout();
+		// FlowRouter.go('/');
 	},
 });
 

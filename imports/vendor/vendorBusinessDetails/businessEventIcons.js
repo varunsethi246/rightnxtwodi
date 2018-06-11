@@ -12,7 +12,8 @@ import { BusinessImgUploadS3 } from '/client/businessImage.js';
 import { UserReviewStoreS3New } from '/client/UserReviewS3.js';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
-import './businessEventIcons.html'
+import './businessEventIcons.html';
+import '../../notifications/sendMailnNotification.js';
 
 Template.businessEventIcons.events({
 	'click #likeme': function(event){
@@ -62,6 +63,7 @@ Template.businessEventIcons.events({
 																templateName : 'Vendor Business Page Like',
 																variables    : msgvariable,
 																}
+																console.log('inputObj:',inputObj); 
 																sendInAppNotification(inputObj);
 
 																var inputObj = {
@@ -82,7 +84,10 @@ Template.businessEventIcons.events({
 																'[currentDate]'	: currentDate,
 																'[businessName]': businessData.businessTitle
 														};
-
+																// Hi [username],
+																// Thanks for like on business [businessName].
+																// Thanks,
+																// RightNXT Team
 																// var inputObj = {
 																// 	notifPath	 : businessurl,
 																//     to           : vendorId,
@@ -99,6 +104,7 @@ Template.businessEventIcons.events({
 																variables    : msgvariable,
 																}
 																sendMailNotification(inputObj); 
+
 										}
 									}
 									//============================================================

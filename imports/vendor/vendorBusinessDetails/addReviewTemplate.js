@@ -609,6 +609,8 @@ Template.addReviewTemplate.helpers({
 					data.profile.userProfilePic = "/users/profile/profile_image_dummy.svg";	
 				}
 				// console.log('data ', data);
+			}else{
+				data.profile.userProfilePic = "/users/profile/profile_image_dummy.svg";
 			}
 
 			return data;

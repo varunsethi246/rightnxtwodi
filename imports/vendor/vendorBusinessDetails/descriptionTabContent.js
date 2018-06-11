@@ -187,26 +187,39 @@ Template.descriptionTabContent.helpers({
 					var tagedFriendsArray = [];
 					for(m=0;m<allReviews[i].tagedFriends.length;m++){
 						var userTagObj = Meteor.users.findOne({"_id":allReviews[i].tagedFriends[m]});
-
+						// console.log('userTagObj:',userTagObj);
 						var dataImgUser = '';
-						if(userTagObj.profile.userProfilePic){
-							var imgData = UserProfileStoreS3New.findOne({"_id":userTagObj.profile.userProfilePic});
-							if(imgData)	{
-								dataImgUser = imgData.url();
+						if (userTagObj) {
+
+							if(userTagObj.profile.userProfilePic){
+								var imgData = UserProfileStoreS3New.findOne({"_id":userTagObj.profile.userProfilePic});
+								if(imgData)	{
+									dataImgUser = imgData.url();
+								}else{
+									dataImgUser = '/users/profile/profile_image_dummy.svg';
+								}
 							}else{
 								dataImgUser = '/users/profile/profile_image_dummy.svg';
 							}
+							var obj = {
+								'tagedFriends'   : userTagObj.profile.name,
+								'tagedFriendsUrl': generateURLid(allReviews[i].tagedFriends[m]),
+								'userTagged':allReviews[i].tagedFriends[m],
+								'imagePath':dataImgUser,
+							}
+
 						}else{
-							dataImgUser = '/users/profile/profile_image_dummy.svg';
+								dataImgUser = '/users/profile/profile_image_dummy.svg';
+
 						}
 
 
-						var obj = {
-							'tagedFriends'   : userTagObj.profile.name,
-							'tagedFriendsUrl': generateURLid(allReviews[i].tagedFriends[m]),
-							'userTagged':allReviews[i].tagedFriends[m],
-							'imagePath':dataImgUser,
-						}
+						// var obj = {
+						// 	'tagedFriends'   : userTagObj.profile.name,
+						// 	'tagedFriendsUrl': generateURLid(allReviews[i].tagedFriends[m]),
+						// 	'userTagged':allReviews[i].tagedFriends[m],
+						// 	'imagePath':dataImgUser,
+						// }
 
 						tagedFriendsArray.push(obj);
 					}
