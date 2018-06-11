@@ -5,6 +5,7 @@ import { Accounts } from 'meteor/accounts-base';
 //============================================================
 import '../imports/api/UMAPI.js';
 import '../imports/api/companysettingsAPI.js';
+import '../imports/api/homePageVideo.js';
 // import '../imports/api/dailyOrderAPI.js';
 
 

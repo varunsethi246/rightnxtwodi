@@ -397,9 +397,9 @@ ViewAllNotifsFunc= function () {
 	})
 }
 
-HomepageBannerFunc = function () {    
-	import('/imports/general/homepage/homepageBanner.js').then(function (handle) {        
-		handle.HomepageBannerForm();    
+homePageBannerFunc = function () { 
+	import('/imports/admin/homePageBanner/homePageBanner.js').then(function (handle) {        
+		handle.homePageBannerForm();    
 	})
 	.then(function(){
 		$("#inject-loader-wrapper").fadeOut(1500, function() { $(this).remove(); });
