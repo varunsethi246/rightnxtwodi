@@ -26,7 +26,7 @@ import './paymentFailed.html';
 var files = [];
 
 function printDiv() 
-{
+	{
   var divToPrint=document.getElementById('DivIdToPrint');
 
   var newWin=window.open('', 'PRINT', 'height=400,width=600');
@@ -1244,8 +1244,14 @@ Template.receipt.helpers({
 
 Template.receipt.events({
 	'click .button2': function(event){
+		var invNum       = FlowRouter.getParam('invoiceNumber');
 		var businessLink = FlowRouter.getParam('businessLink');
-		FlowRouter.go('/businessOffers/:businessLink',{'businessLink':businessLink});
+		if(invNum.split('-')[1]){
+			FlowRouter.go('/VendorPayments');
+		}else{
+			FlowRouter.go('/businessOffers/:businessLink',{'businessLink':businessLink});
+		}
+		
 	},
 	'click .button1': function(event){
 		printDiv();

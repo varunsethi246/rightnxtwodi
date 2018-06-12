@@ -10,7 +10,6 @@ export const State = new Mongo.Collection('state');
 
 if (Meteor.isServer) {
   Meteor.publish('allStates', function () {
-  	if (!this.userId) return this.ready();
     return State.find({});
   });
 }

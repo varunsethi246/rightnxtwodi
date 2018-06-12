@@ -41,23 +41,27 @@ Template.vendorComments.helpers({
 							allReviews[i].revProfilePic = "/users/profile/profile_image_dummy.svg";
 						}
 				}
+				if(allReviews[i].tagedFriends){
+					console.log('allReviews[i].tagedFriends:',allReviews[i].tagedFriends);
+					if(allReviews[i].tagedFriends.length != 0){
+						console.log('allReviews[i].tagedFriends:',allReviews[i].tagedFriends.length);
 
-				if(allReviews[i].tagedFriends.length != 0){
-					allReviews[i].tagedFriendsValidate = true;
+						allReviews[i].tagedFriendsValidate = true;
 
-					var tagedFriendsArray = [];
-					for(m=0;m<allReviews[i].tagedFriends.length;m++){
-						var userTagObj = Meteor.users.findOne({"_id":allReviews[i].tagedFriends[m]});
-						var obj = {
-							'tagedFriends'   : userTagObj.profile.name,
-							'tagedFriendsUrl': generateURLid(allReviews[i].tagedFriends[m]),
+						var tagedFriendsArray = [];
+						for(m=0;m<allReviews[i].tagedFriends.length;m++){
+							var userTagObj = Meteor.users.findOne({"_id":allReviews[i].tagedFriends[m]});
+							var obj = {
+								'tagedFriends'   : userTagObj.profile.name,
+								'tagedFriendsUrl': generateURLid(allReviews[i].tagedFriends[m]),
+							}
+							tagedFriendsArray.push(obj);
+
 						}
-						tagedFriendsArray.push(obj);
-
+						allReviews[i].tagedFriendsArray = tagedFriendsArray;
+					} else {
+						allReviews[i].tagedFriendsValidate = false;
 					}
-					allReviews[i].tagedFriendsArray = tagedFriendsArray;
-				} else {
-					allReviews[i].tagedFriendsValidate = false;
 				}
 				
 				if(userObj){

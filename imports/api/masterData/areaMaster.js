@@ -15,11 +15,9 @@ export const Area = new Mongo.Collection('area');
 if (Meteor.isServer) {
   // This code only runs on the server
   Meteor.publish('area', function area() {
-  	if (!this.userId) return this.ready();
     return Area.find({});
   });
   Meteor.publish('areaListSearch', function areaListSearch() {
-  	if (!this.userId) return this.ready();
     return Area.find({},{fields:{"city":1,"area":1,"status":1}});
   });
 }

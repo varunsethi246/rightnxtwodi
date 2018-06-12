@@ -11,7 +11,6 @@ export const City = new Mongo.Collection('city');
 
 if (Meteor.isServer) {
 	Meteor.publish('allCity', function allCity() {
-		if (!this.userId) return this.ready();
 		return City.find({});
 	});
 }

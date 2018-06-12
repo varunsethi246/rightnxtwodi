@@ -23,12 +23,12 @@
 					{{#with welcomeData}}
 						<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 companytab aboutData-xs">
 							<h4>{{sectionHeading}}</h4>
-								{{{contentBody}}}
+								{{contentBody}}
 						</div>
 					{{/with}}
-				{{else}}
+				<!-- {{else}}
 					<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 companytab aboutData-xs dummyStaticPage">
-					</div>
+					</div> -->
 				{{/if}}
 				
 				<div class="col-lg-12 col-md-12 col-sm-8 col-xs-10 visionImg">
@@ -39,7 +39,7 @@
 					{{#with visionData}}
 						<div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1 visionImg aboutData-xs">
 							<h4>{{sectionHeading}}</h4>
-								{{{contentBody}}}
+								{{contentBody}}
 						</div>
 					{{/with}}
 				{{else}}
@@ -53,7 +53,7 @@
 					{{#if whyWeBuiltData}}
 						{{#each whyWeBuiltData}}
 							<h4>{{sectionHeading}}</h4>
-							{{{contentBody}}}
+							{{contentBody}}
 						{{/each}}
 					{{else}}
 						<span class="dummyStaticPage"></span>
@@ -66,7 +66,7 @@
 					{{#if howWeHelpData}}
 						{{#each howWeHelpData}}
 							<h4>{{sectionHeading}}</h4>
-							{{{contentBody}}}
+							{{contentBody}}
 						{{/each}}
 					{{else}}
 						<span class="dummyStaticPage"></span>

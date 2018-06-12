@@ -272,7 +272,7 @@ Template.vendorPayments.helpers({
 					paymentDetails[i].totalAmount = paymentDetails[i].discountedPrice;
 					paymentDetails[i].receiptLink = "/adsInvoice/" + paymentDetails[i].businessLink;
 				} else {
-					paymentDetails[i].receiptLink = "/" + paymentDetails[i].businessLink + "/receipt/" + paymentDetails[i].invoiceNumber;
+					paymentDetails[i].receiptLink = "/" + paymentDetails[i].businessLink + "/receipt/" + paymentDetails[i].invoiceNumber+'-i';
 				}
 			}
 			return paymentDetails;

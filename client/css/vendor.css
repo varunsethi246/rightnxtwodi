@@ -3687,3 +3687,10 @@ border-radius: 0px!important;
 .margintopBeenThere {
 	    margin-top: 10px;
 }
+.playButtonCss{
+	z-index: 1;
+    position: absolute;
+    color: black;
+    top: 45%;
+    left: 45%;
+}

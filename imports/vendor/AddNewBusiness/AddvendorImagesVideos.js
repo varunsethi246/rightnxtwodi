@@ -373,7 +373,7 @@ Template.addvendorImagesVideos.events({
 		
 		for (var i = 0, f; f = file[i]; i++) {
 			file[i].businessLink = Session.get('SessionBusinessLink');
-			
+			console.log('file[i].businessLink:',file[i].businessLink);
 		    // Only process image files.
 		    if (!f.type.match('image.*')) {
 		      continue;

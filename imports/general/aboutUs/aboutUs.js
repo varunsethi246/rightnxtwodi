@@ -38,6 +38,7 @@ Template.aboutUs.helpers({
 	welcomeData(){
 		var currentURL = FlowRouter.current().path;
 		var splitUlr = currentURL.split('/');
+		var actualURL = currentURL.substring(1);
 		var welcome = GeneralContent.findOne({"url": splitUlr[1] , "tabName": "COMPANY" , "sectionHeading": "Welcome to rrightsNXT"});
 		return welcome;
 	},
