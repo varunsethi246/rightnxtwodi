@@ -306,6 +306,40 @@ Template.addVendorBusInfo.events({
       }
       $("#businessLink").val(myFuncVarLink);
    },
+   'keypress .businessLinkC':function(event){
+      var myFuncVar = $("#businessLink").val().replace(/ /g,'');
+      var myFuncVarLink = $("#businessLink").val().replace(/ /g,'');
+      var data = Business.findOne({"businessLink":myFuncVarLink});
+      var nameRegex = /^[A-Za-z0-9-]{1,50}$/;
+
+      if (myFuncVar==null||myFuncVar==""||data||!myFuncVarLink.match(nameRegex)) {
+         if(myFuncVarLink==null||myFuncVarLink==""){
+            $(".SpanBusinessLink").addClass("hvr-buzz-out ErrorRedText hvr-buzz-out");
+            $(".SpanBusinessLink").text("Please enter link");
+            $(".businessLinkC").addClass("SpanLandLineRedBorder");
+            $(".SpanBusinessLink").removeClass("linkAvail");
+         }
+         if(!myFuncVarLink.match(nameRegex)){
+            $(".SpanBusinessLink").removeClass("linkAvail");
+            $(".SpanBusinessLink").addClass("hvr-buzz-out ErrorRedText");
+            $(".businessLinkC").addClass("SpanLandLineRedBorder");
+            $( ".SpanBusinessLink" ).text("A valid link should be alphanumeric with only hyphens(-)" );
+         }
+
+         if(data&&Session.get('backlinkurl') !== myFuncVarLink){
+            $(".SpanBusinessLink").removeClass("linkAvail");
+            $(".SpanBusinessLink").addClass("hvr-buzz-out ErrorRedText");
+            $(".businessLinkC").addClass("SpanLandLineRedBorder");
+            $( ".SpanBusinessLink" ).text("A unique link should be alphanumeric with only hyphens(-)" );
+         }
+      }else {
+         $(".SpanBusinessLink").removeClass(" ErrorRedText hvr-buzz-out");
+         $(".SpanBusinessLink").addClass("linkAvail");
+         $(".businessLinkC").removeClass("SpanLandLineRedBorder");
+         $( ".SpanBusinessLink" ).text("Link Available");
+      }
+      $("#businessLink").val(myFuncVarLink);
+   },
    'keyup .businessTitleC':function(event){
       if($('.businessLinkC').val().length <= 50 ){
          $('.businessLinkC').val(($('#businessTitle').val()).replace(/ /g,'').substring(0,50));

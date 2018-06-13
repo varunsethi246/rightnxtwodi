@@ -484,8 +484,8 @@ Template.addReviewTemplate.events({
 	 //  var div2 = document.getElementsByClassName("reviewImages");
     if($('.tagFrnd').css('display') == 'block'){
     	$('.tagFrnd').css("display", "none");
-      $('.reviewImages').css("display", "block");
-				$('.openReview').addClass('maxopenReviewHeight');			
+      	$('.reviewImages').css("display", "block");
+		$('.openReview').addClass('maxopenReviewHeight');			
     }else if ($('.tagFrnd').css('display') == 'none') {
      	$('.reviewImages').toggle();
      	if( $('.openReview').hasClass('maxopenReviewHeight') ){

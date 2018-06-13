@@ -3694,3 +3694,14 @@ border-radius: 0px!important;
     top: 45%;
     left: 45%;
 }
+video::-internal-media-controls-download-button {
+    display:none;
+}
+ 
+video::-webkit-media-controls-enclosure {
+    overflow:hidden;
+}
+ 
+video::-webkit-media-controls-panel {
+    width: calc(100% + 30px); /* Adjust as needed */
+}
