@@ -43,8 +43,11 @@ Template.addReviewTemplate.events({
             var remainText = 140 - commentlen;
             if(remainText < 0){
 	            $('.textRemain').css('display','none');
+			    $('.newReviewMsg').css('display','none');
+
             }else{
 	            $('.textRemain').css('display','block');
+			    $('.newReviewMsg').css('display','block');
 	            $('.textRemain').text(remainText + ' /140');
             }
          }else{
@@ -193,11 +196,14 @@ Template.addReviewTemplate.events({
 			if(formValues.reviewComment.length >=0 && formValues.reviewComment.length<=140){
 
 				$('.passwordWrongSpan').text("Your comment is too short, please write min 140 characters.");
+
 	            $('.passwordWrongSpan').addClass('passwordWrongWar');
 				$('.openReviewBox').show();
 				$('.publishReview').hide();
 			}else{
 			    $('.passwordWrongSpan').removeClass('passwordWrongWar');
+			    $('.passwordWrongSpan').css('display','none');
+			    // $('.newReviewMsg').css('display','none');
 				$('.openReview').removeClass('maxopenReviewHeight');
 				$('.openReview').addClass('minopenReviewHeight');
 			
@@ -474,7 +480,10 @@ Template.addReviewTemplate.events({
 	},
 	'click .reviewClose': function(event){
 	    $('.reviewClose').parent('.openReview').hide();
-	    $('.publishReview').show();	
+	    $('.publishReview').show();
+		$('.newReviewMsg').css('display','none');
+		$('.passwordWrongSpan').css('display','none');
+
 	},	
 
 	'click .uploadImg': function(event){

@@ -41,7 +41,7 @@ Template.userLayout.onRendered(function(){
 	var link = FlowRouter.current().path;
 	var checkIdExists = link.split('/');
 	if(checkIdExists[2]){
-		alert('checkIdExists'); 
+		// alert('checkIdExists'); 
 		// console.log('checkIdExists');
 		$(".addPhotoTxt").hide();
 		$(".prfSetting").hide();
