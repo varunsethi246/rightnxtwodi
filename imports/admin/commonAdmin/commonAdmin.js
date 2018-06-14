@@ -174,6 +174,7 @@ Template.ViewAllNotif.events({
 	        Bert.alert( 'Deleted Successfully!', 'success', 'growl-top-right' );
 	      }
 	    });
+	    $('.modal-backdrop').hide();
 	},
 });
 

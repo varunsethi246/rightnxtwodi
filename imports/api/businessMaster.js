@@ -1125,7 +1125,23 @@ Meteor.methods({
 	'updateBusInactivate':function(busId, busComment){
 		var busId = Business.findOne({"_id":busId});
 		var busLink = busId.businessLink;
-		
+		console.log('busid :',busId);
+		Business.update(
+			{"businessLink":busLink},
+			{$set: 
+				{ 	
+					"status"				: 	"inactive",
+					"adminReviewComment"	: 	busComment,
+				}
+			},
+			function(error,result){
+				if(error){
+					// console.log(error);
+					return error;
+				}
+			},
+			{multi: true}
+		);
 		BusinessBanner.update(
 			{"businessLink":busLink}, 
 			{$set:	{
@@ -1143,15 +1159,6 @@ Meteor.methods({
 			{multi: true}
 		);
 
-		Business.update(
-			{"_id":busId},
-			{$set: 
-				{ 	
-					"status"				: 	"inactive",
-					"adminReviewComment"	: 	busComment,
-				}
-			}
-		);
 	},
 
 	'publishBusinessImage':function(busid, busImgId){

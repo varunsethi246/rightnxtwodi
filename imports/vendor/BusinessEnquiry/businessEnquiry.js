@@ -65,6 +65,7 @@ Template.businessEnquiry.events({
 
         var enquirySentBy = Meteor.userId();
         var enquiryName = $('.enquiryName').val();
+        console.log(enquiryName);
         var enquiryEmail = $('.enquiryEmail').val();
         var enquiryPhone = $('.enquiryPhone').val();
         var enquiryDesc = $('.enquiryDesc').val();
@@ -93,7 +94,7 @@ Template.businessEnquiry.events({
             errorIn = "true";
         }
 
-        if(errorIn!="true" && enquiryName && enquiryEmail && enquiryPhoneTwo && enquiryDesc) {
+        if(enquiryName && enquiryEmail && enquiryPhoneTwo && enquiryDesc) {
             if(filesM.length > 0){
                 for(i = 0 ; i < filesM.length; i++){
                     EnquiryImgUploadS3.insert(filesM[i], function (err, fileObj) {
@@ -376,22 +377,34 @@ Template.businessEnquiry.events({
             }
         }else {
             // Bert.alert('Fill all fields before sending enquiry','danger','growl-top-right');
-
+            console.log('hello');
             if (!enquiryName) {
                 $(".spanEnqName").addClass("ErrorRedText");
                 $(".enquiryName").addClass("SpanLandLineRedBorder");
                 $(".spanEnqName").text("Please Enter Valid Name" );
-            }
+            }else{
+            $(".spanEnqDesc").removeClass("ErrorRedText");
+            $(".enquiryDesc").removeClass("SpanLandLineRedBorder");
+            $( ".spanEnqDesc" ).text("");
+        }
             if (!enquiryEmail) {
                 $(".spanEnqEmail").addClass("ErrorRedText");
                 $(".enquiryEmail").addClass("SpanLandLineRedBorder");
                 $( ".spanEnqEmail" ).text("Please Enter Valid Business Email Id" );
-            }
+            }else{
+            $(".spanEnqDesc").removeClass("ErrorRedText");
+            $(".enquiryDesc").removeClass("SpanLandLineRedBorder");
+            $( ".spanEnqDesc" ).text("");
+        }
             if (!enquiryPhoneTwo) {
                 $(".spanEnqPhone").addClass("ErrorRedText");
                 $(".enquiryPhone").addClass("SpanLandLineRedBorder");
                 $(".spanEnqPhone").text("Please Enter Valid 10 digit Mobile Number" );
-            }
+            }else{
+            $(".spanEnqDesc").removeClass("ErrorRedText");
+            $(".enquiryDesc").removeClass("SpanLandLineRedBorder");
+            $( ".spanEnqDesc" ).text("");
+        }
             
             $('.SpanLandLineRedBorder:visible:first').focus();
         }

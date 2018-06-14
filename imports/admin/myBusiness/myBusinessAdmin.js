@@ -262,6 +262,7 @@ Template.listOfBusiness.events({
 		}
 
 		var busId = $(event.currentTarget).attr('data-inactiveBusID');
+		console.log('busId:',busId);
 		if(busId){
 			Meteor.call('updateBusInactivate', busId, busComment, function(error,result){
 				if(error){

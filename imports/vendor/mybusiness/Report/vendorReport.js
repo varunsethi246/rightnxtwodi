@@ -167,62 +167,69 @@ Template.imageReport.events({
 		event.preventDefault();
 		var userId = Meteor.userId();
 		var adminUser 	= Meteor.users.findOne({'roles':'admin'});
-		var adminID		= adminUser._id;
-		var userDetails = Meteor.users.findOne({'_id':userId});
-		var email = $(event.currentTarget).attr('id');
-		var res = email.split(" ");
-		var userID = res[1];
-		var userDet = Reports.findOne({'_id':userID});
-		var usermailID = userDet.userid;
-		// console.log('usermailID:',usermailID);
-		if(userDetails){
-			var mailAdmin 		= userDetails.emails[0].address;
-			var date 			= new Date();
-			var currentDate 	= moment(date).format('DD/MM/YYYY');
-			var businessLink 	= FlowRouter.getParam('businessLink');
-			var businessDetails = Business.findOne({"businessLink":businessLink});
-			if(businessDetails){
-				var msgvariable = {
-					'[currentDate]'	: currentDate,
-					'[businessName]': businessDetails.businessTitle,
-		       	};
-				// user
-				var inputObj = {
-					notifPath	 : "",
-					from 		 : userId,
-				    to           : usermailID,
-				    templateName : 'business-image-report-acknowledged',
-				    variables    : msgvariable,
-				}
-				sendMailNotification(inputObj);
+		if(adminUser){
+			var adminID		= adminUser._id;
+			var userDetails = Meteor.users.findOne({'_id':userId});
+			if(userDetails){
+				var email = $(event.currentTarget).attr('id');
+				var res = email.split(" ");
+				var userID = res[1];
+				var userDet = Reports.findOne({'_id':userID});
+				if(userDet){
 
-				var inputObj = {
-					notifPath	 : "",
-				    to           : usermailID,
-				    templateName : 'business-image-report-acknowledged',
-				    variables    : msgvariable,
-				}
+					var usermailID = userDet.userid;
+					console.log('usermailID:',usermailID);
+					if(userDetails){
+						var mailAdmin 		= userDetails.emails[0].address;
+						var date 			= new Date();
+						var currentDate 	= moment(date).format('DD/MM/YYYY');
+						var businessLink 	= FlowRouter.getParam('businessLink');
+						var businessDetails = Business.findOne({"businessLink":businessLink});
+						if(businessDetails){
+							var msgvariable = {
+								'[currentDate]'	: currentDate,
+								'[businessName]': businessDetails.businessTitle,
+					       	};
+							// user
+							var inputObj = {
+								notifPath	 : "",
+								from 		 : userId,
+							    to           : usermailID,
+							    templateName : 'business-image-report-acknowledged',
+							    variables    : msgvariable,
+							}
+							sendMailNotification(inputObj);
 
-				sendInAppNotification(inputObj);
-				// admin
-				var inputObj = {
-					notifPath	 : "",
-					from 		 : userId,
-				    to           : adminID,
-				    templateName : 'business-image-report-acknowledged',
-				    variables    : msgvariable,
-				}
-				sendMailNotification(inputObj);
+							var inputObj = {
+								notifPath	 : "",
+							    to           : usermailID,
+							    templateName : 'business-image-report-acknowledged',
+							    variables    : msgvariable,
+							}
 
-				var inputObj = {
-					notifPath	 : "",
-				    to           : adminID,
-				    templateName : 'business-image-report-acknowledged',
-				    variables    : msgvariable,
-				}
+							sendInAppNotification(inputObj);
+							// admin
+							var inputObj = {
+								notifPath	 : "",
+								from 		 : userId,
+							    to           : adminID,
+							    templateName : 'business-image-report-acknowledged',
+							    variables    : msgvariable,
+							}
+							sendMailNotification(inputObj);
 
-				sendInAppNotification(inputObj);  
-			}
+							var inputObj = {
+								notifPath	 : "",
+							    to           : adminID,
+							    templateName : 'business-image-report-acknowledged',
+							    variables    : msgvariable,
+							}
+
+							sendInAppNotification(inputObj);  
+						}
+					}
+				}
+		}
 		}
 	},
 

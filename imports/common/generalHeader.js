@@ -168,7 +168,15 @@ Template.generalHeader.helpers({
       	var notifDetails = Notification.find({'toUserId':userId,'status':'unread', 'event': {"$in": notificationLocs}}).fetch();
         	if(notifDetails){
           		var notifCount = Notification.find({'toUserId':userId,'status':'unread', 'event': {"$in": notificationLocs}}).count();
+
           		var notifcountZero = Session.set('notifZero',notifCount);
+          		// if (notifcountZero == 0) {
+          		// 	$('.notifCountIcon').hide();
+          		// 	console.log('hello1');
+          		// }else{
+          		// 	$('.notifCountIcon').show();
+          		// 	console.log('hello');
+          		// }
         	}
       	return notifCount;
     },

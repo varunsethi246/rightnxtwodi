@@ -1,4 +1,3 @@
-
 var enquiryImgStoreS3 = new FS.Store.S3("enquiryImgS3");
 
 export const EnquiryImgUploadS3 = new FS.Collection("enquiryImgS3", {
