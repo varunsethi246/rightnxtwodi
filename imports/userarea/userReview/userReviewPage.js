@@ -53,10 +53,12 @@ Template.userReview.onRendered(function(){
 				i++;
 			});
 				// console.log('before length',$(this).children('.showreplyCmt').length);
-
-			if($(this).children('.showreplyCmt').length == 0){
-				// console.log($(this).children('.showreplyCmt').length);
-				$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
+			if ($(this).children('.commentReplyArr').length > 2) {
+				
+				if($(this).children('.showreplyCmt').length == 0){
+					// console.log($(this).children('.showreplyCmt').length);
+					$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
+				}
 			}
 		});
 

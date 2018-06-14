@@ -591,9 +591,12 @@ Template.userTimeline.onRendered(function(){
 					}
 					i++;
 				});
-				if($(this).children('.showreplyCmt').length == 0){
-					// console.log('count :',$(this).children('.showreplyCmt').length);
-					$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
+				if ($(this).children('.commentReplyArr').length > 2) {
+					
+					if($(this).children('.showreplyCmt').length == 0){
+						// console.log('count :',$(this).children('.showreplyCmt').length);
+						$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
+					}
 				}
 			});			
 		},1000);
