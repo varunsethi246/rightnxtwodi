@@ -121,7 +121,7 @@ Template.userSuggestion.helpers ({
 Template.userTimeline.helpers({
 	'timeAgo': function(datetime) {
 
-		// console.log('datetime: ',datetime);
+
 	  // if(datetime == ''){
 	  //   return 'Never Logged In';
 	  // }else{

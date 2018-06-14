@@ -13,6 +13,7 @@ import '/imports/vendor/businessList/businessMapView/businessMap.html'
 import '/imports/vendor/businessList/businessMapView/businessMapView.js'
 
 
+
 var options = {
   keepHistory: 0,
   localSearch: false
@@ -548,9 +549,12 @@ Template.searchbar.events({
 		}
 	  }, 200),
 
+
 	'click .mapVwPointer':function(event){
 		event.preventDefault();
+
 		var data = Template.currentData(self.view);
+		console.log('data:',data);
         Blaze.renderWithData(Template.businessMap, data, $(".mapContainer")[0]);
         $('.sidebarMapPre').css('display','none');
 		

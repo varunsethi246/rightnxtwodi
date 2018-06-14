@@ -48,6 +48,7 @@ Template.homepage.helpers({
    //    console.log('FlowRouter.subsReady()',FlowRouter.subsReady());
    //     return FlowRouter.subsReady();
    // },
+
 });
 
 Template.homepageBanner.onRendered(function(){

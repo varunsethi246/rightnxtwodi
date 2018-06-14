@@ -1,11 +1,8 @@
 import { Bert } from 'meteor/themeteorchef:bert';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
-// import '/imports/common/forgotPassword.js';
-
 import '/imports/common/common.js';
 
-// import '.ForgotPassword.js';
 
 // if (Meteor.isClient) {
 
@@ -60,6 +57,7 @@ import '/imports/common/common.js';
       $('.resetPwd').removeClass('diplayNoneresetPwd');
 
     },
+
 
      'click .UMloginbutton': function(event, template) {
     event.preventDefault();
@@ -233,6 +231,7 @@ Template.loginScreen.onRendered(function(){
   $('.disableBtn').attr('disabled','disabled');
 
   $.validator.addMethod("regex_1", function(value, element, regexpr) {          
+
       return regexpr.test(value);
   }, "Please Enter valid Email Address");
 

@@ -1,5 +1,6 @@
-// console.log('1');
+
 import './loadingLayout.html';
+
 import './anonymousUserLayout1.html';
 import './anonymousUserLayout.html';
 import './header.html';
@@ -63,8 +64,10 @@ Template.anonymousUserLayout.helpers({
      //   	return false;
      //   }
 
+
       // console.log('FlowRouter.subsReady() anonymousUserLayout:',FlowRouter.subsReady());
        // return FlowRouter.subsReady();
+
 
        return Meteor.subscribe('userfunction').ready();
     },

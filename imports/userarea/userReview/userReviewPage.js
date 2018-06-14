@@ -588,21 +588,7 @@ Template.userReview.helpers({
 		var businessUrl = this.businessLink;
 		// var businessLinkNew = Business.findOne({"businessLink":businessLinks});
 		// console.log('businessUrl :',businessUrl);
-// <<<<<<< Updated upstream
-// 		// var ratingInt = Review.findOne({"userId" : userId,"businessLink":businessUrl});
-// 		var ratingInt = Review.find({
-// 										$or:[ 
-// 												{ "userId":{$in  : uniqueId},"businessLink":businessUrl } , 
-// 											]
-// 										},
-// 									).fetch();
-// 		// console.log('ratingInt :',ratingInt);
-// 		if(ratingInt){
-// 			// console.log("ratingInt = ", ratingInt);
-// 			for (var i = 0; i < ratingInt.length; i++) {	
-// 				var latestRating = ratingInt[i].rating;
-// 				// console.log('latestRating:',latestRating);
-// =======
+
 		var ratingInt = Review.find({"userId" : userId,"businessLink":businessUrl}).fetch();
 		console.log('ratingInt :',ratingInt);
 		if(ratingInt){
@@ -610,8 +596,7 @@ Template.userReview.helpers({
 			for (var j = 0; j < ratingInt.length; j++) {
 				
 				var latestRating = ratingInt[j].rating;
-				console.log('latestRating:',latestRating);
-// >>>>>>> Stashed changes
+
 				var intRating = parseInt(latestRating);
 				var balRating = latestRating - intRating;
 				var finalRating = intRating + balRating;
@@ -2240,6 +2225,7 @@ Template.userReview.events({
 							}
 						});
 					}
+
 				}
 			}
 		}

@@ -144,15 +144,7 @@ Template.descriptionTabContent.helpers({
 				} else {
 					allReviews[i].revEditButton = 'hide';
 				}
-
-				// if(Meteor.users.findOne({"_id": Meteor.userId()}).roles[0] === 'admin'){
-				// 	allReviews[i].revEditButton = 'show';
-				// }
-				// else if(allReviews[i].userId === Meteor.userId()){
-				// 	allReviews[i].revEditButton = 'show';
-				// }else{
-				// 	allReviews[i].revEditButton = 'hide';
-				// }	
+	
 				if(allReviews[i].reviewComment){
 				// console.log("allReviews[i].reviewComment :",allReviews[i].reviewComment);
 				if(allReviews[i].reviewComment.length > 300){
@@ -160,9 +152,6 @@ Template.descriptionTabContent.helpers({
 					var desc4 = allReviews[i].reviewComment.substring(300,allReviews[i].reviewComment.length);
 					allReviews[i].ownerDesc3 = desc3;
 					allReviews[i].ownerDesc4 = desc4;
-					// console.log("allReviews[i].ownerDesc3: ",allReviews[i].ownerDesc3);
-					// console.log("allReviews[i].ownerDesc4 :===>",allReviews[i].ownerDesc4);
-
 				}
 			}
 
@@ -214,13 +203,6 @@ Template.descriptionTabContent.helpers({
 						}
 
 
-						// var obj = {
-						// 	'tagedFriends'   : userTagObj.profile.name,
-						// 	'tagedFriendsUrl': generateURLid(allReviews[i].tagedFriends[m]),
-						// 	'userTagged':allReviews[i].tagedFriends[m],
-						// 	'imagePath':dataImgUser,
-						// }
-
 						tagedFriendsArray.push(obj);
 					}
 					allReviews[i].tagedFriendsArray = tagedFriendsArray;
@@ -264,13 +246,6 @@ Template.descriptionTabContent.helpers({
 					allReviews[i].deleteButton = '';
 				}
 
-				// if(Meteor.users.findOne({"_id": Meteor.userId()}).roles[0] === 'admin'){
-				// 	allReviews[i].deleteButton = 'showDeleteButton';
-				// } else if(allReviews[i].userId === Meteor.userId()){
-				// 	allReviews[i].deleteButton = 'showDeleteButton';
-				// } else{
-				// 	allReviews[i].deleteButton = '';
-				// }
 
 				if(allReviews[i].reviewImages){
 					for(j=0;j<allReviews[i].reviewImages.length;j++){
@@ -342,15 +317,6 @@ Template.descriptionTabContent.helpers({
 							allReviews[i].userComments[k].deleEditBlock = 'hide';
 						}
 
-						// if(Meteor.users.findOne({"_id": Meteor.userId()}).roles[0] === 'admin'){
-						// 	allReviews[i].userComments[k].deleEditBlock = 'show';
-						// }
-						// else if(userId === Meteor.userId()){
-						// 	allReviews[i].userComments[k].deleEditBlock = 'show';
-						// }else{
-						// 	allReviews[i].userComments[k].deleEditBlock = 'hide';
-						// }
-
 						if(userObj){
 							allReviews[i].userComments[k].commentUserName = userObj.profile.name;
 							if(userObj.profile.userProfilePic){								
@@ -392,17 +358,7 @@ Template.descriptionTabContent.helpers({
 									} else{
 										replyObj.repEditBlock = 'hide';
 									}
-
-									// if(Meteor.users.findOne({"_id": Meteor.userId()}).roles[0] === 'admin'){
-									// 	replyObj.repEditBlock = 'show';
-									// }
-									// else if(userId1 === Meteor.userId()){
-									// 	replyObj.repEditBlock = 'show';
-									// }
-									// else{
-									// 	replyObj.repEditBlock = 'hide';
-									// }
-
+							
 									if(userObj1){
 										replyObj.commentReplyUserName = userObj1.profile.name;
 										if(userObj1.profile.userProfilePic){								
@@ -522,8 +478,10 @@ Template.userReviewTemplate.onRendered(function(){
 				}
 				i++;
 			});
-			if($(this).children('.showreplyCmt').length == 0){
-				$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
+			if($(this).children('.commentReplyArr').length > 2){
+				if($(this).children('.showreplyCmt').length == 0){
+					$(this).append("<div class='col-lg-3 pull-right showreplyCmt'> Show all replies </div>");
+				}
 			}
 		});
 
@@ -646,7 +604,7 @@ Template.userReviewTemplate.events({
 		if(e.keyCode != 38 && e.keyCode != 40 && e.keyCode != 37 && e.keyCode != 39){
 			$('.tagFrndUlFrieldList').removeClass('searchDisplayHide').addClass('searchDisplayShow');
 			var text = $(e.currentTarget).val();
-			console.log('text:',text);
+			// console.log('text:',text);
 			if (text) {
 				$('.tagFrndUlFrieldList').css('display','block');
 		// $('.tagFrndUlFrieldList').css('display','none');
@@ -858,8 +816,7 @@ Template.userReviewTemplate.events({
 	},
 
 	'click .heart' : function(event){
-		event.preventDefault();
-		console.log('like page');
+
 		var businessUrl = FlowRouter.getParam('businessurl');
 		var likeid = event.currentTarget.id.split('-');
 		var id = likeid[1];

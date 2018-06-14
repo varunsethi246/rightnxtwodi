@@ -15,6 +15,7 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import './businessEventIcons.html';
 import '../../notifications/sendMailnNotification.js';
 
+
 Template.businessEventIcons.events({
 	'click #likeme': function(event){
 		event.preventDefault();
@@ -63,7 +64,7 @@ Template.businessEventIcons.events({
 																templateName : 'Vendor Business Page Like',
 																variables    : msgvariable,
 																}
-																console.log('inputObj:',inputObj); 
+
 																sendInAppNotification(inputObj);
 
 																var inputObj = {
@@ -84,10 +85,7 @@ Template.businessEventIcons.events({
 																'[currentDate]'	: currentDate,
 																'[businessName]': businessData.businessTitle
 														};
-																// Hi [username],
-																// Thanks for like on business [businessName].
-																// Thanks,
-																// RightNXT Team
+
 																// var inputObj = {
 																// 	notifPath	 : businessurl,
 																//     to           : vendorId,

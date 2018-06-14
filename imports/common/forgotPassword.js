@@ -1,5 +1,5 @@
 import './forgotPassword.html';
-// import './ForgotPassword.js';
+
 
 // import './ForgotPassword.html';
 

@@ -14,6 +14,7 @@ import '../../userarea/userLayout.html';
 import '../../userarea/userLayout.js';
 import '../../general/homepage/homepage.js'
 
+
 Template.adminHeader.helpers({
     'notifVal': function(){
       // var userId = Meteor.userId();
@@ -1175,7 +1176,9 @@ ViewAllNotifForm = function () {
 export { ViewAllNotifForm };
 
 ViewAllNotifsForm = function () {  
+
   BlazeLayout.render("userLayout",{content: 'ViewAllNotif'});
+
   // Blaze.render(Template.vendorLayout,document.body);
 }
 
