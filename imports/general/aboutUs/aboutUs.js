@@ -39,15 +39,18 @@ Template.aboutUs.helpers({
 		var currentURL = FlowRouter.current().path;
 		var splitUlr = currentURL.split('/');
 		var actualURL = currentURL.substring(1);
-		var welcome = GeneralContent.findOne({"url": splitUlr[1] , "tabName": "COMPANY" , "sectionHeading": "Welcome to rrightsNXT"});
+		var welcome = GeneralContent.findOne({"url": splitUlr[1] , "tabName": "COMPANY" , "sectionHeading": "Welcome to rightsNXT"});
 		return welcome;
 	},
 
 	visionData(){
 		var currentURL = FlowRouter.current().path;
+		console.log('currentURL :',currentURL);
 		var splitUlr = currentURL.split('/');
 		var actualURL = currentURL.substring(1);
+		console.log('actualURL :',actualURL);
 		var vision = GeneralContent.findOne({"url": splitUlr[1] , "tabName": "COMPANY" , "sectionHeading": "Our Vision"});
+		console.log('vision',vision);
 		return vision;
 	},
 

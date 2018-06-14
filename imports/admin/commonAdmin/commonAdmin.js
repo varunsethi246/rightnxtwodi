@@ -1175,7 +1175,7 @@ ViewAllNotifForm = function () {
 export { ViewAllNotifForm };
 
 ViewAllNotifsForm = function () {  
-  BlazeLayout.render("userLayout",{main: 'ViewAllNotif'});
+  BlazeLayout.render("userLayout",{content: 'ViewAllNotif'});
   // Blaze.render(Template.vendorLayout,document.body);
 }
 

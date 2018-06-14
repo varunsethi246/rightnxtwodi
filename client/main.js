@@ -368,7 +368,8 @@ configSettingsFunc= function () {
 	})
 }
 
-ViewAllNotifsFunc= function () {    
+ViewAllNotifsFunc= function () {
+	console.log('function');    
 	import('/imports/admin/commonAdmin/commonAdmin.js').then(function (handle) {        
 		handle.ViewAllNotifsForm();    
 	})

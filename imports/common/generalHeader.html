@@ -23,7 +23,11 @@
 			                <li class="dropdown">
 			                    <a href="#" class="dropdown-toggle notifDropdown" data-toggle="dropdown">
 			                        <i class="fa fa-bell fa-lg" aria-hidden="true"></i>
+			                    {{#if notificationZero}}
 			                        <span class="notifCountIcon notifCountIconHide" style="vertical-align: super;">{{notifcount}}</span>
+			                    {{else}}
+			                   		<span class="" style=""></span>
+			                   	{{/if}}
 			                    </a>
 			                    <ul class="dropdown-menu notif-dropdown squarenotifAngle pull-right">
 			                    <hr>
@@ -62,7 +66,11 @@
 			                <li class="dropdown">
 			                    <a href="#" class="dropdown-toggle notifDropdown" data-toggle="dropdown">
 			                        <i class="fa fa-bell fa-lg" aria-hidden="true"></i>
+			                    {{#if notificationZero}}
 			                        <span class="notifCountIcon notifCountIconHide" style="vertical-align: super;">{{notifcount}}</span>
+			                   	{{else}}
+			                   		<span class="" style=""></span>
+			                   	{{/if}}
 			                    </a>
 			                    <ul class="dropdown-menu notif-dropdown squarenotifAngle pull-right">
 			                    <hr>
@@ -71,7 +79,7 @@
 			                    <hr>
 			                      <li style="position: relative;">
 			                        <ul class="menu notifvalMenu">
-			                          	{{#if notificationZero}}
+			                        {{#if notificationZero}}
 			                          {{#each notifVal}}
 			                          <li class="innerNotifLi">
 			                            <a href="/viewVendorNotification"  class="notifContent {{statusBackground}} col-lg-12 col-md-12 col-sm-12 col-xs-12 hoverColor" id="{{id}}">
@@ -80,14 +88,14 @@
 			                            </a>
 			                           </li>
 			                           <hr>
-			                          {{/each}}
+			                        {{/each}}
 			                            {{else}}
 			                          <li class="innerNotifLi">
 
 			                            <div >No Notifications</div>
 			                           </li>
 			                            
-			                            {{/if}}
+			                        {{/if}}
 			                        </ul>
 			                      </li>
 			                      <hr>
