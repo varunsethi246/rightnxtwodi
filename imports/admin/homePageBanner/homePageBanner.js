@@ -3,55 +3,55 @@ import { Template } from 'meteor/templating';
 import { Bert } from 'meteor/themeteorchef:bert';
 import { Session } from 'meteor/session';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { BizVideoBanner } from '/imports/videoUploadClient/videoUploadBanner.js';
 
 import './homePageBanner.html';
 import '/imports/admin/commonAdmin/commonAdmin.js';
 
+Template.homePageBanner.onCreated(function() {
+    this.currentUpload = new ReactiveVar(false);
+    this.subscribe('getBizVideoBanner');
+});
 
 Template.homePageBanner.events({
 	'change #fileInputVideo'(e, template) {
 	    if (e.currentTarget.files && e.currentTarget.files[0]) {
-			// var businessLink = FlowRouter.getParam('businessLink');
-			// var bussData = Business.findOne({"businessLink":businessLink});
-	    	if(bussData.businessVideo){
-			 	Bert.alert('Only One can be upload','danger','growl-top-right');
-		    }else{
-
 		      // We upload only one file, in case
 		      // multiple files were selected
-		      const upload = BizVideo.insert({
+		    const upload = BizVideoBanner.insert({
 		        file: e.currentTarget.files[0],
 		        streams: 'dynamic',
 		        chunkSize: 'dynamic'
-		      }, false);
+		    }, false);
 
-		      upload.on('start', function () {
+		    upload.on('start', function () {
 		        template.currentUpload.set(this);
-		      });
+		    });
 
-		      upload.on('end', function (error, fileObj) {
+		    upload.on('end', function (error, fileObj) {
 		        if (error) {
 		          // alert('Error during upload: ' + error);
 		           console.log('Error during upload 1: ' + error);
 		           console.log('Error during upload 1: ' + error.reason);
 		        } else {
 		          // alert('File "' + fileObj._id + '" successfully uploaded');
-		          Bert.alert('Business Video uploaded','success','growl-top-right');
+		          Bert.alert('Home Page Video uploaded','success','growl-top-right');
 		          
-		          	Meteor.call("updateVendorBulkVideos", businessLink,fileObj._id,
+		          	Meteor.call("updateBannerVideo",fileObj._id,
 			          function(error, result) { 
 			              if(error) {
-			                  console.log ('Error Message: ' +error ); 
+			                  console.log ('Error Message: ' +error.reason ); 
 			              }else{
-								  // process.exit();
+								console.log ('success'); 
 			              }
 			        });
 		        }
 		        template.currentUpload.set(false);
-		      });
+		    });
 
-		      upload.start();
-		    }
+		    upload.start();
+		    
 	    }
 	},
 });

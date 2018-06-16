@@ -5,6 +5,8 @@ import { FilesCollection } from 'meteor/ostrio:files';
 import stream from 'stream';
 
 import S3 from 'aws-sdk/clients/s3'; // http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html
+// See fs-extra and graceful-fs NPM packages
+// For better i/o performance
 import fs from 'fs';
 
 import {S3Details} from '/imports/api/s3Details.js';
@@ -45,13 +47,14 @@ if(s3Data)
 
             // console.log('s3: ', s3);
             // Declare the Meteor file collection on the Server
-            export const BizVideo = new FilesCollection({
+            export const BizVideoBanner = new FilesCollection({
                 debug: true, // Change to `true` for debugging
-                storagePath: 'bizVideos',
-                collectionName: 'bussVideo',
+                storagePath: 'bizVideoBanner',
+                collectionName: 'bannerVideo',
                 // Disallow Client to execute remove, use the Meteor.method
                 allowClientCode: false,
-                chunkSize: 1024 * 1024,
+                streams: 'dynamic',
+                chunkSize: 'dynamic',
                 onBeforeUpload: function(file) {
                     if ( /mp4|3gp/i.test(file.extension)) {
                         // limit size to 1GB and in mp4 format
@@ -187,8 +190,8 @@ if(s3Data)
             });
 
             // Intercept FilesCollection's remove method to remove file from AWS:S3
-            const _origRemove = BizVideo.remove;
-            BizVideo.remove = function(search) {
+            const _origRemove = BizVideoBanner.remove;
+            BizVideoBanner.remove = function(search) {
                 const cursor = this.collection.find(search);
                 cursor.forEach((fileRef) => {
                     _.each(fileRef.versions, (vRef) => {

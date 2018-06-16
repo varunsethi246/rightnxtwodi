@@ -3706,3 +3706,8 @@ video::-webkit-media-controls-enclosure {
 video::-webkit-media-controls-panel {
     width: calc(100% + 30px); /* Adjust as needed */
 }
+.sidebarBustitles{
+	    width: 100%;
+    font-size: 12px;
+    padding: 2px 9px!important;
+}

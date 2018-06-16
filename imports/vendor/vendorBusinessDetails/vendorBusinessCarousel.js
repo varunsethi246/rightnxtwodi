@@ -90,6 +90,7 @@ Template.vendorBusinessCarousel.helpers({
 	    			return false;
 	    		}else{
 		    		var data = BizVideo.find({"_id":bussData.businessVideo}).fetch();
+		    		// console.log('data :',data);
 		    		if(data){
 		    			// console.log('video present');
 			    		return true;

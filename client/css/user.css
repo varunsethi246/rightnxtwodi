@@ -4212,3 +4212,20 @@ padding-left: 48px;
 	    overflow-y: scroll;
     height: 400px;
 }
+.timeLineFollowBtn{
+	background: #6bc233;;
+	color: white;
+	    line-height: 26px;
+    border: 1px solid #ccc;
+    padding: 7px;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    color: #4e4f51;
+    font-family: 'PROXIMANOVA-REGULAR';
+}
+.rightBtn .timeLineFollowBtn:hover {
+	color: white;
+}

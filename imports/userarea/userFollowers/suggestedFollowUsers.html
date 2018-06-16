@@ -1,6 +1,6 @@
 <template name="suggestedFollowUsers">
 	 <div class="firstDiv col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <p class="friendTittle">Suggested to Follow.</p>
+      <p class="friendTittle">Suggested to Followddd.</p>
       <ul class="friendL">
       {{#each  userSuggestionData}}
         <li id="{{_id}}">
@@ -17,18 +17,18 @@
     </div>
 
     <div class="secondDiv col-lg-12 col-md-12 col-sm-12 col-xs-12">
-      <p class="friendTittle">Suggested to Follow.</p>
+      <p class="friendTittle">Suggested to Followsss.</p>
       <ul class="friendL">
       {{#each  userSuggestionrender}}
         <li id="{{id}}">
-          <div class="photoSugg"><img src="{{UsersuggestionImg}}" alt="" class="userImg"></div>
-            <div class="suggInfoTimeline">
+          <div class="photoSugg col-lg-2 col-md-1 col-sm-1 col-xs-2"><img src="{{UsersuggestionImg}}" alt="" class="userImg"></div>
+            <div class="suggInfoTimeline col-lg-8 col-md-10 col-sm-10 col-xs-8">
                 <h5>{{SuggestionInt}}</h5>
                 
                 <p>{{userSuggestionRev}} Reviews , {{userSuggestionFol}} Followers</p>
                 
             </div>
-            <div class="follwSugg"><a> <i class="fa fa-user-plus followI" aria-hidden="true" title="Follow"></i> </a></div>
+            <div class="follwSugg col-lg-2 col-md-1 col-sm-1 col-xs-2 pull-right"><a> <i class="fa fa-user-plus followI" aria-hidden="true" title="Follow"></i> </a></div>
             <div class="clear"></div>
         </li>
       {{/each}}

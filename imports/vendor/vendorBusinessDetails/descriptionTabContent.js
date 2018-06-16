@@ -1271,6 +1271,8 @@ Template.userReviewTemplate.events({
 		$('.bus-page-edit-outerFrnd1-'+id).css('display','inline-block');
 		$('.tagedFrndDivPre-'+id).css('display','none');
 		$('.tagFrndUlFrieldList').css('display','none');
+		$('.userRevTempImage1').css('display','none');
+		$('.userCommRevTemp').css('display','none');
 
 		
 
@@ -1345,6 +1347,8 @@ Template.userReviewTemplate.events({
 		$('.tagFrnd').css('display','none');
 		$('.tagedFrndDivPre-'+id).css('display','block');
 		$('.reviewImages-'+id).css('display','none');
+		$('.userRevTempImage1').css('display','block');
+		$('.userCommRevTemp').css('display','block');
 		tagedFriends = [];
 	},
 	'keypress .editReviewTextArea': function(event){
@@ -1447,6 +1451,8 @@ Template.userReviewTemplate.events({
 						$('.tagFrnd').css('display','none');
 						$('.tagedFrndDivPre-'+id).css('display','block');
 						$('.reviewImages-'+id).css('display','none');
+						$('.userRevTempImage1').css('display','block');
+						$('.userCommRevTemp').css('display','block');
 						tagedFriends = [];
 						// console.log('tagedFriends:',tagedFriends);
 						

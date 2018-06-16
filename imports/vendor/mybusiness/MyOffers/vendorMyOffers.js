@@ -47,6 +47,12 @@ function printDiv()
 
 Template.vendorOffer1.onRendered(function(){
 	$('.changeDate').val(moment(new Date()).add(1, 'days').format('YYYY-MM-DD'));
+	$("#usrtimeFrom").datepicker({
+		    changeMonth: true,
+		    changeYear: true,
+		    minDate: today // set the minDate to the today's date
+		    // you can add other options here
+		});
 });
 
 Template.vendorMyOffers.helpers({
@@ -977,6 +983,15 @@ Template.vendorOffer1.helpers({
 });
 
 Template.vendorOffer1.events({
+	'click #usrtimeFrom': (event)=>{
+		// $( "#usrtimeFrom" ).datepicker({ minDate: today});
+		$("#usrtimeFrom").datepicker({
+		    changeMonth: true,
+		    changeYear: true,
+		    minDate: today // set the minDate to the today's date
+		    // you can add other options here
+		});
+	},
 	'change .businessPhotofiles' : function(event){
 		var $this = $(event.target);
 		$this.parent().parent().find('output').empty();

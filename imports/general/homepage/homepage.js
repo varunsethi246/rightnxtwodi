@@ -33,7 +33,8 @@ Template.anonymousUserLayout.onCreated(function () {
   this.subscribe('userfunction');
   this.subscribe('allCity');
   this.subscribe('area');
-  // this.subscribe('userProfileS3OneUser');
+  this.subscribe('homeBannerVideo');
+  this.subscribe('getBizVideoBanner');
   this.subscribe('categories');
   this.subscribe('notification');
   this.subscribe('notificationTemplate');

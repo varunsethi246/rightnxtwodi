@@ -391,9 +391,9 @@ Template.suggestedFollowUsers.helpers ({
 		var followArray    = [];
 		var currentUserObj = Meteor.users.findOne({"_id":userId});
 		var userIdArr =[userId];
-		// followI
 
 		var followUserData = FollowUser.find({"userId":userId}).fetch();
+		console.log('followUserData :',followUserData);
 		if(followUserData && followUserData.length>0){
 			for(i=0;i<followUserData.length;i++){
 				userIdArr.push(followUserData[i].followUserId);
@@ -403,7 +403,6 @@ Template.suggestedFollowUsers.helpers ({
 			if(currentUserObj){
 				userCity = currentUserObj.profile.city;
 				var otherUsersData  = Meteor.users.find({"profile.city":userCity, "_id": { $nin: userIdArr }, "roles":{$nin: [ 'admin', 'Vendor']}}).fetch();
-				// console.log("otherUsersData: ",otherUsersData);
 				
 				if(otherUsersData){
 					for(var i=0;i<otherUsersData.length;i++){
@@ -435,8 +434,10 @@ Template.suggestedFollowUsers.helpers ({
 			}
 			var url = FlowRouter.current().path;
 			var checkIdExists = url.split('/');
-			if(checkIdExists[2] != '' && checkIdExists[2]){
-				var returnUserArray = userArray.filter(function(el) { return el._id != checkIdExists[2]; });
+			if(checkIdExists[1] != '' && checkIdExists[1]){
+				var returnUserArray = userArray.filter(function(el) { 
+					return el._id != checkIdExists[2]; 
+				});
 			}
 			return returnUserArray;
 	},

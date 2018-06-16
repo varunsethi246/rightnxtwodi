@@ -66,10 +66,14 @@ import '../imports/api/s3Details.js';
 
 
 import { BizVideo } from '/imports/videoUploadserver/videoUpload.js';
+import { BizVideoBanner } from '/imports/videoUploadserver/videoUploadBanner.js';
 import { FollowUser } from '/imports/api/userFollowMaster.js';
 
 Meteor.publish('getBizVideo', function() {
     return BizVideo.find({}).cursor;
+});
+Meteor.publish('getBizVideoBanner', function() {
+    return BizVideoBanner.find({}).cursor;
 });
 
 

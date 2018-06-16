@@ -3,14 +3,17 @@ import '../../admin/commonAdmin/adminLayout.html';
 import '../../admin/commonAdmin/adminSidebar.html';
 import '../../admin/commonAdmin/adminHeader.html';
 import '../../admin/commonAdmin/adminFooter.html';
+import '/imports/common/loading.html';
 import '../mainBusinessSearch/mainBusinessSearch.js';
 
-
+import { BizVideoBanner } from '/imports/videoUploadClient/videoUploadBanner.js';
+import { HomeBannerVideo } from '/imports/api/homePageVideo.js';
 import { Area } from '/imports/api/masterData/areaMaster.js';
 import { City } from '/imports/api/masterData/cityMaster.js';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
-Meteor.subscribe('vendorBusiness');
+// Meteor.subscribe('vendorBusiness');
+// Meteor.subscribe('homeBannerVideo');
 
 var options = {
   keepHistory: 0,
@@ -57,6 +60,21 @@ Template.homepageBanner.onRendered(function(){
 });
 
 Template.homepageBanner.helpers({
+
+  bannerVideo: function() {
+      var bussData = HomeBannerVideo.find({}).fetch();
+      if(bussData.length > 0){
+        console.log('bussData :',bussData);
+        var data = BizVideoBanner.find({"_id":bussData[0].bannerLink}).fetch();
+          if(data){
+            console.log('data :',data);
+            return data;
+          }else{
+            return false;
+          }
+      }
+    },
+
   shwCityAndArea(){
       var currentCityList=citySearch1.getData();
       var currentAreaList = [];
