@@ -483,7 +483,7 @@ Template.addReviewTemplate.events({
 	    $('.publishReview').show();
 		$('.newReviewMsg').css('display','none');
 		$('.passwordWrongSpan').css('display','none');
-
+		$('.openReviewBox').hide();
 	},	
 
 	'click .uploadImg': function(event){

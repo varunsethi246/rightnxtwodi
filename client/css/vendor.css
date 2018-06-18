@@ -2618,7 +2618,8 @@ border:1px solid #5cb85c
 }
 
 .uploadPhotoSize {
-height:217px;
+/*height:217px;*/
+height:150px;
 overflow:hidden;
 padding:2%
 }

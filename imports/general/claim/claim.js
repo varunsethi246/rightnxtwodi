@@ -564,7 +564,7 @@ Template.claimOtp.events({
 
 // export { claimForm };
 claimForm = function () {  
-  BlazeLayout.render("generalLayoutWithImage" ,{generalcontent: 'claim'});
+  BlazeLayout.render("generalLayout" ,{generalcontent: 'claim'});
   // Blaze.render(Template.claim,document.body);
 }
 

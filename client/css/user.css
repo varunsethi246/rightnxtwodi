@@ -3419,8 +3419,9 @@ height:250px
 }
 
 .maxopenReviewHeight {
-/* height:365px */
-display: flow-root !important;
+ height:365px ;
+display: block;
+/*display: flow-root !important;*/
 }
 
 .inputReviewImg {

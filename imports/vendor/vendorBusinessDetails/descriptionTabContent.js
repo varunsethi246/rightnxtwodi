@@ -1349,6 +1349,8 @@ Template.userReviewTemplate.events({
 		$('.reviewImages-'+id).css('display','none');
 		$('.userRevTempImage1').css('display','block');
 		$('.userCommRevTemp').css('display','block');
+		$('#searchFrndsEdit').val('');
+
 		tagedFriends = [];
 	},
 	'keypress .editReviewTextArea': function(event){
@@ -1414,6 +1416,7 @@ Template.userReviewTemplate.events({
 											$('.publishReview').show();
 											$('.openReviewBox').hide();
 											$('.reviewImages').hide();
+											$('#searchFrndsEdit').val('');
 											event.target.review.value	= '';
 							              }
 							        });
@@ -1453,6 +1456,8 @@ Template.userReviewTemplate.events({
 						$('.reviewImages-'+id).css('display','none');
 						$('.userRevTempImage1').css('display','block');
 						$('.userCommRevTemp').css('display','block');
+						$('#searchFrndsEdit').val('');
+
 						tagedFriends = [];
 						// console.log('tagedFriends:',tagedFriends);
 						

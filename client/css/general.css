@@ -2057,12 +2057,14 @@ box-shadow:1px 1px 2px #aaa
 }
 
 .receipt h3 {
-font-family:'PROXIMANOVA-REGULAR';
-color:#fff;
-background-color:#f89b1c;
-margin-left:3%;
-padding-top:2%;
-padding-bottom:2%
+    font-family: 'PROXIMANOVA-REGULAR';
+    color: #fff;
+    background-color: antiquewhite;
+    margin-left: 3%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border: 2px solid #f89b1c;
+    margin-bottom: 10px;
 }
 
 .receipt h4 {
