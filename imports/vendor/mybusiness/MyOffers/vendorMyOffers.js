@@ -46,13 +46,28 @@ function printDiv()
 }
 
 Template.vendorOffer1.onRendered(function(){
-	$('.changeDate').val(moment(new Date()).add(1, 'days').format('YYYY-MM-DD'));
-	$("#usrtimeFrom").datepicker({
-		    changeMonth: true,
-		    changeYear: true,
-		    minDate: today // set the minDate to the today's date
-		    // you can add other options here
-		});
+	// $('.changeDate').val(moment(new Date()).add(1, 'days').format('YYYY-MM-DD'));
+	// $("#usrtimeFrom").datepicker({
+	// 	    changeMonth: true,
+	// 	    changeYear: true,
+	// 	    minDate: new Date() // set the minDate to the today's date
+	// 	    // you can add other options here
+	// 	});
+	var dates = $("#from").datepicker({
+	    minDate: "0",
+	    maxDate: "+2Y",
+	    defaultDate: "+1w",
+	    dateFormat: 'mm/dd/yy',
+	    numberOfMonths: 1,
+	    onSelect: function(date) {
+	        for(var i = 0; i < dates.length; ++i) {
+	            if(dates[i].id < this.id)
+	                $(dates[i]).datepicker('option', 'maxDate', date);
+	            else if(dates[i].id > this.id)
+	                $(dates[i]).datepicker('option', 'minDate', date);
+	        }
+	    } 
+	});
 });
 
 Template.vendorMyOffers.helpers({
@@ -155,36 +170,53 @@ Template.paymentSuccess.helpers({
 
 });
 Template.vendorOffer1.helpers({
-	'newdesc':function(){
-		var dealdesOne = Session.get('dealDescriptionvalOne')
-		if (dealdesOne == 'Percent Off') {
-			var dealdes = 'X% off on your order';
-			return dealdes;
-		}else if(dealdesOne == 'Price Off'){
-			var dealdes = 'Rs.X off on your total bill (Eg. Any Salon Service)';
-			return dealdes;
-		}
-		else if(dealdesOne == 'Fixed Price'){
-			var dealdes = 'Rs. X for our fixed price menu(Mayur Thali)';
-			return dealdes;
-		}else if(dealdesOne == 'Free Item'){
-			var dealdes = 'X free glass of juice with every Entrée before 7';
-			return dealdes;
-		}else if(dealdesOne == 'Create Your own Deal'){
-			var dealdes = 'Create your own Deal';
-			return dealdes;
-		}
-		else{
-			return false;
-		}
-	}
+	// 'newdesc':function(){
+	// 	var dealdesOne = Session.get('dealDescriptionvalOne');
+
+	// 	console.log('dealdesOne get:',dealdesOne);
+	// 	// var dealdesOne = $('.dealx').val();
+	// 	if (dealdesOne == 'Percent Off') {
+	// 		var dealdes = 'X% off on your order';
+	// 	console.log('dealdes :',dealdes);
+
+	// 		return dealdes;
+	// 	}else if(dealdesOne == 'Price Off'){
+	// 		var dealdes = 'Rs.X off on your total bill (Eg. Any Salon Service)';
+	// 		return dealdes;
+	// 	}
+	// 	else if(dealdesOne == 'Fixed Price'){
+	// 		var dealdes = 'Rs. X for our fixed price menu(Mayur Thali)';
+	// 		return dealdes;
+	// 	}else if(dealdesOne == 'Free Item'){
+	// 		var dealdes = 'X free glass of juice with every Entrée before 7';
+	// 		return dealdes;
+	// 	}else if(dealdesOne == 'Create Your own Deal'){
+	// 		var dealdes = 'Create your own Deal';
+	// 		return dealdes;
+	// 	}
+	// 	else{
+	// 		return false;
+	// 	}
+	// }
 });
 Template.vendorMyOffers.events({
 	'click .dealx':function(event){
 		// var dealDescriptionval = event.target.dealTemplate.value;
 		var dealDescriptionval = $('.dealx').val();
-		console.log('dealDescriptionval :', dealDescriptionval);
-		var dealDescriptionvalone = Session.set('dealDescriptionvalOne',dealDescriptionval);
+		if (dealDescriptionval == 'Percent Off') {
+			var dealdes = 'X% off on your order';
+		}else if(dealDescriptionval == 'Price Off'){
+			var dealdes = 'Rs.X off on your total bill (Eg. Any Salon Service)';
+		}else if(dealDescriptionval == 'Fixed Price'){
+			var dealdes = 'Rs. X for our fixed price menu(Mayur Thali)';
+		}else if(dealDescriptionval == 'Free Item'){
+			var dealdes = 'X free glass of juice with every Entrée before 7';
+		}else if(dealDescriptionval == 'Create Your own Deal'){
+			var dealdes = 'Create your own Deal';
+			}
+		$('#dealHeadline').val(dealdes);
+		console.log('$#dealHeadline).val(dealdes);',$('#dealHeadline').val(dealdes));
+		// var dealDescriptionvalone = Session.set('dealDescriptionvalOne',dealDescriptionval);
 		
 	},
 	'click .viewModal': function(event){
@@ -331,7 +363,7 @@ Template.vendorMyOffers.events({
 								"expirationFromDate" 	: event.target.expirationFromDate.value,
 								"expirationToDate" 		: event.target.expirationToDate.value,
 								"legalNotices"			: event.target.legalNotices.value,
-								"offerStatus"			: 'new',
+								"offerStatus"			: 'Payment Pending',
 								"numOfMonths"			: numOfMonths,
 								"offerImage"			: imgId,
 							};
@@ -446,7 +478,7 @@ Template.vendorMyOffers.events({
 				"expirationFromDate" 	: event.target.expirationFromDate.value,
 				"expirationToDate" 		: event.target.expirationToDate.value,
 				"legalNotices"			: event.target.legalNotices.value,
-				"offerStatus"			: 'new',
+				"offerStatus"			: 'Payment Pending',
 				"numOfMonths"			: numOfMonths,
 				"offerImage"			: imgId,
 			};
@@ -983,20 +1015,20 @@ Template.vendorOffer1.helpers({
 });
 
 Template.vendorOffer1.events({
-	'click #usrtimeFrom': (event)=>{
-		// $( "#usrtimeFrom" ).datepicker({ minDate: today});
-		$("#usrtimeFrom").datepicker({
-		    changeMonth: true,
-		    changeYear: true,
-		    minDate: today // set the minDate to the today's date
-		    // you can add other options here
-		});
-	},
+	// 'click #usrtimeFrom': (event)=>{
+	// 	// $( "#usrtimeFrom" ).datepicker({ minDate: today});
+	// 	$("#usrtimeFrom").datepicker({
+	// 	    changeMonth: true,
+	// 	    changeYear: true,
+	// 	    minDate: new Date() // set the minDate to the today's date
+	// 	    // you can add other options here
+	// 	});
+	// },
 	'change .businessPhotofiles' : function(event){
 		var $this = $(event.target);
 		$this.parent().parent().find('output').empty();
 		$this.parent().next().find('.drag').hide();
-		$this.parent().find('input[name="choosePic"]').css('margin-top','45%');
+		// $this.parent().find('input[name="choosePic"]').css('margin-top','45%');
 		var imageId = $this.parent().parent().find('output').attr('id');
 		files = event.target.files; // FileList object\
 		// Loop through the FileList and render image files as thumbnails.
@@ -1015,8 +1047,8 @@ Template.vendorOffer1.events({
 		      return function(e) {
 		        // Render thumbnail.
 		        var span = document.createElement('span');
-		        span.innerHTML = ['<img class="thumbnail draggedImg imgVendorSpan" src="', e.target.result,
-		                          '" title="', escape(theFile.name), '"/><i class="pull-right fa fa-times-circle cursorPointer" id="imgVendorSpan" aria-hidden="true"></i>'].join('');
+		        span.innerHTML = ['<i class="pull-right fa fa-times-circle cursorPointer" id="" aria-hidden="true"></i><img class="thumbnail draggedImg imgVendorSpan" src="', e.target.result,
+		                          '" title="', escape(theFile.name), '"/>'].join('');
 		        document.getElementById(imageId).insertBefore(span, null);
 		      };
 		    })(f); //end of onload
@@ -1213,14 +1245,40 @@ Template.vendorOffer2.events({
 });
 
 Template.receipt.helpers({
+	paymentcheck(){
+		var invNum 			= parseInt(FlowRouter.getParam('invoiceNumber'));
+
+		var paymentDetails 	= Payment.findOne({'invoiceNumber':invNum,"orderType":'Offer'});
+		console.log('paymentDetails :',paymentDetails);
+		if(paymentDetails){
+			var paymentStatusOne = paymentDetails.paymentStatus;
+			if (paymentStatusOne == 'unpaid') {
+		console.log('paymentDetails true:',paymentStatusOne);
+
+				return true;
+
+			}else{
+		console.log('paymentDetails false:',paymentStatusOne);
+				
+				// var PaymentSuccess = 'Payment Successful';
+				return false;
+			}
+		}
+	},
 	receiptDetails(){
 		var invNum 			= parseInt(FlowRouter.getParam('invoiceNumber'));
 		var businessLink 	= FlowRouter.getParam('businessLink');
 		var businessDetails = Business.findOne({"businessLink":businessLink, "status":"active"});
 		var companyDetails 	= CompanySettings.findOne({'companyId':101});
 		var paymentDetails 	= Payment.findOne({'invoiceNumber':invNum,"orderType":'Offer'});
-
+		
 		if(paymentDetails){
+			var paymentStatusOne =paymentDetails.paymentStatus;
+			if (paymentStatusOne == 'unpaid') {
+				var PaymentSuccess = 'Payment Faild';
+			}else{
+				var PaymentSuccess = 'Payment Successful';
+			}
 			var offers = [];
 			var totalPrice = 0;
 			for( var i = 0 ; i< paymentDetails.offers.length ; i++)
@@ -1237,6 +1295,7 @@ Template.receipt.helpers({
 					totalAmount    : parseInt(offerObj.numOfMonths) * parseInt(paymentDetails.offerPricePerMonth),
 				}
 				totalPrice     = (totalPrice + offers[i].totalAmount);
+				// var statusPayment = Offers.findOne({})
 			}
 			
 			var dateTime = paymentDetails.invoiceDate.toLocaleString();
@@ -1250,7 +1309,7 @@ Template.receipt.helpers({
 				paymentMode 			: paymentDetails.modeOfPayment,
 				totalAmount				: paymentDetails.totalAmount,
 				totalPrice				: totalPrice,
-				transactionMsg 			: 'Payment Successful'
+				transactionMsg 			: PaymentSuccess
 			}
 			return data;
 		}

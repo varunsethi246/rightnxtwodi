@@ -22,8 +22,14 @@ padding:0 0 20px
 float:left;
 padding:40px 70px
 }
-
-
+.locIcn{
+        margin-top: 9%!important;
+}
+.businessPhotofiles{
+        height: 40px;
+    z-index: 100;
+    margin-top: 5px;
+}
 
 .section1-head h3,.section5-head h3,.dowApp a {
 font-size:14px;
@@ -1166,6 +1172,11 @@ top: 54%
 }
 #businessPhotofiles{
 margin-left: 0px;
+}
+#businessPhotofiles{
+    height: 39px;
+    margin-top: 2px;
+    z-index: 100;
 }
 .modalforgetpass{
     height: 74%;

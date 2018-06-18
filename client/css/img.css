@@ -28,13 +28,21 @@ overflow-y:auto
 }
 
 .draggedImg {
+    height: 190px;
+    width: 160px;
+    border: 1px solid #ddd;
+    padding: 6px;
+    margin: 6px;
+}
+
+/*.draggedImg {
 height:150px;
 width:120px;
 border:1px solid #ddd;
 padding:6px;
 margin:6px
 }
-
+*/
 .draggedVid {
 border:1px solid #ddd;
 padding:6px;

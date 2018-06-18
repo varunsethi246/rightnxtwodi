@@ -2518,9 +2518,12 @@ left:31px
 }
 
 .myBusinessAdmin .uploadPhotoSize {
-width:276px;
+/*width:276px;
 height:217px;
-overflow:hidden
+overflow:hidden*/
+    height: 150px!important;
+    overflow: hidden!important;
+    padding: 2%!important;
 }
 
 .vEnqModalC {

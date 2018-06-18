@@ -3288,6 +3288,20 @@ color:#4e4f51
 }
 
 .uploadButton1 {
+    background-color: #f89b2fbf;
+    border: 1px solid #f89b2f45;
+    box-sizing: content-box;
+    color: #080808;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    height: 33px;
+    width: 53%;
+    margin-left: 21px;
+    position: absolute;
+    top: 65%;
+}
+/*.uploadButton1 {
 background-color: #f89b2f;
     border: 1px solid #ccc;
     box-sizing: content-box;
@@ -3297,7 +3311,7 @@ background-color: #f89b2f;
     font-size: 14px;
     height: 33px;
 }
-
+*/
 .upldTxtImg .fileName {
 font-size:14px
 }
