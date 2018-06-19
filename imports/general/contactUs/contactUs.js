@@ -28,6 +28,66 @@ Template.contactUs.helpers({
 });
 
 Template.contactUs.events({
+	'keydown #contactMblNumber': function(e){
+      if ($.inArray(e.keyCode, [8, 9, 27, 13]) !== -1 ||
+             // Allow: Ctrl+A, Command+A
+            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true))||
+            (e.keyCode === 86 && (e.ctrlKey === true || e.metaKey === true))||
+            (e.keyCode === 67 && (e.ctrlKey === true || e.metaKey === true))||
+             // Allow: home, end, left, right, down, up
+            (e.keyCode >= 35 && e.keyCode <= 40)) {
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105 || e.keyCode===190 || e.keyCode===46 || e.keyCode===110)) {
+            e.preventDefault();
+        }
+   },
+   'focusout #contactMblNumber': function(){
+         var myFuncVar = $("#contactMblNumber").val();
+         var nameRegex = /^\d+$/;
+         var nameRegexLandLine = /^([0-9\-\s]{2,5}[0-9]{6,8})$/;
+         // var mylandLine = $("#businessLandline").val();
+
+        if(myFuncVar){
+          // 1. condition
+          if(myFuncVar){
+            if(myFuncVar){
+              if(myFuncVar.length<10){
+                $(".SpanMobileErrors").addClass("ErrorRedText");
+                $(".businessMobileC").addClass("SpanLandLineRedBorder");
+                $(".SpanMobileErrors").text("Please Enter Valid 10 digit Mobile Number");
+              }
+            }
+          }
+          if(!myFuncVar.match(nameRegexLandLine)){
+            $(".SpanMobileErrors").removeClass("ErrorRedText");
+            $(".businessMobileC").removeClass("SpanLandLineRedBorder");
+            $(".SpanMobileErrors").text("");
+          }
+          // 2. condition
+          if(myFuncVar){
+            if(myFuncVar.length<10){
+              $(".SpanMobileErrors").addClass("ErrorRedText");
+              $(".businessMobileC").addClass("SpanLandLineRedBorder");
+              $(".SpanMobileErrors").text("Please Enter Valid 10 digit Mobile Number");
+            }
+            if(myFuncVar.length==10){
+                $(".SpanMobileErrors").removeClass("ErrorRedText");
+                $(".businessMobileC").removeClass("SpanLandLineRedBorder");
+                $(".SpanMobileErrors").text("");
+            }
+          }
+          // 3. condition
+        }
+        //Condition 4
+        if(!myFuncVar){
+          $(".SpanMobileErrors").addClass("ErrorRedText");
+          $(".businessMobileC").addClass("SpanLandLineRedBorder");
+          $(".SpanMobileErrors").text("Please Enter Valid 10 digit Mobile Number");
+        }
+    },
 	'focusout input[name="name"]': function(event){
 		if($(event.target).val() != ''){
 			$('#name-error').html('Name should only contains uppercase, lowercase letters and space.');
@@ -86,20 +146,20 @@ Template.contactUs.onRendered(function(){
     	return regexpr.test(value);
 	}, "Please enter a valid email address.");
 	
-	$.validator.addMethod("regx12", function(value, element, regexpr) {          
-    	return regexpr.test(value);
-	}, "Please enter a valid mobile number.");
+	// $.validator.addMethod("regx12", function(value, element, regexpr) {          
+ //    	return regexpr.test(value);
+	// }, "Please enter a valid mobile number.");
 	
 	$("#contactUsFrom").validate({
 	 	rules: {
 	        name: {
 	            required: true,
-	            regx10: /^[A-za-z']+( [A-Za-z']+)*$/,
+	            regx10: /^[A-za-z'\s]+( [A-Za-z'\s]+)*$/,
 	        },
-	        phoneNo: {
-	        	// required: true,
-	        	regx12: /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/,	
-	        },
+	        // phoneNo: {
+	        // 	// required: true,
+	        // 	regx12: /^(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$/,	
+	        // },
 	        email: {
 	        	required: true,
 	        	regx11: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, 

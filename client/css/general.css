@@ -316,7 +316,20 @@ color:#f89b1c!important;
 border-bottom:1px solid #000;
 border-radius:0
 }
-
+.aboutNavbar .FAQTAB > li.active > a {
+background-color:#fff!important;
+color:#f89b1c!important;
+border-bottom:1px solid #000!important;
+border-radius:0
+}
+.FAQTAB>li.active>a, .FAQTAB>li.active>a:hover, .FAQTAB>li.active>a:focus, .FAQTAB>li>a{
+	/*border-style: none!important;*/
+	/*border: 1px solid #a5a5a500!important;*/
+	    border-radius: 0;
+    border-left: 0px!important;
+    border-top: 0px!important;
+    border-right: 0px!important;
+}
 .aboutNavbar .nav-pills > li > a {
 color:#4e4f53!important;
 border-radius:0

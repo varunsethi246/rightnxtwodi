@@ -7,16 +7,17 @@
 					<h2>Contact us</h2>
 				  	<div class="form-group form_group">
 				    	<label for="name">Name<span class="careerColorOrange">*</span></label>
-				    	<input type="text" class="form-control" name="name" pattern="[a-zA-Z0-9 ]+">
+				    	<input type="text" class="form-control" name="name" pattern="[a-zA-Z0-9\s\'\.]+">
 				  	</div>
 				  	<div class="form-group form_group">
 				    	<label for="email">Email<span class="careerColorOrange">*</span></label>
 				    	<input type="email" class="form-control" id="email" name="email">
 				  	</div>
 				  	<div class="form-group form_group">
-				    	<label for="mobile-no">Phone number</label>
-				    	<input type="number" value="+91" class="form-control no-spinner" name="phoneNo">
+				    	<label for="mobile-no">Mobile Number</label>
+				    	<input type="number" id="contactMblNumber" value="+91" class="form-control no-spinner" name="phoneNo" minlength="10" maxlength="10">
 				  	</div>
+				  	<span class="SpanMobile"></span>
 				  	<div class="form-group form_group">
 				    	<label>How can we help you?<span class="careerColorOrange">*</span></label>
 				    	<select class="form-control" name="howCanWeHelpYou" required="true">
@@ -47,8 +48,8 @@
 					<a href="/claim/{{getCityName}}"><button type="submit" class="btn btn-default">Learn More</button></a>
 				</div>
 			</div>
-		{{else}}
-			{{> loading}}
+		<!-- {{else}}
+			{{> loading}} -->
 		{{/if}}
 		</div>
 	</div>

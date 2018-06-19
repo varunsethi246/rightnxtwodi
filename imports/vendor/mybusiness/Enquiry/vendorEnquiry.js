@@ -226,7 +226,7 @@ Template.vendorEnquiry.helpers({
 					}
 				}else{
 					var data = "No Active Data Available";
-					console.log('data :',data);
+					// console.log('data :',data);
 
 					return data;
 				}
@@ -244,18 +244,24 @@ Template.vendorEnquiry.helpers({
 	},
 	vendorEnquiryCount: function(){
 		var businessLink = FlowRouter.getParam('businessLink');
-		var businessObj = Business.findOne({"businessLink":businessLink,"status": "active"});
-		var blockedUserArray;
-		if(businessObj){
-			blockedUserArray = businessObj.blockedUsers;
-		}
-		var enqCount = Enquiry.find({"businessid":businessObj._id,'enquirySentBy': { $nin: blockedUserArray }}).count();	
-				
+		// console.log('businessLink :',businessLink);
+		if (businessLink) {
 
-		var data = {
-			vendorcount : enqCount,	
+			var businessObj = Business.findOne({"businessLink":businessLink,"status": "active"});
+			
+			var blockedUserArray;
+			if(businessObj){
+				// console.log('businessObj :',businessObj);
+				blockedUserArray = businessObj.blockedUsers;
+			}
+			var enqCount = Enquiry.find({"businessid":businessObj._id,'enquirySentBy': { $nin: blockedUserArray }}).count();	
+					
+
+			var data = {
+				vendorcount : enqCount,	
+			}
+			return data;
 		}
-		return data;
 	},
 	vendorEnquiryDetails:function (event) {
 		if(Session.get("EnqIDSes")){
@@ -288,6 +294,7 @@ Template.vendorEnquiry.helpers({
 					}
 				}
 			}
+			// $('.vEnqFormImgOne').animate({ scrollTop: $(document).height() }, 1);
 			return enqData;			
 		}
 	},
@@ -406,7 +413,9 @@ Template.vendorEnquiry.events({
 		var enquiryPhoto = '';
 		var enquiryCommentNew = $('.vEnqFormTextarea').val();
        	var id = event.currentTarget.id;
+       	console.log('id :',id);
        	var enquirySentBy = $(event.currentTarget).attr("data-enquirySentBy");
+       	console.log('enquiryName :',enquirySentBy);
        	var businessLink = $(event.currentTarget).attr("data-businessLink");
        	console.log('hi');
 		var elem = $(event.currentTarget).attr('.vEnqFormImgOne');
@@ -439,13 +448,16 @@ Template.vendorEnquiry.events({
 									//============================================================
 									var admin = Meteor.users.findOne({'roles':'admin'});
 								    if(admin){
+								    	console.log('admin:',admin);
 								    	var adminId = admin._id;
 								    }
 									var businessData = Business.findOne({"businessLink":businessLink});
 									if(businessData){
 										var vendorId = businessData.businessOwnerId;
+										console.log('vendor: ',vendorId);
 				        				var vendorDetail = Meteor.users.findOne({'_id':vendorId});
 				          	  			var userId = enquirySentBy;
+				          	  			cosnole.log('userId:',userId);
 										var userDetail = Meteor.users.findOne({'_id':userId});
 				        				if(vendorDetail&&userDetail){
 
@@ -515,11 +527,12 @@ Template.vendorEnquiry.events({
 
 					if(businessData){
 						var vendorId = businessData.businessOwnerId;
+						console.log('vendorId :',vendorId);
         				var vendorDetail = Meteor.users.findOne({'_id':vendorId});
 
 						// var userId = Meteor.userId();
 						var userId = enquirySentBy;
-							
+							console.log('userId :',userId);
         				var userDetail = Meteor.users.findOne({'_id':userId});
         				
         				if(vendorDetail&&userDetail){

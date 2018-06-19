@@ -453,11 +453,17 @@ Template.claim.events({
 			}
 		}else{
 			$('#loginModal').modal('show');
-			$('.loginScreen').hide();
-			$('.signupScreen').hide();
-			$('.thankyouscreen').hide();
-			$('.genLoginSignup').show();
-			$('.signUpBox').hide();	
+			// $('.loginScreen').hide();
+			// $('.signupScreen').hide();
+			// $('.thankyouscreen').hide();
+			// $('.genLoginSignup').show();
+			// $('.signUpBox').hide();	
+
+					$('.loginScreen').hide();
+		$('.genLoginSignup').hide();
+		$('.signupScreen').hide();
+		$('.thankyouscreen').hide();
+		$('.signUpBox').show();
 		}
 	},
 	'click .pagenumbers': function(event){
