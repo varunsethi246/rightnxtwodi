@@ -3715,3 +3715,6 @@ video::-webkit-media-controls-panel {
     font-size: 12px;
     padding: 2px 9px!important;
 }
+.hoverEnqVendor:hover {
+    background: #ccc!important;
+}

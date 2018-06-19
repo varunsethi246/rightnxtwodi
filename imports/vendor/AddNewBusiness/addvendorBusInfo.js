@@ -132,12 +132,18 @@ Template.addVendorBusInfo.events({
    'keydown .businessAbtBus':function(event){
       setTimeout(function() {
          var aboutBus = $('.businessAbtBus').val();
+         console.log('aboutBus :',aboutBus);
          if(aboutBus){
             var aboutBuslen = aboutBus.length;
             var remainText = 2500- aboutBuslen;
             $('.textRemain').text(remainText + ' Characters Remaining');
+            if (aboutBuslen > 150) {
+               $(".SpanbusinessAbtBus").removeClass("ErrorRedText");
+               $(".businessAbtBus").removeClass("SpanLandLineRedBorder");
+               $( ".SpanbusinessAbtBus" ).text('');
+            }
          }else{
-            $('.textRemain').text('2500 Characters Remaining');
+            $('.textRemain').text('2500 Characters Remaining');   
          }
       }, 1);
    },

@@ -60,7 +60,7 @@ Template.vendorSignUpForm.events({
             console.log(error);
           }else{
             // location.reload();
-            $('#loginModal').modal('hide'); 
+            $('#loginModal').hide(); 
             FlowRouter.go("/LoginOTP");
             
           }

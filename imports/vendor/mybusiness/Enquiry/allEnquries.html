@@ -1,5 +1,5 @@
 <template name="allEnquries">
-	<div  class="row vEnqRowTwo {{vendorArchive}}Enq {{vendorReadFlag}}Enq vEnqAllC" id={{_id}}>
+	<div  class="row vEnqRowTwo {{vendorArchive}}Enq {{vendorReadFlag}}Enq vEnqAllC hoverEnqVendor" id={{_id}}>
 		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 checkEnq">
 			<input type="checkbox" class="EnqListCheckboxAll EnqListCheckboxNew commonCheckbox" id="{{_id}}">
 		</div>
@@ -9,10 +9,10 @@
 					<img src="{{userProfilePic}}">
 				</span>
 			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+			<div class="col-lg-5 col-md-4 col-sm-4 col-xs-4">
 				<div class="vEnqUserAdj">{{enquiryName}}</div>
 			</div>
-			<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+			<div class="col-lg-4 col-md-5 col-sm-5 col-xs-5">
 				<div class="vEnqUserAdj enqTimestamp">{{enquiryCreatedAt}}</div>
 			</div>
 		</div>

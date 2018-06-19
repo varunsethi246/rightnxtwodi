@@ -360,67 +360,74 @@ Template.AddNewJobForm.events({
 
 	'submit .addNewJobForm': function(event){
 		event.preventDefault();
-		if(event.target.jobTitle.value && event.target.date.value){
-			var formValues = {
-				"contentType" 				: 'jobList',
-				"jobTitle" 					: event.target.jobTitle.value,
-				"jobDescripton" 			: event.target.jobDescripton.value,
-				"noOfVacancies" 			: event.target.noOfVacancies.value,
-				"date" 						: event.target.date.value,
-				"selectCountry" 			: event.target.selectCountry.value,
-				"selectState" 				: event.target.selectState.value,
-				"selectCity" 				: event.target.selectCity.value,
-				"salary" 					: event.target.salary.value,
-			};
+		console.log("event.target.jobDescripton.value:",event.target.jobDescripton.value);
+		if (!event.target.jobDescripton.value == "")  {
 
-			var currentURL = FlowRouter.current().path;
-			if(currentURL == "/jobList") {
-				formValues.id = Session.get('id');
-				Meteor.call('updateNewjob',formValues,
-				function(error, result){
-					if(error){
-						Bert.alert("Error occurs while updating New Job.",'danger',"growl-top-right");
-					}else{
-						Bert.alert("Listed Job updated sucessfully.",'success','growl-top-right');
-						$(".joblist").hide();
-						$("html,body").scrollTop(0);
-						$('#jobFormCity').find('option:first').attr('selected','true');
-						$('#jobFormCity').find('option:first').next().removeAttr('selected');
+			if(event.target.jobTitle.value && event.target.date.value && event.target.jobDescripton.value){
+				var formValues = {
+					"contentType" 				: 'jobList',
+					"jobTitle" 					: event.target.jobTitle.value,
+					"jobDescripton" 			: event.target.jobDescripton.value,
+					"noOfVacancies" 			: event.target.noOfVacancies.value,
+					"date" 						: event.target.date.value,
+					"selectCountry" 			: event.target.selectCountry.value,
+					"selectState" 				: event.target.selectState.value,
+					"selectCity" 				: event.target.selectCity.value,
+					"salary" 					: event.target.salary.value,
+				};
 
-						$('#jobFormState').find('option:first').attr('selected','true');
-						$('#jobFormState').find('option:first').next().removeAttr('selected');
-						$('#inactiveOk').removeAttr('style');
+				var currentURL = FlowRouter.current().path;
+				if(currentURL == "/jobList") {
+					formValues.id = Session.get('id');
+					Meteor.call('updateNewjob',formValues,
+					function(error, result){
+						if(error){
+							Bert.alert("Error occurs while updating New Job.",'danger',"growl-top-right");
+						}else{
+							Bert.alert("Listed Job updated sucessfully.",'success','growl-top-right');
+							$(".joblist").hide();
+							$("html,body").scrollTop(0);
+							$('#jobFormCity').find('option:first').attr('selected','true');
+							$('#jobFormCity').find('option:first').next().removeAttr('selected');
 
-						Session.set('id',"");
+							$('#jobFormState').find('option:first').attr('selected','true');
+							$('#jobFormState').find('option:first').next().removeAttr('selected');
+							$('#inactiveOk').removeAttr('style');
 
-					}
-				});
+							Session.set('id',"");
+
+						}
+					});
+				}
+
+				if(currentURL == "/addNewJob"){			
+					Meteor.call('insertNewjob', formValues,
+					function(error,result){
+						if(error){
+							Bert.alert("Error occurs while inserting New Job.",'danger',"growl-top-right");
+							return;
+						}else{
+							Bert.alert("New Job inserted sucessfully.",'success','growl-top-right');
+							event.target.jobTitle.value        ='';
+							event.target.jobDescripton.value   = CKEDITOR.instances['desc'].setData('');
+							event.target.noOfVacancies.value   ='';
+							event.target.date.value            ='';
+							event.target.selectCountry.value   ='';
+							event.target.selectState.value     ='';
+							event.target.selectCity.value      ='';
+							event.target.salary.value          ='';
+							return;
+						}
+					});
+				}
 			}
-
-			if(currentURL == "/addNewJob"){			
-				Meteor.call('insertNewjob', formValues,
-				function(error,result){
-					if(error){
-						Bert.alert("Error occurs while inserting New Job.",'danger',"growl-top-right");
-						return;
-					}else{
-						Bert.alert("New Job inserted sucessfully.",'success','growl-top-right');
-						event.target.jobTitle.value        ='';
-						event.target.jobDescripton.value   = CKEDITOR.instances['desc'].setData('');
-						event.target.noOfVacancies.value   ='';
-						event.target.date.value            ='';
-						event.target.selectCountry.value   ='';
-						event.target.selectState.value     ='';
-						event.target.selectCity.value      ='';
-						event.target.salary.value          ='';
-						return;
-					}
-				});
+			else{
+				// Bert.alert("Please enter data in the field !!!","danger","growl-top-right");
 			}
-		}
-		else{
-			// Bert.alert("Please enter data in the field !!!","danger","growl-top-right");
-		}
+		}else{
+				Bert.alert("Please enter Job Description!!!","danger","growl-top-right");
+
+		}	
 	},
 });
 

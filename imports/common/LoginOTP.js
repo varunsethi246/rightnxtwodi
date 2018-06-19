@@ -3,6 +3,8 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import './LoginOTP.html';
 import './anonymousUserLayout.html';
 import './loading.html';
+import '/imports/common/common.js';
+
 
 Template.LoginOTP.onRendered(function(){
   $('#loginModal').modal('hide'); 
