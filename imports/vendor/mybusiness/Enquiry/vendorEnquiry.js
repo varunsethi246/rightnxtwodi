@@ -476,7 +476,7 @@ Template.vendorEnquiry.events({
 											var inputObj = {
 												notifPath	 : businessLink,
 												to           : enquirySentBy,
-												templateName : 'User Enquiry Message',
+												templateName : 'User Enquiry Messages',
 												variables    : msgvariable,
 											}
 											sendInAppNotification(inputObj);
@@ -486,7 +486,7 @@ Template.vendorEnquiry.events({
 												notifPath	 : businessLink,
 												from         : adminId,
 												to           : enquirySentBy,
-												templateName : 'User Enquiry Message',
+												templateName : 'User Enquiry Messages',
 												variables    : msgvariable,
 											}
 											sendMailNotification(inputObj);
@@ -551,8 +551,8 @@ Template.vendorEnquiry.events({
 
 							var inputObj = {
 								notifPath	 : businessLink,
-							    to           : enquirySentBy,
-							    templateName : 'User Enquiry Message',
+							    to           : userId,
+							    templateName : 'User Enquiry Messages',
 							    variables    : msgvariable,
 							}
 							sendInAppNotification(inputObj);
@@ -561,8 +561,8 @@ Template.vendorEnquiry.events({
 							var inputObj = {
 								notifPath	 : businessLink,
 								from         : adminId,
-								to           : enquirySentBy,
-								templateName : 'User Enquiry Message',
+								to           : userId,
+								templateName : 'User Enquiry Messages',
 								variables    : msgvariable,
 							}
 							sendMailNotification(inputObj);

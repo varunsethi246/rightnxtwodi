@@ -69,7 +69,7 @@ Template.vendorReport.helpers({
 Template.businessReport.helpers({
 	'busReportVendorImg':function(userid){
 
-		console.log('userObj:',userid);
+		// console.log('userObj:',userid);
 		var userObj = Meteor.users.findOne({"_id":userid});
 		if (userObj){
 			if(userObj.profile.userProfilePic){
@@ -83,11 +83,11 @@ Template.businessReport.helpers({
 			}else{
 				userProfilePic = "/users/profile/profile_image_dummy.svg";
 			}
-			console.log("userProfilePic: ",userProfilePic);
+			// console.log("userProfilePic: ",userProfilePic);
 			objImg = {
 				"userProfilePic":userProfilePic,
 			}
-			console.log('objImg :',objImg);
+			// console.log('objImg :',objImg);
 			return objImg;
 		}
 	}
@@ -134,7 +134,7 @@ Template.imageReport.helpers({
 			}else{
 				userProfilePic = "/users/profile/profile_image_dummy.svg";
 			}
-			console.log("userProfilePic: ",userProfilePic);
+			// console.log("userProfilePic: ",userProfilePic);
 			objImg = {
 				"userProfilePic":userProfilePic,
 			}
@@ -178,7 +178,7 @@ Template.imageReport.events({
 				if(userDet){
 
 					var usermailID = userDet.userid;
-					console.log('usermailID:',usermailID);
+					// console.log('usermailID:',usermailID);
 					if(userDetails){
 						var mailAdmin 		= userDetails.emails[0].address;
 						var date 			= new Date();
@@ -242,12 +242,13 @@ Template.businessReport.events({
 		var adminUser 	= Meteor.users.findOne({'roles':'admin'});
 		var adminID		= adminUser._id;
 		var userDetails = Meteor.users.findOne({'_id':userId});
+		console.log('userDetails:',userDetails);
 		var email = $(event.currentTarget).attr('id');
 		var res = email.split(" ");
 		var userID = res[1];
 		var userDet = Reports.findOne({'_id':userID});
 		var usermailID = userDet.userid;
-		// console.log('usermailID:',usermailID);
+		console.log('usermailID:',usermailID);
 		if(userDetails){
 			var mailAdmin 		= userDetails.emails[0].address;
 			var date 			= new Date();
@@ -261,40 +262,40 @@ Template.businessReport.events({
 		       	};
 				// user
 				var inputObj = {
-					notifPath	 : "",
+					notifPath	 : businessLink,
 					from 		 : userId,
 				    to           : usermailID,
-				    templateName : 'businessDone-report-acknowledged',
+				    templateName : 'businessDone-report-acknowledgedOne',
 				    variables    : msgvariable,
 				}
 				sendMailNotification(inputObj);
 
 				var inputObj = {
-					notifPath	 : "",
+					notifPath	 : businessLink,
 				    to           : usermailID,
-				    templateName : 'businessDone-report-acknowledged',
+				    templateName : 'businessDone-report-acknowledgedOne',
 				    variables    : msgvariable,
 				}
 
 				sendInAppNotification(inputObj);
 				// admin
-				var inputObj = {
-					notifPath	 : "",
-					from 		 : userId,
-				    to           : adminID,
-				    templateName : 'businessDone-report-acknowledged',
-				    variables    : msgvariable,
-				}
-				sendMailNotification(inputObj);
+				// var inputObj = {
+				// 	notifPath	 : businessLink,
+				// 	from 		 : userId,
+				//     to           : adminID,
+				//     templateName : 'businessDone-report-acknowledged',
+				//     variables    : msgvariable,
+				// }
+				// sendMailNotification(inputObj);
 
-				var inputObj = {
-					notifPath	 : "",
-				    to           : adminID,
-				    templateName : 'businessDone-report-acknowledged',
-				    variables    : msgvariable,
-				}
+				// var inputObj = {
+				// 	notifPath	 : businessLink,
+				//     to           : adminID,
+				//     templateName : 'businessDone-report-acknowledged',
+				//     variables    : msgvariable,
+				// }
 
-				sendInAppNotification(inputObj);  
+				// sendInAppNotification(inputObj);  
 			}
 		}
 	},

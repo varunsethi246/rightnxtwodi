@@ -86,12 +86,12 @@ Template.masterState.events({
 		// console.log(stateInputVal);
 		var stateInputData = State.findOne({"state":stateInputVal});
 		if (stateInputData) { 
-				$(".duplication2").addClass("AlreadyAdded hvr-buzz-out");
-				$(".duplication2").text("State already Added.");
+				$(".duplication4").addClass("AlreadyAdded hvr-buzz-out");
+				$(".duplication4").text("State already Added.");
 			}
 		else{
-				$(".duplication2").removeClass("AlreadyAdded hvr-buzz-out");
-				$(".duplication2").addClass("NotAdded");
+				$(".duplication4").removeClass("AlreadyAdded hvr-buzz-out");
+				$(".duplication4").addClass("NotAdded");
 			}
 	},
 	
@@ -109,15 +109,15 @@ Template.masterState.events({
 
 		var stateInputData = State.findOne({"state":stateInputVal});
 		if (stateInputData) { 
-				$(".duplication2").addClass("AlreadyAdded hvr-buzz-out");
-				$(".duplication2").text("State already Added.");
+				$(".duplication4").addClass("AlreadyAdded hvr-buzz-out");
+				$(".duplication4").text("State already Added.");
 			}
 		else if (stateInputVal==null||stateInputVal==''){
 			$('.areaStaes').addClass('SpanLandLineRedBorder');
 		}
 		else{
-				$(".duplication2").removeClass("AlreadyAdded hvr-buzz-out");
-				$(".duplication2").addClass("NotAdded");
+				$(".duplication4").removeClass("AlreadyAdded hvr-buzz-out");
+				$(".duplication4").addClass("NotAdded");
 				
 				
 				var formValues = {

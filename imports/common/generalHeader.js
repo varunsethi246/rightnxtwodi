@@ -57,11 +57,11 @@ Template.generalHeader.helpers({
     var userId = Meteor.userId();
 
 	var userDetail = Meteor.users.findOne({'_id':userId});
-	var notifArr = ["Vendor Modal Image Report", "Vendor Modal Image Report", "business-report-acknowledged", "business-image-report-acknowledged", "User Modal Image Report", "Admin Business Page Modal Report", "Admin Business Page Modal Report", "Vendor Business Page Bookmark", "Vendor Business Page Bookmark", "User Business Page Bookmark", "Vendor Business Page Been There", "Vendor Business Page Been There", "User Business Page Been There", "Business Page Share", "Vendor Business Page Report", "Vendor Business Page Report", "Vendor Business Page Report", "User Business Page Report", "Admin Business Page Report", "Admin Business Page Report", "You have been Tagged", "You have been Tagged", "Delete Business Admin", "Delete Business Admin", "Delete Business Vendor", "Delete Business Vendor", "Anything Else Business Admin", "Anything Else Business Admin", "Thanks for Submiting Offer", "Thanks for Submiting Offer", "Vendor has Submiting Offer", "Vendor has Submiting Offer", "Payment Received", "Payment Received", "Vendor Paid for Offer", "Vendor Paid for Offer", "Offer Deleted", "Offer Deleted", "Vendor deleted Offer", "Vendor deleted Offer", "Vendor Message Send", "Thanks for Registering New Business", "Thanks for Registering New Business", "Vendor Added New Business", "Vendor Added New Business"];
+	var notifArr = ["Vendor Modal Image Report","User Enquiry Messages","businessDone-report-acknowledgedOne", "Vendor Modal Image Report", "business-report-acknowledged", "business-image-report-acknowledged", "User Modal Image Report", "Admin Business Page Modal Report", "Admin Business Page Modal Report", "Vendor Business Page Bookmark", "Vendor Business Page Bookmark", "User Business Page Bookmark", "Vendor Business Page Been There", "Vendor Business Page Been There", "User Business Page Been There", "Business Page Share", "Vendor Business Page Report", "Vendor Business Page Report", "Vendor Business Page Report", "User Business Page Report", "Admin Business Page Report", "Admin Business Page Report", "You have been Tagged", "You have been Tagged", "Delete Business Admin", "Delete Business Admin", "Delete Business Vendor", "Delete Business Vendor", "Anything Else Business Admin", "Anything Else Business Admin", "Thanks for Submiting Offer", "Thanks for Submiting Offer", "Vendor has Submiting Offer", "Vendor has Submiting Offer", "Payment Received", "Payment Received", "Vendor Paid for Offer", "Vendor Paid for Offer", "Offer Deleted", "Offer Deleted", "Vendor deleted Offer", "Vendor deleted Offer", "Vendor Message Send", "Thanks for Registering New Business", "Thanks for Registering New Business", "Vendor Added New Business", "Vendor Added New Business"];
 
 	if(userDetail.notificationConfiguration){
 		if(userDetail.notificationConfiguration.enquiry == "true"){
-			var arr = ["User Enquiry Message", "Vendor Enquiry Message", "Vendor Business Enquiry", "Vendor Business Enquiry", "Vendor Business Enquiry", "User Business Enquiry", "Enquiry Message Send", "User Business Enquiry All"];
+			var arr = ["User Enquiry Message","User Enquiry Messages", "Vendor Enquiry Message", "Vendor Business Enquiry", "Vendor Business Enquiry", "Vendor Business Enquiry", "User Business Enquiry", "Enquiry Message Send", "User Business Enquiry All"];
 			for(j=0;j<arr.length;j++){
 				notifArr.push(arr[j]);
 			}
@@ -86,6 +86,12 @@ Template.generalHeader.helpers({
 		}
 		if(userDetail.notificationConfiguration.comment == "true"){
 			var arr = ["Vendor Modal Image Comment", "Vendor Modal Image Comment", "User Modal Image Comment", "Vendor Modal Image Comment Reply", "Vendor Modal Image Comment Reply", "User Modal Image Added Comment Reply", "User Modal Image Added Comment Reply", "User Modal Image Comment Reply", "Vendor Review and Rating Comment", "Vendor Review and Rating Comment", "Other User Review and Rating Comment", "Other User Review and Rating Comment", "Current User Review and Rating Comment", "Vendor Review Comment Reply", "Vendor Review Comment Reply", "User Review Comment", "User Review Comment", "Current User Review Comment Reply"];
+			for(j=0;j<arr.length;j++){
+				notifArr.push(arr[j]);
+			}
+		}
+		if(userDetail){
+			var arr = ["businessDone-report-acknowledgedOne"];
 			for(j=0;j<arr.length;j++){
 				notifArr.push(arr[j]);
 			}
@@ -128,11 +134,11 @@ Template.generalHeader.helpers({
     'notifcount': function(){
       	var userId = Meteor.userId();
 		var userDetail = Meteor.users.findOne({'_id':userId});
-		var notifArr = ["Vendor Modal Image Report", "Vendor Modal Image Report", "business-report-acknowledged", "business-image-report-acknowledged", "User Modal Image Report", "Admin Business Page Modal Report", "Admin Business Page Modal Report", "Vendor Business Page Bookmark", "Vendor Business Page Bookmark", "User Business Page Bookmark", "Vendor Business Page Been There", "Vendor Business Page Been There", "User Business Page Been There", "Business Page Share", "Vendor Business Page Report", "Vendor Business Page Report", "Vendor Business Page Report", "User Business Page Report", "Admin Business Page Report", "Admin Business Page Report", "You have been Tagged", "You have been Tagged", "Delete Business Admin", "Delete Business Admin", "Delete Business Vendor", "Delete Business Vendor", "Anything Else Business Admin", "Anything Else Business Admin", "Thanks for Submiting Offer", "Thanks for Submiting Offer", "Vendor has Submiting Offer", "Vendor has Submiting Offer", "Payment Received", "Payment Received", "Vendor Paid for Offer", "Vendor Paid for Offer", "Offer Deleted", "Offer Deleted", "Vendor deleted Offer", "Vendor deleted Offer", "Vendor Message Send", "Thanks for Registering New Business", "Thanks for Registering New Business", "Vendor Added New Business", "Vendor Added New Business"];
+		var notifArr = ["Vendor Modal Image Report","businessDone-report-acknowledgedOne","User Enquiry Messages", "Vendor Modal Image Report", "business-report-acknowledged", "business-image-report-acknowledged", "User Modal Image Report", "Admin Business Page Modal Report", "Admin Business Page Modal Report", "Vendor Business Page Bookmark", "Vendor Business Page Bookmark", "User Business Page Bookmark", "Vendor Business Page Been There", "Vendor Business Page Been There", "User Business Page Been There", "Business Page Share", "Vendor Business Page Report", "Vendor Business Page Report", "Vendor Business Page Report", "User Business Page Report", "Admin Business Page Report", "Admin Business Page Report", "You have been Tagged", "You have been Tagged", "Delete Business Admin", "Delete Business Admin", "Delete Business Vendor", "Delete Business Vendor", "Anything Else Business Admin", "Anything Else Business Admin", "Thanks for Submiting Offer", "Thanks for Submiting Offer", "Vendor has Submiting Offer", "Vendor has Submiting Offer", "Payment Received", "Payment Received", "Vendor Paid for Offer", "Vendor Paid for Offer", "Offer Deleted", "Offer Deleted", "Vendor deleted Offer", "Vendor deleted Offer", "Vendor Message Send", "Thanks for Registering New Business", "Thanks for Registering New Business", "Vendor Added New Business", "Vendor Added New Business"];
 
 		if(userDetail.notificationConfiguration){
 			if(userDetail.notificationConfiguration.enquiry == "true"){
-				var arr = ["User Enquiry Message","Vendor Enquiry Message", "Vendor Business Enquiry", "Vendor Business Enquiry", "Vendor Business Enquiry", "User Business Enquiry", "Enquiry Message Send", "User Business Enquiry All"];
+				var arr = ["User Enquiry Message","User Enquiry Messages","Vendor Enquiry Message", "Vendor Business Enquiry", "Vendor Business Enquiry", "Vendor Business Enquiry", "User Business Enquiry", "Enquiry Message Send", "User Business Enquiry All"];
 				for(j=0;j<arr.length;j++){
 					notifArr.push(arr[j]);
 				}
@@ -157,6 +163,12 @@ Template.generalHeader.helpers({
 			}
 			if(userDetail.notificationConfiguration.comment == "true"){
 				var arr = ["Vendor Modal Image Comment", "Vendor Modal Image Comment", "User Modal Image Comment", "Vendor Modal Image Comment Reply", "Vendor Modal Image Comment Reply", "User Modal Image Added Comment Reply", "User Modal Image Added Comment Reply", "User Modal Image Comment Reply", "Vendor Review and Rating Comment", "Vendor Review and Rating Comment", "Other User Review and Rating Comment", "Other User Review and Rating Comment", "Current User Review and Rating Comment", "Vendor Review Comment Reply", "Vendor Review Comment Reply", "User Review Comment", "User Review Comment", "Current User Review Comment Reply"];
+				for(j=0;j<arr.length;j++){
+					notifArr.push(arr[j]);
+				}
+			}
+			if(userDetail.notificationConfiguration){
+				var arr = ["businessDone-report-acknowledgedOne"];
 				for(j=0;j<arr.length;j++){
 					notifArr.push(arr[j]);
 				}

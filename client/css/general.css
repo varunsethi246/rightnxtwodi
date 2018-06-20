@@ -4233,3 +4233,7 @@ text-align: center
 		margin-left: 37%;
 	}
 }
+.otpOuterDiv{
+	border: 1px solid #bbbbbb;
+    margin-top: 15px;
+}

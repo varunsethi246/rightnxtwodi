@@ -28,10 +28,13 @@ Template.addVendorBusInfo.helpers({
    vendorBusInfoRetrive(){
 
          if(Session.get("backlinkurl")){
+            console.log('in back url');
             var businessLink = Session.get("backlinkurl");
             var busData = Business.findOne({"businessLink":businessLink});
             busData.completedPercent = 25;            
          }else{
+            console.log('in back url');
+            
             var busData = {
                businessState     : '',
                businessCity      : '',

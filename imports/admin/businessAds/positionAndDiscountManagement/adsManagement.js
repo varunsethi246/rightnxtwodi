@@ -119,50 +119,54 @@ Template.adsPositionManagement.events({
 			e.preventDefault();
 			var id = Session.get("adsPositionId");
 			var position = $('.selectPosition').val();
-			if(position){
-				position = parseInt(position);
-			}
-
-			var positionAdded = '';
-			var positionTrue = false;
-			var posId = id;
-
-			if(id){
-				positionAdded = AdsPosition.find({"position":id}).fetch();
-				if(positionAdded.length>0){
-					positionTrue = true;
+			if (position != '-- Select --') {
+				
+				console.log("position",position);
+				if(position){
+					position = parseInt(position);
 				}
-			}else{
-				positionAdded = AdsPosition.find({"position":position}).fetch();
-				if(positionAdded.length>0){
-					posId = positionAdded[0]._id;
-					positionTrue = true;
-				}
-			}
 
+				var positionAdded = '';
+				var positionTrue = false;
+				var posId = id;
 
-			var rate     = $('#rate').val();
-			if((id || positionTrue)&&position!='-- Select --'){
-				Meteor.call('updateAdsPosition',posId,position,rate,function(error,result){
-					if(error){
-						console.log(error);
-					}else{
-						$('.selectPosition').val('');
-						$('#rate').val('');
-        				Session.set("adsPositionId",'');
-
+				if(id){
+					positionAdded = AdsPosition.find({"position":id}).fetch();
+					if(positionAdded.length>0){
+						positionTrue = true;
 					}
-				})
-			}else{
-				if(position!='-- Select --'){
-					Meteor.call('insertAdsPosition',position,rate,function(error,result){
+				}else{
+					positionAdded = AdsPosition.find({"position":position}).fetch();
+					if(positionAdded.length>0){
+						posId = positionAdded[0]._id;
+						positionTrue = true;
+					}
+				}
+
+
+				var rate     = $('#rate').val();
+				if((id || positionTrue) && position != '-- Select --' && position != null && rate!= null && rate!== ''){
+					Meteor.call('updateAdsPosition',posId,position,rate,function(error,result){
 						if(error){
 							console.log(error);
 						}else{
 							$('.selectPosition').val('');
 							$('#rate').val('');
+	        				Session.set("adsPositionId",'');
+
 						}
 					})
+				}else{
+					if(position!='-- Select --' && position != null && rate!= null && rate!== ''){
+						Meteor.call('insertAdsPosition',position,rate,function(error,result){
+							if(error){
+								console.log(error);
+							}else{
+								$('.selectPosition').val('');
+								$('#rate').val('');
+							}
+						})
+					}
 				}
 			}
 		}
