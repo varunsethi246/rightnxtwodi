@@ -528,33 +528,65 @@ Template.addvendorOpeningAndClosing.events({
     $('.WeekClassPre').removeClass("WeekClassPost");
     
     var saveFromTime  = $("#fromTime").val();
-    var saveToTime    = $("#toTime").val();
-    var docLink = FlowRouter.getParam('businessLink');
-    var docId = Business.findOne({"businessLink":docLink});
-    for(i=0;i<saveDay.length;i++){
-      var valueObj = {
-        "day"       :  saveDay[i],
-        "dayNum"    :  dayNum[saveDay[i]],
-        "fromTime"  :  saveFromTime,
-        "toTime"    :  saveToTime,      
-      }
-      formValues[i] = valueObj;
-    }
-    if(saveFromTime&&saveToTime&&formValues[0]){
-      Meteor.call('insertOpenCloseTiming', docId._id, formValues, function(error,result){
-        if(error){
-          return;
-        }else{
-          $('.shwDayError').text('');
-          $('.shwDayError').removeClass('redTextDays fadeOut');
-          return;
-        }
-      });
-    }else {
-      $('.shwDayError').text('Select Days & Time before adding your Business Timings');
-      $('.shwDayError').addClass('redTextDays fadeOut');
+    // fsdfs
+      var time = $("#fromTime").val();
+      var hours = Number(time.match(/^(\d+)/)[1]);
+      var minutes = Number(time.match(/:(\d+)/)[1]);
+      var AMPM = time.match(/\s(.*)$/)[1];
+      if(AMPM == "PM" && hours<12) hours = hours+12;
+      if(AMPM == "AM" && hours==12) hours = hours-12;
+      var sHours = hours.toString();
+      var sMinutes = minutes.toString();
+      if(hours<10) sHours = "0" + sHours;
+      if(minutes<10) sMinutes = "0" + sMinutes;
+      var time1 = sHours + ":" + sMinutes;
 
-    }
+    var saveToTime    = $("#toTime").val();
+    // sdsdf
+      var time = $("#toTime").val();
+      var hoursTwo = Number(time.match(/^(\d+)/)[1]);
+      var minutesTwo = Number(time.match(/:(\d+)/)[1]);
+      var AMPM = time.match(/\s(.*)$/)[1];
+      if(AMPM == "PM" && hoursTwo<12) hoursTwo = hoursTwo+12;
+      if(AMPM == "AM" && hoursTwo==12) hoursTwo = hoursTwo-12;
+      var sHoursTwo = hoursTwo.toString();
+      var sMinutesTwo = minutesTwo.toString();
+      
+      if(hoursTwo<10) sHoursTwo = "0" + sHoursTwo;
+      if(minutesTwo<10) sMinutesTwo = "0" + sMinutesTwo;
+      var time2 = sHoursTwo + ":" + sMinutesTwo;
+
+      if(time1 > time2){
+        alert('From time should be greater than To time');
+      }else{
+              // Bert.alert('Business categories and timing information submitted successfully!','success','growl-top-right');
+        var docLink = FlowRouter.getParam('businessLink');
+        var docId = Business.findOne({"businessLink":docLink});
+        for(i=0;i<saveDay.length;i++){
+          var valueObj = {
+            "day"       :  saveDay[i],
+            "dayNum"    :  dayNum[saveDay[i]],
+            "fromTime"  :  saveFromTime,
+            "toTime"    :  saveToTime,      
+          }
+          formValues[i] = valueObj;
+        }
+        if(saveFromTime&&saveToTime&&formValues[0]){
+          Meteor.call('insertOpenCloseTiming', docId._id, formValues, function(error,result){
+            if(error){
+              return;
+            }else{
+              $('.shwDayError').text('');
+              $('.shwDayError').removeClass('redTextDays fadeOut');
+              return;
+            }
+          });
+        }else {
+          $('.shwDayError').text('Select Days & Time before adding your Business Timings');
+          $('.shwDayError').addClass('redTextDays fadeOut');
+
+        }
+      }
   },
 
   'click .selectOption': function(e){

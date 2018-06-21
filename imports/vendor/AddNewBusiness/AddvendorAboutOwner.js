@@ -9,7 +9,7 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import { BusinessImgUploadS3 } from '/client/businessImage';
 
 import '../vendor.js';
-import './AddvendorAboutOwner.html'
+import './AddvendorAboutOwner.html';
 
 Template.addvendorAboutOwner.helpers({
 	vendorBusOwInfoRetrive() {

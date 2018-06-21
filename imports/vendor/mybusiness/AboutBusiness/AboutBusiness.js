@@ -12,10 +12,10 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 import '../../vendor.js';
 import '../../../common/starRating2.html';
-import './VendorBusinessInformation.js';
-import './VendorOpeningAndClosing.js';
-import './vendorAboutOwner.js';
-import './VendorImagesVideos.js';
+// import './VendorBusinessInformation.js';
+// import './VendorOpeningAndClosing.js';
+// import './vendorAboutOwner.js';
+// import './VendorImagesVideos.js';
 
 
 
@@ -394,13 +394,14 @@ Template.aboutBusiness.events({
 		}
 		
 	},
-	'click .delete': function(event){
+	'click .deleteTemp': function(event){
 		event.preventDefault();		
 		var businessId = $(event.currentTarget).attr("data-bussinessId");
 		var vendorId = $(event.currentTarget).attr("data-vendorId");
+		// console.log('vendorId :',vendorId);
 		var businessTitle = $(event.currentTarget).attr("data-busTitle");
 		var businessLink = $(event.currentTarget).attr("data-busLink");
-		console.log('in delete');
+		// console.log('in delete');
 		Meteor.call('deleteBusiness',businessId,function(error,result){
 			if(error){
 				Bert.alert(error.reason,"danger",'growl-top-right');
@@ -413,9 +414,10 @@ Template.aboutBusiness.events({
 				
 				var admin = Meteor.users.findOne({'roles':'admin'});
 				var vendorDetail = Meteor.users.findOne({'_id':vendorId});
+				// console.log('vendorDetail :',vendorDetail);
 				var notificationOn = vendorDetail.notificationConfiguration;
 
-				console.log('notificationOn:',notificationOn);
+				// console.log('notificationOn:',notificationOn);
 
 				if(admin&&vendorDetail){
 			    	var adminId = admin._id;
@@ -439,6 +441,8 @@ Template.aboutBusiness.events({
 					    templateName : 'Delete Business Vendor',
 					    variables    : msgvariable,
 					}
+					// console.log('inputObj :',inputObj);
+					
 					sendInAppNotification(inputObj);
 
 					var inputObj = {
@@ -448,35 +452,36 @@ Template.aboutBusiness.events({
 					    templateName : 'Delete Business Vendor',
 					    variables    : msgvariable,
 					}
+					// console.log('inputObj :',inputObj);
 					sendMailNotification(inputObj);
 
 					//Send Notification, Mail and SMS to Admin
-            		var date 		= new Date();
-            		var currentDate = moment(date).format('DD/MM/YYYY');
-            		var msgvariable = {
-						'[vendorname]' 	: vendorname,
-						'[adminname]'	: username,
-	   					'[currentDate]'	: currentDate,
-						'[businessName]': businessTitle
+     //        		var date 		= new Date();
+     //        		var currentDate = moment(date).format('DD/MM/YYYY');
+     //        		var msgvariable = {
+					// 	'[vendorname]' 	: vendorname,
+					// 	'[adminname]'	: username,
+	   	// 				'[currentDate]'	: currentDate,
+					// 	'[businessName]': businessTitle
 
-	               	};
+	    //            	};
 
-					var inputObj = {
-						notifPath	 : businessLink,
-					    to           : adminId,
-					    templateName : 'Delete Business Admin',
-					    variables    : msgvariable,
-					}
-					sendInAppNotification(inputObj);
+					// var inputObj = {
+					// 	notifPath	 : businessLink,
+					//     to           : adminId,
+					//     templateName : 'Delete Business Admin',
+					//     variables    : msgvariable,
+					// }
+					// sendInAppNotification(inputObj);
 
-					var inputObj = {
-						notifPath	 : businessLink,
-						from         : adminId,
-					    to           : adminId,
-					    templateName : 'Delete Business Admin',
-					    variables    : msgvariable,
-					}
-					sendMailNotification(inputObj); 
+					// var inputObj = {
+					// 	notifPath	 : businessLink,
+					// 	from         : adminId,
+					//     to           : adminId,
+					//     templateName : 'Delete Business Admin',
+					//     variables    : msgvariable,
+					// }
+					// sendMailNotification(inputObj); 
 				}
 				//============================================================
 				// 			End Notification Email / SMS / InApp

@@ -15,6 +15,11 @@ import './addvendorBusInfo.html';
 import '../vendor.js';
 import '../../notifications/sendMailnNotification.js';
 
+
+var businessLink = Session.get("backlinkurl");
+console.log('businessLink :',businessLink);
+
+
 Template.addVendorBusInfo.helpers({
    // To retrive Data on back button
    completedPercentShow(data){
@@ -28,12 +33,14 @@ Template.addVendorBusInfo.helpers({
    vendorBusInfoRetrive(){
 
          if(Session.get("backlinkurl")){
-            console.log('in back url');
+            // console.log('in back url');
             var businessLink = Session.get("backlinkurl");
+            console.log('businessLink :',businessLink);
+            console.log('Session.get("backlinkurl") :',Session.get("backlinkurl"));
             var busData = Business.findOne({"businessLink":businessLink});
             busData.completedPercent = 25;            
          }else{
-            console.log('in back url');
+            // console.log('in back url');
             
             var busData = {
                businessState     : '',
@@ -691,6 +698,8 @@ Template.addVendorBusInfo.onRendered(function(){
    $("#businessTitle").focus();
    $("html,body").scrollTop(0);
 
+var businessLink = Session.get("backlinkurl");
+            console.log('businessLink :',businessLink);
    // Session.set("addVenCountrySes","India");
    // Session.set("addVenStateSes","Maharashtra");
    // Session.set("addVenCitySes","Pune");

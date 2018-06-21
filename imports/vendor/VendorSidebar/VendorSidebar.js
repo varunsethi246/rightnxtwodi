@@ -148,7 +148,7 @@ Template.vendorSidebar.events({
 		$('.menusidebarClass1').removeClass('mymenucolorSelect');
 		$('.menusidebarClass2').toggleClass('mymenucolorSelect');
 		$('.menusidebarClass3').removeClass('mymenucolorSelect');
-		Session.set("backlinkurl",'');
+		// Session.set("backlinkurl",'');
 	},
 	'click .menusidebarClass3': function(){
 		$('.menusidebarClass0').removeClass('mymenucolorSelect');

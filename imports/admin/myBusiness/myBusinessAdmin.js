@@ -627,15 +627,67 @@ Template.listOfBusiness.events({
 
 		var modelid = $(event.target).parent().parent().parent().parent().parent().attr('id');
 		var id  = modelid.split("-");
+		var businessIdS = $(event.currentTarget).attr("data-vendorId");
+		console.log('businessIdS :',businessIdS);
+		var vendorId  = Business.findOne({'_id':businessIdS});
+		console.log('vendorId',vendorId);
+		var vendoriDS = vendorId.createdBy;
+		var businessTitle = $(event.currentTarget).attr("data-busTitle");
+		var businessLink = $(event.currentTarget).attr("data-busLink");
 		// console.log('delete id ' + id[1]);
 		Meteor.call('removeBusinessPermanent',id[1],function(error,result){
 			if(error){
 				Bert.alert(error.reason,"danger",'growl-top-right');
 			}else{
 				Bert.alert('Business is deleted','success','growl-top-right');
+
+				var admin = Meteor.users.findOne({'roles':'admin'});
+				var vendorDetail = Meteor.users.findOne({'_id':vendoriDS});
+				console.log('vendorDetail :',vendorDetail);
+				var vendorids = vendorDetail._id;
+				// var notificationOn = vendorDetail.notificationConfiguration;
+
+				// console.log('notificationOn:',notificationOn);
+
+				if(admin&&vendorDetail){
+			    	var adminId = admin._id;
+
+					//Send Notification, Mail and SMS to Current Vendor
+					var vendorname 	= vendorDetail.profile.name;
+					var username 	= admin.profile.firstName;
+
+            		var date 		= new Date();
+            		var currentDate = moment(date).format('DD/MM/YYYY');
+            		var msgvariable = {
+						'[vendorname]' 	: vendorname,
+	   					'[currentDate]'	: currentDate,
+						'[businessName]': businessTitle
+
+	               	};
+
+					var inputObj = {
+						notifPath	 : businessLink,
+					    to           : vendorids,
+					    templateName : 'Delete Business Admin',
+					    variables    : msgvariable,
+					}
+					// console.log('inputObj :',inputObj);
+					
+					sendInAppNotification(inputObj);
+
+					var inputObj = {
+						notifPath	 : businessLink,
+						from         : adminId,
+					    to           : vendorids,
+					    templateName : 'Delete Business Admin',
+					    variables    : msgvariable,
+					}
+					// console.log('inputObj :',inputObj);
+					sendMailNotification(inputObj);
+				}
+				$('.fade').hide();
 			}
 		});
-		$('.modal-backdrop').hide();
 	},
 	'click .delete': function(event){
 	   	event.preventDefault();
@@ -649,8 +701,8 @@ Template.listOfBusiness.events({
 			}else{
 				Bert.alert('Business Inactived','success','growl-top-right');
 			}
+				$('.fade').hide();	
 		});
-		$('.modal-backdrop').hide();
 	},
 
 	'click .actInactAdminOn':function(event) {
