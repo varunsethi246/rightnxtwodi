@@ -53,6 +53,12 @@ Template.vendorOffer1.onRendered(function(){
 	// 	    minDate: new Date() // set the minDate to the today's date
 	// 	    // you can add other options here
 	// 	});
+	var todayNext = new Date().toISOString().split('T')[0];
+	document.getElementsByName("expirationToDate")[0].setAttribute('min', todayNext);
+	
+	var today = new Date().toISOString().split('T')[0];
+	document.getElementsByName("expirationFromDate")[0].setAttribute('min', today);
+	
 	var dates = $("#from").datepicker({
 	    minDate: "0",
 	    maxDate: "+2Y",
@@ -1023,6 +1029,10 @@ Template.vendorOffer1.events({
 	// 	    minDate: new Date() // set the minDate to the today's date
 	// 	    // you can add other options here
 	// 	});
+	// },
+	// 'click #usrtimeTo':function(event){
+	// 	var todayNext = new Date().toISOString().split('T')[0];
+	// 	document.getElementsByName("expirationToDate")[0].setAttribute('min', todayNext);
 	// },
 	'change .businessPhotofiles' : function(event){
 		var $this = $(event.target);

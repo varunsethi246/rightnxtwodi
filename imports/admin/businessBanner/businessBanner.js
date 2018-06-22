@@ -300,56 +300,59 @@ Template.bannerInvoice.helpers({
   		var businessDetails = Business.findOne({"businessLink":businessLink, "status":"active"});
 		var paymentCheck = Payment.findOne({"businessLink":businessLink,"orderType":"Banner"});
 
-		if(paymentCheck) {
-			businessDetails.invoiceNumber 	= paymentCheck.invoiceNumber;
-	    	businessDetails.discountPercent = paymentCheck.discountPercent;
-	    	businessDetails.totalDiscount 	= paymentCheck.totalDiscount;
-	    	businessDetails.discountedPrice = paymentCheck.discountedPrice;
+		if(businessDetails){
+			if(paymentCheck) {
+				console.log('paymentCheck: ',paymentCheck);
+				businessDetails.invoiceNumber 	= paymentCheck.invoiceNumber;
+		    	businessDetails.discountPercent = paymentCheck.discountPercent;
+		    	businessDetails.totalDiscount 	= paymentCheck.totalDiscount;
+		    	businessDetails.discountedPrice = paymentCheck.discountedPrice;
 
 
-		}else{
-			businessDetails.invoiceNumber = 'None';
-		}
-		var companyDetails 	= CompanySettings.findOne({'companyId':101});
+			}else{
+				businessDetails.invoiceNumber = 'None';
+			}
+			var companyDetails 	= CompanySettings.findOne({'companyId':101});
 
-		businessDetails.invoiceDate = moment(new Date()).format('DD/MM/YYYY');
-		if(companyDetails){
-			businessDetails.companyName = companyDetails.companyName;
-			businessDetails.companyAddress = companyDetails.companyLocationsInfo[0].companyAddress;
-			businessDetails.companyCity = companyDetails.companyLocationsInfo[0].companyCity;
-			businessDetails.companyState = companyDetails.companyLocationsInfo[0].companyState;
-			businessDetails.companyPincode = companyDetails.companyLocationsInfo[0].companyPincode;
+			businessDetails.invoiceDate = moment(new Date()).format('DD/MM/YYYY');
+			if(companyDetails){
+				businessDetails.companyName = companyDetails.companyName;
+				businessDetails.companyAddress = companyDetails.companyLocationsInfo[0].companyAddress;
+				businessDetails.companyCity = companyDetails.companyLocationsInfo[0].companyCity;
+				businessDetails.companyState = companyDetails.companyLocationsInfo[0].companyState;
+				businessDetails.companyPincode = companyDetails.companyLocationsInfo[0].companyPincode;
 
-		}
+			}
 
-		
-		var totalPrice = 0;
-		var businessBanner = [];
-		if(paymentCheck.paymentStatus == "paid"){
-			var selector = {"businessLink":businessLink,"status":"active"};
-		}else{
-			var selector = {"businessLink":businessLink,"status":"new"};
-		}
-    	businessBanner = BusinessBanner.find(selector).fetch();
-		
-		if(businessBanner && businessBanner.length>0){
-    		for(i=0;i<businessBanner.length;i++){
-    			if(businessBanner[i].areas){
-    				businessBanner[i].numOfAreas=businessBanner[i].areas.length;
-    			}else{
-    				businessBanner[i].numOfAreas=0;
-    			}
-				var monthlyRate = Position.findOne({'position':businessBanner[i].position});
-    			businessBanner[i].monthlyRate 	= monthlyRate.rate;
-				businessBanner[i].totalAmount 	= parseInt(monthlyRate.rate) * parseInt(businessBanner[i].areas.length) * parseInt(businessBanner[i].noOfMonths);
-    			totalPrice= totalPrice + businessBanner[i].totalAmount;
-    		}
+			
+			var totalPrice = 0;
+			var businessBanner = [];
+			if(paymentCheck.paymentStatus == "paid"){
+				var selector = {"businessLink":businessLink,"status":"active"};
+			}else{
+				var selector = {"businessLink":businessLink,"status":"new"};
+			}
+	    	businessBanner = BusinessBanner.find(selector).fetch();
+			
+			if(businessBanner && businessBanner.length>0){
+	    		for(i=0;i<businessBanner.length;i++){
+	    			if(businessBanner[i].areas){
+	    				businessBanner[i].numOfAreas=businessBanner[i].areas.length;
+	    			}else{
+	    				businessBanner[i].numOfAreas=0;
+	    			}
+					var monthlyRate = Position.findOne({'position':businessBanner[i].position});
+	    			businessBanner[i].monthlyRate 	= monthlyRate.rate;
+					businessBanner[i].totalAmount 	= parseInt(monthlyRate.rate) * parseInt(businessBanner[i].areas.length) * parseInt(businessBanner[i].noOfMonths);
+	    			totalPrice= totalPrice + businessBanner[i].totalAmount;
+	    		}
+	    	}
+
+	    	businessDetails.paymentCheck = paymentCheck.paymentStatus;
+	    	businessDetails.businessLink = businessLink;
+	    	businessDetails.totalPrice = totalPrice;
+	    	businessDetails.businessBanner = businessBanner;
     	}
-
-    	businessDetails.paymentCheck = paymentCheck.paymentStatus;
-    	businessDetails.businessLink = businessLink;
-    	businessDetails.totalPrice = totalPrice;
-    	businessDetails.businessBanner = businessBanner;
 		return businessDetails;
 	},
 });
@@ -377,6 +380,7 @@ Template.businessBanner.events({
 	'click .bannerButton':function(event){
 		event.preventDefault();
 		var invoiceNumber 	= Counts.get('noOfInvoiceCount')+1;
+		console.log('invoiceNumber :',invoiceNumber);
 		var businessLink 	= Session.get("businessLink");
 		var businessData 	= Business.findOne({"businessLink":businessLink, "status":"active"});
 

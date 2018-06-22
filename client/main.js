@@ -552,9 +552,10 @@ vendorDashboardFunc= function () {
 		$("#inject-loader-wrapper").fadeOut(1500, function() { $(this).remove(); });
 	})
 }
-vendorbannersFunc= function () {    
+vendorbannersFunc= function () { 
+	console.log('in mainjs');   
 	import('/imports/vendor/mybusiness/Banners/vendorbanners.js').then(function (handle) {        
-		handle.vendorDashboardForm();    
+		handle.vendorbannersForm();    
 	})
 	.then(function(){
 		$("#inject-loader-wrapper").fadeOut(1500, function() { $(this).remove(); });
