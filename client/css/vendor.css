@@ -1321,7 +1321,8 @@ font-family:'PROXIMANOVA-REGULAR'
 }
 
 .vPhotosYouUpload {
-margin:18px 0 0;
+/*margin:18px 0 0;*/
+margin-top:-30px;
 border:1px solid #ccc;
 padding:20px 22px
 }
@@ -1329,15 +1330,15 @@ padding:20px 22px
 .vPhotosYouUploadImg {
 display:inline-block;
 vertical-align:top;
-position:relative;
-margin-top:18px;
-margin-right:11px
+/*position:relative;*/
+/*margin-top:18px;*/
+margin-right:12px
 }
 
 .vPhotosYouUploadTxt {
 display:inline-block;
-margin-top:10px;
-margin-bottom:11px
+margin-top:3px;
+/*margin-bottom:11px*/
 }
 
 .vPhotosYouUploadTxt h3 {
@@ -1474,9 +1475,9 @@ text-align:center
 .vendorPhotosUImg {
 position:absolute;
 top:0;
-right:3px;
-height:27px;
-width:27px
+right:4px;
+height:22px;
+width:28px
 }
 
 .noworkDiv > .uploadPhotoSize {
@@ -1490,18 +1491,21 @@ right:0
 }
 
 .noworkDiv1 > .delBusiImg {
-position:relative;
+/*position:relative;
 top:26px;
-right:18px
+right:18px*/
+    position: relative;
+    top: 20px;
+    right: -10px;
 }
 
 .vendor-colomn > .col-lg-12 > .toDateBuss,.vendor-colomn > .col-lg-12 > .col-lg-12 > .row > .toDateBuss {
 padding-left:0
 }
 
-.noworkDiv1 > .uploadPhotoSize {
+/*.noworkDiv1 > .uploadPhotoSize {
 width:88%
-}
+}*/
 
 .delBusiMenu {
 position:relative;
@@ -2622,9 +2626,9 @@ border:1px solid #5cb85c
 
 .uploadPhotoSize {
 /*height:217px;*/
-height:150px;
+height:160px;
 overflow:hidden;
-padding:2%
+/*padding:2%*/
 }
 
 .uploadPhotoSize img {
@@ -2792,10 +2796,11 @@ right:-12px;
 position:relative;
 top:-5px
 }
-
+.vPhotosUserRowSecAdj1{margin-top: 15px;}
 .vPhotosYouRepeatImgO {
 height:185px;
-padding:0
+padding:0;
+/*margin-bottom: 15px;*/
 }
 
 .vPhotosYouRImgPost {
@@ -2854,13 +2859,17 @@ height:0;
 line-height:0;
 width:1px
 }
-
+#datetimepicker3 .bootstrap-datetimepicker-widget{
+	display: block!important;
+}
 #datetimepicker3 .bootstrap-datetimepicker-widget table td span {
 width:2px;
 height:0!important;
-line-height:4px!important
+line-height:4px!important;
+color: #4e4f51!important;
 }
-
+#datetimepicker3 .bootstrap-datetimepicker-widget button[data-action]{background-color: #f89b1c;border: 1px solid #f89b1c;border-radius: 0px;}
+#datetimepicker4 .bootstrap-datetimepicker-widget button[data-action]{background-color: #f89b1c;border: 1px solid #f89b1c;border-radius: 0px;}
 #datetimepicker4 td,#datetimepicker4 tr,#datetimepicker4 tbody {
 border:none
 }
@@ -2878,7 +2887,8 @@ width:1px
 #datetimepicker4 .bootstrap-datetimepicker-widget table td span {
 width:2px;
 height:0!important;
-line-height:4px!important
+line-height:4px!important;
+color: #4e4f51!important;
 }
 
 #datetimepicker3 .timepicker-minutes table td,#datetimepicker4 .timepicker-minutes table td {

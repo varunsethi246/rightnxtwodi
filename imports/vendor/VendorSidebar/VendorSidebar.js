@@ -15,7 +15,7 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 
 Template.vendorSidebar.helpers({
 	'bussinessDetails' : function () {
-		console.log('bussinessDetails');
+		// console.log('bussinessDetails');
 		var usrId = Meteor.userId();
 		var data = Business.find({"businessOwnerId":usrId,"status": "active"}).fetch();
 		if(data){

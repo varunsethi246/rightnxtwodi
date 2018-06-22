@@ -142,7 +142,7 @@ Template.addVendorBusInfo.events({
    'keydown .businessAbtBus':function(event){
       setTimeout(function() {
          var aboutBus = $('.businessAbtBus').val();
-         console.log('aboutBus :',aboutBus);
+         // console.log('aboutBus :',aboutBus);
          if(aboutBus){
             var aboutBuslen = aboutBus.length;
             var remainText = 2500- aboutBuslen;

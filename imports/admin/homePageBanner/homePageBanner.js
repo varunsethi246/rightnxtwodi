@@ -59,7 +59,7 @@ Template.homePageBanner.events({
 
 
 homePageBannerForm = function () {  
-	console.log('infunction');
+	// console.log('infunction');
   BlazeLayout.render("adminLayout",{main: 'homePageBanner'});
 }
 

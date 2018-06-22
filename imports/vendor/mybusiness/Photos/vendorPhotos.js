@@ -337,7 +337,7 @@ Template.vendorPhotos.events({
 		        // Render thumbnail.
 
 		        var span = document.createElement('span');
-		        span.innerHTML = ['<img class="draggedImg" src="', e.target.result,
+		        span.innerHTML = ['<img class="draggedImgPhotos" src="', e.target.result,
 		                          '" title="', escape(theFile.name), '"/>'].join('');
 		        document.getElementById('businessPhotolist').insertBefore(span, null);
 		        

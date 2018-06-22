@@ -115,9 +115,9 @@ Template.LoginOTP.events({
 
               var emailVar    = userDetails.emails[0].address;
               var reversePassWord = userDetails.profile.reverse;
-              console.log("reversePassWord",reversePassWord); 
+              // console.log("reversePassWord",reversePassWord); 
                 var passwordVar   = reversePassWord.split("").reverse().join("");
-                console.log("passwordVar",passwordVar);
+                // console.log("passwordVar",passwordVar);
 
                 Meteor.loginWithPassword(emailVar,passwordVar, function(err,result){
                   if(err){

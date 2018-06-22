@@ -2353,11 +2353,11 @@ margin-top:15%
 
 .uploadpicvendor {
 display:none;
-height:220px!important
+height:122px!important
 }
 
 .marginBtnV {
-margin-left:150%!important;
+margin-left:98%!important;
 margin-top:12%!important
 }
 
@@ -2368,16 +2368,17 @@ padding-right:2px
 }
 
 .vPhotosUserRowSecAdj {
-margin-bottom:15px
+	padding: 0px 15px 0px 4px;
+/*margin-bottom:15px*/
 }
 
 .vPhotosUserRowSecAdj > .vPhotosYouRImg {
 padding-right:0
 }
 
-.vPhotosUserRowSecAdj:last-child {
+/*.vPhotosUserRowSecAdj:last-child {
 margin-bottom:15px
-}
+}*/
 
 .uploadPicSize img {
 height:100%;
@@ -2552,8 +2553,8 @@ margin-top:10px!important
 }
 
 .vPhotosYouRe .row {
-margin-top:0px!important;
-margin-bottom:0!important;
+/*margin-top:0px!important;*/
+/*margin-bottom:0!important;*/
 margin-left:1%
 }
 
@@ -2567,16 +2568,12 @@ height:195px
 
 .vPhotosYouRepeatImgOAdj:hover {
 border:2px solid #f89b1c;
-box-shadow:1px 1px 2px #aaa
+box-shadow:0px 0px 12px #aaa;
 }
 
 .vPhotosYouRepeatImgOAdj img {
 height:100%;
 width:100%
-}
-
-.vPhotosYouRepeatImgOAdj input {
-background-color:#fff!important
 }
 
 .photoAlbmImg img {
@@ -2753,9 +2750,9 @@ margin-left:5.5%
 display:none
 }
 
-.selectBuss {
+/*.selectBuss {
 margin-top:-6px
-}
+}*/
 
 .heartv > .fa-heart {
 position:absolute;
@@ -4237,3 +4234,4 @@ text-align: center
 	border: 1px solid #bbbbbb;
     margin-top: 15px;
 }
+.busiTimeOpenHrs{margin-top: 10px;margin-bottom: 0px;}
