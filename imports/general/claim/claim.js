@@ -459,7 +459,12 @@ Template.claim.events({
 			// $('.genLoginSignup').show();
 			// $('.signUpBox').hide();	
 
-					$('.loginScreen').hide();
+			// $('.loginScreen').hide();
+			// $('.genLoginSignup').hide();
+			// $('.signupScreen').hide();
+			// $('.thankyouscreen').hide();
+			// $('.signUpBox').show();
+			$('.loginScreen').hide();
 		$('.genLoginSignup').hide();
 		$('.signupScreen').hide();
 		$('.thankyouscreen').hide();

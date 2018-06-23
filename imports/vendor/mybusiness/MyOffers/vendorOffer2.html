@@ -6,7 +6,7 @@
 					<div class="row vendor-colomn">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<label class="bold">Deal Templates</label>
-							<select class="form-control vendorSelectArrow selectpicker" name="dealTemplate" required="true">
+							<select class="form-control vendorSelectArrow selectpicker dealy" name="dealTemplate" required="true">
 								<option>Percent Off</option>
 								<option>Price Off</option>
 								<option>Fixed Price</option>
@@ -17,7 +17,7 @@
 						{{#with formvaluesData}}
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<label class="bold">Deal Heading/Headline (40 char. max)</label>
-								<input type="text" name="dealHeadline" value="{{dealHeadline}}" maxlength="40" class="form-control" required="true">
+								<input id="dealHeadliney" type="text" name="dealHeadline" value="{{dealHeadline}}" maxlength="40" class="form-control" required="true">
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 								<label class="bold">Deal Description (80 char. max)</label>

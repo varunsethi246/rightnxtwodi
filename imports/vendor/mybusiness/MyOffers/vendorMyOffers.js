@@ -206,25 +206,7 @@ Template.vendorOffer1.helpers({
 	// }
 });
 Template.vendorMyOffers.events({
-	'click .dealx':function(event){
-		// var dealDescriptionval = event.target.dealTemplate.value;
-		var dealDescriptionval = $('.dealx').val();
-		if (dealDescriptionval == 'Percent Off') {
-			var dealdes = 'X% off on your order';
-		}else if(dealDescriptionval == 'Price Off'){
-			var dealdes = 'Rs.X off on your total bill (Eg. Any Salon Service)';
-		}else if(dealDescriptionval == 'Fixed Price'){
-			var dealdes = 'Rs. X for our fixed price menu(Mayur Thali)';
-		}else if(dealDescriptionval == 'Free Item'){
-			var dealdes = 'X free glass of juice with every Entrée before 7';
-		}else if(dealDescriptionval == 'Create Your own Deal'){
-			var dealdes = 'Create your own Deal';
-			}
-		$('#dealHeadline').val(dealdes);
-		console.log('$#dealHeadline).val(dealdes);',$('#dealHeadline').val(dealdes));
-		// var dealDescriptionvalone = Session.set('dealDescriptionvalOne',dealDescriptionval);
-		
-	},
+	
 	'click .viewModal': function(event){
 		event.preventDefault();
 		var id = event.currentTarget.id;
@@ -1021,6 +1003,25 @@ Template.vendorOffer1.helpers({
 });
 
 Template.vendorOffer1.events({
+	'click .dealx':function(event){
+		// var dealDescriptionval = event.target.dealTemplate.value;
+		var dealDescriptionval = $('.dealx').val();
+		if (dealDescriptionval == 'Percent Off') {
+			var dealdes = 'X% off on your order';
+		}else if(dealDescriptionval == 'Price Off'){
+			var dealdes = 'Rs.X off on your total bill (Eg. Any Salon Service)';
+		}else if(dealDescriptionval == 'Fixed Price'){
+			var dealdes = 'Rs. X for our fixed price menu(Mayur Thali)';
+		}else if(dealDescriptionval == 'Free Item'){
+			var dealdes = 'X free glass of juice with every Entrée before 7';
+		}else if(dealDescriptionval == 'Create Your own Deal'){
+			var dealdes = 'Create your own Deal';
+			}
+		$('#dealHeadline').val(dealdes);
+		// console.log('$#dealHeadline).val(dealdes);',$('#dealHeadline').val(dealdes));
+		// var dealDescriptionvalone = Session.set('dealDescriptionvalOne',dealDescriptionval);
+		
+	},
 	// 'click #usrtimeFrom': (event)=>{
 	// 	// $( "#usrtimeFrom" ).datepicker({ minDate: today});
 	// 	$("#usrtimeFrom").datepicker({
@@ -1086,8 +1087,16 @@ Template.vendorOffer2.helpers({
 		var offerObj = Offers.findOne({"_id":offerId});
 		var offerData = Offers.find({}).fetch();
 		var count = 0;
+		var headDealY = Session.get('dealHeadY');
+		console.log('headDealY :',headDealY);
 		if(offerObj){
+			if (headDealY) {
+
+			var dateToDate = headDealY;
+			}else{
 			var dateToDate = offerObj.expirationToDate;
+
+			}
 			var date1 = moment(dateToDate).format('YYYY-MM-DD');
 			var dateFromDate = offerObj.expirationFromDate;
 			var date2 = moment(dateFromDate).format('YYYY-MM-DD');
@@ -1116,6 +1125,26 @@ Template.vendorOffer2.helpers({
 });
 
 Template.vendorOffer2.events({
+	'click .dealy':function(event){
+		// var dealDescriptionval = event.target.dealTemplate.value;
+		var dealDescriptionval = $('.dealy').val();
+		if (dealDescriptionval == 'Percent Off') {
+			var dealdes = 'X% off on your order';
+		}else if(dealDescriptionval == 'Price Off'){
+			var dealdes = 'Rs.X off on your total bill (Eg. Any Salon Service)';
+		}else if(dealDescriptionval == 'Fixed Price'){
+			var dealdes = 'Rs. X for our fixed price menu(Mayur Thali)';
+		}else if(dealDescriptionval == 'Free Item'){
+			var dealdes = 'X free glass of juice with every Entrée before 7';
+		}else if(dealDescriptionval == 'Create Your own Deal'){
+			var dealdes = 'Create your own Deal';
+			}
+		var dealHeadY=$('#dealHeadliney').val(dealdes);
+		Session.set('dealHeadY',dealHeadY);
+		// console.log('$#dealHeadline).val(dealdes);',$('#dealHeadline').val(dealdes));
+		// var dealDescriptionvalone = Session.set('dealDescriptionvalOne',dealDescriptionval);
+		
+	},
 	'click #locationIcon': function(event){
 		event.preventDefault();
 		FlowRouter.go('/terms-of-service');
