@@ -71,7 +71,6 @@ Template.imageCommet.helpers({
 		}
 		var businessName = Business.findOne({"businessLink":busLink});
 		if(businessName){
-			console.log('businessName :',businessName);
 			if(businessName.businessImages.length>0){
 				if(businessName.businessImages[0].img){
 					var pic = BusinessImgUploadS3.findOne({"_id":businessName.businessImages[0].img});

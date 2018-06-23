@@ -30,11 +30,11 @@ var counterImg = 0;
 
 Template.userReviewTemplate.helpers({
 
-	showRating(){
+	showRating(_id){
 		// userId,businessLink
-		var userId = Meteor.userId();
+		var userId = _id;
 		var businessLink = FlowRouter.getParam('businessurl');
-		var ratingInt = Review.findOne({"userId" : userId,"businessLink":businessLink});
+		var ratingInt = Review.findOne({"_id" : userId,"businessLink":businessLink});
 		if(ratingInt){
 			// console.log("ratingInt = ", ratingInt);
 			var latestRating = ratingInt.rating;
@@ -64,7 +64,6 @@ Template.userReviewTemplate.helpers({
 				}
 			
 			}
-			// console.log("ratingObj = ", ratingObj);
 			return ratingObj;
 		}else{
 			return {};
@@ -133,7 +132,6 @@ Template.descriptionTabContent.helpers({
 
 			for(i=0; i<allReviews.length; i++){
 				allReviews[i].userProfileUrl = generateURLid(allReviews[i].userId);	
-
 				var newUserThree = Meteor.userId();
 				if(newUserThree){
 					if((Meteor.users.findOne({"_id": newUserThree}).roles[0] === 'admin') || (allReviews[i].userId === newUserThree)){
@@ -144,16 +142,16 @@ Template.descriptionTabContent.helpers({
 				} else {
 					allReviews[i].revEditButton = 'hide';
 				}
-	
+				
 				if(allReviews[i].reviewComment){
 				// console.log("allReviews[i].reviewComment :",allReviews[i].reviewComment);
-				if(allReviews[i].reviewComment.length > 300){
-					var desc3 = allReviews[i].reviewComment.substring(0,300);
-					var desc4 = allReviews[i].reviewComment.substring(300,allReviews[i].reviewComment.length);
-					allReviews[i].ownerDesc3 = desc3;
-					allReviews[i].ownerDesc4 = desc4;
+					if(allReviews[i].reviewComment.length > 300){
+						var desc3 = allReviews[i].reviewComment.substring(0,300);
+						var desc4 = allReviews[i].reviewComment.substring(300,allReviews[i].reviewComment.length);
+						allReviews[i].ownerDesc3 = desc3;
+						allReviews[i].ownerDesc4 = desc4;
+					}
 				}
-			}
 
 				var userId = allReviews[i].userId;
 				var userObj = Meteor.users.findOne({"_id":userId});

@@ -23,13 +23,15 @@
               </div>
               <div class="logoNamePhoto col-lg-3 pull-right col-xs-3 col-md-3 col-sm-3   ">
                 <div class="userPicReview"> 
-                  <img src="{{userProfilePic}}"  height="40px" width="40px" alt="userProfilePic" class="bgGif">
+                  <a href="/userReview/{{redirectUid}}" target="_blank">
+                    <img src="{{userProfilePic}}"  height="40px" width="40px" alt="userProfilePic" class="bgGif">
+                  </a>
                 </div>
                 <div class="userName">
                   {{#if checkCurrentUser userId}}
-                  <p>{{username}}</p>
+                    <p>{{username}}</p>
                   {{else}}
-                  <a href="/userReview/{{redirectUid}}" target="_blank"><p>{{username}}</p> </a>
+                    <a href="/userReview/{{redirectUid}}" target="_blank"><p>{{username}}</p> </a>
                   {{/if}}
                 </div> 
               </div>
