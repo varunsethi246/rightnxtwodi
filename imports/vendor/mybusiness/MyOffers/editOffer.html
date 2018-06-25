@@ -7,6 +7,7 @@
 				<table class="table table-bordered editOfferTable">
 					<thead>
 						<tr>
+							<th></th>
 							<th>Offer No.</th>
 							<th>Offer Headline</th>
 							<th>Post On</th>
@@ -18,6 +19,7 @@
 					<tbody>
 						{{#each editOffers}}	
 							<tr class="text-center">
+								<td><input type="checkbox" name="offerCheckbox" class="cursorPointer" value="{{_id}}"></td>
 								<td>{{i}}</td>
 								<td>{{dealHeadline}}</td>
 								<td>{{expirationFromDate}}</td>
