@@ -128,9 +128,9 @@ margin:0
 .thumImgDescP {
 color:#000!important;
 line-height:16px;
-font-weight:700
+font-weight:700;
 }
-.thumbTxtAddr{min-height: 100px;}
+.thumbTxtAddr{height: 85px;}
 .thumbTxtOverfl {
 display:inline-block;
 /*width:230px;*/
@@ -139,6 +139,7 @@ overflow:hidden!important;
 text-overflow:ellipsis;
 word-break: break-word;
 line-height: 18px;
+height: 40px;
 }
 
 .thumbEnqBtn {
