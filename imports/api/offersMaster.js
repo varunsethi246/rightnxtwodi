@@ -13,7 +13,7 @@ if (Meteor.isServer) {
 		return Offers.find({});
 	});
 	Meteor.publish('offersListSearch', function() {
-		return Offers.find({"offerStatus":"active"},{fields:{"dealHeadline":1}});
+		return Offers.find({"offerStatus":"Active"},{fields:{"dealHeadline":1}});
 	});
 	Meteor.publish('businessOffers', function businessOffers(businessurl) {
 		return Offers.find({"businessLink": businessurl});
@@ -28,19 +28,19 @@ if (Meteor.isServer) {
 		var first = currentDate.getDate() - currentDate.getDay();
 		var lastDate = new Date(last).toISOString();
 		var firstWeekDate = new Date(currentDate.setDate(first)).toISOString();
-		Counts.publish(this, 'noOfOfferWeek', Offers.find({'offerStatus':'active','createdAt' : {$gte : new Date(firstWeekDate), $lt :new Date(new Date().toISOString())}}));
+		Counts.publish(this, 'noOfOfferWeek', Offers.find({'offerStatus':'Active','createdAt' : {$gte : new Date(firstWeekDate), $lt :new Date(new Date().toISOString())}}));
 	});
 	Meteor.publish('noOfofferMonth', function() {
   		var currentDate = new Date();
   		var firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
   		var lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-		Counts.publish(this, 'noOfofferMonth', Offers.find({'offerStatus':'active','createdAt' : {$gte : new Date(firstDay), $lt :new Date( new Date().toISOString())}}));
+		Counts.publish(this, 'noOfofferMonth', Offers.find({'offerStatus':'Active','createdAt' : {$gte : new Date(firstDay), $lt :new Date( new Date().toISOString())}}));
 	});
 	Meteor.publish('noOfofferYear', function() {
   		var currentDate = new Date();
   		var endDate = new Date(currentDate.getFullYear(),11, 31);
   		var startDate = new Date(new Date().getFullYear(), 0, 1);
-		Counts.publish(this, 'noOfofferYear', Offers.find({'offerStatus':'active','createdAt' : {$gte :startDate, $lt :endDate}}));
+		Counts.publish(this, 'noOfofferYear', Offers.find({'offerStatus':'Active','createdAt' : {$gte :startDate, $lt :endDate}}));
 	});
 }
 
@@ -119,7 +119,7 @@ Meteor.methods({
 
 	'deleteOffers':function(formValues,businessLink){
 		Offers.remove(formValues);
-		var payObj = Payment.findOne({"vendorId":Meteor.userId(), "businessLink": businessLink, "paymentStatus":"unpaid"});
+		var payObj = Payment.findOne({"vendorId":Meteor.userId(), "businessLink": businessLink, "paymentStatus":"unpaid", "orderType":"Offer"});
 		if(payObj){
 			Payment.update(
 			{"_id":payObj._id},
@@ -127,10 +127,28 @@ Meteor.methods({
 				{'offers': 
 					{
 						'offerId': formValues
-					}
+					},
+				'offerId': formValues,
 				}
 			});
 		}
 	},
-	
+	'deleteOfferImg' : function(id){
+		Offers.update(
+			{"_id": id},
+			{ $set:	
+				{ 
+					"offerImage"			: '',
+				}, 
+			},
+			function(error,result){
+				if(error){
+					return error;
+				}
+				if(result){
+					return result;
+				}
+			}
+		);	
+	},
 });

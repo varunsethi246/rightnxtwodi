@@ -29,6 +29,23 @@ bottom:0
     /* z-index: 100; */
     opacity: 0;
 }
+.inputOfferImg{
+    height: 40px;
+    margin-top: 2px;
+    background-color: #5f5952bf;
+    border: 1px solid #f89b2f45;
+    box-sizing: content-box;
+    color: #080808;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    height: 32px;
+    width: 53%;
+    position: absolute;
+    top: 64%;
+    /* z-index: 100; */
+    opacity: 0;
+}
 
 #list {
 width:100%;
@@ -51,6 +68,14 @@ overflow-y:auto
     border: 1px solid #ddd;
     padding: 6px;
     margin: 6px;
+}
+.draggedImgOffers {
+    height: 190px;
+    width: 160px;
+    border: 1px solid #ddd;
+    padding: 6px;
+    margin: 0px;
+    position: relative;
 }
 .draggedImgPhotos {
     height: 105px;

@@ -58,7 +58,7 @@ Meteor.methods({
 
 	'insertPayment':function(formValues){
 		//Find all new offers for businessId
-		var newOffers = Offers.find({"businessId":formValues.businessId,"offerStatus":"new"}).fetch();
+		var newOffers = Offers.find({"businessId":formValues.businessId,"offerStatus":"Payment Pending"}).fetch();
 		var newOffersArr = [];
 		if(newOffers){
 			var companyRates = CompanySettings.findOne({'companyId':101},{"rates":1});
@@ -290,7 +290,19 @@ Meteor.methods({
 	
 	'addNewOfferinPayment': function(_id, offerId){
 		Payment.update( {"_id":_id},
-			{$push: {offers: {"offerId": offerId} } },
+			{$push: {offers: {"offerId": offerId},"offerId": offerId}},
+			function(error,result){
+				if(error){
+					return error;
+				}else{
+					return result;
+				}
+			}
+		);
+	},
+	'removeNewOfferinPayment': function(_id, offerId){
+		Payment.update( {"_id":_id},
+			{$pull: {offers: {"offerId": offerId}, "offerId": offerId} },
 			function(error,result){
 				if(error){
 					return error;
@@ -375,7 +387,7 @@ Meteor.methods({
 							Offers.update(
 								{"_id": data},
 								{ $set:	{ 
-											"offerStatus" 	: "active",
+											"offerStatus" 	: "Active",
 										}, 
 								},
 								function(error1,result1){
@@ -480,7 +492,7 @@ Meteor.methods({
 					Offers.update(
 						{"_id": offerId},
 						{ $set:	{ 
-									"offerStatus" 	: "active",
+									"offerStatus" 	: "Active",
 								}, 
 						},
 						function(error1,result1){

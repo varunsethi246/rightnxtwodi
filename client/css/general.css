@@ -1224,7 +1224,8 @@ font-family:"PROXIMANOVA-REGULAR"
 color:#4e4f51;
 font-size:14px;
 font-family:"PROXIMANOVA-REGULAR";
-line-height:25px
+line-height:25px;
+word-wrap: break-word;
 }
 
 .claim-data h3 {

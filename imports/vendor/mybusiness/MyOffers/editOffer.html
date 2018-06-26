@@ -19,7 +19,7 @@
 					<tbody>
 						{{#each editOffers}}	
 							<tr class="text-center">
-								<td><input type="checkbox" name="offerCheckbox" class="cursorPointer" value="{{_id}}"></td>
+								<td>{{#if activeInactiveOffer}}<input type="checkbox" name="offerCheckbox" class="cursorPointer offerCheckbox" value="{{_id}}" checked="{{#if showCheckedOffer}}checked{{/if}}">{{/if}}</td>
 								<td>{{i}}</td>
 								<td>{{dealHeadline}}</td>
 								<td>{{expirationFromDate}}</td>
@@ -56,7 +56,7 @@
 								        		<a href="#" data-dismiss="modal" aria-hidden="true" class="close pull-right"><i class="fa fa-times-circle-o fa-lg" aria-hidden="true"></i></a>
 								   			</div>
 								            <div class="modal-body">
-								            	{{> vendorOffer2}}
+								            	{{> viewVendorOffer}}
 								            </div>
 								        </div>
 									</div>

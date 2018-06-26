@@ -21,6 +21,7 @@ import './receipt.html';
 import './editOffer.html';
 import './paymentSuccess.html';
 import './paymentFailed.html';
+import './viewVendorOffer.html';
 
 
 var files = [];
@@ -90,7 +91,7 @@ Template.vendorMyOffers.helpers({
 		if(businessObj){
 			var unpaidOffers = Offers.find({"vendorId":Meteor.userId(),
 											"businessId":businessObj._id,
-											"offerStatus":"new"}).count();
+											"offerStatus":"Payment Pending"}).count();
 			if(unpaidOffers){
 				if(unpaidOffers > 0){
 					var valueObj = {'value' : ''};
@@ -211,21 +212,9 @@ Template.vendorMyOffers.events({
 		event.preventDefault();
 		var id = event.currentTarget.id;
 		Session.set('id',id);
-		$('.vendorOfferForm2').find('input').attr('disabled','disabled');
-		$('.vendorOfferForm2').find('select').attr('disabled','disabled');
-		$('.vendorOfferForm2').find('textarea').attr('disabled','disabled');
-		$('.vendorOfferForm2').find('.venBusiOffer').children('.col-lg-4').css('display','none');
-		$('.vendorOfferForm2').find('input[type="submit"]').css('display','none');
 	},
 	'click .editModal': function(event){
 		event.preventDefault();
-	
-		$('.vendorOfferForm2').find('input').removeAttr('disabled','disabled');
-		$('.vendorOfferForm2').find('select').removeAttr('disabled','disabled');
-		$('.vendorOfferForm2').find('textarea').removeAttr('disabled','disabled');
-		$('.vendorOfferForm2').find('.venBusiOffer').children('.col-lg-4').css('display','block');
-		$('.vendorOfferForm2').find('input[type="submit"]').css('display','block');	
-	
 		var id = event.currentTarget.id;
 		Session.set('id',id);
 
@@ -351,7 +340,7 @@ Template.vendorMyOffers.events({
 								"expirationFromDate" 	: event.target.expirationFromDate.value,
 								"expirationToDate" 		: event.target.expirationToDate.value,
 								"legalNotices"			: event.target.legalNotices.value,
-								"offerStatus"			: 'Payment Pending',
+								"offerStatus"			: 'New',
 								"numOfMonths"			: numOfMonths,
 								"offerImage"			: imgId,
 							};
@@ -466,7 +455,7 @@ Template.vendorMyOffers.events({
 				"expirationFromDate" 	: event.target.expirationFromDate.value,
 				"expirationToDate" 		: event.target.expirationToDate.value,
 				"legalNotices"			: event.target.legalNotices.value,
-				"offerStatus"			: 'Payment Pending',
+				"offerStatus"			: 'New',
 				"numOfMonths"			: numOfMonths,
 				"offerImage"			: imgId,
 			};
@@ -587,11 +576,34 @@ Template.vendorMyOffers.events({
 			//pending to be added into invoice - payment collection
 			var offersArray = Offers.find({"vendorId"	 	: Meteor.userId(), 
 										   "businessId" 	: formValues.businessId,
-										   "offerStatus" 	: 'new'
+										   "offerStatus" 	: 'Payment Pending'
+										  }).fetch();
+			var newOffersArray = Offers.find({"vendorId"	: Meteor.userId(), 
+										   "businessId" 	: formValues.businessId,
+										   "offerStatus" 	: 'New'
 										  }).fetch(); 
 			if(unpaidInvoiceObj.offers){
-				if(offersArray){
-					if(unpaidInvoiceObj.offers.length != offersArray.length){
+				if(newOffersArray){
+					for(k=0; k<newOffersArray.length; k++){
+						for (l=0; l<unpaidInvoiceObj.offers.length;l++) {
+							if(newOffersArray[k]._id == unpaidInvoiceObj.offers[l].offerId){
+								Meteor.call('removeNewOfferinPayment',unpaidInvoiceObj._id, newOffersArray[k]._id,
+									function(error,result){
+										if(error){
+											Bert.alert('There is some error occur while adding recent offer to invoice!','danger','growl-top-right');
+										}
+										else{
+											// console.log('checking1');
+											// Bert.alert('Your recent new Offer added to Invoice.','success','growl-top-right');
+										}
+									}
+								);	
+							} 
+						}
+					}
+				}
+				if(offersArray){					
+					// if(unpaidInvoiceObj.offers.length != offersArray.length){
 						for(i=0; i<offersArray.length; i++){
 							var offerFound = 'notfound';
 							for (j=0; j<unpaidInvoiceObj.offers.length;j++) {
@@ -607,14 +619,14 @@ Template.vendorMyOffers.events({
 											Bert.alert('There is some error while adding recent offer to invoice!','danger','growl-top-right');
 										}
 										else{
-											console.log('checking1');
+											// console.log('checking1');
 											Bert.alert('Your recent new Offer added to Invoice.','success','growl-top-right');
 										}
 									}
 								);									
 							}
 						}
-					}
+					// }
 				}
 			}
 			FlowRouter.go('/businessOffers/:businessLink/invoice/:invoiceNumber',{'businessLink':businessLink, 'invoiceNumber':invNum});
@@ -1058,7 +1070,7 @@ Template.vendorOffer1.events({
 		      return function(e) {
 		        // Render thumbnail.
 		        var span = document.createElement('span');
-		        span.innerHTML = ['<i class="pull-right fa fa-times-circle cursorPointer" id="" aria-hidden="true"></i><img class="thumbnail draggedImg imgVendorSpan" src="', e.target.result,
+		        span.innerHTML = ['<i class="pull-right fa fa-times-circle cursorPointer exitOfferImage"></i><img class="thumbnail draggedImgOffers imgVendorSpan" src="', e.target.result,
 		                          '" title="', escape(theFile.name), '"/>'].join('');
 		        document.getElementById(imageId).insertBefore(span, null);
 		      };
@@ -1067,6 +1079,10 @@ Template.vendorOffer1.events({
 		    // Read in the image file as a data URL.
 		    reader.readAsDataURL(f);
 		}// end of for loop
+	},
+	'click .exitOfferImage' :  function(event){
+		var $this = $(event.target);
+		$this.parent().parent().empty();
 	},	
 	'click #imgVendorSpan' :  function(event){
 		// $(event.target).parent().parent().empty();
@@ -1081,14 +1097,13 @@ Template.vendorOffer1.events({
 	// },
 });
 
-Template.vendorOffer2.helpers({
+Template.viewVendorOffer.helpers({
 	formvaluesData(){
 		var offerId = Session.get('id');
 		var offerObj = Offers.findOne({"_id":offerId});
 		var offerData = Offers.find({}).fetch();
 		var count = 0;
 		var headDealY = Session.get('dealHeadY');
-		console.log('headDealY :',headDealY);
 		if(offerObj){
 			if (headDealY) {
 
@@ -1102,6 +1117,70 @@ Template.vendorOffer2.helpers({
 			var date2 = moment(dateFromDate).format('YYYY-MM-DD');
 
 			var data={
+				dealTemplate 		: offerObj.dealTemplate,
+				dealHeadline 		: offerObj.dealHeadline,
+				dealDescription 	: offerObj.dealDescription,
+				expirationFromDate  : moment(date2).format('DD/MM/YYYY'),
+				expirationToDate	: moment(date1).format('DD/MM/YYYY'),
+				legalNotices 		: offerObj.legalNotices,
+				offerImage 			: offerObj.offerImage,
+				id 					: offerObj._id,
+			}
+		}
+		return data;
+	},
+	offerImgData(){
+		var offerId = Session.get('id');
+		var offerObj = Offers.findOne({"_id":offerId});
+		if(offerObj){
+			var pic = OfferImagesS3.findOne({'_id' : offerObj.offerImage});
+		}
+		return pic;
+	}
+});
+
+Template.vendorOffer2.helpers({
+	formvaluesData(){
+		var offerId = Session.get('id');
+		var offerObj = Offers.findOne({"_id":offerId});
+		var offerData = Offers.find({}).fetch();
+		var count = 0;
+		var headDealY = Session.get('dealHeadY');
+		var selectedPercent = '';
+		var selectedPrice = '';
+		var selectedFixed = '';
+		var selectedFree = '';
+		var selectedCreate = '';
+
+		if(offerObj){
+			if (headDealY) {
+
+			var dateToDate = headDealY;
+			}else{
+			var dateToDate = offerObj.expirationToDate;
+
+			}
+			var date1 = moment(dateToDate).format('YYYY-MM-DD');
+			var dateFromDate = offerObj.expirationFromDate;
+			var date2 = moment(dateFromDate).format('YYYY-MM-DD');
+			if(offerObj.dealTemplate == 'Percent Off'){
+				var selectedPercent = 'selected';
+			}else if(offerObj.dealTemplate == 'Price Off'){
+				var selectedPrice = 'selected';
+			}else if(offerObj.dealTemplate == 'Fixed Price'){
+				var selectedFixed = 'selected';
+			}else if(offerObj.dealTemplate == 'Free Item'){
+				var selectedFree = 'selected';
+			}else if(offerObj.dealTemplate == 'Create Your own Deal'){
+				var selectedCreate = 'selected';
+			} 
+			var data={
+				selectedPercent 	: selectedPercent,
+				selectedPrice 		: selectedPrice,
+				selectedFixed 		: selectedFixed,
+				selectedFree 		: selectedFree,
+				selectedCreate 		: selectedCreate,
+				dealTemplate 		: offerObj.dealTemplate,
 				dealHeadline 		: offerObj.dealHeadline,
 				dealDescription 	: offerObj.dealDescription,
 				expirationFromDate  : date2,
@@ -1118,7 +1197,6 @@ Template.vendorOffer2.helpers({
 		var offerObj = Offers.findOne({"_id":offerId});
 		if(offerObj){
 			var pic = OfferImagesS3.findOne({'_id' : offerObj.offerImage});
-			console.log(pic);
 		}
 		return pic;
 	}
@@ -1161,14 +1239,16 @@ Template.vendorOffer2.events({
 		var monthVal1 = (moment($(event.target).find('input[name="expirationToDate"]').val()).month())+1;
 		var num = parseInt(monthVal1) - parseInt(monthVal);
 		if(num < 0){
-			var offerStatus = 'inactive';
-		}else if(offers.offerStatus == 'active'){
-			var offerStatus = 'active';
-		}else if(num > 0 && offers.offerStatus == 'inactive'){
-			var offerStatus = 'inactive';
+			var offerStatus = 'Inactive';
+		}else if(num > 0 && offers.offerStatus == 'Active'){
+			var offerStatus = 'Active';
+		}else if(num > 0 && offers.offerStatus == 'Inactive'){
+			var offerStatus = 'Inactive';
 		}
-		else{
-			var offerStatus = 'new';
+		else if(offers.offerStatus == 'Payment Pending'){
+			var offerStatus = 'Payment Pending';
+		}else{
+			var offerStatus = 'New';
 		}
 		
 		if(files[0]){
@@ -1244,7 +1324,7 @@ Template.vendorOffer2.events({
 			);
 		}
 	},
-	'change .businessOffersfiles' : function(event){
+	'change .businessPhotofiles' : function(event){
 		var $this = $(event.target);
 		$this.parent().parent().find('output').empty();
 		// $('.drag').hide();
@@ -1271,7 +1351,7 @@ Template.vendorOffer2.events({
 		      return function(e) {
 		        // Render thumbnail.
 		        var span = document.createElement('span');
-		        span.innerHTML = ['<img class="thumbnail draggedImg imgVendorSpan" src="', e.target.result,
+		        span.innerHTML = ['<i class="pull-right fa fa-times-circle cursorPointer exitOfferImage"></i><img class="thumbnail draggedImgOffers imgVendorSpan" src="', e.target.result,
 		                          '" title="', escape(theFile.name), '"/>'].join('');
 		        document.getElementById(imageId).insertBefore(span, null);
 		      };
@@ -1280,7 +1360,25 @@ Template.vendorOffer2.events({
 		    // Read in the image file as a data URL.
 		    reader.readAsDataURL(f);
 		}// end of for loop
-	},	
+	},
+	'click .exitOfferImage' :  function(event){
+		var $this = $(event.target);
+		$this.parent().parent().empty();
+	},
+	'click .delOfferImage' :  function(event){
+		var $this = $(event.target);
+		var id = $this.attr('id');
+		var imgId = $this.attr('data-imgid');
+		
+		Meteor.call('deleteOfferImg',id,
+            function(error, result) { 
+              if(error) {
+                console.log ('Error Message: ' +error ); 
+              }else{
+				OfferImagesS3.remove(imgId);
+            }
+		});
+	}	
 });
 
 Template.receipt.helpers({
@@ -1425,7 +1523,7 @@ Template.editOffer.events({
 		var modelid = $(event.target).attr('id');
 		var offerObj 	=  Offers.findOne({"_id":modelid});
 		var status = offerObj.offerStatus; 
-		if(status == 'new'){
+		if(status == 'New' || status == 'Payment Pending'){
 			Meteor.call('deleteOffers',modelid,businessLink,function(error,result){
 				if(error){
 					Bert.alert(error.reason,"danger","growl-top-right");
@@ -1514,14 +1612,30 @@ Template.editOffer.events({
 			});
 		}
 	},
-
+	'click .offerCheckbox':function(event){
+	    var id = event.target.value;
+	    if(event.target.checked){
+	    	var status = 'Payment Pending';
+	    	$(event.target).prop('checked',true);
+		}else{
+	    	var status = 'New';
+	    	$(event.target).prop('checked',false);
+		}
+	    Meteor.call("updateOfferStatus",id,status, function(error,result){
+	        if(error){
+	          console.log(error.reason);
+	        }else{
+	          // swal("Done","Basic Information inserted successfully!"); 
+	        }
+        });
+	},
 	'click .offerStatus':function(event){
 		event.preventDefault();
 		var modelid = $(event.target).attr('id');
 		var offerObj 	=  Offers.findOne({"_id":modelid});
 		var status = offerObj.offerStatus; 
-		if(status == 'active'){
-			Meteor.call('updateOfferStatus',modelid,'inactive',function(error,result){
+		if(status == 'Active'){
+			Meteor.call('updateOfferStatus',modelid,'Inactive',function(error,result){
 				if(error){
 					Bert.alert(error.reason,"danger","growl-top-right");
 				}else{
@@ -1537,8 +1651,8 @@ Template.editOffer.events({
 				// $(event.target).removeAttr('data-target','modal');
 				$('#inactOfferModal-'+modelid).modal('show');
 			}else{
-				if(status == 'inactive'){
-					Meteor.call('updateOfferStatus',modelid,'active',function(error,result){
+				if(status == 'Inactive'){
+					Meteor.call('updateOfferStatus',modelid,'Active',function(error,result){
 						if(error){
 							Bert.alert(error.reason,"danger","growl-top-right");
 						}else{
@@ -1566,7 +1680,7 @@ Template.editOffer.helpers({
 				var expireDate = allPages[i].expirationToDate;
 				if(expireDate < postDate || expireDate < todayDate){
 					// var offerStatus = 'inactive';
-					Meteor.call('updateOfferStatus',allPages[i]._id,'inactive',function(error,result){
+					Meteor.call('updateOfferStatus',allPages[i]._id,'Inactive',function(error,result){
 						if(error){
 							Bert.alert(error.reason,"danger","growl-top-right");
 						}else{
@@ -1603,7 +1717,15 @@ Template.editOffer.helpers({
 	},
 	showDeleteOffer(){
 		var offerStatus = this.offerStatus;
-		if(offerStatus == 'new'){
+		if(offerStatus == 'New' || offerStatus == 'Payment Pending'){
+			return true;
+		}else{
+			return false;
+		}
+	},
+	showCheckedOffer(){
+		var offerStatus = this.offerStatus;
+		if(offerStatus == 'Payment Pending'){
 			return true;
 		}else{
 			return false;
@@ -1611,12 +1733,20 @@ Template.editOffer.helpers({
 	},
 	showActiveOffer(){
 		var offerStatus = this.offerStatus;
-		if(offerStatus == 'active'){
+		if(offerStatus == 'Active'){
 			return true;
 		}else{
 			return false;
 		}
-	}
+	},
+	activeInactiveOffer(){
+		var offerStatus = this.offerStatus;
+		if(offerStatus == 'Active' || offerStatus == 'Inactive'){
+			return false;
+		}else{
+			return true;
+		}
+	},
 });
 
 Template.offerPayment.onRendered(function(){
