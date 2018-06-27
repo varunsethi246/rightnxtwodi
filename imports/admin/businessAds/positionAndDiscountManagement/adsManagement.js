@@ -60,6 +60,9 @@ Template.adsDiscountManagement.events({
 
 					}
 				});
+			}else if(rate == '' || discount == ''){
+				Bert.alert("Please select discount & rate first.","danger","growl-top-right");
+
 			}
 	    }
 	},
@@ -156,17 +159,18 @@ Template.adsPositionManagement.events({
 
 						}
 					})
-				}else{
-					if(position!='-- Select --' && position != null && rate!= null && rate!== ''){
-						Meteor.call('insertAdsPosition',position,rate,function(error,result){
-							if(error){
-								console.log(error);
-							}else{
-								$('.selectPosition').val('');
-								$('#rate').val('');
-							}
-						})
-					}
+				}else if(position!='-- Select --' && position != null && rate!= null && rate!== ''){
+					Meteor.call('insertAdsPosition',position,rate,function(error,result){
+						if(error){
+							console.log(error);
+						}else{
+							$('.selectPosition').val('');
+							$('#rate').val('');
+						}
+					})
+				}else if(position == '-- Select --' || position == "" || rate == '' || rate == null){
+					Bert.alert("Please select discount & rate first.","danger","growl-top-right");
+
 				}
 			}
 		}

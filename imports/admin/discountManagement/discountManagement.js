@@ -38,6 +38,9 @@ Template.discountManagement.events({
 						$('#price').focus();
 					}
 				});
+			}else if(discount == '' || rate == ''){
+
+				Bert.alert("Please select rate and discount first.","success","growl-top-right");
 			}
 	    }
 	},
@@ -139,7 +142,9 @@ Template.positionManagement.events({
 				Meteor.call('updatePosition',posId,position,rate,function(error,result){
 					if(error){
 						console.log(error);
+
 					}else{
+							// Bert.alert("Please select position number first.","success","growl-top-right");
 						$('.selectPosition').val('');
 						$('#rate').val('');
         				Session.set("positionId",'');
@@ -147,17 +152,21 @@ Template.positionManagement.events({
 
 					}
 				})
-			}else{
-				if(position != '-- Select --' && position != null){
+			}
+			else if(position != '-- Select --' && position != null && rate != ''&& rate != null){
 					Meteor.call('insertPosition',position,rate,function(error,result){
 						if(error){
 							console.log(error);
 						}else{
+							// Bert.alert("Please select position number first.","success","growl-top-right");
 							$('.selectPosition').val('');
 							$('#rate').val('');
 						}
 					})
-				}
+			}
+			else if(position == '-- Select --' || rate == ''){
+
+				Bert.alert("Please select position number and rate first.","danger","growl-top-right");
 			}
 		}
 	},
