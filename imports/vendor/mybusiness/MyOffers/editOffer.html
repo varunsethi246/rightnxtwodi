@@ -13,6 +13,7 @@
 							<th>Post On</th>
 							<th>Expire On</th>
 							<th>Status</th>
+							<th>Payment</th>
 							<th>Action</th>
 						</tr>
 					</thead>
@@ -25,6 +26,7 @@
 								<td>{{expirationFromDate}}</td>
 								<td>{{expirationToDate}}</td>
 								<td>{{offerStatus}}</td>
+								<td>Rs. {{payment}}</td>
 								<td>
 									<i id="{{_id}}" data-toggle="modal" data-target="#editDataModal-{{_id}}" class="fa fa-pencil-square-o editModal" title="Edit"></i>
 									{{#if showDeleteOffer}}<i id="{{_id}}" data-toggle="modal" data-target="#deleteDataModal-{{_id}}" class="fa fa-trash-o" title="Delete"></i>{{else}}<i id="{{_id}}" class="fa fa-circle offerStatus {{#if showActiveOffer}}activeOfer{{/if}}" aria-hidden="true" title="{{#if showActiveOffer}}Inactivate Offer {{else}} Activate Offer {{/if}}"></i>{{/if}}

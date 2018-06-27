@@ -2108,14 +2108,14 @@ margin-bottom:6%
 padding-right:18px
 }
 
-.recDiv .button1 {
+.recDiv .button1,.buttonMakePaymet {
 color:#fff;
 background-color:#f89b1c;
 font-family:'PROXIMANOVA-BOLD';
 border:1px solid #f89b1c
 }
 
-.recDiv .button1:hover {
+.recDiv .button1:hover,.buttonMakePaymet:hover {
 background-color:#b2b2b2;
 border:1px solid #b2b2b2
 }
@@ -2144,7 +2144,7 @@ background-color:#f89b1c;
 border:1px solid #f89b1c
 }
 
-.recDiv .button2 i:hover,.recDiv .button1 i:hover,.recDiv .button3 i:hover {
+.recDiv .button2 i:hover,.recDiv .button1 i:hover,.recDiv .button3 i:hover,.buttonMakePaymet i:hover {
 color:#fff
 }
 

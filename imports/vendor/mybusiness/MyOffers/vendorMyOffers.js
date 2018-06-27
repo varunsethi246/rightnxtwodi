@@ -1454,6 +1454,12 @@ Template.receipt.helpers({
 });
 
 Template.receipt.events({
+	'click .buttonMakePaymet': function(event){
+		var invNum       = FlowRouter.getParam('invoiceNumber');
+		var businessLink = FlowRouter.getParam('businessLink');
+		var invoiceNumber = invNum.split('-')[0];
+		FlowRouter.go('/businessOffers/:businessLink/invoice/:invoiceNumber',{'businessLink':businessLink, 'invoiceNumber':invoiceNumber}); 	
+	},
 	'click .button2': function(event){
 		var invNum       = FlowRouter.getParam('invoiceNumber');
 		var businessLink = FlowRouter.getParam('businessLink');
@@ -1461,8 +1467,7 @@ Template.receipt.events({
 			FlowRouter.go('/VendorPayments');
 		}else{
 			FlowRouter.go('/businessOffers/:businessLink',{'businessLink':businessLink});
-		}
-		
+		}	
 	},
 	'click .button1': function(event){
 		printDiv();
@@ -1671,7 +1676,7 @@ Template.editOffer.helpers({
 		var businessLink = FlowRouter.getParam('businessLink');
 		var businessName = Business.findOne({"businessLink":businessLink, "status":"active"});
 		var businessId = businessName._id;
-
+		var companyRates = CompanySettings.findOne({'companyId':101},{"rates":1,"_id":0});
 		allPages = Offers.find({"vendorId":Meteor.userId(),"businessId":businessId}).fetch();
 		if(allPages){
 			for(i=0;i<allPages.length;i++){
@@ -1688,6 +1693,15 @@ Template.editOffer.helpers({
 						}
 					});
 				}
+				if(companyRates){
+					if(companyRates.rates){
+						var payment = companyRates.rates.ratePerOffer * allPages[i].numOfMonths;
+					}else{
+						var payment = 0;
+					}			
+				}else{
+					var payment = 0;
+				}
 
 
 				allPages[i] = {
@@ -1697,6 +1711,7 @@ Template.editOffer.helpers({
 					dealHeadline		: allPages[i].dealHeadline,
 					expirationFromDate 	: moment(allPages[i].expirationFromDate).format('DD/MM/YYYY'),
 					expirationToDate 	: moment(allPages[i].expirationToDate).format('DD/MM/YYYY'),
+					payment 			: payment,
 				};
 			}
 			return allPages;			
