@@ -1,4 +1,5 @@
 import { Mongo } from 'meteor/mongo';
+import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
  
 export const ConfigSettings = new Mongo.Collection('configSettings');
 

@@ -115,6 +115,7 @@ Template.listOfBusiness.helpers({
 		if(data){
 			for(i=0; i< data.length; i++){
 				var createdBy = Meteor.users.findOne({"_id":data[i].createdBy});
+				// console.log('createdBy :',createdBy);
 				if(createdBy){
 					data[i].userEmailID = createdBy.emails[0].address;
 					data[i].userEmailIDVal = true;
@@ -127,6 +128,18 @@ Template.listOfBusiness.helpers({
 					data[i].createdBy = 'admin';
 					data[i].userEmailIDVal = false;
 				}
+				// for (var j = 0; j < data[i].createdBy.length; j++) {
+				// 	for (var k = 0; k < data[i].createdBy[j].roles.length; k++) {
+						
+				// 	console.log('data[i].createdBy[j].roles',data[i].createdBy[j].roles[0]);
+				// 	}
+				// }
+				// 	console.log('staff :',data[i].createdBy.roles);
+
+				// if (data[i].createdBy.roles == 'Staff') {
+				// 	console.log('staff :',data[i].createdBy.roles);
+				// 	data[i].createdByStaff == 'staffCreatedy';
+				// }
 
 				if(data[i].status == "inactive"){
 					data[i].statusTooltipone = 'Activate';
