@@ -45,19 +45,21 @@ Template.UMlistOfUsers.helpers({
     // console.log("roleSetget : " + roleSetVar);
     var user       =  Meteor.users.find({},{ limit: listLimit}).fetch();
     if(user){
-      console.log('print1');
+      // console.log('print1');
       var userCount =  user.length;
-      console.log('userCount ', userCount);
+      // console.log('userCount ', userCount);
       if(roleSetVar){ 
-        console.log('roleSetVar');
+        // console.log('roleSetVar');
         if(roleSetVar == 'all'){
-          console.log('roleSetVar all');
+          // console.log('roleSetVar all');
 
           for(i=0;i<userCount;i++){
-            console.log('user Data ', user[i]);
+            console.log('user Data ', i);
             if(user[i].status){
               if(user[i].status.lastLogin){
+                console.log(user[i]); 
                 roleSetArray.push({
+                  'SrNo'                  : i,
                   '_id'                   : user[i]._id,
                   'emails'                : user[i].emails[0].address,
                   'status'                : user[i].profile.status,
@@ -68,6 +70,7 @@ Template.UMlistOfUsers.helpers({
                 // console.log('true: ',user[i]._id);
               }else{
                 roleSetArray.push({
+                  'SrNo'                  : i,
                   '_id'                   : user[i]._id,
                   'emails'                : user[i].emails[0].address,
                   'status'                : user[i].profile.status,
@@ -79,6 +82,7 @@ Template.UMlistOfUsers.helpers({
               }
             }else{
               roleSetArray.push({
+                  'SrNo'                  : i,
                   '_id'                   : user[i]._id,
                   'emails'                : user[i].emails[0].address,
                   'status'                : user[i].profile.status,
@@ -92,12 +96,13 @@ Template.UMlistOfUsers.helpers({
         }else{
           console.log('else roleSetVar all'); 
             for(i=0;i<userCount;i++){
-            console.log('user Data ', user[i]);
+            console.log('user Data d', i);
               
               if ( Roles.userIsInRole( user[i]._id, roleSetVar ) ) {
                 if(user[i].status){
                   if(user[i].status.lastLogin){
                     roleSetArray.push({
+                      'SrNo'                  : i,
                       '_id'                   : user[i]._id,
                       'emails'                : user[i].emails[0].address,
                       'status'                : user[i].profile.status,
@@ -108,6 +113,7 @@ Template.UMlistOfUsers.helpers({
                     // console.log('true: ',user[i]._id);
                   }else{
                     roleSetArray.push({
+                      'SrNo'                  : i,
                       '_id'                   : user[i]._id,
                       'emails'                : user[i].emails[0].address,
                       'status'                : user[i].profile.status,
@@ -119,6 +125,7 @@ Template.UMlistOfUsers.helpers({
                   }
               }else{
                 roleSetArray.push({
+                    'SrNo'                  : i,
                     '_id'                   : user[i]._id,
                     'emails'                : user[i].emails[0].address,
                     'status'                : user[i].profile.status,
@@ -136,11 +143,12 @@ Template.UMlistOfUsers.helpers({
       }else{
         console.log('else roleSetVar');
           for(i=0;i<userCount;i++){
-            console.log('user ',user[i]);
+            console.log('user s ',i);
             if(user[i].status){
               if(user[i].status.lastLogin){
 
                 roleSetArray.push({
+                  'SrNo'                  : i,
                   '_id'                   : user[i]._id,
                   'emails'                : user[i].emails[0].address,
                   'status'                : user[i].profile.status,
@@ -153,6 +161,7 @@ Template.UMlistOfUsers.helpers({
                 // console.log('true: ',user[i]._id);
               }else{
                 roleSetArray.push({
+                  'SrNo'                  : i,
                   '_id'                   : user[i]._id,
                   'emails'                : user[i].emails[0].address,
                   'status'                : user[i].profile.status,
@@ -164,6 +173,7 @@ Template.UMlistOfUsers.helpers({
               }
             }else{
               roleSetArray.push({
+                  'SrNo'                  : i,
                   '_id'                   : user[i]._id,
                   'emails'                : user[i].emails[0].address,
                   'status'                : user[i].profile.status,

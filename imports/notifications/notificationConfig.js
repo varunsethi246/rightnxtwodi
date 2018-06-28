@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { Mongo } from 'meteor/mongo';
 import { Email } from 'meteor/email';
+import { Bert } from 'meteor/themeteorchef:bert';
 
 import './notificationConfig.html';
 import '../userarea/profileSetting/profileSettingSidebar.js';

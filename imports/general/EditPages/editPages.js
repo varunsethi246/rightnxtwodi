@@ -50,6 +50,7 @@ Template.editPages.helpers({
 Template.editPages.events({
 	'click .edit': function(event){
 		event.preventDefault();
+		$('html, body').scrollTop(0);
 		$('.aboutUs-form').css('margin-bottom','-2%');
 		$("body").scrollTop(0);
 		

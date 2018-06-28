@@ -153,7 +153,7 @@ Template.positionManagement.events({
 					}
 				})
 			}
-			else if(position != '-- Select --' && position != null && rate != ''&& rate != null){
+			else if(position != '-- Select --' && position != null && rate != '' && rate != null){
 					Meteor.call('insertPosition',position,rate,function(error,result){
 						if(error){
 							console.log(error);
@@ -164,7 +164,7 @@ Template.positionManagement.events({
 						}
 					})
 			}
-			else if(position == '-- Select --' || rate == ''){
+			else if(position == '-- Select --' || rate == '' || rate == null){
 
 				Bert.alert("Please select position number and rate first.","danger","growl-top-right");
 			}

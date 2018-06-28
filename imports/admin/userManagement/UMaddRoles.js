@@ -15,19 +15,26 @@ Template.UMaddRoles.events({
       var inputId    = $("input[name=roleName]").attr("id");
       console.log('roleName : ' + roleName);
       console.log('inputId : ' + inputId);
-      Meteor.call('addrole', roleName,
+      if (roleName != '') {
+        Meteor.call('addrole', roleName,
                 function(error, result) { 
                     if (error) {
                         console.log ( error ); 
                     } //info about what went wrong 
                     else {
                          // FlowRouter.go("/UMroles");
+                      Bert.alert('Role added successful','success', 'growl-top-right');
+
                     }//the _id of new object if successful
                 }
 
 
-      	);
-      $("input[name=roleName]").val('');
+        );
+        $("input[name=roleName]").val('');
+      }else{
+          Bert.alert('Please Add Role..');
+      }
+      
       // event.target.roleName.value = '';
     },
 

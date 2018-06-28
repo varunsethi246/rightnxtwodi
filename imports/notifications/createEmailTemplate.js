@@ -1,7 +1,10 @@
 import { Session } from 'meteor/session';
 import { NotificationTemplate } from '../api/NotificationTemplate.js';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
-
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
+import { Template } from 'meteor/templating';
+import { Bert } from 'meteor/themeteorchef:bert';
 
 import './createEmailTemplate.html';
 import './viewTemplate.html';
@@ -104,10 +107,13 @@ Template.createEmailTemplate.events({
 		        	if(error){
 		        		console.log(error.reason);
 		        	}else if(result){
-		        		Bert.alert("Successfully Inserted..!!");
+		        		// Bert.alert("Successfully Inserted..!!");
+           				Bert.alert('Successfully Inserted..!!',"success","growl-top-right");
+
 		        	}
 		        });	
-
+           				Bert.alert('Successfully Inserted..!!',"success","growl-top-right");
+				
 		        $('.templateName').value  = '';
 		        $('#messageContent').val('');
 			}else{
@@ -116,16 +122,21 @@ Template.createEmailTemplate.events({
 		        	if(error){
 		        		console.log(error.reason);
 		        	}else if(result){
-		        		Bert.alert("Successfully Inserted..!!");
+		        		// Bert.alert("Successfully Inserted..!!");
+           				Bert.alert('Successfully Inserted..!!',"success","growl-top-right");
+
 		        	}
 		        });	
-
+           				Bert.alert('Successfully Inserted..!!',"success","growl-top-right");
+				
 		        $('.templateName').val('');
 		        $('.subject').val('');
 		        $('#messageContent').val('');
 			}
 		}else{
-		        Bert.alert("Please insert message..!");
+		        // Bert.alert("Please insert message..!");
+           		Bert.alert('Please insert message..!',"success","growl-top-right");
+
 			
 		}
 
@@ -180,7 +191,9 @@ Template.editTemplate.events({
 	        	if(error){
 	        		console.log(error.reason);
 	        	}else if(result){
-	        		Bert.alert("Updated Successfully..!!");
+	        		// Bert.alert("Updated Successfully..!!");
+           			Bert.alert('Updated Successfully..!!',"success","growl-top-right");
+
 	        	}
 	        });	
 

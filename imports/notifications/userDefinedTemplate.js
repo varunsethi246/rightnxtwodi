@@ -1,5 +1,6 @@
 import { Session } from 'meteor/session';
 import { NotificationTemplate } from '../api/NotificationTemplate.js';
+import { Bert } from 'meteor/themeteorchef:bert';
 
 import './userDefinedTemplate.html';
 import '/imports/admin/commonAdmin/commonAdmin.js';

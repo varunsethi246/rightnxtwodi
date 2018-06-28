@@ -598,6 +598,9 @@ Template.AddNewJobForm.onRendered(function(){
 	Session.set('stateVal','');
 	Session.set('id','');
 
+	var todayNext = new Date().toISOString().split('T')[0];
+	document.getElementsByName("date")[0].setAttribute('min', todayNext);
+	
 	$(".addNewJobForm").validate({
 	 	rules: {
 	        jobTitle: {
