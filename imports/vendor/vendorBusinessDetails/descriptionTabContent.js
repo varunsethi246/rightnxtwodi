@@ -33,8 +33,13 @@ Template.userReviewTemplate.helpers({
 	showRating(_id){
 		// userId,businessLink
 		var userId = _id;
-		var businessLink = FlowRouter.getParam('businessurl');
-		var ratingInt = Review.findOne({"_id" : userId,"businessLink":businessLink});
+		var businessUrl = FlowRouter.getParam('businessurl');
+		var businessLink = FlowRouter.getParam('businessLink');
+		if(businessUrl){
+			var ratingInt = Review.findOne({"_id" : userId,"businessLink":businessUrl});
+		}else{
+			var ratingInt = Review.findOne({"_id" : userId,"businessLink":businessLink});
+		}
 		if(ratingInt){
 			// console.log("ratingInt = ", ratingInt);
 			var latestRating = ratingInt.rating;

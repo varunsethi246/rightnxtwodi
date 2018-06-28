@@ -1412,9 +1412,16 @@ Template.receipt.helpers({
 		if(paymentDetails){
 			var paymentStatusOne =paymentDetails.paymentStatus;
 			if (paymentStatusOne == 'unpaid') {
-				var PaymentSuccess = 'Payment Faild';
+				if(paymentDetails.modeOfPayment){
+					var PaymentSuccess = 'Payment Failed';
+					var PaymentClass = 'text-danger';
+				}else{
+					var PaymentSuccess = 'Payment Pending';
+					var PaymentClass = 'text-danger';
+				}
 			}else{
 				var PaymentSuccess = 'Payment Successful';
+				var PaymentClass = 'text-success';
 			}
 			var offers = [];
 			var totalPrice = 0;
@@ -1446,7 +1453,8 @@ Template.receipt.helpers({
 				paymentMode 			: paymentDetails.modeOfPayment,
 				totalAmount				: paymentDetails.totalAmount,
 				totalPrice				: totalPrice,
-				transactionMsg 			: PaymentSuccess
+				transactionMsg 			: PaymentSuccess,
+				paymentclass 			: PaymentClass,
 			}
 			return data;
 		}

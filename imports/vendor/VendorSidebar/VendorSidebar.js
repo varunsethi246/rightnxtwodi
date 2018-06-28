@@ -17,8 +17,9 @@ Template.vendorSidebar.helpers({
 	'bussinessDetails' : function () {
 		// console.log('bussinessDetails');
 		var usrId = Meteor.userId();
+
 		var data = Business.find({"businessOwnerId":usrId,"status": "active"}).fetch();
-		if(data){
+		if(data.length>0){
 			for(i=0;i<data.length;i++){
 				var businessLink = data[i].businessLink;
 

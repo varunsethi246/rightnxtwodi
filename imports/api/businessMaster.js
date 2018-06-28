@@ -28,7 +28,7 @@ if (Meteor.isServer) {
 	Business._ensureIndex({ "businesscategories":1});
   // This code only runs on the server
   Meteor.publish('vendorBusiness', function vendorBusiness() {
-    return Business.find({});
+    return Business.find({"businessOwnerId" : Meteor.userId()});
   });
 
   Meteor.publish('oneBusiness', function oneBusiness(businessurl) {

@@ -15,8 +15,8 @@ if (Meteor.isServer) {
 	Meteor.publish('offersListSearch', function() {
 		return Offers.find({"offerStatus":"Active"},{fields:{"dealHeadline":1}});
 	});
-	Meteor.publish('businessOffers', function businessOffers(businessurl) {
-		return Offers.find({"businessLink": businessurl});
+	Meteor.publish('businessOffers', function businessOffers(businessLink) {
+		return Offers.find({"businessLink": businessLink});
 	});
 	Meteor.publish('businessOffersCount', function businessOffersCount() {
 		return Offers.find({});

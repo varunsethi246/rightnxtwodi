@@ -16,8 +16,8 @@ import '../vendor.js';
 import '../../notifications/sendMailnNotification.js';
 
 
-var businessLink = Session.get("backlinkurl");
-console.log('businessLink :',businessLink);
+// var businessLink = Session.get("backlinkurl");
+// console.log('businessLink :',businessLink);
 
 
 Template.addVendorBusInfo.helpers({
