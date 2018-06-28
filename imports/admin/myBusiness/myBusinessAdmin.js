@@ -83,6 +83,7 @@ Template.listOfBusiness.helpers({
     },
 	'Details' : function(){
     	var businessCount  = Counts.get('noOfBusiness');
+    	console.log('businessCount :',businessCount);
     	if (businessCount > 15) {
 	        $('.loadMoreRows50').addClass('showMore50').removeClass('hideMore50');
 		}else if(businessCount > 50){
@@ -111,6 +112,7 @@ Template.listOfBusiness.helpers({
 				data = Business.find({"status":"inactive"},{sort:{'createdAt': -1}, limit: listLimit}).fetch();
 			}
 		}
+		 
 		// console.log('data ', data);
 		if(data){
 			for(i=0; i< data.length; i++){
