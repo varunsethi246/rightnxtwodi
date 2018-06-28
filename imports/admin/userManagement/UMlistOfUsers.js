@@ -54,10 +54,11 @@ Template.UMlistOfUsers.helpers({
           // console.log('roleSetVar all');
 
           for(i=0;i<userCount;i++){
-            console.log('user Data ', i);
+            // console.log('user Data ', i);
             if(user[i].status){
               if(user[i].status.lastLogin){
-                console.log(user[i]); 
+                // console.log()
+                console.log('user[i].status.lastLogin :',user[i].status.lastLogin); 
                 roleSetArray.push({
                   'SrNo'                  : i,
                   '_id'                   : user[i]._id,
@@ -91,16 +92,18 @@ Template.UMlistOfUsers.helpers({
                   'lastLogin'             : '',
                 });
             }
-            console.log('roleSetArray ',roleSetArray);
+            // console.log('roleSetArray ',roleSetArray);
           }//roleSetVar all loop
         }else{
-          console.log('else roleSetVar all'); 
+          // console.log('else roleSetVar all'); 
             for(i=0;i<userCount;i++){
-            console.log('user Data d', i);
+            // console.log('user Data d', i);
               
               if ( Roles.userIsInRole( user[i]._id, roleSetVar ) ) {
                 if(user[i].status){
                   if(user[i].status.lastLogin){
+                console.log('user[i].status.lastLogin :',user[i].status.lastLogin); 
+                    
                     roleSetArray.push({
                       'SrNo'                  : i,
                       '_id'                   : user[i]._id,
@@ -135,18 +138,19 @@ Template.UMlistOfUsers.helpers({
                   });
               }
             }
-            console.log('roleSetArray1 ',roleSetArray);
+            // console.log('roleSetArray1 ',roleSetArray);
 
           }
 
         }   
       }else{
-        console.log('else roleSetVar');
+        // console.log('else roleSetVar');
           for(i=0;i<userCount;i++){
-            console.log('user s ',i);
+            // console.log('user s ',i);
             if(user[i].status){
               if(user[i].status.lastLogin){
-
+                console.log('user[i].status.lastLogin :',user[i].status.lastLogin); 
+                
                 roleSetArray.push({
                   'SrNo'                  : i,
                   '_id'                   : user[i]._id,
@@ -156,7 +160,7 @@ Template.UMlistOfUsers.helpers({
                   'createdAt'             : user[i].createdAt,
                   'lastLogin'             : user[i].status.lastLogin.date,
                 });
-                console.log('roleSetArray1 ',roleSetArray);
+                // console.log('roleSetArray1 ',roleSetArray);
 
                 // console.log('true: ',user[i]._id);
               }else{
@@ -182,11 +186,11 @@ Template.UMlistOfUsers.helpers({
                   'lastLogin'             : '',
                 });
             }
-            console.log('roleSetArray1 ',roleSetArray);
+            // console.log('roleSetArray1 ',roleSetArray);
             
           }
       }
-      console.log('roleSetArray 1',roleSetArray);
+      // console.log('roleSetArray 1',roleSetArray);
       return roleSetArray;
     } 
     

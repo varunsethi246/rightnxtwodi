@@ -44,15 +44,27 @@ bannerCategorySearch1 = new SearchSource('bannerCategories', fields, options);
 var dataIndex = 0;
 
 Template.businessBanner.onRendered(function(){
+	var todayNext = new Date().toISOString().split('T')[0];
+	console.log('todayNext',todayNext);
+	document.getElementsByName("DateBanner")[0].setAttribute('min', todayNext);
 
+	// var todayNext = new Date().toISOString().split('T')[0];
+	// document.getElementsByName("dateCurrent")[0].setAttribute('min', todayNext);
 	// To set Current Date plus One Day to Input Field
 	var currentdate = new Date();
 	var startDate = moment(currentdate);
     var setDate = moment(startDate).add(1, 'days').format('YYYY-MM-DD');
+	console.log('setDate',setDate);
+
     $('#dateCurrent').val(setDate);
 
     // var startDate = moment(setDate);
     var futureMonth = moment(setDate).add(1, 'M').format('YYYY-MM-DD');
+    console.log('futureMonth :',futureMonth);
+    
+ //    var todayNext = new Date().toISOString().split('T')[0];
+	// console.log('todayNext',todayNext);
+	document.getElementsByName("EndBanner")[0].setAttribute('min', futureMonth);
     $('.enddate').val(futureMonth);
 });
 
