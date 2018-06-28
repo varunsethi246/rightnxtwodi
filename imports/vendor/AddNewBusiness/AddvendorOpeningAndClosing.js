@@ -207,7 +207,7 @@ Template.addvendorOpeningAndClosing.helpers({
       busData.currentPath = '/addnewbusinessAdmin'; 
     }
     if(splitPath[1] == "addNewBusiness") {
-      busData.currentPath = '/addNewBusiness/businessInfo'; 
+      busData.currentPath = '/aboutBusiness/'+BusLink; 
     }
 
     return busData;

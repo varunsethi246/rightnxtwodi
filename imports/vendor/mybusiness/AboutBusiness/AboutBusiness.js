@@ -563,6 +563,10 @@ Template.aboutBusiness.events({
   // }
 });
 
+Template.aboutBusiness.onRendered(function(){
+	$('html, body').scrollTop(0);
+});
+
 aboutBusinessForm = function () {  
   BlazeLayout.render("vendorLayout",{main: 'aboutBusiness'});
   // Blaze.render(Template.vendorLayout,document.body);
