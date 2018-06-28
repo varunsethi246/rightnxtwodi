@@ -54,13 +54,16 @@ Template.vendorSignUpForm.events({
         Meteor.logout();
         var defaultRoleconfig = "Vendor";
         Session.set("loginSession",newID);
+        $('#loginModal').hide();
+        $(".modal-backdrop").remove(); 
         // console.log('loginSession Signup ',Session.get("loginSession"));
         Meteor.call('addRoleNotifEmailOTPsendVerifyLink' , newID , defaultRoleconfig, function(error,result){
           if(error){
             console.log(error);
           }else{
             // location.reload();
-            $('#loginModal').hide(); 
+            $('#loginModal').hide();
+            $(".modal-backdrop").remove(); 
             FlowRouter.go("/LoginOTP");
             
           }
