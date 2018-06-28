@@ -2497,7 +2497,9 @@ padding-right:0
 }
 
 .textBoxVen {
-padding-top:6px
+padding-top:6px;
+margin-left: 30%;
+text-align: right;
 }
 
 .locBusi {

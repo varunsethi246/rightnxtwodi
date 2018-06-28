@@ -30,7 +30,7 @@ Template.starRating.events({
 		var whatClass = $(event.currentTarget).attr('class');
 		var classes = whatClass.split(' ');
 		var theClass = classes[classes.length - 1];
-		if(theClass == 'boxStar1' || theClass == 'boxStar2'){
+		if(theClass == 'fixStar1' || theClass == 'fixStar2'){
 			theClass = classes[classes.length - 2];
 		}
 		var classnum = theClass.substr(3);
@@ -95,15 +95,5 @@ Template.starRating.events({
 				$('.box'+j).removeClass('fixStar2');
 			}
 		}
-
-
 	},
-
-
 });
-
-
-
-
-
-

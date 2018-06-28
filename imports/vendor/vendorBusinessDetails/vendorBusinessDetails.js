@@ -242,7 +242,7 @@ Template.vendorBusinessLayout.helpers({
        // }else{
        // 	return false;
        // }
-       console.log(Meteor.subscribe('userfunction').ready());
+       // console.log(Meteor.subscribe('userfunction').ready());
         return Meteor.subscribe('userfunction').ready();
     },
 });

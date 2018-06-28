@@ -20,25 +20,65 @@ import '../../../common/starRating2.html';
 
 
 Template.aboutBusiness.helpers({
+	// showRating(){
+	// 	var businessLink = FlowRouter.getParam('businessLink');
+	// 	var business = Business.findOne({"businessLink" : businessLink,'status':'active'});
+	// 	var latestRating = business.latestRating;		
+
+	// 	var intRating = parseInt(latestRating);
+	// 	var balRating = latestRating - intRating;
+	// 	var finalRating = intRating + balRating;
+	// 	if(balRating > 0 && balRating < 0.5){
+	// 		var finalRating = intRating + 0.5;
+	// 	}
+	// 	if(balRating > 0.5){
+	// 		var finalRating = intRating + 1;
+	// 	}
+
+	// 	var ratingObj = {};
+
+	// 	for(i=1; i<=10; i++){
+	// 		var x = "star" + i;
+	// 		if(i <= finalRating*2){
+	// 			if( i%2 == 0){
+	// 				ratingObj[x] = "fixStar2";
+	// 			}else{
+	// 				ratingObj[x] = "fixStar1";
+	// 			}				
+	// 		}else{
+	// 			ratingObj[x]  = "";
+	// 		}
+		
+	// 	}
+	// 	return ratingObj;
+	// },
 	showRating(){
 		var businessLink = FlowRouter.getParam('businessLink');
-		var business = Business.findOne({"businessLink" : businessLink});
-		var latestRating = business.latestRating;		
-
-		var intRating = parseInt(latestRating);
-		var balRating = latestRating - intRating;
+		var allReviews = Review.find({"businessLink" : businessLink}).fetch();
+		var totalRating = 0;
+		for(i=0; i<allReviews.length; i++){
+			totalRating = totalRating + allReviews[i].rating;
+		}
+		// console.log('totalRating: '+totalRating+' | number: '+allReviews.length );
+		totalRating = totalRating / allReviews.length ;
+		// console.log('totalRating2: '+totalRating);
+		var intRating = parseInt(totalRating);
+		var balRating = totalRating - intRating;
 		var finalRating = intRating + balRating;
-		if(balRating > 0 && balRating < 0.5){
+		if(balRating < 0.5 && balRating > 0){
 			var finalRating = intRating + 0.5;
 		}
 		if(balRating > 0.5){
 			var finalRating = intRating + 1;
 		}
 
-		var ratingObj = {};
+		ratingObj = {
+		};
 
 		for(i=1; i<=10; i++){
+
 			var x = "star" + i;
+			// console.log('x = ', x);
 			if(i <= finalRating*2){
 				if( i%2 == 0){
 					ratingObj[x] = "fixStar2";
@@ -50,10 +90,10 @@ Template.aboutBusiness.helpers({
 			}
 		
 		}
+
+		// console.log(ratingObj);
 		return ratingObj;
-
 	},
-
 
 	'thisBusinessDetails' : function(){
 		var businessLink = FlowRouter.getParam('businessLink');	
