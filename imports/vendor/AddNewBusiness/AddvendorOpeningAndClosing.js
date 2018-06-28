@@ -94,7 +94,7 @@ Template.addvendorOpeningAndClosing.helpers({
   },
   vendorBusOpAndClsRetrive() {
     var BusLink = FlowRouter.getParam('businessLink');
-    Session.set("backlinkurl",BusLink);
+    // Session.set("backlinkurl",BusLink);
     var busData = Business.findOne({"businessLink":BusLink});
 
     if(busData){
@@ -207,7 +207,8 @@ Template.addvendorOpeningAndClosing.helpers({
       busData.currentPath = '/addnewbusinessAdmin'; 
     }
     if(splitPath[1] == "addNewBusiness") {
-      busData.currentPath = '/aboutBusiness/'+BusLink; 
+      // busData.currentPath = '/aboutBusiness/'+BusLink; 
+      busData.currentPath = '/addNewBusiness/businessInfo'; 
     }
 
     return busData;
@@ -228,6 +229,11 @@ Template.addvendorOpeningAndClosing.onRendered(function(){
 
 
 Template.addvendorOpeningAndClosing.events({
+  'click .backlinkClick':function(event){
+    var BusLink = FlowRouter.getParam('businessLink');
+    console.log(BusLink);
+    Session.set("backlinkurl",BusLink);
+  },
   'keypress #fromTime':function(event){
     return false;
   },

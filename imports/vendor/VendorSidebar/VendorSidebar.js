@@ -126,6 +126,9 @@ Template.vendorSidebar.helpers({
 });
 
 Template.vendorSidebar.events({
+	'click .clickAddNewBusi': function(){
+    	Session.set("backlinkurl",'');
+	},
 	'click .myBussinessList': function(){
 		Session.set('EnqIDSes','');
 	},

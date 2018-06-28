@@ -197,6 +197,12 @@ Template.header.events({
 	},
 });
 
+Template.footer.events({
+	'click .clickAddNewBusi': function(){
+    	Session.set("backlinkurl",'');
+	},
+});
+
 Template.generalHeader.events({
 	'click .logoutLink': function(event){
 		// Meteor.logout(function(error,result){

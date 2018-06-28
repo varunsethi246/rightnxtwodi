@@ -123,7 +123,6 @@ Template.descriptionTabContent.helpers({
 		var allReviewsTotalCount = Review.find({"businessLink": businessLink},{sort: {reviewDate:-1}}).count();
 		var allReviews = Review.find({"businessLink": businessLink},{sort: {"reviewDate": -1}, limit:limitFollows }).fetch();
 		if(allReviews){
-
 			if(allReviews.length < 5 || allReviews.length == allReviewsTotalCount){
 				allReviews.showLoadMore = 'hideFollowButton';
 			}else{

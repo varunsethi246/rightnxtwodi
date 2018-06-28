@@ -32,6 +32,11 @@
 					    <h4>Welcome to RightNXT</h4>
 					    <h5>{{profile.aboutMe}}</h5>
 					    {{#if profile.city}}<h5><img src="../images/locPng.png"> &nbsp; {{profile.city}}</h5>{{/if}}
+					    {{#if isInRole 'user'}}
+						    <div class="userFollow col-lg-2 {{followButton}} {{followButtonClass}}" id="follow-{{_id}}">
+						    	{{followButtonText}}
+						    </div>
+						{{/if}}
 				</div>
 		    </div>
 		  <!--   <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
