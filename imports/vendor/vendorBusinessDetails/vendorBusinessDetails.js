@@ -464,7 +464,7 @@ Template.businessMainContent.helpers({
 	  	var businessObj = Business.findOne({"businessLink": businessLink, 'status': 'active'});
 
 	  	if(businessObj){
-			var businessOffers = Offers.findOne({"businessId" : businessObj._id, "offerStatus":'active'});
+			var businessOffers = Offers.findOne({"businessId" : businessObj._id, "offerStatus":'Active'});
 			if( businessOffers ){
 				return true;
 			}else{
@@ -479,7 +479,7 @@ Template.businessOfferDetails.helpers({
 		var businessLink = FlowRouter.getParam('businessurl');
 	  	var businessObj = Business.findOne({"businessLink": businessLink});
 	  	if(businessObj){
-			var businessOffers = Offers.find({"businessId" : businessObj._id, "offerStatus":'active'}).fetch();
+			var businessOffers = Offers.find({"businessId" : businessObj._id, "offerStatus":'Active'}).fetch();
 			if(businessOffers){
 				for(i=0; i<businessOffers.length; i++){
 					var date = businessOffers[i].expirationFromDate;
@@ -506,7 +506,7 @@ Template.businessOfferDetails.helpers({
 		var businessLink = FlowRouter.getParam('businessurl');
 	  	var businessObj = Business.findOne({"businessLink": businessLink});
 	  	if(businessObj){
-			var businessOffers = Offers.find({"businessId" : businessObj._id, "offerStatus":'active'}).count();
+			var businessOffers = Offers.find({"businessId" : businessObj._id, "offerStatus":'Active'}).count();
 			if(businessOffers > 3){
 				return true;
 			}else{
@@ -524,7 +524,7 @@ Template.offersTabContent.helpers({
 		var userSavedOffer = SavedOffer.findOne({"userId":Meteor.userId() , "businessLink": businessLink});
 
 	  	if(businessObj){
-			var businessOffers = Offers.find({"businessId" : businessObj._id, "offerStatus":'active'}).fetch();
+			var businessOffers = Offers.find({"businessId" : businessObj._id, "offerStatus":'Active'}).fetch();
 			if( businessOffers){
 				for(i=0; i<businessOffers.length; i++){
 					var date = businessOffers[i].expirationFromDate;
@@ -549,7 +549,7 @@ Template.offersTabContent.helpers({
 		}
 	},
 	offerImgData(){
-		var businessOffers = Offers.findOne({"_id" : this._id, "offerStatus":'active'});
+		var businessOffers = Offers.findOne({"_id" : this._id, "offerStatus":'Active'});
 		if(businessOffers){
 			var pic = OfferImagesS3.findOne({'_id' : businessOffers.offerImage});
 			if(pic){

@@ -98,7 +98,7 @@ Template.userOffers.helpers({
 		}
 	},
 	offerImgData(){
-		var businessOffers = Offers.findOne({"_id" : this._id, "offerStatus":'active'});
+		var businessOffers = Offers.findOne({"_id" : this._id, "offerStatus":'Active'});
 		if(businessOffers){
 			var pic = OfferImagesS3.findOne({'_id' : businessOffers.offerImage});
 			if(pic){
