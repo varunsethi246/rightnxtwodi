@@ -29,11 +29,11 @@
 											</a>
 										</div>
 										<div class="thumImgDesc">
-											<a  href="/{{businessLink}}"  class="enqHelper">
+											<a  href="/{{businessLink}}"  class="enqHelper col-lg-12 col-md-12 col-sm-12 col-xs-12 noPaddingVendor">
 												<p class="thumImgDescP thumbTxtOverfl" data-linkUrl={{businessLink}} id={{businessTitle}}>{{businessTitle}}</p>
 											</a>
-											<p class="thumbTxtOverfl thumbTxtAddr">{{businessAddress}}</p>
-											<div class="thumDescPhon thumbTxtOverfl">
+											<p class="thumbTxtAddr col-lg-12 col-md-12 col-sm-12 col-xs-12 noPaddingVendor">{{businessAddress}}</p>
+											<div class="thumDescPhon thumbTxtOverfl col-lg-12 col-md-12 col-sm-12 col-xs-12 noPaddingVendor">
 												<i class="fa fa-phone" aria-hidden="true"></i>
 												<span>{{businessLandline}}{{mobNumSeperator}} {{businessMobile}}</span>
 											</div>
@@ -44,7 +44,7 @@
 											</span>
 											<span class="thumBusOffersSnT">{{busOffer}}</span>
 										</div>
-										<div class="thumbEnqBtn" data-toggle="modal" data-target="#vEnqModal">
+										<div class="thumbEnqBtn" data-link="{{businessLink}}" data-toggle="modal" data-target="#vEnqModal">
 											<button class="btn btn-success">Enquiry</button>
 											<span class="vCmtEnqPageHideGrid">
 												{{> businessEnquiry}}
@@ -112,7 +112,7 @@
 												<span>{{businessLandline}}{{mobNumSeperator}} {{businessMobile}}</span>
 											</div>
 
-											<div class="thumbEnqBtn" data-toggle="modal" data-target="#vEnqModal">
+											<div class="thumbEnqBtn" data-link="{{businessLink}}" data-toggle="modal" data-target="#vEnqModal">
 												<button class="btn btn-success">Enquiry</button>
 												<span class="vCmtEnqPageHideGrid">
 													{{> businessEnquiry}}

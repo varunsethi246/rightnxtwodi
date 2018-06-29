@@ -1484,6 +1484,11 @@ Template.receipt.events({
 		var userId = Meteor.userId();
 		var userDetails = Meteor.users.findOne({'_id':userId});
 		if(userDetails){
+			if(userDetails.profile){
+				var name = userDetails.profile.name;
+			}else{
+				var name = '';
+			}
 			var email = $('#toVEmail').val();
 		    var divToPrint=document.getElementById('DivIdToPrint');
 			var message = '<html><head></head><body onload="window.print()">'+divToPrint.innerHTML+'</body></html>'; 
@@ -1497,7 +1502,9 @@ Template.receipt.events({
 				var msgvariable = {
 					'[receipt]' 	: message,
 					'[currentDate]'	: currentDate,
+					'[username]' 	: name,
 					'[businessName]': businessDetails.businessTitle,
+					'[message]'		: message,
 					// '[dealHeadline]': offerObj.dealHeadline
 
 		       	};

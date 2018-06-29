@@ -599,6 +599,9 @@ Template.userEnquiryPage.events({
 
 	//Active Flag and Archive Options: done
 	'click #activeList': function(event){
+		$(event.currentTarget).parent().children().removeClass('active');
+		$(event.currentTarget).addClass('active');
+		$('.tab-pane').attr('id','vEnqActive');
 		Session.set("EnqIDSes",'');
 		$(".commonCheckbox").prop('checked', false);
 
@@ -615,6 +618,9 @@ Template.userEnquiryPage.events({
 		$(".vEnqActiveDiv").removeClass('vEnqSpanShow');
 	},
 	'click #flagList': function(event){
+		$(event.currentTarget).parent().children().removeClass('active');
+		$(event.currentTarget).addClass('active');	Session.set("EnqIDSes",'');
+		$('.tab-pane').attr('id','vEnqFlag');
 		Session.set("EnqIDSes",'');
 
 		var userSortTitle = $(event.currentTarget).children('.flagSelC').text();

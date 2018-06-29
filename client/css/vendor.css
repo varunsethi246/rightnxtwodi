@@ -2425,8 +2425,16 @@ position:relative
 .deleteDataModalB > .modal-dialog {
 margin-top:12%
 }
-
-.activeDownList,.activeDownListFlag {
+.activeDownListFlag{
+position:absolute;
+z-index:1;
+background:#fff;
+border:1px solid #ccc;
+display: none;	
+top:25px;
+width:69px;
+}
+.activeDownList {
 position:absolute;
 z-index:1;
 background:#fff;
@@ -3732,3 +3740,4 @@ video::-webkit-media-controls-panel {
     background: #ccc!important;
 }
 .removeMargTopImg{margin-top: 0px!important;}
+.noPaddingVendor{padding-left: 0px;padding-right: 0px;}

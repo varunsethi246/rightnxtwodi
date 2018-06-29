@@ -130,7 +130,13 @@ color:#000!important;
 line-height:16px;
 font-weight:700;
 }
-.thumbTxtAddr{height: 85px;}
+.thumbTxtAddr{
+display:inline-block;
+overflow:hidden!important;
+text-overflow:ellipsis;
+word-break: break-word;
+line-height: 18px;
+min-height: 85px;}
 .thumbTxtOverfl {
 display:inline-block;
 /*width:230px;*/
@@ -139,7 +145,7 @@ overflow:hidden!important;
 text-overflow:ellipsis;
 word-break: break-word;
 line-height: 18px;
-height: 40px;
+min-height: 40px;
 }
 
 .thumbEnqBtn {

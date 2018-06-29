@@ -263,7 +263,7 @@ Template.vendorEnquiry.helpers({
 			return data;
 		}
 	},
-	vendorEnquiryDetails:function (event) {
+	vendorEnquiryDetails:function () {
 		if(Session.get("EnqIDSes")){
 			id = Session.get("EnqIDSes");
 		}else{
@@ -641,6 +641,9 @@ Template.vendorEnquiry.events({
 
 	//Active Flag and Archive Options
 	'click #activeList': function(event){
+		$(event.currentTarget).parent().children().removeClass('active');
+		$(event.currentTarget).addClass('active');
+		$('.tab-pane').attr('id','vEnqActive');
 		var vendorSortTitle = $(event.currentTarget).children('.activeSelC').text();
 		Session.set('vendorSortTitle',vendorSortTitle);
 		Session.set("EnqIDSes",'');
@@ -655,7 +658,9 @@ Template.vendorEnquiry.events({
 		
 	},
 	'click #flagList': function(event){
-		Session.set("EnqIDSes",'');
+		$(event.currentTarget).parent().children().removeClass('active');
+		$(event.currentTarget).addClass('active');	Session.set("EnqIDSes",'');
+		$('.tab-pane').attr('id','vEnqFlag');
 		$(".commonCheckbox").prop('checked', false);
 		Session.set("tabStatus","flagTab");
 		$('#markWithFlag').hide();
@@ -670,6 +675,8 @@ Template.vendorEnquiry.events({
 		
 	},
 	'click #archiveList': function(event){
+		$(event.currentTarget).parent().children().removeClass('active');
+		$(event.currentTarget).addClass('active');
 		setTimeout(function() {
 			$('.restoreArchivei').show();
 			$('.vEnqSpan').show();
@@ -787,6 +794,7 @@ Template.vendorEnquiry.events({
 		$('.activeDownList').toggle();
 	},
 	'click .activeDownListFlagPre': function(){
+    	event.preventDefault();
     	event.stopPropagation();
 
 		$('.activeDownListFlag').toggleClass('activeDownListBlockFlag');

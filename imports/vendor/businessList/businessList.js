@@ -845,6 +845,13 @@ Template.businessList.events({
 });
 
 Template.thumbnailBusinessList.events({
+	'click .thumbEnqBtn':function(event){
+		event.preventDefault();
+		var linkName = $(event.currentTarget).attr('data-link');
+		$('.vEnqModalCShowTwo').hide();
+		$('.vEnqModalCShowOne').show();
+		$('.vEnqModalCShowOne').children().attr('data-link',linkName);
+	},
 	'click .enqRightDiv':function(event){
 		var currentMarker = $(event.currentTarget).attr('cords-ids');
 		$('.displayMapView').show();

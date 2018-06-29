@@ -16,7 +16,7 @@ import '../vendor.js';
 import '../../notifications/sendMailnNotification.js';
 
 
-// var businessLink = Session.get("backlinkurl");
+var businessLink = Session.get("backlinkurl");
 // console.log('businessLink :',businessLink);
 
 

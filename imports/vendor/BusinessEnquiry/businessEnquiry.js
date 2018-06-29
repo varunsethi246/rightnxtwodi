@@ -26,6 +26,12 @@ Template.businessEnquiry.helpers({
 });
 
 Template.businessEnquiry.events({
+    // 'click .SendEnqToAll2' : function(event){
+    //     console.log('true');
+    // },
+    // 'click .SendEnqToAll1' : function(event){
+    //     console.log('true');
+    // },
     'change .enquiryPhoto' : function(event){
         filesM = event.target.files; // FileList object
         $('.showEnquiryImg').empty(); 
@@ -59,13 +65,18 @@ Template.businessEnquiry.events({
         event.preventDefault();
 
         var id = FlowRouter.getParam('businessurl');
+        if(id){
+            var businessLink = id;
+        }else{
+            var businessLink = $(event.currentTarget).attr('data-link');
+        }
         var enquiryPhoto = '';
 
         $('#businessMenulist').empty();
 
         var enquirySentBy = Meteor.userId();
         var enquiryName = $('.enquiryName').val();
-        console.log(enquiryName);
+        // console.log(enquiryName);
         var enquiryEmail = $('.enquiryEmail').val();
         var enquiryPhone = $('.enquiryPhone').val();
         var enquiryDesc = $('.enquiryDesc').val();
@@ -84,7 +95,7 @@ Template.businessEnquiry.events({
             enquiryPhoneTwo = '+91' + enquiryPhone;
         }
 
-        var businessObject = Business.findOne({"businessLink":id});
+        var businessObject = Business.findOne({"businessLink":businessLink});
         var businessid = businessObject._id;
         var businessTitle = businessObject.businessTitle;
         //Save image on S3
