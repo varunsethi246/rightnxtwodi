@@ -2,12 +2,12 @@
 <div class="row manageRow">	 
 	<div class="row masterAreaCityState ">
 		<div class="areaCityStateHeading">
-		<h1>List Of Business</h1>
+		<h1>List of Business</h1>
 		</div>
 		
 		<hr>
 		<div class="actInactAdminPre">
-			<ul class="actInactAdmin">
+			<ul class="actInactAdmin areaMarginTop">
 				<li class="actInactAdminC actInactAdminOn">Active</li>
 				<li class="actInactAdminC actInactAdminTw">Inactive</li>
 			</ul>
@@ -26,7 +26,7 @@
 					<tr class="tableHeadColor">
 						<th>Business Title </th> 
 						<th>Business Address</th>
-						<th>Business EmailId</th>
+						<th>Business Email Id</th>
 						<th>Business Mobile</th>
 						<th>Images </th>
 						<!-- <th>Business Video 		 	</th> -->
@@ -35,7 +35,7 @@
 						<th class="bussListAction">Action</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody class="tableFontBus">
 					
 					{{#each Details}}
 
@@ -111,7 +111,7 @@
 
 								  </div>
 								</div>
-							<br>Video : {{businessVideos businessVideo}}
+							<br>Videos : {{businessVideos businessVideo}}
 								{{#unless businessVideos businessVideo}}
 									<i class="fa fa-cart-plus addVideo" aria-hidden="true" data-toggle="modal" data-target="#addVideo-{{businessLink}}"></i>
 
@@ -201,13 +201,13 @@
 						<td class="bussTabletwo oneform">		
 							<a href="/{{businessLink}}" target="_blank" >
 								<span class="buttonform">
-									<i class="fa fa-eye fa-lg" aria-hidden="true" title="view"></i>
+									<i class="fa fa-eye fa-lg" aria-hidden="true" title="View"></i>
 								</span>
 							</a>
 						
 							<a href="/editBusinessAdmin/{{businessLink}}">
 								<span class="buttonform">
-									<i class="fa fa-pencil-square-o fa-lg" aria-hidden="true" title="edit"></i>
+									<i class="fa fa-pencil-square-o fa-lg" aria-hidden="true" title="Edit"></i>
 								</span>
 							</a>
 							<!-- <span class="buttonformone"> -->
@@ -235,7 +235,7 @@
 									</span>
 								</a>
 								<!-- <span class="buttonformone"> -->
-									<i class="fa fa-circle fa-lg  showTooltipOneList" id="statusBusiness-{{_id}}" aria-hidden="true" data-toggle="modal" data-target="#ActiveBusiness-{{_id}}" title="Click To Activate"></i>
+									<i class="fa fa-check-circle-o fa-lg  showTooltipOneList" id="statusBusiness-{{_id}}" aria-hidden="true" data-toggle="modal" data-target="#ActiveBusiness-{{_id}}" title="Click To Activate"></i>
 									<div class="newtooltipList"> 
 										<span class="texttooltilplist">
 											Click to {{statusTooltipone}}

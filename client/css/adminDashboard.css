@@ -2943,3 +2943,21 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .marginVisionBtm{
 	margin-bottom: 30px;
 }
+.QueryDelete{
+	    margin-right: 10px;
+}
+.HeadingList{
+	    text-align: center;
+    font-family: 'PROXIMANOVA-REGULAR';
+    font-weight: 700;
+    color: #3c8dbc;
+}
+.areaPadingOne{
+	padding: 0px;
+}
+.areaMarginTop{
+margin-top: 10px;
+}
+.tableFontBus{
+	font-size: 12px;
+}

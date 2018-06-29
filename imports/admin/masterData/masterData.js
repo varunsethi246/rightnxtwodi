@@ -1390,7 +1390,7 @@ Template.masterBulkUpload.events({
 Template.masterArea.onRendered(function(){
 	$.validator.addMethod("Areavali", function(value, element, regexpr) {          
     	return regexpr.test(value);
-	}, "Please enter atlest three Alphabets.");
+	}, "Please enter atleast three Alphabets.");
 
 	// $.validator.addMethod("regex", function(value, element, regexpr) {          
  //    	return regexpr.test(value);
@@ -1426,7 +1426,7 @@ Template.masterArea.onRendered(function(){
 Template.masterCity.onRendered(function(){
 	$.validator.addMethod("cityValida", function(value, element, regexpr) {          
     	return regexpr.test(value);
-	}, "Please enter atlest three Alphabets.");
+	}, "Please enter atleast three Alphabets.");
 	$.validator.addMethod("regex", function(value, element, regexpr) {          
     	return regexpr.test(value);
 	}, "Invalid Format");

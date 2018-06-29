@@ -3,10 +3,10 @@
 		<div class="col-lg-12 bannerEdit addNewJob" id="">
 	        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 webpageForm">
 	            <h1>Business Banners</h1>
-	            <hr class="webpageFormUnderline">
+	            <hr class="">
 	            <form class="bannerForm">
 		            <div class="row">	
-		            	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 marginBottom">
+		            	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 marginBottom areaMarginTop">
 		                	<div class="row">
 			                	<div class="col-lg-4">
 			                		<label for="">State</label>
@@ -60,7 +60,7 @@
 			                        <input name="DateBanner" id="dateCurrent" class="form-control getdate startDate" type="date" placeholder="" value=""> 
 			                	</div>   
 		                    	 <div class="col-lg-4">
-		                    	    <label for="">Months</label>
+		                    	    <label for="">Duration of Banner</label>
 		                    	 	<input type="number" value="1" name="" class="form-control getmonth">
 		                    	 </div> 
 			                    <div class="col-lg-4">
@@ -88,7 +88,7 @@
 									</datalist>
 			                	</div>
 			                	<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 categoryValues">
-			                    	<span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Selected Categories will show here</span>
+			                    	<span class="col-lg-12 col-md-12 col-sm-12 col-xs-12 areaPadingOne">Selected Categories will show here</span>
 									<div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 selectedCategories"> 
 										{{#each selectedCategories}} 
 											<span class="bunchCategory">
@@ -114,7 +114,7 @@
 									</datalist>
 			                	</div>
 			                	<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 areaValues">
-			                    	<span class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Selected Areas will show here.</span>
+			                    	<span class="col-lg-12 col-md-12 col-sm-12 col-xs-12 areaPadingOne">Selected Areas will show here.</span>
 									<div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 selectedAreas"> 
 										{{#each selectedAreas}}
 											<span class="bunchAreas">
@@ -165,7 +165,7 @@
 			                		<thead>
 										<th>Category</th>		                			
 										<th>Position</th>		                			
-										<th>Rate Per Month</th>		                			
+										<th>Rate per Month</th>		                			
 										<th>Number of Areas</th>		                			
 										<th>Number of Months</th>		                			
 										<th>Total Amount</th>		                			

@@ -23,16 +23,16 @@
 							   			<input type="number" id="discount" name="discount" class="form-control" placeholder="" value="{{discount}}">
 							   		</td>
 									</tr>
-									<tr>Note: Please enter the discount and press enter button to submit</tr>
 								</tbody>
 							</table>
+									<tr>Note: Please enter the discount and press enter button to submit</tr>
 		                </div>
 						<br>
 						<br>
 						<br>
 		            </div>
 		        </form>
-		        <h3>List Of Discounts</h3>
+		        <h3>List of Discounts</h3>
 		         <div class="table-responsive">
 					<table class="table table-striped myTable">
 						<thead>
@@ -50,7 +50,9 @@
 							<td>{{price}}</td>
 					   		<td>{{discount}}</td>
 					   		<td style="text-align: center;">
-					   			<button><i class="fa fa-trash" aria-hidden="true" title="delete" data-toggle="modal" data-target="#deleteDiscount"></i>
+					   			<button><i class="fa fa-pencil edit" aria-hidden="true" title="Edit"></i></button>
+
+					   			<button><i class="fa fa-trash" aria-hidden="true" title="Delete" data-toggle="modal" data-target="#deleteDiscount"></i>
 					   				<div class="modal fade" id="deleteDiscount" role="dialog">
 										<div class="modal-dialog">
 											<div class="modal-content">
@@ -68,7 +70,6 @@
 										</div>
 									</div>
 					   			</button>
-					   			<button><i class="fa fa-pencil edit" aria-hidden="true" title="edit"></i></button>
 					   		</td>
 							</tr>
 						{{/each}}

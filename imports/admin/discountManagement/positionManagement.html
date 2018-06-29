@@ -26,11 +26,11 @@
 							  <input type="text" id="rate" name="rate" class="form-control" placeholder="" value="">
 							</div>
 		                </div>
-		                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Note: Please enter the rate and press enter button to submit</div>
+		                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Note: Please enter the rate and press enter button to submit.</div>
 		            </div>
 	            </form>
 	            <br><br>
-	            <h3>List Of Positions</h3>
+	            <h3>List of Positions</h3>
 		         <div class="table-responsive">
 					<table class="table table-striped myTable">
 						<thead>
@@ -46,10 +46,12 @@
 							<td class="textAlPosMang">{{position}}</td>
 							<td class="textAlPosMang">{{rate}}</td>
 					   		<td class="textAlPosMang">
+					   			<button><i class="fa fa-pencil edit" aria-hidden="true" title="Edit"></i></button>
+
 					   			<button>
 					   				<!-- <i class="fa fa-trash delete" aria-hidden="true"></i> -->
 
-					   				<i class="fa fa-trash" title="delete" aria-hidden="true" data-toggle="modal" data-target="#m-{{_id}}" ></i>
+					   				<i class="fa fa-trash" title="Delete" aria-hidden="true" data-toggle="modal" data-target="#m-{{_id}}" ></i>
 
 									<div class="modal fade" id="m-{{_id}}" role="dialog">
 										<div class="modal-dialog">
@@ -70,7 +72,6 @@
 
 
 					   			</button>
-					   			<button><i class="fa fa-pencil edit" aria-hidden="true" title="edit"></i></button>
 					   		</td>
 							</tr>
 						{{/each}}

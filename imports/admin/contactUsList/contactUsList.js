@@ -102,6 +102,9 @@ Template.contactUsList.events({
 		      } else {
 		        tr[i].style.display = "none";
 		      }
+		    }else{
+			console.log('no found 1');
+
 		    }
 
 		    var td = tr[i].getElementsByTagName("td")[3];
@@ -113,8 +116,14 @@ Template.contactUsList.events({
 		      } else {
 		        tr[i].style.display = "none";
 		      }
-		    } 
+		    }else{
+			console.log('no found 2');
+
+		    }
 		  }
+		}
+		else{
+			console.log('no found');
 		}
 
 	}, 200),
