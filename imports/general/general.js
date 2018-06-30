@@ -23,6 +23,3 @@ import './merchantGuidelines/merchant.js';
 import './EditPages/editPages.js';
 
 import './mainBusinessSearch/mainBusinessSearch.js';
-
-
-

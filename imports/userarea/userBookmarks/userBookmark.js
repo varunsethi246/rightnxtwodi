@@ -57,8 +57,7 @@ Template.userBookmarks.helpers({
 		var bookmarkdataArr = [];
 		var userID  = id;
 		var businessBookmark = Bookmark.find({"userId":userID}).fetch();
-		if(businessBookmark)
-		{
+		if(businessBookmark){
 			// console.log('businessBookmark ' , businessBookmark);
 
 			for(i=0; i<businessBookmark.length; i++){
@@ -77,39 +76,42 @@ Template.userBookmarks.helpers({
 						if(categories){
 							// console.log('categories :',categories);
 							businessBookmark[i].categoryClasses = categories;
-							businessBookmark[i].businessName = businessObj.businessTitle;
-							businessBookmark[i].businessArea = businessObj.businessArea;
+						}else{
+							businessBookmark[i].categoryClasses = '';
+						}
 
-							businessObj.businessArea 	= businessObj.businessArea.split(' ').join('-');
-							businessBookmark[i].AreaClasses 	= businessObj.businessArea.split('.').join('-');
+						businessBookmark[i].businessName = businessObj.businessTitle;
+						businessBookmark[i].businessArea = businessObj.businessArea;
 
-							businessBookmark[i].businessCity = businessObj.businessCity;
-							businessBookmark[i].businessLink = businessObj.businessLink;
+						businessObj.businessArea 	= businessObj.businessArea.split(' ').join('-');
+						businessBookmark[i].AreaClasses 	= businessObj.businessArea.split('.').join('-');
 
-							if(businessObj.businessImages){
-								if(businessObj.businessImages.length>0){
-									var pic = BusinessImgUploadS3.findOne({"_id":businessObj.businessImages[0].img});
-									var pic1 = UserReviewStoreS3New.findOne({"_id":businessObj.businessImages[0].img});
-									if(pic){
-										businessBookmark[i].ownerPhoto = pic.url();
-									}else if(pic1){
-										businessBookmark[i].ownerPhoto = pic1.url();
-									}else{
-										businessBookmark[i].ownerPhoto = '../images/rightnxt_image_nocontent.jpg'
-									}	
+						businessBookmark[i].businessCity = businessObj.businessCity;
+						businessBookmark[i].businessLink = businessObj.businessLink;
+
+						if(businessObj.businessImages){
+							if(businessObj.businessImages.length>0){
+								var pic = BusinessImgUploadS3.findOne({"_id":businessObj.businessImages[0].img});
+								var pic1 = UserReviewStoreS3New.findOne({"_id":businessObj.businessImages[0].img});
+								if(pic){
+									businessBookmark[i].ownerPhoto = pic.url();
+								}else if(pic1){
+									businessBookmark[i].ownerPhoto = pic1.url();
 								}else{
 									businessBookmark[i].ownerPhoto = '../images/rightnxt_image_nocontent.jpg'
-								}
-							}
-							else{
+								}	
+							}else{
 								businessBookmark[i].ownerPhoto = '../images/rightnxt_image_nocontent.jpg'
 							}
+						}
+						else{
+							businessBookmark[i].ownerPhoto = '../images/rightnxt_image_nocontent.jpg'
 						}
 					}
 					bookmarkdataArr.push(businessBookmark[i]);
 				}
 			}
-			// console.log('businessBookmark ' , businessBookmark);
+			console.log('businessBookmark ' , businessBookmark);
 			return bookmarkdataArr;	
 		}
 	},

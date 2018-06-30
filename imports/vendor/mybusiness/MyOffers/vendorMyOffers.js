@@ -1225,8 +1225,8 @@ Template.vendorOffer2.events({
 	},
 	'click #locationIcon': function(event){
 		event.preventDefault();
-		FlowRouter.go('/terms-of-service');
-		if(FlowRouter.current().path == '/terms-of-service'){
+		FlowRouter.go('/webpage/terms-of-service');
+		if(FlowRouter.current().path == '/webpage/terms-of-service'){
 			$('.modal-backdrop').hide();
 		}
 	},

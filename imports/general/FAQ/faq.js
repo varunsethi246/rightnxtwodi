@@ -17,24 +17,24 @@ import './privacy.html';
 import './businessOwners.html';
 import './FaqForm.html';
 
-
-
-
 Template.introduction.helpers({
 	introductionData(){
-		console.log('Testing'); 
-		var currentURL = FlowRouter.current().path;
-		var actualURL = currentURL.substring(1);
-		var introduction = GeneralContent.find({"url": actualURL , "tabName": "Introduction"}).fetch();
+		// var currentURL = FlowRouter.current().path;
+		// var actualURL = currentURL.substring(1);
+		// var introduction = GeneralContent.find({"url": actualURL , "tabName": "Introduction"}).fetch();
+		var currentURL = FlowRouter.getParam('tabName');
+		var introduction = GeneralContent.find({"url": 'faqs' , "tabName": currentURL}).fetch();
 		if(introduction){
 			return introduction;
 		}
 	},
 
 	inData(){
-		var currentURL = FlowRouter.current().path;
-		var actualURL = currentURL.substring(1);
-		var introduction = GeneralContent.findOne({"url": actualURL , "tabName": "Introduction"});
+		// var currentURL = FlowRouter.current().path;
+		// var actualURL = currentURL.substring(1);
+		// var introduction = GeneralContent.findOne({"url": actualURL , "tabName": "Introduction"});
+		var currentURL = FlowRouter.getParam('tabName');
+		var introduction = GeneralContent.findOne({"url": 'faqs' , "tabName": currentURL});
 		if(introduction._id == this._id){
 			return true;
 		}	
@@ -43,17 +43,21 @@ Template.introduction.helpers({
 
 Template.yourAccount.helpers({
 	yourAccountData(){
-		var currentURL = FlowRouter.current().path;
-		var actualURL = currentURL.substring(1);
-		var yourAccount = GeneralContent.find({"url": actualURL , "tabName": "Your Account"}).fetch();
+		// var currentURL = FlowRouter.current().path;
+		// var actualURL = currentURL.substring(1);
+		// var yourAccount = GeneralContent.find({"url": actualURL , "tabName": "Your Account"}).fetch();
+		var currentURL = FlowRouter.getParam('tabName');
+		var yourAccount = GeneralContent.find({"url": 'faqs' , "tabName": currentURL}).fetch();
 		if(yourAccount){
 			return yourAccount;
 		}
 	},
 	inData(){
-		var currentURL = FlowRouter.current().path;
-		var actualURL = currentURL.substring(1);
-		var introduction = GeneralContent.findOne({"url": actualURL , "tabName": "Your Account"});
+		// var currentURL = FlowRouter.current().path;
+		// var actualURL = currentURL.substring(1);
+		// var introduction = GeneralContent.findOne({"url": actualURL , "tabName": "Your Account"});
+		var currentURL = FlowRouter.getParam('tabName');
+		var introduction = GeneralContent.findOne({"url": 'faqs' , "tabName": currentURL});
 		if(introduction._id == this._id){
 			return true;
 		}	
@@ -62,17 +66,21 @@ Template.yourAccount.helpers({
 
 Template.review.helpers({
 	reviewData(){
-		var currentURL = FlowRouter.current().path;	
-		var actualURL = currentURL.substring(1);
-		var review = GeneralContent.find({"url": actualURL , "tabName": "Reviews"}).fetch();
+		// var currentURL = FlowRouter.current().path;	
+		// var actualURL = currentURL.substring(1);
+		// var review = GeneralContent.find({"url": actualURL , "tabName": "Reviews"}).fetch();
+		var currentURL = FlowRouter.getParam('tabName');
+		var review = GeneralContent.find({"url": 'faqs' , "tabName": currentURL}).fetch();
 		if(review){
 			return review;
 		}
 	},
 	inData(){
-		var currentURL = FlowRouter.current().path;
-		var actualURL = currentURL.substring(1);
-		var introduction = GeneralContent.findOne({"url": actualURL , "tabName": "Reviews"});
+		// var currentURL = FlowRouter.current().path;
+		// var actualURL = currentURL.substring(1);
+		// var introduction = GeneralContent.findOne({"url": actualURL , "tabName": "Reviews"});
+		var currentURL = FlowRouter.getParam('tabName');
+		var introduction = GeneralContent.findOne({"url": 'faqs' , "tabName": currentURL});
 		if(introduction._id == this._id){
 			return true;
 		}	
@@ -81,17 +89,21 @@ Template.review.helpers({
 
 Template.privacy.helpers({
 	privacyData(){
-		var currentURL = FlowRouter.current().path;	
-		var actualURL = currentURL.substring(1);
-		var privacy = GeneralContent.find({"url": actualURL , "tabName": "Privacy"}).fetch();
+		// var currentURL = FlowRouter.current().path;	
+		// var actualURL = currentURL.substring(1);
+		// var privacy = GeneralContent.find({"url": actualURL , "tabName": "Privacy"}).fetch();
+		var currentURL = FlowRouter.getParam('tabName');
+		var privacy = GeneralContent.find({"url": 'faqs' , "tabName": currentURL}).fetch();
 		if(privacy){
 			return privacy;
 		}
 	},
 	inData(){
-		var currentURL = FlowRouter.current().path;
-		var actualURL = currentURL.substring(1);
-		var introduction = GeneralContent.findOne({"url": actualURL , "tabName": "Privacy"});
+		// var currentURL = FlowRouter.current().path;
+		// var actualURL = currentURL.substring(1);
+		// var introduction = GeneralContent.findOne({"url": actualURL , "tabName": "Privacy"});
+		var currentURL = FlowRouter.getParam('tabName');
+		var introduction = GeneralContent.findOne({"url": 'faqs' , "tabName": currentURL});
 		if(introduction._id == this._id){
 			return true;
 		}	
@@ -100,18 +112,55 @@ Template.privacy.helpers({
 
 Template.businessOwners.helpers({
 	businessOwnersData(){
-		var currentURL = FlowRouter.current().path;
-		var actualURL = currentURL.substring(1);
-		var businessOwners = GeneralContent.find({"url": actualURL , "tabName": "Business Owners"}).fetch();
+		// var currentURL = FlowRouter.current().path;
+		// var actualURL = currentURL.substring(1);
+		// var businessOwners = GeneralContent.find({"url": actualURL , "tabName": "Business Owners"}).fetch();
+		var currentURL = FlowRouter.getParam('tabName');
+		var businessOwners = GeneralContent.find({"url": 'faqs' , "tabName": currentURL}).fetch();
 		if(businessOwners){
 			return businessOwners;
 		}
 	},
 	inData(){
-		var currentURL = FlowRouter.current().path;
-		var actualURL = currentURL.substring(1);
-		var introduction = GeneralContent.findOne({"url": actualURL , "tabName": "Business Owners"});
+		// var currentURL = FlowRouter.current().path;
+		// var actualURL = currentURL.substring(1);
+		// var introduction = GeneralContent.findOne({"url": actualURL , "tabName": "Business Owners"});
+		var currentURL = FlowRouter.getParam('tabName');
+		var introduction = GeneralContent.findOne({"url": 'faqs' , "tabName": currentURL});
 		if(introduction._id == this._id){
+			return true;
+		}	
+	}
+});
+
+Template.faq.helpers({
+	introductionTab(){
+		var currentURL = FlowRouter.getParam('tabName');
+		if(currentURL == 'Introduction'){
+			return true;
+		}	
+	},
+	yourAccountTab(){
+		var currentURL = FlowRouter.getParam('tabName');
+		if(currentURL == 'Your Account'){
+			return true;
+		}	
+	},
+	reviewsTab(){
+		var currentURL = FlowRouter.getParam('tabName');
+		if(currentURL == 'Reviews'){
+			return true;
+		}	
+	},
+	privacyTab(){
+		var currentURL = FlowRouter.getParam('tabName');
+		if(currentURL == 'Privacy'){
+			return true;
+		}	
+	},
+	businessOwnersTab(){
+		var currentURL = FlowRouter.getParam('tabName');
+		if(currentURL == 'Business Owners'){
 			return true;
 		}	
 	}
@@ -284,6 +333,39 @@ Template.businessOwners.events({
     	$('.owner').not($this).removeClass('panel-color');
     	$('.owner').not($this).find('i').removeClass('fa-angle-up');
     	$('.owner').not($this).find('i').addClass('fa-angle-down');
+	},
+});
+
+Template.faq.events({
+	'click .home': function(event){
+    	FlowRouter.go('/faqs/Introduction');
+	    $('.pillsContent').find('.active').removeClass('in active');
+	    $('#home').addClass('in active');
+	    $('.home').addClass('active');
+	},
+	'click .menu1': function(event){
+    	FlowRouter.go('/faqs/Your Account');
+	    $('.pillsContent').find('.active').removeClass('in active');
+	    $('#menu1').addClass('in active');
+	    $('.menu1').addClass('active');
+	},
+	'click .menu2': function(event){
+    	FlowRouter.go('/faqs/Reviews');
+	    $('.pillsContent').find('.active').removeClass('in active');
+	    $('#menu2').addClass('in active');
+	    $('.menu2').addClass('active');
+	},
+	'click .menu3': function(event){
+    	FlowRouter.go('/faqs/Privacy');
+	    $('.pillsContent').find('.active').removeClass('in active');
+	    $('#menu3').addClass('in active');
+	    $('.menu3').addClass('active');
+	},
+	'click .menu4': function(event){
+    	FlowRouter.go('/faqs/Business Owners');
+	    $('.pillsContent').find('.active').removeClass('in active');
+	    $('#menu4').addClass('in active');
+	    $('.menu4').addClass('active');
 	},
 });
 

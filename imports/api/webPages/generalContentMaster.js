@@ -11,6 +11,12 @@ if (Meteor.isServer) {
   Meteor.publish('generalContent', function generalContent() {
     return GeneralContent.find({});
   });
+  Meteor.publish('generalContentUrl', function generalContentUrl(url) {
+    return GeneralContent.find({"url": url});
+  });
+  Meteor.publish('generalContentFaq', function generalContentFaq(url,tabName) {
+    return GeneralContent.find({"url": url,"tabName": tabName});
+  });
 }
 
 Meteor.methods({

@@ -30,7 +30,7 @@ import '../mainBusinessSearch/mainBusinessSearch.js';
 });*/
 Template.anonymousUserLayout.onCreated(function () {
   // Use this.subscribe inside onCreated callback
-  this.subscribe('userfunction');
+  // this.subscribe('userfunction');
   this.subscribe('allCity');
   this.subscribe('area');
   this.subscribe('homeBannerVideo');
@@ -39,8 +39,8 @@ Template.anonymousUserLayout.onCreated(function () {
   this.subscribe('notification');
   this.subscribe('notificationTemplate');
   this.subscribe('vendorBusiness');
-  this.subscribe('userProfileS3'); 
-  this.subscribe('businessImgS3');
+  this.subscribe('userProfileS3OneUser'); 
+  // this.subscribe('businessImgS3');
   
 });
 

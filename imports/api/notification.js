@@ -11,13 +11,13 @@ if(Meteor.isServer){
   });
   
   Meteor.publish('notification',function notification(){
-      return Notification.find({});
+      return Notification.find({"toUserId":this.userId});
   });
 
   
-   Meteor.publish('sms',function sms(){
-      return SMS.find({});
-  });
+  //  Meteor.publish('sms',function sms(){
+  //     return SMS.find({});
+  // });
   
 }
 

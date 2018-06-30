@@ -484,6 +484,8 @@ Template.addReviewTemplate.events({
 		$('.newReviewMsg').css('display','none');
 		$('.passwordWrongSpan').css('display','none');
 		$('.openReviewBox').hide();
+		$('.boxbg').removeClass('fixStar1');
+		$('.boxbg').removeClass('fixStar2');
 	},	
 
 	'click .uploadImg': function(event){
